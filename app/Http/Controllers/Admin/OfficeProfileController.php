@@ -3,15 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Dashboard;
+use App\Models\OfficeProfile;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class OfficeProfileController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +15,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.dashboard');
+        $officeprofiles = OfficeProfile::get();
+
+        return view('pages.admin.officeprofile.index', compact('officeprofiles'));
     }
 
     /**
@@ -40,16 +38,26 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required'
+        ],[
+            'name.required' => 'NAMA OFFICEPROFILE WAJIB DIISI'
+        ]);
+
+        $data = OfficeProfile::create([
+            'name' => Request()->name
+        ]);
+
+        return back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Dashboard  $dashboard
+     * @param  \App\Models\OfficeProfile  $officeProfile
      * @return \Illuminate\Http\Response
      */
-    public function show(Dashboard $dashboard)
+    public function show(OfficeProfile $officeProfile)
     {
         //
     }
@@ -57,10 +65,10 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Dashboard  $dashboard
+     * @param  \App\Models\OfficeProfile  $officeProfile
      * @return \Illuminate\Http\Response
      */
-    public function edit(Dashboard $dashboard)
+    public function edit(OfficeProfile $officeProfile)
     {
         //
     }
@@ -69,10 +77,10 @@ class DashboardController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Dashboard  $dashboard
+     * @param  \App\Models\OfficeProfile  $officeProfile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dashboard $dashboard)
+    public function update(Request $request, OfficeProfile $officeProfile)
     {
         //
     }
@@ -80,10 +88,10 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Dashboard  $dashboard
+     * @param  \App\Models\OfficeProfile  $officeProfile
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Dashboard $dashboard)
+    public function destroy(OfficeProfile $officeProfile)
     {
         //
     }

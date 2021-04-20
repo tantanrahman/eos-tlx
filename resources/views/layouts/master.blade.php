@@ -1,21 +1,13 @@
+@include('includes.style')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>EOS | @yield('title')</title>
 
-  @include('includes.style')
-
-</head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
   <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{ url('img/favicon.png') }}" height="100" width="100">
-  </div>
+  {{-- <div class="preloader dark-mode flex-column justify-content-center align-items-center">
+    <img class="animation__wobble" src="{{ url('img/favicon.png') }}" height="100" width="100">
+  </div> --}}
 
   @include('includes.navbar')
 

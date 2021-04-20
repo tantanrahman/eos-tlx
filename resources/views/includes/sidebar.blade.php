@@ -9,13 +9,44 @@
 
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard   
-              </p>
+
+          <li class="nav-item {{ request()->is('admin') ? 'menu-open' : '' }}">
+            <a href="/admin" class="nav-link {{ request()->is('admin') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-th"></i>
+            <p style="font-size: 16px">
+                Dashboard
+            </p>
             </a>
+          </li>
+
+          <li class="nav-item {{ request()->is('admin/role*') || request()->is('admin/user*') || request()->is('admin/officeprofile*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-cogs"></i>
+            <p style="font-size: 16px">
+                Setup
+                <i class="right fas fa-angle-left"></i>
+            </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.officeprofile.index') }}" class="nav-link {{ request()->is('admin/officeprofile*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="font-size: 16px">Office Profile</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.role.index') }}" class="nav-link {{ request()->is('admin/role*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="font-size: 16px">Roles</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.user.index') }}" class="nav-link {{ request()->is('admin/user*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="font-size: 16px">User</p>
+                </a>
+              </li>
+            </ul>
           </li>
 
         </ul>
