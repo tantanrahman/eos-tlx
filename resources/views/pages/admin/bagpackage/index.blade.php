@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title','Office Profile')
+@section('title','Bag Package')
 
 @section('content')
 <div class="content-wrapper">
@@ -9,10 +9,10 @@
             <div class="card">
                 <div class="card-header bg-secondary">
                     <i class="fas fa-plus"></i>
-                    Add Office Profile
+                    Add Bag Package
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.officeprofile.store') }}" method="POST">
+                    <form action="{{ route('admin.bagpackage.store') }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-6">
@@ -33,7 +33,7 @@
 
             <div class="card">
                 <div class="card-header bg-secondary">
-                    Table of Office Role
+                    Table of Bag Package
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">
@@ -42,12 +42,12 @@
                             <th>Name</th>
                             <th>Status</th>
                         </tr>
-                        @foreach ($officeprofiles as $index => $officeprofile)
+                        @foreach ($bagpackages as $index => $bagpackage)
                             <tr>
                                 <td>{{ $index + 1 }}</td>
-                                <td>{{ $officeprofile->name }}</td>
+                                <td>{{ $bagpackage->name }}</td>
                                 <td>
-                                    @if ($officeprofile->active == 1)
+                                    @if ($bagpackage->active == 1)
                                         <span class="badge badge-success">ACTIVE</span>
                                     @else
                                         <span class="badge badge-danger">NOT ACTIVE</span>

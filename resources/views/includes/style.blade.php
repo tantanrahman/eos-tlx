@@ -16,6 +16,6 @@
     <link rel="stylesheet" href="{{ url('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <link rel="stylesheet" href="{{ url('plugins/daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ url('plugins/summernote/summernote-bs4.min.css') }}">
-
+    <link rel="stylesheet" href="{{ url('dist/css/dataTables.bootstrap4.min.css') }}">
     
 </head>

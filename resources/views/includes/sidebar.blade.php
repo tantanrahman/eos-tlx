@@ -19,6 +19,36 @@
             </a>
           </li>
 
+          <li class="nav-item {{ request()->is('admin/bagpackage*') || request()->is('admin/city*') || request()->is('admin/courier*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-database"></i>
+            <p style="font-size: 16px">
+                Master
+                <i class="right fas fa-angle-left"></i>
+            </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.bagpackage.index') }}" class="nav-link {{ request()->is('admin/bagpackage*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="font-size: 16px">Bag Package</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.city.index') }}" class="nav-link {{ request()->is('admin/city*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="font-size: 16px">City</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.courier.index') }}" class="nav-link {{ request()->is('admin/courier*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="font-size: 16px">Courier</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <li class="nav-item {{ request()->is('admin/role*') || request()->is('admin/user*') || request()->is('admin/officeprofile*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-cogs"></i>

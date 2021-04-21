@@ -1,12 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\BagpackageController;
+use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\CourierController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OfficeProfileController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +35,9 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::resource('role', RoleController::class);
     Route::resource('officeprofile', OfficeProfileController::class);
     Route::resource('user', UserController::class);
-    Route::resource('register', RegisterController::class);
+    Route::resource('bagpackage', BagpackageController::class);
+    Route::resource('city', CityController::class);
+    Route::resource('courier', CourierController::class);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
