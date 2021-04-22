@@ -30,4 +30,9 @@ class Dropship extends Model
     {
         return $this->belongsTo('App\Models\Courier');
     }
+
+    public function cities()
+    {
+        return $this->belongsTo('App\Models\City');
+    }
 }

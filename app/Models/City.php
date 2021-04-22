@@ -16,4 +16,9 @@ class City extends Model
         'province',
         'city'
     ];
+
+    public function dropships()
+    {
+        return $this->hasMany('App\Models\Dropship');
+    }
 }

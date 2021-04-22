@@ -20,7 +20,7 @@ class CreateDropshipTable extends Migration
             $table->foreignId('courier_id')->references('id')->on('courier')->onDelete('cascade');
             $table->string('jenis_barang',50);
             $table->float('berat',11,2);
-            $table->string('city',50);
+            $table->foreignId('city',50)->references('id')->on('city')->onDelete('cascade');
             $table->foreignId('users_id')->nullable()->references('id')->on('users')->onDelete('cascade');
             $table->string('photo',150)->nullable();
             $table->timestamps();

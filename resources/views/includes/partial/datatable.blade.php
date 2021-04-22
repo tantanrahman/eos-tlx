@@ -11,7 +11,7 @@
           {data:'courier',name:'courier.name'},
           {data:'jenis_barang',name:'dropship.jenis_barang'},
           {data:'berat',name:'dropship.berat'},
-          {data:'city',name:'dropship.city'},
+          {data:'cities',name:'city.city'},
           {data:'name',name:'users.name'},
         ],
       });
