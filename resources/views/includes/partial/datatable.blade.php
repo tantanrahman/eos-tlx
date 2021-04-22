@@ -5,13 +5,13 @@
         serverSide : true,
         ajax : '{!! route("admin.dropship.index") !!}',
         columns: [
-          {data:'created_at',name:'created_at'},
-          {data:'resi',name:'resi'},
-          {data:'name',name:'name'},
-          {data:'jenis_barang',name:'jenis_barang'},
-          {data:'berat',name:'berat'},
-          {data:'city',name:'city'},
-          {data:'users_id',name:'users_id'},
+          {data:'created_at',name:'dropship.created_at'},
+          {data:'resi',name:'dropship.resi'},
+          {data:'dname',name:'dropship.name'},
+          {data:'jenis_barang',name:'dropship.jenis_barang'},
+          {data:'berat',name:'dropship.berat'},
+          {data:'city',name:'dropship.city'},
+          {data:'name',name:'users.name'},
         ],
       });
     });
