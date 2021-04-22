@@ -5,18 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OfficeProfile extends Model
+class Dropship extends Model
 {
     use HasFactory;
 
-    protected $table = 'officeprofile';
+    protected $table = 'dropship';
 
     protected $fillable = [
-        'name'
+        'resi',
+        'name',
+        'jenis_barang',
+        'berat',
+        'city',
+        'users_id'
     ];
 
     public function users()
     {
-        return $this->hasMany('App\Models\User');
+        return $this->belongsTo('App\Models\User');
     }
 }

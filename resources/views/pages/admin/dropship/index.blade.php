@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title','Courier')
+@section('title','Dropship')
 
 @section('content')
 <div class="content-wrapper">
@@ -11,7 +11,7 @@
                     {{-- <button class="btn btn-info" data-toggle="modal" data-target="#ModalCourier">
                         <i class="nav-icon fas fa-upload"></i>
                     </button> --}}
-                    <a href="{{ route('admin.courier.create') }}" class="btn bg-danger"><i class="nav-icon fas fa-plus"></i></a>
+                    <a href="{{ route('admin.dropship.create') }}" class="btn bg-danger"><i class="nav-icon fas fa-plus"></i></a>
                 </div>
             </div>
         </div>
@@ -22,13 +22,17 @@
           <div class="table-responsive">
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-bordered" id="table_courier">
+                    <table class="table table-bordered" id="table_dropship">
                         <thead class="thead-dark">
                             <tr>
-                                <th>#</th>
-                                <th>Code</th>
-                                <th>Code 2</th>
-                                <th>Name</th>
+                                
+                                <th>Tanggal</th>
+                                <th>Resi</th>
+                                <th>Nama</th>
+                                <th>Jenis Barang</th>
+                                <th>Berat (KG)</th>
+                                <th>Kota</th>
+                                <th>Marketing</th>
                             </tr>
                         </thead>
 
@@ -39,5 +43,5 @@
         </div>
     </section>
 </div>
-
 @endsection
+

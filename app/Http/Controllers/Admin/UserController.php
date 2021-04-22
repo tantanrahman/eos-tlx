@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\OfficeProfile;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -16,7 +18,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.user.index');
+        $users = User::get();
+
+        return view('pages.admin.user.index', compact('users'));
     }
 
     /**
@@ -26,7 +30,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.user.create');
+        $roles = Role::get();
+        $officeprofiles = OfficeProfile::get();
+
+        return view('pages.admin.user.create', compact('roles', 'officeprofiles'));
     }
 
     /**
@@ -40,16 +47,22 @@ class UserController extends Controller
         $this->validate($request, [
             'username' => 'required',
             'name' => 'required',
-            'password' => 'required'
+            'role_id' => 'required',
+            'password' => 'required',
+            'office_id' => 'required'
         ], [
             'username.required' => 'USERNAME WAJIB DIISI',
             'name.required' => 'NAMA WAJIB DIISI',
+            'role_id.required' => 'ROLE WAJIB DIISI',
             'password.required' => 'PASSWORD WAJIB DIISI',
+            'office_id.required' => 'OFFICE WAJIB DIISI'
         ]);
 
         $data = User::create([
             'username' => Request()->username,
             'name' => Request()->name,
+            'role_id' => Request()->role_id,
+            'office_id' => Request()->office_id,
             'email' => Request()->email,
             'password' => Hash::make(Request()->password)
         ]);

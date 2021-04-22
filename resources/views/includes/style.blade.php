@@ -17,5 +17,6 @@
     <link rel="stylesheet" href="{{ url('plugins/daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ url('plugins/summernote/summernote-bs4.min.css') }}">
     <link rel="stylesheet" href="{{ url('dist/css/dataTables.bootstrap4.min.css') }}">
-    
+    <link rel="stylesheet" href="{{ url('plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ url('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 </head>

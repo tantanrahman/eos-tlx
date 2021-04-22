@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CourierController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DropshipController;
 use App\Http\Controllers\Admin\OfficeProfileController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
@@ -38,6 +39,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::resource('bagpackage', BagpackageController::class);
     Route::resource('city', CityController::class);
     Route::resource('courier', CourierController::class);
+    Route::resource('dropship', DropshipController::class);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

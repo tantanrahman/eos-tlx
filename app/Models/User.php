@@ -18,6 +18,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'username',
+        'role_id',
+        'office_id',
         'name',
         'email',
         'password',
@@ -41,4 +43,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * 
+     * 
+     */
+
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role');
+    }
+
+    public function officeprofile()
+    {
+        return $this->belongsTo('App\Models\OfficeProfile');
+    }
+
+    public function drophips()
+    {
+        return $this->hasMany('App\Models\dropship');
+    }
 }

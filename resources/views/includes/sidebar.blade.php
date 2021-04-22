@@ -19,6 +19,15 @@
             </a>
           </li>
 
+          <li class="nav-item {{ request()->is('admin/dropship*') ? 'menu-open' : '' }}">
+            <a href="{{ route('admin.dropship.index') }}" class="nav-link {{ request()->is('admin/dropship*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-truck-loading"></i>
+            <p style="font-size: 16px">
+                Dropship
+            </p>
+            </a>
+          </li>
+
           <li class="nav-item {{ request()->is('admin/bagpackage*') || request()->is('admin/city*') || request()->is('admin/courier*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-database"></i>

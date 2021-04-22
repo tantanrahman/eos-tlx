@@ -15,6 +15,7 @@
 <script src="{{ url('dist/js/demo.js') }}"></script>
 <script src="{{ url('dist/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ url('dist/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ url('plugins/select2/js/select2.min.js') }}"></script>
 @include('sweetalert::alert')
 
 <script>
@@ -32,3 +33,7 @@
     });
   });
 </script>
+
+
+@include('includes.partial.datatable')
+@include('includes.partial.select')
