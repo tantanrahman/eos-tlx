@@ -8,6 +8,7 @@ use App\Models\Dropship;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Courier;
 use Yajra\DataTables\Facades\DataTables;
 
 class DropshipController extends Controller
@@ -22,7 +23,8 @@ class DropshipController extends Controller
        //$dropship = Dropship::join('users AS u','u.id','=','dropship.users_id')->select('dropship.name','u.name');
 
        $dropship = Dropship::join('users','dropship.users_id','=','users.id')
-                                ->select('dropship.created_at','dropship.resi','dropship.name AS dname','dropship.jenis_barang','dropship.berat','dropship.city','users.name');
+                                ->join('courier','dropship.courier_id','=','courier.id')
+                                ->select('dropship.created_at AS time','dropship.resi','dropship.name AS dname','courier.name as courier','dropship.jenis_barang','dropship.berat','dropship.city','users.name');
 
        if($request->ajax())
        {
@@ -41,8 +43,9 @@ class DropshipController extends Controller
     {
         $cities = City::all();
         $users = User::where('role_id','=',8)->get();
+        $couriers = Courier::where('active','=',1)->get();
 
-        return view('pages.admin.dropship.create', compact('cities','users'));
+        return view('pages.admin.dropship.create', compact('cities','users','couriers'));
     }
 
     /**
@@ -56,6 +59,7 @@ class DropshipController extends Controller
         $this->validate($request, [
             'resi' => 'required',
             'name' => 'required',
+            'courier_id' => 'required',
             'jenis_barang' => 'required',
             'berat' => 'required',
             'city' => 'required',
@@ -63,6 +67,7 @@ class DropshipController extends Controller
         ], [
             'resi.required' => 'RESI WAJIB DIISI',
             'name.required' => 'NAMA WAJIB DIISI',
+            'courier_id.required' => 'COURIER WAJIB DIISI',
             'jenis_barang.required' => 'JENIS BARANG WAJIB DIISI',
             'berat.required' => 'BERAT WAJIB DIISI',
             'city.required' => 'KOTA WAJIB DIISI',
@@ -72,6 +77,7 @@ class DropshipController extends Controller
         $data = Dropship::create([
             'resi' => Request()->resi,
             'name' => Request()->name,
+            'courier_id' => Request()->courier_id,
             'jenis_barang' => Request()->jenis_barang,
             'berat' => Request()->berat,
             'city' => Request()->city,

@@ -27,4 +27,11 @@
         theme: "bootstrap4",
         });
     });
+    $(document).ready(function() {
+        $('#select2dropcourier').select2({
+        placeholder: "Select a Courier",
+        allowClear: true,
+        theme: "bootstrap4",
+        });
+    });
 </script>

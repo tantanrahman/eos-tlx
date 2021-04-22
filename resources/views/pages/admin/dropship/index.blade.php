@@ -29,6 +29,7 @@
                                 <th>Tanggal</th>
                                 <th>Resi</th>
                                 <th>Nama</th>
+                                <th>Courier</th>
                                 <th>Jenis Barang</th>
                                 <th>Berat (KG)</th>
                                 <th>Kota</th>

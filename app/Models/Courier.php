@@ -18,4 +18,9 @@ class Courier extends Model
         'logo',
         'website'
     ];
+
+    public function dropships()
+    {
+        return $this->hasMany('App\Models\Dropship');
+    }
 }

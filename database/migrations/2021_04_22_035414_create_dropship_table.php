@@ -17,6 +17,7 @@ class CreateDropshipTable extends Migration
             $table->id();
             $table->string('resi',50);
             $table->string('name',100);
+            $table->foreignId('courier_id')->references('id')->on('courier')->onDelete('cascade');
             $table->string('jenis_barang',50);
             $table->float('berat',11,2);
             $table->string('city',50);

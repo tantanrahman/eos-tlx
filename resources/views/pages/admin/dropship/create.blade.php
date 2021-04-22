@@ -38,7 +38,7 @@
                     <form action="{{ route('admin.dropship.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                               <label for="resi">Resi*</label>
                               <input type="text" name="resi" class="form-control @error('resi') is-invalid @enderror" id="resi" value="{{ old('resi') }}" autofocus>
                               @error('resi')
@@ -47,7 +47,7 @@
                                     </span>
                               @enderror
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                               <label for="name">Nama*</label>
                               <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}">
                               @error('name')
@@ -55,6 +55,20 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                               @enderror
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="courier_id">Courier*</label>
+                                <select name="courier_id" class="form-control" id="select2dropcourier" data-width="100%">
+                                    <option></option>
+                                    @foreach($couriers as $courier)
+                                        <option value="{{ $courier->id }}">{{ $courier->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('courier_id')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                @enderror
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="jenis_barang">Jenis Barang*</label>
@@ -87,7 +101,7 @@
                                 <select name="city" class="form-control" id="select2City" data-width="100%">
                                     <option></option>
                                     @foreach($cities as $city)
-                                        <option value="{{ $city->city }}">{{ $city->city }}</option>
+                                        <option value="{{ $city->id }}">{{ $city->city }}</option>
                                     @endforeach
                                 </select>
                                 @error('city')

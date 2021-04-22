@@ -14,6 +14,7 @@ class Dropship extends Model
     protected $fillable = [
         'resi',
         'name',
+        'courier_id',
         'jenis_barang',
         'berat',
         'city',
@@ -23,5 +24,10 @@ class Dropship extends Model
     public function users()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function couriers()
+    {
+        return $this->belongsTo('App\Models\Courier');
     }
 }
