@@ -101,7 +101,7 @@
                                 <select name="city" class="form-control" id="select2City" data-width="100%">
                                     <option></option>
                                     @foreach($cities as $city)
-                                        <option value="{{ $city->id }}">{{ $city->city }}</option>
+                                        <option value="{{ $city->id }}">{{ $city->urban }}</option>
                                     @endforeach
                                 </select>
                                 @error('city')

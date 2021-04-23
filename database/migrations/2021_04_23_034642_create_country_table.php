@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBagpackageTable extends Migration
+class CreateCountryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateBagpackageTable extends Migration
      */
     public function up()
     {
-        Schema::create('bagpackage', function (Blueprint $table) {
+        Schema::create('country', function (Blueprint $table) {
             $table->id();
-            $table->string('name',50)->unique();
-            $table->tinyInteger('active')->default(1);
+            $table->string('name',100);
+            $table->string('alpha2code',10);
+            $table->string('alpha3code',10);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateBagpackageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bagpackage');
+        Schema::dropIfExists('country');
     }
 }

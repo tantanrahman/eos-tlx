@@ -16,4 +16,19 @@
         ],
       });
     });
+
+    $(document).ready(function() {
+      $('#table_country').DataTable({
+        processing : true,
+        serverSide : true,
+        ajax : '{!! route("admin.country.index") !!}',
+        columns: [
+          {data:'id',name:'id'},
+          {data:'name',name:'name'},
+          {data:'alpha2code',name:'alpha2code'},
+          {data:'alpha3code',name:'alpha3code'},
+        ],
+      });
+    });
+
 </script>

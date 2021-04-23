@@ -33,6 +33,7 @@
 
             <div class="card">
                 <div class="card-header bg-secondary">
+                    <i class="fas fa-table"></i>
                     Table of Bag Package
                 </div>
                 <div class="card-body">
@@ -58,6 +59,7 @@
                     </table>
                 </div>
             </div>
+            
         </div>
     </div>
 </div>

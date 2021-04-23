@@ -6,58 +6,52 @@
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
-            {{-- <div class="card">
-                <div class="card-header bg-secondary">
-                    <i class="fas fa-plus"></i>
-                    Add Role
-                </div>
-                <div class="card-body">
-                    <form action="{{ route('admin.role.store') }}" method="POST">
-                        @csrf
-                        <div class="row">
-                            <div class="col-6">
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autofocus>
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-primary">SUBMIT</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>                
-            </div> --}}
+            <div class="row">
+                {{-- <div class="col-6">
+                    <button class="btn btn-info" data-toggle="modal" data-target="#ModalCourier">
+                        <i class="nav-icon fas fa-upload"></i>
+                    </button>
+                    <a href="{{ route('admin.dropship.create') }}" class="btn bg-danger"><i class="nav-icon fas fa-plus"></i></a>
+                </div> --}}
+            </div>
+        </div>
+    </div>
 
+    <section class="content">
+        <div class="container-fluid">
+          <div class="table-responsive">
             <div class="card">
-                <div class="card-header bg-secondary">
-                    <i class="fa fa-table"></i>
-                    Table of City
-                </div>
                 <div class="card-body">
                     <table class="table table-bordered">
-                        <tr>
-                            <th>#</th>
-                            <th>Code</th>
-                            <th>Province</th>
-                            <th>City</th>
-                        </tr>
-                        @foreach ($cities as $index => $city)
+                        <thead class="thead-dark">
                             <tr>
-                                <td>{{ $cities->firstItem() + $index }}</td>
-                                <td>{{ $city->code }}</td>
-                                <td>{{ $city->province }}</td>
-                                <td>{{ $city->city }}</td>
+                                <th>#</th>
+                                <th>Province</th>
+                                <th>City</th>
+                                <th>District</th>
+                                <th>Urban</th>
+                                <th>Postal Code</th>
                             </tr>
+                        </thead>
+                        @foreach ($cities as $city)
+                            <tbody>
+                                <tr>
+                                    <td>{{ $city->id }}</td>
+                                    <td>{{ $city->province }}</td>
+                                    <td>{{ $city->city }}</td>
+                                    <td>{{ $city->district }}</td>
+                                    <td>{{ $city->urban }}</td>
+                                    <td>{{ $city->postal_code }}</td>
+                                </tr>
+                            </tbody>
                         @endforeach
                     </table>
                     <br>
                     {{ $cities->links() }}
                 </div>
             </div>
+          </div>
         </div>
-    </div>
+    </section>
 </div>
 @endsection

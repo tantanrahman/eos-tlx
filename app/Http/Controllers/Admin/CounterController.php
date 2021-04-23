@@ -2,28 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\City;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Yajra\DataTables\Facades\DataTables;
+use App\Models\Counter;
+use Illuminate\Http\Request;
 
-class CityController extends Controller
+class CounterController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $cities = City::paginate(10);
-
-        // if($request->ajax())
-        // {
-        //    return DataTables::of($cities)->make(true);
-        // }
-
-        return view('pages.admin.city.index', compact('cities'));
+        return view('pages.admin.counter.index');
     }
 
     /**
@@ -50,10 +42,10 @@ class CityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\City  $city
+     * @param  \App\Models\Counter  $counter
      * @return \Illuminate\Http\Response
      */
-    public function show(City $city)
+    public function show(Counter $counter)
     {
         //
     }
@@ -61,10 +53,10 @@ class CityController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\City  $city
+     * @param  \App\Models\Counter  $counter
      * @return \Illuminate\Http\Response
      */
-    public function edit(City $city)
+    public function edit(Counter $counter)
     {
         //
     }
@@ -73,10 +65,10 @@ class CityController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\City  $city
+     * @param  \App\Models\Counter  $counter
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, City $city)
+    public function update(Request $request, Counter $counter)
     {
         //
     }
@@ -84,10 +76,10 @@ class CityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\City  $city
+     * @param  \App\Models\Counter  $counter
      * @return \Illuminate\Http\Response
      */
-    public function destroy(City $city)
+    public function destroy(Counter $counter)
     {
         //
     }

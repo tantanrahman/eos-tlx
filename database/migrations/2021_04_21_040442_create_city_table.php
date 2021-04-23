@@ -15,9 +15,11 @@ class CreateCityTable extends Migration
     {
         Schema::create('city', function (Blueprint $table) {
             $table->id();
-            $table->string('code',10);
             $table->string('province',50);
             $table->string('city',50);
+            $table->string('district',50);
+            $table->string('urban',50);
+            $table->integer('postal_code');
             $table->timestamps();
         });
     }
@@ -29,6 +31,7 @@ class CreateCityTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('city');
     }
 }

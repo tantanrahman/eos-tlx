@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBagpackageTable extends Migration
+class CreateCounterTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateBagpackageTable extends Migration
      */
     public function up()
     {
-        Schema::create('bagpackage', function (Blueprint $table) {
+        Schema::create('counter', function (Blueprint $table) {
             $table->id();
             $table->string('name',50)->unique();
-            $table->tinyInteger('active')->default(1);
+            $table->integer('count');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateBagpackageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bagpackage');
+        Schema::dropIfExists('counter');
     }
 }

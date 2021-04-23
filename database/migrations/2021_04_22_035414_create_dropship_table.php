@@ -34,6 +34,7 @@ class CreateDropshipTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('dropship');
     }
 }

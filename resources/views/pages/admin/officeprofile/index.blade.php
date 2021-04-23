@@ -33,7 +33,8 @@
 
             <div class="card">
                 <div class="card-header bg-secondary">
-                    Table of Office Role
+                    <i class="fas fa-table"></i>
+                    Table of Office Profile
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">

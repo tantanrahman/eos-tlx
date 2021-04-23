@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\Admin\BagpackageController;
 use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\CounterController;
+use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\CourierController;
+use App\Http\Controllers\Admin\CustomerController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
@@ -40,6 +43,9 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::resource('city', CityController::class);
     Route::resource('courier', CourierController::class);
     Route::resource('dropship', DropshipController::class);
+    Route::resource('customer', CustomerController::class);
+    Route::resource('country', CountryController::class);
+    Route::resource('counter', CounterController::class);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

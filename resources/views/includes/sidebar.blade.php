@@ -19,16 +19,7 @@
             </a>
           </li>
 
-          <li class="nav-item {{ request()->is('admin/dropship*') ? 'menu-open' : '' }}">
-            <a href="{{ route('admin.dropship.index') }}" class="nav-link {{ request()->is('admin/dropship*') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-truck-loading"></i>
-            <p style="font-size: 16px">
-                Dropship
-            </p>
-            </a>
-          </li>
-
-          <li class="nav-item {{ request()->is('admin/bagpackage*') || request()->is('admin/city*') || request()->is('admin/courier*') ? 'menu-open' : '' }}">
+          <li class="nav-item {{ request()->is('admin/bagpackage*') || request()->is('admin/city*') || request()->is('admin/courier*') || request()->is('admin/country*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-database"></i>
             <p style="font-size: 16px">
@@ -50,6 +41,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{ route('admin.country.index') }}" class="nav-link {{ request()->is('admin/country*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="font-size: 16px">Country</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ route('admin.courier.index') }}" class="nav-link {{ request()->is('admin/courier*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="font-size: 16px">Courier</p>
@@ -58,7 +55,25 @@
             </ul>
           </li>
 
-          <li class="nav-item {{ request()->is('admin/role*') || request()->is('admin/user*') || request()->is('admin/officeprofile*') ? 'menu-open' : '' }}">
+          <li class="nav-item {{ request()->is('admin/dropship*') ? 'menu-open' : '' }}">
+            <a href="{{ route('admin.dropship.index') }}" class="nav-link {{ request()->is('admin/dropship*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-truck-loading"></i>
+            <p style="font-size: 16px">
+                Dropship
+            </p>
+            </a>
+          </li>
+
+          <li class="nav-item {{ request()->is('admin/customer*') ? 'menu-open' : '' }}">
+            <a href="{{ route('admin.customer.index') }}" class="nav-link {{ request()->is('admin/customer*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-users"></i>
+            <p style="font-size: 16px">
+                Customer
+            </p>
+            </a>
+          </li>
+
+          <li class="nav-item {{ request()->is('admin/role*') || request()->is('admin/user*') || request()->is('admin/officeprofile*') || request()->is('admin/counter*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-cogs"></i>
             <p style="font-size: 16px">
@@ -67,6 +82,12 @@
             </p>
             </a>
             <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.counter.index') }}" class="nav-link {{ request()->is('admin/counter*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="font-size: 16px">Counter</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="{{ route('admin.officeprofile.index') }}" class="nav-link {{ request()->is('admin/officeprofile*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>

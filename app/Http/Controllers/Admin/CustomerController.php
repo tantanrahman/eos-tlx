@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Bagpackage;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
-class BagpackageController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,7 @@ class BagpackageController extends Controller
      */
     public function index()
     {
-        $bagpackages = Bagpackage::get();
-
-        return view('pages.admin.bagpackage.index', compact('bagpackages'));
+        return view('pages.admin.customer.index');
     }
 
     /**
@@ -38,34 +36,16 @@ class BagpackageController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required'
-        ],[
-            'name.required' => 'NAMA BAG WAJIB DIISI'
-        ]);
-
-        $data = Bagpackage::where('name', '=', $request->input('name'))->first();
-
-        if ($data === null)
-        {
-            $data = Bagpackage::create([
-                'name' => Request()->name
-            ]);
-            return redirect(route('admin.bagpackage.index'))->with('toast_success', 'Berhasil menambah Data');
-        } else 
-        {
-            return redirect(route('admin.bagpackage.index'))->with('toast_error', 'Gagal! Data Sudah Ada Di Database!');
-        }
         
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Bagpackage  $bagpackage
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Bagpackage $bagpackage)
+    public function show(Customer $customer)
     {
         //
     }
@@ -73,10 +53,10 @@ class BagpackageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Bagpackage  $bagpackage
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bagpackage $bagpackage)
+    public function edit(Customer $customer)
     {
         //
     }
@@ -85,10 +65,10 @@ class BagpackageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Bagpackage  $bagpackage
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bagpackage $bagpackage)
+    public function update(Request $request, Customer $customer)
     {
         //
     }
@@ -96,10 +76,10 @@ class BagpackageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Bagpackage  $bagpackage
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bagpackage $bagpackage)
+    public function destroy(Customer $customer)
     {
         //
     }
