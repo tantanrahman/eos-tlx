@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DropshipController;
 use App\Http\Controllers\Admin\OfficeProfileController;
+use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 
@@ -46,6 +47,8 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::resource('customer', CustomerController::class);
     Route::resource('country', CountryController::class);
     Route::resource('counter', CounterController::class);
+    Route::resource('partner', PartnerController::class);
+    Route::get('export', [App\Http\Controllers\Admin\DropshipController::class, 'export'])->name('dropship.export');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

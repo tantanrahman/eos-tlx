@@ -28,6 +28,7 @@ class CreateBagpackageTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('bagpackage');
     }
 }

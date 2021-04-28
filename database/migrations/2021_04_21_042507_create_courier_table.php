@@ -15,11 +15,8 @@ class CreateCourierTable extends Migration
     {
         Schema::create('courier', function (Blueprint $table) {
             $table->id();
-            $table->string('code',50);
-            $table->string('code_dua',50)->nullable();
+            $table->string('reff_id',50)->nullable();
             $table->string('name',70);
-            $table->string('logo',70)->nullable();
-            $table->string('website',50)->nullable();
             $table->tinyInteger('active')->default(1);
             $table->timestamps();
         });
@@ -32,6 +29,7 @@ class CreateCourierTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('courier');
     }
 }

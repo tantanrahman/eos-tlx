@@ -18,7 +18,8 @@ class Dropship extends Model
         'jenis_barang',
         'berat',
         'city',
-        'users_id'
+        'users_id',
+        'photo'
     ];
 
     public function users()

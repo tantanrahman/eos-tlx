@@ -100,6 +100,7 @@ class CreatePermissionTables extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         $tableNames = config('permission.table_names');
 
         if (empty($tableNames)) {

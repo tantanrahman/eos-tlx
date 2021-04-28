@@ -13,6 +13,7 @@
           {data:'berat',name:'dropship.berat'},
           {data:'cities',name:'city.city'},
           {data:'name',name:'users.name'},
+          {data:'photo',name:'dropship.photo'},
         ],
       });
     });

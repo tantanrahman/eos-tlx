@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('role_id')->constrained()->onDelete('cascade');
+            $table->foreignId('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->foreignId('office_id')->references('id')->on('officeprofile')->onDelete('cascade');
             $table->string('username', 100)->unique();
             $table->string('name');
@@ -37,6 +37,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('users');
     }
 }

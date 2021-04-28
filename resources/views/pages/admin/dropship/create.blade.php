@@ -38,7 +38,7 @@
                     <form action="{{ route('admin.dropship.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                               <label for="resi">Resi*</label>
                               <input type="text" name="resi" class="form-control @error('resi') is-invalid @enderror" id="resi" value="{{ old('resi') }}" autofocus>
                               @error('resi')
@@ -47,7 +47,7 @@
                                     </span>
                               @enderror
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                               <label for="name">Nama*</label>
                               <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}">
                               @error('name')
@@ -56,7 +56,7 @@
                                     </span>
                               @enderror
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="courier_id">Courier*</label>
                                 <select name="courier_id" class="form-control" id="select2dropcourier" data-width="100%">
                                     <option></option>
@@ -65,15 +65,6 @@
                                     @endforeach
                                 </select>
                                 @error('courier_id')
-                                      <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="jenis_barang">Jenis Barang*</label>
-                                <input type="text" name="jenis_barang" class="form-control @error('jenis_barang') is-invalid @enderror" id="jenis_barang" value="{{ old('jenis_barang') }}">
-                                @error('jenis_barang')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
                                       </span>
@@ -96,6 +87,16 @@
                                       </span>
                                 @enderror
                             </div>
+                            <div class="form-group col-md-3">
+                                <label for="jenis_barang">Jenis Barang*</label>
+                                <input type="text" name="jenis_barang" class="form-control @error('jenis_barang') is-invalid @enderror" id="jenis_barang" value="{{ old('jenis_barang') }}">
+                                @error('jenis_barang')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                @enderror
+                            </div>
+                            
                             <div class="form-group col-md-3">
                                 <label for="city">Kota*</label>
                                 <select name="city" class="form-control" id="select2City" data-width="100%">
@@ -123,7 +124,16 @@
                                           <strong>{{ $message }}</strong>
                                       </span>
                                 @enderror
-                            </div>  
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="font-weight-bold">Upload Gambar*</label>
+                                <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo">
+                                @error('photo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
                         <div class="float-right">
                             <button type="reset" class="btn btn-warning"><b>RESET</b></button>

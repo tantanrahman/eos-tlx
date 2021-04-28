@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\City;
 use App\Models\User;
+use App\Models\Courier;
 use App\Models\Dropship;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use App\Exports\DropshipExport;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
-use App\Models\Courier;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class DropshipController extends Controller
@@ -20,20 +24,23 @@ class DropshipController extends Controller
      */
     public function index(Request $request)
     {
-       //$dropship = Dropship::join('users AS u','u.id','=','dropship.users_id')->select('dropship.name','u.name');
 
-       $dropship = Dropship::join('users','dropship.users_id','=','users.id')
+       $dropships = Dropship::join('users','dropship.users_id','=','users.id')
                                 ->join('courier','dropship.courier_id','=','courier.id')
                                 ->join('city','dropship.city','=','city.id')
-                                ->select('dropship.created_at AS time','dropship.resi','dropship.name AS dname','courier.name as courier','dropship.jenis_barang','dropship.berat','city.city as cities','users.name');
+                                ->select('dropship.created_at AS time','dropship.resi','dropship.name AS dname','courier.name as courier','dropship.jenis_barang','dropship.berat','city.city as cities','users.name', 'dropship.photo')->get();
 
        if($request->ajax())
        {
-           return DataTables::of($dropship)->make(true);
+
+           return DataTables::of($dropships)->addColumn('photo', function($dropship){
+                $url = URL::asset("/storage/dropship/".$dropship->photo);
+               return '<img src='.$url.' border="0" width="100" class="img-rounded" text-align="center" />';
+           })->rawColumns(['photo'])->make(true);
        }
        
        return view('pages.admin.dropship.index');
-    }
+    }  
 
     /**
      * Show the form for creating a new resource.
@@ -43,7 +50,7 @@ class DropshipController extends Controller
     public function create()
     {
         $cities = City::all();
-        $users = User::where('role_id','=',8)->get();
+        $users = User::where('role_id','=',2)->get();
         $couriers = Courier::where('active','=',1)->get();
 
         return view('pages.admin.dropship.create', compact('cities','users','couriers'));
@@ -58,31 +65,38 @@ class DropshipController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'resi' => 'required',
-            'name' => 'required',
-            'courier_id' => 'required',
-            'jenis_barang' => 'required',
-            'berat' => 'required',
-            'city' => 'required',
-            'users_id' => 'required'
+            'resi'              => 'required',
+            'name'              => 'required',
+            'courier_id'        => 'required',
+            'jenis_barang'      => 'required',
+            'berat'             => 'required',
+            'city'              => 'required',
+            'users_id'          => 'required',
+            'photo'             => 'required|image'
         ], [
-            'resi.required' => 'RESI WAJIB DIISI',
-            'name.required' => 'NAMA WAJIB DIISI',
-            'courier_id.required' => 'COURIER WAJIB DIISI',
+            'resi.required'         => 'RESI WAJIB DIISI',
+            'name.required'         => 'NAMA WAJIB DIISI',
+            'courier_id.required'   => 'COURIER WAJIB DIISI',
             'jenis_barang.required' => 'JENIS BARANG WAJIB DIISI',
-            'berat.required' => 'BERAT WAJIB DIISI',
-            'city.required' => 'KOTA WAJIB DIISI',
-            'users_id.required' => 'MARKETING PIC WAJIB DIISI',
+            'berat.required'        => 'BERAT WAJIB DIISI',
+            'city.required'         => 'KOTA WAJIB DIISI',
+            'users_id.required'     => 'MARKETING PIC WAJIB DIISI',
+            'photo.required'        => 'PHOTO WAJIB DIUPLOAD'
         ]);
 
+        //UPLOAD GAMBAR
+        $photo = $request->file('photo');
+        $photo->storeAs('public/dropship', $photo->hashName());
+
         $data = Dropship::create([
-            'resi' => Request()->resi,
-            'name' => Request()->name,
-            'courier_id' => Request()->courier_id,
-            'jenis_barang' => Request()->jenis_barang,
-            'berat' => Request()->berat,
-            'city' => Request()->city,
-            'users_id' => Request()->users_id,
+            'resi'          => Request()->resi,
+            'name'          => Request()->name,
+            'courier_id'    => Request()->courier_id,
+            'jenis_barang'  => Request()->jenis_barang,
+            'berat'         => Request()->berat,
+            'city'          => Request()->city,
+            'users_id'      => Request()->users_id,
+            'photo'         => $photo->hashName()
         ]);
 
         if($data)
@@ -139,4 +153,15 @@ class DropshipController extends Controller
     {
         //
     }
+
+    /**
+     * Export XLS Dropship
+     * 
+     * 
+     */
+
+     public function export()
+     {
+         return Excel::download(new DropshipExport(), 'Report-Dropship-'.date("Y-m-d").'.xlsx');
+     }
 }

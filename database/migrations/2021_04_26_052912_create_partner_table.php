@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCounterTable extends Migration
+class CreatePartnerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateCounterTable extends Migration
      */
     public function up()
     {
-        Schema::create('counter', function (Blueprint $table) {
+        Schema::create('partner', function (Blueprint $table) {
             $table->id();
-            $table->string('name',50)->unique();
-            $table->integer('count');
+            $table->string('reff_id',50)->nullable();
+            $table->string('name',70);
+            $table->tinyInteger('active')->default(1);
             $table->timestamps();
         });
     }
@@ -28,7 +29,6 @@ class CreateCounterTable extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('counter');
+        Schema::dropIfExists('partner');
     }
 }
