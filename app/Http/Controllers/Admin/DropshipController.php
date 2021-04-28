@@ -28,7 +28,7 @@ class DropshipController extends Controller
        $dropships = Dropship::join('users','dropship.users_id','=','users.id')
                                 ->join('courier','dropship.courier_id','=','courier.id')
                                 ->join('city','dropship.city','=','city.id')
-                                ->select('dropship.created_at AS time','dropship.resi','dropship.name AS dname','courier.name as courier','dropship.jenis_barang','dropship.berat','city.city as cities','users.name', 'dropship.photo')->get();
+                                ->select('dropship.created_at AS time','dropship.resi as resis','dropship.name AS names','courier.name as couriers','dropship.jenis_barang as category','dropship.berat as weight','city.city as cities','users.name as users', 'dropship.photo')->get();
 
        if($request->ajax())
        {

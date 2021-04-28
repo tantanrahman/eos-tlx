@@ -34,6 +34,9 @@
   });
 </script>
 
+<script>
+  $('#datedropship').daterangepicker()
+</script>
 
 @include('includes.partial.datatable')
 @include('includes.partial.select')

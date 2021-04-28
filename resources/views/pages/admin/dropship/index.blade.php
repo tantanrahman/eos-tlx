@@ -7,12 +7,21 @@
     <div class="content-header">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-6">
-                    {{-- <button class="btn btn-info" data-toggle="modal" data-target="#ModalCourier">
-                        <i class="nav-icon fas fa-upload"></i>
-                    </button> --}}
+                <div class="col-4">
                     <a href="{{ route('admin.dropship.create') }}" class="btn bg-danger"><i class="nav-icon fas fa-plus"></i> Tambah Data</a>
                     <a href="{{ route('admin.dropship.export') }}" class="btn bg-danger"><i class="fas fa-file-excel"></i> Excel</a>
+                </div>
+                <div class="col-8">
+                    <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="far fa-calendar-alt"></i>
+                            </span>
+                          </div>
+                          <input type="text" class="form-control float-right" id="datedropship">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
