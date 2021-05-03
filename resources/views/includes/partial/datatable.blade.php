@@ -5,6 +5,7 @@
         serverSide : true,
         ajax : '{!! route("admin.dropship.index") !!}',
         columns: [
+          {data:'idx',name:'idx', visible: false},
           {data:'time',name:'time'},
           {data:'resis',name:'resis'},
           {data:'names',name:'names'},
@@ -14,6 +15,7 @@
           {data:'cities',name:'cities'},
           {data:'users',name:'users'},
           {data:'photo',name:'dropship.photo'},
+          {data:'action',name:'action', orderable: false, searchable: false},
         ],
       });
     });

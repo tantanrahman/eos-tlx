@@ -49,6 +49,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::resource('counter', CounterController::class);
     Route::resource('partner', PartnerController::class);
     Route::get('export', [App\Http\Controllers\Admin\DropshipController::class, 'export'])->name('dropship.export');
+    Route::get('pdf', [App\Http\Controllers\Admin\DropshipController::class, 'pdf'])->name('dropship.pdf');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

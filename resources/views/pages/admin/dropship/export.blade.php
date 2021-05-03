@@ -1,4 +1,4 @@
-<table>
+<table border="1" style="border-collapse: collapse" width="100%">
     <thead>
         <tr>
             <th>DATE</th>
@@ -13,13 +13,13 @@
     <tbody>
         @foreach ($dropships as $dropship)
             <tr>
-                <td>{{ $dropship->time }}</td>
-                <td>{{ $dropship->resi }}</td>
-                <td>{{ $dropship->courier }}</td>
-                <td>{{ $dropship->dname }}</td>
-                <td>{{ $dropship->jenis_barang }}</td>
-                <td>{{ $dropship->marketing }}</td>
-                <td>{{ $dropship->berat }}</td>
+                <td align="center">{{ $dropship->time }}</td>
+                <td align="center">{{ $dropship->resi }}</td>
+                <td align="center">{{ $dropship->courier }}</td>
+                <td align="center">{{ $dropship->dname }}</td>
+                <td align="center">{{ $dropship->jenis_barang }}</td>
+                <td align="center">{{ $dropship->marketing }}</td>
+                <td align="center">{{ $dropship->berat }}</td>
             </tr>
             
         @endforeach
