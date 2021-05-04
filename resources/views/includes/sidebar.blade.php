@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link bg-primary">
+    <a href="/admin" class="brand-link bg-primary">
       <img src="{{ url('img/favicon2.png') }}" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
       <span class="brand-text font-weight-light">EOS | TLX</span>
     </a>

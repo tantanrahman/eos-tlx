@@ -19,22 +19,6 @@
 @include('sweetalert::alert')
 
 <script>
-  $(document).ready(function() {
-    $('#table_courier').DataTable({
-      processing : true,
-      serverSide : true,
-      ajax : '{!! route("admin.courier.index") !!}',
-      columns: [
-        {data:'id',name:'id'},
-        {data:'code',name:'code'},
-        {data:'code_dua',name:'code_dua'},
-        {data:'name',name:'name'},
-      ]
-    });
-  });
-</script>
-
-<script>
   $('#datedropship').daterangepicker()
 </script>
 

@@ -54,7 +54,7 @@ class BagpackageController extends Controller
             return redirect(route('admin.bagpackage.index'))->with('toast_success', 'Berhasil menambah Data');
         } else 
         {
-            return redirect(route('admin.bagpackage.index'))->with('toast_error', 'Gagal! Data Sudah Ada Di Database!');
+            return redirect(route('admin.bagpackage.index'))->with('toast_error', 'Gagal! Bag Number Sudah Terdaftar!');
         }
         
     }

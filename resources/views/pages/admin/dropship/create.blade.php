@@ -127,7 +127,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="font-weight-bold">Upload Gambar*</label>
-                                <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo">
+                                <input type="file" class="form-control-file @error('photo') is-invalid @enderror" name="photo">
                                 @error('photo')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -135,6 +135,7 @@
                                 @enderror
                             </div>
                         </div>
+                        <br>
                         <div class="float-right">
                             <button type="reset" class="btn btn-warning"><b>RESET</b></button>
                             <button type="submit" class="btn btn-primary"><b>SIMPAN</b></button>

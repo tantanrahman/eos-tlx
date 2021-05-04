@@ -57,7 +57,7 @@ class DropshipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    protected function create()
     {
         $cities = City::all();
         $users = User::where('role_id','=',2)->get();
@@ -98,25 +98,27 @@ class DropshipController extends Controller
         $photo = $request->file('photo');
         $photo->storeAs('public/dropship', $photo->hashName());
 
-        $data = Dropship::create([
-            'resi'          => Request()->resi,
-            'name'          => Request()->name,
-            'courier_id'    => Request()->courier_id,
-            'jenis_barang'  => Request()->jenis_barang,
-            'berat'         => Request()->berat,
-            'city'          => Request()->city,
-            'users_id'      => Request()->users_id,
-            'photo'         => $photo->hashName()
-        ]);
+        $data = Dropship::where('resi', '=', $request->input('resi'))->first();
 
-        if($data)
+        if($data === null)
         {
+            $data = Dropship::create([
+                'resi'          => Request()->resi,
+                'name'          => Request()->name,
+                'courier_id'    => Request()->courier_id,
+                'jenis_barang'  => Request()->jenis_barang,
+                'berat'         => Request()->berat,
+                'city'          => Request()->city,
+                'users_id'      => Request()->users_id,
+                'photo'         => $photo->hashName()
+            ]);
             return redirect(route('admin.dropship.index'))->with('toast_success', 'Berhasil Tambah Data');
         }
-        else 
+        else
         {
-            return redirect(route('admin.dropship.index'))->with('toast_error', 'Gagal');
+            return redirect(route('admin.dropship.index'))->with('toast_error', 'Gagal! Resi Sudah Terdaftar!');
         }
+        
     }
 
     /**
@@ -208,18 +210,9 @@ class DropshipController extends Controller
      */
     public function destroy($id)
     {
-        $dropship = Dropship::findOrFail($id);
-        Storage::disk('local')->delete('public/dropship'.$dropship->photo);
-        $dropship->delete();
+        $dropship = Dropship::where('id',$id)->delete();
 
-        if($dropship)
-        {
-            return redirect(route('admin.dropship.index'))->with('toast_success', 'Berhasil Hapus Data');
-        }
-        else 
-        {
-            return redirect(route('admin.dropship.index'))->with('toast_error', 'Gagal');
-        }
+        return response()->json($dropship);
 
     }
 
