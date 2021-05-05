@@ -15,14 +15,14 @@ class CreateCustomerTable extends Migration
     {
         Schema::create('customer', function (Blueprint $table) {
             $table->id();
-            $table->string('account_code',50);
+            $table->string('account_code',50)->unique();
             $table->string('name',150);
             $table->string('company_name',150)->nullable();
             $table->text('address');
-            $table->foreignId('district_id')->references('id')->on('city')->onDelete('cascade');
-            $table->string('phone',60);
-            $table->enum('grup', ['shipper','consignee'])->default('shipper');
-            $table->string('postal_code',20);
+            $table->foreignId('city_id')->references('id')->on('city')->onDelete('cascade');
+            $table->string('phone',60)->nullable();
+            $table->enum('group', ['shipper','consignee'])->default('shipper');
+            $table->string('postal_code',20)->nullable();
             $table->foreignId('postalcode_id')->references('id')->on('city')->onDelete('cascade');
             $table->string('sum_key',150)->nullable()->unique();
             $table->string('api_passowrd',150);

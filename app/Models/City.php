@@ -12,11 +12,9 @@ class City extends Model
     protected $table = 'city';
 
     protected $fillable = [
+        'code',
         'province',
         'city',
-        'district',
-        'urban',
-        'postal_code'
     ];
 
     public function dropships()

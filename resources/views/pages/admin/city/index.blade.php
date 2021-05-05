@@ -18,39 +18,24 @@
     </div>
 
     <section class="content">
-        <div class="container-fluid">
-          <div class="table-responsive">
+        <div class="container-fluid">   
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>#</th>
-                                <th>Province</th>
-                                <th>City</th>
-                                <th>District</th>
-                                <th>Urban</th>
-                                <th>Postal Code</th>
-                            </tr>
-                        </thead>
-                        @foreach ($cities as $city)
-                            <tbody>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="table_city">
+                            <thead class="thead-dark">
                                 <tr>
-                                    <td>{{ $city->id }}</td>
-                                    <td>{{ $city->province }}</td>
-                                    <td>{{ $city->city }}</td>
-                                    <td>{{ $city->district }}</td>
-                                    <td>{{ $city->urban }}</td>
-                                    <td>{{ $city->postal_code }}</td>
+                                    <th>#</th>
+                                    <th>Code</th>
+                                    <th>Province</th>
+                                    <th>City</th>
                                 </tr>
-                            </tbody>
-                        @endforeach
-                    </table>
-                    <br>
-                    {{ $cities->links() }}
+                            </thead>
+                            
+                        </table>
+                    </div>
                 </div>
             </div>
-          </div>
         </div>
     </section>
 </div>

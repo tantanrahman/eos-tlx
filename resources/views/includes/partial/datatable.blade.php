@@ -31,7 +31,7 @@
     $(document).on('click', '.delete', function () {
             dataId = $(this).attr('id');
             $('#konfirmasi-modal').modal('show');
-        });
+    });
         
     $('#tombol-hapus').click(function () {
         $.ajax({
@@ -101,4 +101,36 @@
         ]
       });
     });
+
+    $(document).ready(function() {
+      $('#table_city').DataTable({
+        processing : true,
+        serverSide : true,
+        ajax : '{!! route("admin.city.index") !!}',
+        columns: [
+          {data:'id',name:'id'},
+          {data:'code',name:'code'},
+          {data:'province',name:'province'},
+          {data:'city',name:'city'},
+        ],
+      });
+    });
+
+    $(document).ready(function() {
+      $('#table_customer').DataTable({
+        processing : true,
+        serverSide : true,
+        ajax : '{!! route("admin.customer.index") !!}',
+        columns: [
+          {data:'id',name:'id'},
+          {data:'account_code',name:'account_code'},
+          {data:'name',name:'name'},
+          {data:'city',name:'city'},
+          {data:'phone',name:'phone'},
+          {data:'group',name:'group'},
+          {data:'action',name:'action'},
+        ],
+      });
+    });
+   
 </script>

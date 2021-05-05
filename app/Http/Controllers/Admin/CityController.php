@@ -16,14 +16,14 @@ class CityController extends Controller
      */
     public function index(Request $request)
     {
-        $cities = City::paginate(10);
+        $cities = City::get();
 
-        // if($request->ajax())
-        // {
-        //    return DataTables::of($cities)->make(true);
-        // }
+        if($request->ajax())
+        {
+           return DataTables::of($cities)->make(true);
+        }
 
-        return view('pages.admin.city.index', compact('cities'));
+        return view('pages.admin.city.index');
     }
 
     /**

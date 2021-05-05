@@ -16,10 +16,32 @@
 <script src="{{ url('dist/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ url('dist/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ url('plugins/select2/js/select2.min.js') }}"></script>
+<script src="{{ url('dist/js/typeahead.bundle.js') }}"></script>
 @include('sweetalert::alert')
 
 <script>
   $('#datedropship').daterangepicker()
+</script>
+<script type="text/javascript">
+  $('.livesearch').select2({
+      placeholder: 'Select City',
+      ajax: {
+          url: '/admin.getCity',
+          dataType: 'json',
+          delay: 250,
+          processResults: function (data) {
+              return {
+                  results: $.map(data, function (item) {
+                      return {
+                          text: item.city,
+                          id: item.id
+                      }
+                  })
+              };
+          },
+          cache: true
+      }
+  });
 </script>
 
 @include('includes.partial.datatable')
