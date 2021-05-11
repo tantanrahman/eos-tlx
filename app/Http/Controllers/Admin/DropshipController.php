@@ -34,7 +34,7 @@ class DropshipController extends Controller
                         ->join('city','dropship.city','=','city.id')
                         ->select('dropship.id as idx','dropship.created_at AS time','dropship.resi as resis','dropship.name AS names','courier.name as couriers','dropship.jenis_barang as category','dropship.berat as weight','city.city as cities','users.name as users', 'dropship.photo')->get();
 
-           return DataTables::of($dropships)
+            return DataTables::of($dropships)
                         ->addColumn('photo', function($dropship){
                             $url = URL::asset("/storage/dropship/".$dropship->photo);
                             return '<img src='.$url.' border="0" height="60" width="100" class="img-rounded" text-align="center" />';
@@ -82,7 +82,7 @@ class DropshipController extends Controller
             'berat'             => 'required',
             'city'              => 'required',
             'users_id'          => 'required',
-            'photo'             => 'required|image'
+            'photo'             => 'required|image|mimes:jpeg,jpg,png'
         ], [
             'resi.required'         => 'RESI WAJIB DIISI',
             'name.required'         => 'NAMA WAJIB DIISI',
@@ -220,10 +220,10 @@ class DropshipController extends Controller
      * Export XLS Dropship
      */
 
-     public function export()
-     {
-         return Excel::download(new DropshipExport(), 'Report-Dropship-'.date("Y-m-d").'.xlsx');
-     }
+    public function export()
+    {
+        return Excel::download(new DropshipExport(), 'Report Dropship '.date("Y-m-d").'.xlsx');
+    }
 
     /**
      * Download and Print PDF
@@ -233,10 +233,24 @@ class DropshipController extends Controller
     {
         $dropships = Dropship::join('users','dropship.users_id','=','users.id')
                                         ->join('courier','dropship.courier_id','=','courier.id')
-                                         ->join('city','dropship.city','=','city.id')
-                                         ->select('dropship.created_at AS time','dropship.resi','courier.name as courier','dropship.name AS dname','dropship.jenis_barang','dropship.berat','city.city as cities','users.name as marketing')->whereDate('dropship.created_at', Carbon::today())->get();
+                                        ->join('city','dropship.city','=','city.id')
+                                        ->select('dropship.created_at AS time','dropship.resi','courier.name as courier','dropship.name AS dname','dropship.jenis_barang','dropship.berat','city.city as cities','users.name as marketing')->whereDate('dropship.created_at', Carbon::today())->get();
 
         $pdf = PDF::loadView('pages.admin.dropship.export', compact('dropships'))->setPaper('a4', 'landscape');
-        return $pdf->download('Report-Dropship-'.date("Y-m-d").'.pdf');
+        return $pdf->download('Report Dropship '.date("Y-m-d").'.pdf');
     }
+
+    public function searchdateDrop(Request $request)
+    {
+        $fromDate       = "2021-05-08";
+        $toDate         = "2021-05-09";
+
+        $data = Dropship::where('created_at','LIKE',"%{$fromDate}%")->where('created_at','LIKE',"%{$toDate}%")->get();
+
+        dd($data);
+
+        // return view('pages.admin.dropship.index', compact('data'));
+    }
+
+    
 }

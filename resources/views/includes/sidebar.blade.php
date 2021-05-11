@@ -19,7 +19,7 @@
             </a>
           </li>
 
-          <li class="nav-item {{ request()->is('admin/bagpackage*') || request()->is('admin/city*') || request()->is('admin/courier*') || request()->is('admin/country*') || request()->is('admin/partner*') ? 'menu-open' : '' }}">
+          <li class="nav-item {{ request()->is('admin/bagpackage*') || request()->is('admin/city*') || request()->is('admin/courier*') || request()->is('admin/country*') || request()->is('admin/partner*') || request()->is('admin/packagetype*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-database"></i>
             <p style="font-size: 16px">
@@ -53,11 +53,27 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{ route('admin.packagetype.index') }}" class="nav-link {{ request()->is('admin/packagetype*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="font-size: 16px">Package Type</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ route('admin.partner.index') }}" class="nav-link {{ request()->is('admin/partner*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="font-size: 16px">Partner</p>
                 </a>
+              </li>
             </ul>
+          </li>
+
+          <li class="nav-item {{ request()->is('admin/customer*') ? 'menu-open' : '' }}">
+            <a href="{{ route('admin.customer.index') }}" class="nav-link {{ request()->is('admin/customer*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-users"></i>
+            <p style="font-size: 16px">
+                Customer
+            </p>
+            </a>
           </li>
 
           <li class="nav-item {{ request()->is('admin/dropship*') ? 'menu-open' : '' }}">
@@ -69,11 +85,38 @@
             </a>
           </li>
 
-          <li class="nav-item {{ request()->is('admin/customer*') ? 'menu-open' : '' }}">
-            <a href="{{ route('admin.customer.index') }}" class="nav-link {{ request()->is('admin/customer*') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-users"></i>
+          <li class="nav-item {{ request()->is('admin/finance*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is('admin/finance*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-money-bill-wave"></i>
             <p style="font-size: 16px">
-                Customer
+                Finance
+            </p>
+            </a>
+          </li>
+
+          <li class="nav-item {{ request()->is('admin/kpi*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is('admin/kpi*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-archive"></i>
+            <p style="font-size: 16px">
+                KPI
+            </p>
+            </a>
+          </li>
+
+          <li class="nav-item {{ request()->is('admin/manifest*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is('admin/manifest*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-file-archive"></i>
+            <p style="font-size: 16px">
+                Manifest
+            </p>
+            </a>
+          </li>
+
+          <li class="nav-item {{ request()->is('admin/shipment*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is('admin/shipment*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-plane-departure"></i>
+            <p style="font-size: 16px">
+                Shipment
             </p>
             </a>
           </li>
@@ -112,6 +155,16 @@
                 </a>
               </li>
             </ul>
+          </li>
+
+          <li class="nav-item {{ request()->is('admin/support*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is('admin/support*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-question"></i>
+            <p style="font-size: 16px">
+                Support
+                <span class="right badge badge-danger">PDF</span>
+            </p>
+            </a>
           </li>
 
         </ul>

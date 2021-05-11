@@ -112,4 +112,17 @@ class CourierController extends Controller
     {
         //
     }
+
+    /**
+     * 
+     * Get All Courier
+     */
+    public function autocompleteCourier(Request $request)
+    {
+        return Courier::select('name')
+            ->where('name', 'like', "%{$request->term}%")
+            ->where('active','=',1)
+            ->pluck('name');
+            
+    }
 }

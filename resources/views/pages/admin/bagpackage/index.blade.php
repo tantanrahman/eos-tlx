@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title','Bag Package')
+@section('title','Bag Number')
 
 @section('content')
 <div class="content-wrapper">

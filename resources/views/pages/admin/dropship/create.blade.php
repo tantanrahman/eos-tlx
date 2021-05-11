@@ -58,12 +58,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="courier_id">Courier*</label>
-                                <select name="courier_id" class="form-control" id="select2dropcourier" data-width="100%">
-                                    <option></option>
-                                    @foreach($couriers as $courier)
-                                        <option value="{{ $courier->id }}">{{ $courier->name }}</option>
-                                    @endforeach
-                                </select>
+                                <input class="typeaheadCourier form-control" type="text" name="courier_id" autocomplete="off" value="">
                                 @error('courier_id')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
@@ -99,12 +94,7 @@
                             
                             <div class="form-group col-md-3">
                                 <label for="city">Kota*</label>
-                                <select name="city" class="form-control" id="select2City" data-width="100%">
-                                    <option></option>
-                                    @foreach($cities as $city)
-                                        <option value="{{ $city->id }}">{{ $city->city }}</option>
-                                    @endforeach
-                                </select>
+                                <input class="typeaheadCity form-control" type="text" name="city" autocomplete="off" value="">
                                 @error('city')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>

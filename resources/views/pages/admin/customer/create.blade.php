@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                  
+
                 </div>
                 <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right">
@@ -32,7 +32,7 @@
             <div class="card">
                 <div class="card-header bg-secondary">
                     <i class="fas fa-plus"></i>
-                    Input Dropship
+                    Input Customer
                 </div>
                 <div class="card-body">
                     <form action="{{ route('admin.customer.store') }}" method="POST" enctype="multipart/form-data">
@@ -40,9 +40,9 @@
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="city">City*</label>
-                                <select class="livesearch form-control" name="livesearch"></select>
+                                <input type="text" class="form-control typeahead">
                             </div>
-                            
+
                         </div>
                         <br>
                         <div class="float-right">
@@ -55,4 +55,5 @@
         </div>
     </section>
 </div>
+
 @endsection

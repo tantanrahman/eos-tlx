@@ -104,7 +104,7 @@
                                 <select name="city" class="form-control" id="select2City" data-width="100%">
                                     <option></option>
                                     @foreach($cities as $city)
-                                        <option value="{{ $city->id }}" {{ ($city->id == $dropship->city) ? 'selected' : '' }}>{{ $city->urban }}</option>
+                                        <option value="{{ $city->id }}" {{ ($city->id == $dropship->city) ? 'selected' : '' }}>{{ $city->city }}</option>
                                     @endforeach
                                 </select>
                                 @error('city')

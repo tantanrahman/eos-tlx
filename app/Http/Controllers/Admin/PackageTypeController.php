@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Partner;
+use App\Models\PackageType;
 use Illuminate\Http\Request;
 
-class PartnerController extends Controller
+class PackageTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class PartnerController extends Controller
      */
     public function index()
     {
-        $partners = Partner::get();
+        $packageType = PackageType::get();
 
-        return view('pages.admin.partner.index', compact('partners'));
+        return view('pages.admin.packagetype.index', compact('packageType'));
     }
 
     /**
@@ -41,31 +41,30 @@ class PartnerController extends Controller
         $this->validate($request, [
             'name' => 'required'
         ],[
-            'name.required' => 'NAMA BAG WAJIB DIISI'
+            'name.required' => 'NAMA PACKAGE WAJIB DIISI'
         ]);
 
-        $data = Partner::where('reff_id', '=', $request->input('reff_id'))->first();
+        $data = PackageType::where('name', '=', $request->input('name'))->first();
 
         if ($data === null)
         {
-            $data = Partner::create([
-                'reff_id' => Request()->reff_id,
+            $data = PackageType::create([
                 'name' => Request()->name
             ]);
-            return redirect(route('admin.partner.index'))->with('toast_success', 'Berhasil menambah Data');
+            return redirect(route('admin.packagetype.index'))->with('toast_success', 'Berhasil menambah Data');
         } else 
         {
-            return redirect(route('admin.partner.index'))->with('toast_error', 'Gagal! Reff ID Sudah Terdaftar!');
+            return redirect(route('admin.packagetype.index'))->with('toast_error', 'Gagal! Nama Sudah Terdaftar!');
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Partner  $partner
+     * @param  \App\Models\PackageType  $packageType
      * @return \Illuminate\Http\Response
      */
-    public function show(Partner $partner)
+    public function show(PackageType $packageType)
     {
         //
     }
@@ -73,10 +72,10 @@ class PartnerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Partner  $partner
+     * @param  \App\Models\PackageType  $packageType
      * @return \Illuminate\Http\Response
      */
-    public function edit(Partner $partner)
+    public function edit(PackageType $packageType)
     {
         //
     }
@@ -85,10 +84,10 @@ class PartnerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Partner  $partner
+     * @param  \App\Models\PackageType  $packageType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Partner $partner)
+    public function update(Request $request, PackageType $packageType)
     {
         //
     }
@@ -96,10 +95,10 @@ class PartnerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Partner  $partner
+     * @param  \App\Models\PackageType  $packageType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Partner $partner)
+    public function destroy(PackageType $packageType)
     {
         //
     }

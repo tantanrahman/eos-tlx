@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePartnerTable extends Migration
+class CreatePackagetypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreatePartnerTable extends Migration
      */
     public function up()
     {
-        Schema::create('partner', function (Blueprint $table) {
+        Schema::create('packagetype', function (Blueprint $table) {
             $table->id();
-            $table->string('reff_id',50)->nullable();
             $table->string('name',70);
             $table->tinyInteger('active')->default(1);
             $table->timestamps();
@@ -30,6 +29,6 @@ class CreatePartnerTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('partner');
+        Schema::dropIfExists('packagetype');
     }
 }

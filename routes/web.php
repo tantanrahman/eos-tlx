@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DropshipController;
 use App\Http\Controllers\Admin\OfficeProfileController;
+use App\Http\Controllers\Admin\PackageTypeController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
@@ -48,10 +49,13 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::resource('country', CountryController::class);
     Route::resource('counter', CounterController::class);
     Route::resource('partner', PartnerController::class);
+    Route::resource('packagetype', PackageTypeController::class);
     Route::get('export', [App\Http\Controllers\Admin\DropshipController::class, 'export'])->name('dropship.export');
     Route::get('pdf', [App\Http\Controllers\Admin\DropshipController::class, 'pdf'])->name('dropship.pdf');
-    Route::get('getCity', [App\Http\Controllers\Admin\CustomerController::class, 'getCity'])->name('getCity');
+    Route::post('searchdateDrop', [App\Http\Controllers\Admin\DropshipController::class, 'searchdateDrop'])->name('searchdateDrop');
+    
 });
-
+Route::get('autocompleteCity', [App\Http\Controllers\Admin\CityController::class, 'autocompleteCity'])->name('autocompleteCity');
+Route::get('autocompleteCourier', [App\Http\Controllers\Admin\CourierController::class, 'autocompleteCourier'])->name('autocompleteCourier');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

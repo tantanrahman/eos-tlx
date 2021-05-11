@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\City;
 use GuzzleHttp\Client;
 use App\Models\Country;
+use App\Models\Student;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -105,16 +106,11 @@ class CustomerController extends Controller
      * 
      */
 
-    public function getCity(Request $request)
+    public function autocomplete(Request $request)
     {
-        $cities = [];
-
-        if($request->has('q')){
-            $search = $request->q;
-            $cities =City::select("id", "city")
-            		->where('city', 'LIKE', "%$search%")
-            		->get();
-        }
-        return response()->json($cities);    
+        $data = City::select("city")
+                ->where("city","LIKE","%{$request['query']}%")
+                ->get();
+        return response()->json($data);   
     }
 }

@@ -26,12 +26,12 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>#</th>
-                                    <th>Code</th>
-                                    <th>Province</th>
-                                    <th>City</th>
+                                    <th>CODE</th>
+                                    <th>PROVINCE</th>
+                                    <th>CITY</th>
                                 </tr>
                             </thead>
-                            
+                          
                         </table>
                     </div>
                 </div>

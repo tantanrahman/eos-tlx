@@ -1,6 +1,7 @@
 <table border="1" style="border-collapse: collapse" width="100%">
     <thead>
         <tr>
+            <th>NO</th>
             <th>DATE</th>
             <th>RESI</th>
             <th>COURIER</th>
@@ -11,8 +12,9 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($dropships as $dropship)
+        @foreach ($dropships as $index => $dropship)
             <tr>
+                <td align="center">{{ $index + 1 }}</td>
                 <td align="center">{{ $dropship->time }}</td>
                 <td align="center">{{ $dropship->resi }}</td>
                 <td align="center">{{ $dropship->courier }}</td>

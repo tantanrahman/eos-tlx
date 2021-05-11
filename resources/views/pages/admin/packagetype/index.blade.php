@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title','Partner')
+@section('title','Package Type')
 
 @section('content')
 <div class="content-wrapper">
@@ -9,33 +9,21 @@
             <div class="card">
                 <div class="card-header bg-secondary">
                     <i class="fas fa-plus"></i>
-                    Add Partner
+                    Add Package Type
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.partner.store') }}" method="POST">
+                    <form action="{{ route('admin.packagetype.store') }}" method="POST">
                         @csrf
                         <div class="row">
-                            <div class="col-5">
-                                <input oninput="this.value = this.value.toUpperCase()" type="text" name="reff_id" class="form-control @error('reff_id') is-invalid @enderror" name="reff_id" value="{{ old('reff_id') }}" placeholder="Reff ID" autofocus>
-                                <small class="form-text text-muted">
-                                    <i>Akan digunakan/ditampilkan di Connote. <strong>Ex: 08 GD MY</strong> </i>
-                                </small>
-                                @error('reff_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                
-                            </div>
-                            <div class="col-5">
-                                <input oninput="this.value = this.value.toUpperCase()" type="text" name="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Name" autofocus>
+                            <div class="col-6">
+                                <input oninput="this.value = this.value.toUpperCase()" type="text" name="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autofocus>
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                            <div class="col-2">
+                            <div class="col-6">
                                 <button type="submit" class="btn btn-primary">SUBMIT</button>
                             </div>
                         </div>
@@ -46,23 +34,21 @@
             <div class="card">
                 <div class="card-header bg-secondary">
                     <i class="fas fa-table"></i>
-                    Table of Partner
+                    Table of Package Type
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">
                         <tr>
                             <th>#</th>
-                            <th>Reff ID</th>
                             <th>Name</th>
                             <th>Status</th>
                         </tr>
-                        @foreach ($partners as $index => $partner)
+                        @foreach ($packageType as $index => $pt)
                             <tr>
                                 <td>{{ $index + 1 }}</td>
-                                <td>{{ $partner->reff_id }}</td>
-                                <td>{{ $partner->name }}</td>
+                                <td>{{ $pt->name }}</td>
                                 <td>
-                                    @if ($partner->active == 1)
+                                    @if ($pt->active == 1)
                                         <span class="badge badge-success">ACTIVE</span>
                                     @else
                                         <span class="badge badge-danger">NOT ACTIVE</span>

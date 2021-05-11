@@ -1,4 +1,5 @@
 <script src="{{ url('plugins/jquery/jquery.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
 <script src="{{ url('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button)
@@ -16,12 +17,19 @@
 <script src="{{ url('dist/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ url('dist/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ url('plugins/select2/js/select2.min.js') }}"></script>
-<script src="{{ url('dist/js/typeahead.bundle.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 @include('sweetalert::alert')
 
 <script>
-  $('#datedropship').daterangepicker()
+  $('#event_period').datepicker({
+    inputs: $('.actual_range'),
+    format: "yyyy-mm-dd",
+    autoclose: true,
+    endDate: "0d"
+  });
 </script>
 
+
+@include('includes.partial.autocomplete')
 @include('includes.partial.datatable')
 @include('includes.partial.select')

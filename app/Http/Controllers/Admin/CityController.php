@@ -91,4 +91,17 @@ class CityController extends Controller
     {
         //
     }
+
+    /**
+     * 
+     * get All data City for AutoComplete
+     */
+
+    public function autocompleteCity(Request $request)
+    {
+        return City::select('city')
+            ->where('city', 'like', "%{$request->term}%")
+            ->pluck('city');
+            
+    }
 }
