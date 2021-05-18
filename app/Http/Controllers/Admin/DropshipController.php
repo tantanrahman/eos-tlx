@@ -26,13 +26,12 @@ class DropshipController extends Controller
      */
     public function index(Request $request)
     {
+		if($request->ajax())
+		{
+			$date_start = ( ! empty($request->get('date_start')) ? $request->get('date_start') : '');
+			$date_end = ( ! empty($request->get('date_end')) ? $request->get('date_end') : '');
 
-       if($request->ajax())
-       {
-            $dropships = Dropship::join('users','dropship.users_id','=','users.id')
-                        ->join('courier','dropship.courier_id','=','courier.id')
-                        ->join('city','dropship.city','=','city.id')
-                        ->select('dropship.id as idx','dropship.created_at AS time','dropship.resi as resis','dropship.name AS names','courier.name as couriers','dropship.jenis_barang as category','dropship.berat as weight','city.city as cities','users.name as users', 'dropship.photo')->get();
+			$dropships = Dropship::get_items($date_start, $date_end);
 
             return DataTables::of($dropships)
                         ->addColumn('photo', function($dropship){
@@ -229,12 +228,12 @@ class DropshipController extends Controller
      * Download and Print PDF
     */
 
-    public function pdf()
+    public function pdf(Request $request)
     {
-        $dropships = Dropship::join('users','dropship.users_id','=','users.id')
-                                        ->join('courier','dropship.courier_id','=','courier.id')
-                                        ->join('city','dropship.city','=','city.id')
-                                        ->select('dropship.created_at AS time','dropship.resi','courier.name as courier','dropship.name AS dname','dropship.jenis_barang','dropship.berat','city.city as cities','users.name as marketing')->whereDate('dropship.created_at', Carbon::today())->get();
+		$date_start = ( ! empty($request->get('date_start')) ? $request->get('date_start') : '');
+		$date_end = ( ! empty($request->get('date_end')) ? $request->get('date_end') : '');
+
+		$dropships = Dropship::get_items($date_start, $date_end);
 
         $pdf = PDF::loadView('pages.admin.dropship.export', compact('dropships'))->setPaper('a4', 'landscape');
         return $pdf->download('Report Dropship '.date("Y-m-d").'.pdf');
@@ -242,12 +241,11 @@ class DropshipController extends Controller
 
     public function searchdateDrop(Request $request)
     {
-        $fromDate       = "2021-05-08";
-        $toDate         = "2021-05-09";
+        $fromDate       = date('Y-m-d 00:00:00', strtotime($request->post('periode_start')));
+		$toDate         = date('Y-m-d 23:59:59', strtotime($request->post('periode_end')));
 
-        $data = Dropship::where('created_at','LIKE',"%{$fromDate}%")->where('created_at','LIKE',"%{$toDate}%")->get();
-
-        dd($data);
+        $data = Dropship::whereBetween('created_at', [$fromDate, $toDate])->get();
+		dd($data);
 
         // return view('pages.admin.dropship.index', compact('data'));
     }

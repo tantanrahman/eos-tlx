@@ -17,15 +17,40 @@
 <script src="{{ url('dist/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ url('dist/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ url('plugins/select2/js/select2.min.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
 @include('sweetalert::alert')
 
 <script>
-  $('#event_period').datepicker({
-    inputs: $('.actual_range'),
-    format: "yyyy-mm-dd",
-    autoclose: true,
-    endDate: "0d"
+  $('#dropship-periode-start').datepicker({
+      format: "yyyy-mm-dd",
+      autoclose: true,
+  }).on('changeDate', function (e) {
+	  var dt = new Date(e.target.value);
+	  $("#dropship-periode-end").datepicker("setStartDate", dt);
+
+	  fetch_dropship();
+  });
+
+  $('#dropship-periode-end').datepicker({
+      format: "yyyy-mm-dd",
+      autoclose: true,
+  }).on('changeDate', function (e) {
+	  fetch_dropship();
+  });
+
+  $('body').on('click', '.dropship-export', function (e) {
+	  e.preventDefault();
+
+	  let export_url = e.target.href,
+		  query = {
+			  date_start: $('#dropship-periode-start').val(),
+			  date_end: $('#dropship-periode-end').val(),
+		  },
+		  url_params = '';
+
+	  url_params = '?' + $.param(query);
+
+	  window.location.href = export_url + url_params;
   });
 </script>
 

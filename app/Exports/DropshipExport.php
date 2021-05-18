@@ -50,11 +50,11 @@ class DropshipExport implements FromView
 
     public function view(): View
     {
-        return view('pages.admin.dropship.export', [
-            'dropships' => Dropship::join('users','dropship.users_id','=','users.id')
-                                        ->join('courier','dropship.courier_id','=','courier.id')
-                                         ->join('city','dropship.city','=','city.id')
-                                         ->select('dropship.created_at AS time','dropship.resi','courier.name as courier','dropship.name AS dname','dropship.jenis_barang','dropship.berat','city.city as cities','users.name as marketing')->whereDate('dropship.created_at', Carbon::today())->get()
+		$date_start = ( ! empty($_GET['date_start']) ? $_GET['date_start'] : '');
+		$date_end = ( ! empty($_GET['date_end']) ? $_GET['date_end'] : '');
+
+		return view('pages.admin.dropship.export', [
+            'dropships' => Dropship::get_items($date_start, $date_end)
         ]);
     }
 }

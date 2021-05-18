@@ -16,12 +16,12 @@
             <tr>
                 <td align="center">{{ $index + 1 }}</td>
                 <td align="center">{{ $dropship->time }}</td>
-                <td align="center">{{ $dropship->resi }}</td>
-                <td align="center">{{ $dropship->courier }}</td>
-                <td align="center">{{ $dropship->dname }}</td>
-                <td align="center">{{ $dropship->jenis_barang }}</td>
-                <td align="center">{{ $dropship->marketing }}</td>
-                <td align="center">{{ $dropship->berat }}</td>
+                <td align="center">{{ $dropship->resis }}</td>
+                <td align="center">{{ $dropship->couriers }}</td>
+                <td align="center">{{ $dropship->names }}</td>
+                <td align="center">{{ $dropship->category }}</td>
+                <td align="center">{{ $dropship->users }}</td>
+                <td align="center">{{ $dropship->weight }}</td>
             </tr>
             
         @endforeach

@@ -1,4 +1,39 @@
 <script>
+    function fetch_dropship()
+    {
+    	let index_url = '{!! route("admin.dropship.index") !!}',
+			query = {
+				date_start: $('#dropship-periode-start').val(),
+				date_end: $('#dropship-periode-end').val(),
+			};
+
+		$('#table_dropship').DataTable({
+			processing : true,
+			serverSide : true,
+			"ajax": {
+				"url": index_url,
+				"data": {
+					"date_start": query.date_start,
+					"date_end": query.date_end,
+				}
+			},
+			columns: [
+				{data:'idx',name:'idx', visible: false},
+				{data:'time',name:'time'},
+				{data:'resis',name:'resis'},
+				{data:'names',name:'names'},
+				{data:'couriers',name:'couriers'},
+				{data:'category',name:'category'},
+				{data:'weight',name:'weight'},
+				{data:'cities',name:'cities'},
+				{data:'users',name:'users'},
+				{data:'photo',name:'dropship.photo'},
+				{data:'action',name:'action', orderable: false, searchable: false},
+			],
+			destroy: true,
+		});
+    }
+
   $(document).ready(function () {
       $.ajaxSetup({
           headers: {
@@ -8,24 +43,10 @@
   });
 
   $(document).ready(function() {
-    $('#table_dropship').DataTable({
-      processing : true,
-      serverSide : true,
-      ajax : '{!! route("admin.dropship.index") !!}',
-      columns: [
-        {data:'idx',name:'idx', visible: false},
-        {data:'time',name:'time'},
-        {data:'resis',name:'resis'},
-        {data:'names',name:'names'},
-        {data:'couriers',name:'couriers'},
-        {data:'category',name:'category'},
-        {data:'weight',name:'weight'},
-        {data:'cities',name:'cities'},
-        {data:'users',name:'users'},
-        {data:'photo',name:'dropship.photo'},
-        {data:'action',name:'action', orderable: false, searchable: false},
-      ],
-    });
+  	if ($('#dropship-periode-start').length)
+    {
+		fetch_dropship();
+	}
   });
 
   $(document).on('click', '.delete', function () {

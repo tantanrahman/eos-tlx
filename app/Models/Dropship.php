@@ -36,4 +36,35 @@ class Dropship extends Model
     {
         return $this->belongsTo('App\Models\City');
     }
+
+    public static function get_items($date_start, $date_end)
+	{
+		$items = self::join('users','dropship.users_id','=','users.id')
+			->join('courier','dropship.courier_id','=','courier.id')
+			->join('city','dropship.city','=','city.id')
+			->select(
+				'dropship.id as idx',
+				'dropship.created_at AS time',
+				'dropship.resi as resis',
+				'dropship.name AS names',
+				'courier.name as couriers',
+				'dropship.jenis_barang as category',
+				'dropship.berat as weight',
+				'city.city as cities',
+				'users.name as users',
+				'dropship.photo'
+			);
+
+		if ( ! empty($date_start))
+		{
+			$items->whereDate('dropship.created_at', '>=', $date_start);
+		}
+
+		if ( ! empty($date_end))
+		{
+			$items->whereDate('dropship.created_at', '<=', $date_end);
+		}
+
+		return $items->get();
+	}
 }

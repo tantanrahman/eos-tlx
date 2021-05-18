@@ -18,13 +18,10 @@
                                             <i class="far fa-calendar-alt"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control actual_range" name="periode_start" autocomplete="off">
+                                    <input type="text" class="form-control actual_range" name="periode_start" id="dropship-periode-start" autocomplete="off">
                                     <span class="input-group-text rounded-0">TO</span>
-                                    <input type="text" class="form-control actual_range" name="periode_end" autocomplete="off">
+                                    <input type="text" class="form-control actual_range" name="periode_end" id="dropship-periode-end" autocomplete="off">
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-primary">FILTER</button>
                             </div>
                         </div>
                     </form>
@@ -39,15 +36,19 @@
                 <div class="card-body">
                     <div class="btn-group mb-4" role="group" aria-label="Basic example">
                         <a href="{{ route('admin.dropship.create') }}" class="btn bg-info"><i class="nav-icon fas fa-plus"></i> Tambah Data</a>
-                        <a href="{{ route('admin.dropship.export') }}" class="btn bg-secondary"><i class="fas fa-file-excel"></i> Excel</a>
-                        <a href="{{ route('admin.dropship.pdf') }}" class="btn bg-secondary"><i class="fas fa-file-pdf"></i> PDF</a>
+                        <a href="{{ route('admin.dropship.export') }}" class="btn bg-secondary dropship-export">
+                            <i class="fas fa-file-excel"></i> Excel
+                        </a>
+                        <a href="{{ route('admin.dropship.pdf') }}" class="btn bg-secondary dropship-export">
+                            <i class="fas fa-file-pdf"></i> PDF
+                        </a>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="table_dropship" style="width:100%">
                             <thead class="thead-dark">
                                 <tr>
                                     <th style="display: none">Id</th>
-                                    <th>Tanggal</th>
+                                    <th width="70px">Tanggal</th>
                                     <th>Resi</th>
                                     <th>Nama</th>
                                     <th>Courier</th>
