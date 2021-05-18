@@ -1,17 +1,17 @@
 <script type="text/javascript">
-    var path = "{{ route('autocompleteCity')  }}"
+    let city_path = "{{ route('autocompleteCity')  }}"
     $('input.typeaheadCity').typeahead({
         source:  function (query, process) {
-        return $.get(path, { term: query }, function (data) {
+        return $.get(city_path, { term: query }, function (data) {
                 return process(data);
             });
         }
     });
     
-    var path = "{{ route('autocompleteCourier')  }}"
-    $('input.typeaheadCity').typeahead({
+    let courier_path = "{{ route('autocompleteCourier')  }}"
+    $('input.typeaheadCourier').typeahead({
         source:  function (query, process) {
-        return $.get(path, { term: query }, function (data) {
+        return $.get(courier_path, { term: query }, function (data) {
                 return process(data);
             });
         }
