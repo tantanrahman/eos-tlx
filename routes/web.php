@@ -57,5 +57,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
 });
 Route::get('autocompleteCity', [App\Http\Controllers\Admin\CityController::class, 'autocompleteCity'])->name('autocompleteCity');
 Route::get('autocompleteCourier', [App\Http\Controllers\Admin\CourierController::class, 'autocompleteCourier'])->name('autocompleteCourier');
+Route::get('autocompleteCountry', [App\Http\Controllers\Admin\CountryController::class, 'autocompleteCountry'])->name('autocompleteCountry');
+Route::get('getCustomerId', [App\Http\Controllers\Admin\CustomerController::class, 'getCustomerId'])->name('getCustomerId');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

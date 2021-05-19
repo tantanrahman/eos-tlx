@@ -91,4 +91,19 @@ class CountryController extends Controller
     {
         //
     }
+
+	/**
+	 *
+	 * get All data Country for AutoComplete
+	 */
+
+	public function autocompleteCountry(Request $request)
+	{
+		$countries = Country::select('id', 'name as label')
+			->where('name', 'like', "%{$request->term}%")
+			->get();
+
+		return response()->json($countries);
+	}
+
 }

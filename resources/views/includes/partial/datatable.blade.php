@@ -143,7 +143,7 @@
       serverSide : true,
       ajax : '{!! route("admin.customer.index") !!}',
       columns: [
-        {data:'id',name:'id'},
+        {data:'id',name:'id', visible: false},
         {data:'account_code',name:'account_code'},
         {data:'name',name:'name'},
         {data:'city',name:'city'},

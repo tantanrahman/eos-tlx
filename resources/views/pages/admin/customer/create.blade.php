@@ -39,8 +39,77 @@
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-3">
+                                <label for="city">Customer Type*</label>
+                                <select class="custom-select" id="customer-type" name="group">
+                                    <option selected>Select Customer Type</option>
+                                    <option value="shipper">Shipper</option>
+                                    <option value="consignee">Consignee</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3" id="customer-city-section" style="display: none">
                                 <label for="city">City*</label>
-                                <input type="text" class="form-control typeahead">
+                                <input type="text" class="form-control typeaheadCity @error('city') is-invalid @enderror" value="">
+                                @error('city')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <input type="hidden" name="city" id="customer-city">
+                            </div>
+                            <div class="form-group col-md-3" id="customer-country-section" style="display: none">
+                                <label for="city">Country*</label>
+                                <input type="text" class="form-control typeaheadCountry @error('country_id') is-invalid @enderror" value="">
+                                @error('country_id')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <input type="hidden" name="country_id" id="customer-country">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="city">Customer Id*</label>
+                                <input type="text" class="form-control @error('account_code') is-invalid @enderror" id="customer-id" name="account_code" readonly value="{{ old('account_code') }}">
+                                @error('account_code')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="city">Name*</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}">
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="city">Company</label>
+                                <input type="text" class="form-control @error('company_name') is-invalid @enderror" name="company_name" value="{{ old('company_name') }}">
+                                @error('company_name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="city">Address*</label>
+                                <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}">
+                                @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="city">Phone</label>
+                                <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}">
+                                @error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                         </div>

@@ -52,6 +52,52 @@
 
 	  window.location.href = export_url + url_params;
   });
+
+  $('body').on('change', '#customer-type', function (e) {
+	  e.preventDefault();
+
+	  if (e.target.value == 'shipper')
+      {
+		  $('#customer-city-section').show();
+		  $('#customer-country-section').hide();
+		  $('#customer-country').val(106); // hardcoded to Indonesia for now
+      }
+	  else if (e.target.value == 'consignee')
+      {
+		  $('#customer-city-section').hide();
+		  $('#customer-country-section').show();
+		  $('#customer-city').val(1); // hack to bypass foreign key constraint fails
+      }
+	  else
+      {
+		  $('#customer-city-section').hide();
+		  $('#customer-country-section').hide();
+      }
+  });
+
+  $('body').on('change', '#customer-city', function (e) {
+	  e.preventDefault();
+
+	  let customer_id_path = "{{ route('getCustomerId')  }}";
+	  $.get(customer_id_path, {source: 'city', id: e.target.value}).done((rsp) => {
+		  if (rsp.status)
+		  {
+			  $('#customer-id').val(rsp.customer_id);
+		  }
+	  });
+  });
+
+  $('body').on('change', '#customer-country', function (e) {
+	  e.preventDefault();
+
+	  let customer_id_path = "{{ route('getCustomerId')  }}";
+	  $.get(customer_id_path, {source: 'country', id: e.target.value}).done((rsp) => {
+		  if (rsp.status)
+		  {
+			  $('#customer-id').val(rsp.customer_id);
+		  }
+	  });
+  });
 </script>
 
 

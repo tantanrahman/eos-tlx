@@ -13,7 +13,7 @@
 			});
 		},
 		updater: function(item) {
-			$('input[name="city"]').val(map[item].id);
+			$('input[name="city"]').val(map[item].id).trigger('change');
 			return item;
 		}
     });
@@ -36,5 +36,24 @@
 			return item;
 		}
     });
+
+	let country_path = "{{ route('autocompleteCountry')  }}"
+	$('input.typeaheadCountry').typeahead({
+		source: function(query, process) {
+			objects = [];
+			map = {};
+			return $.get(country_path, { term: query }, function (data) {
+				$.each(data, function(i, object) {
+					map[object.label] = object;
+					objects.push(object.label);
+				});
+				process(objects);
+			});
+		},
+		updater: function(item) {
+			$('input[name="country_id"]').val(map[item].id).trigger('change');
+			return item;
+		}
+	});
 
 </script>
