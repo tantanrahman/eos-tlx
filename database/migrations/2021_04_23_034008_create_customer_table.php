@@ -20,6 +20,7 @@ class CreateCustomerTable extends Migration
             $table->string('company_name',150)->nullable();
             $table->text('address');
             $table->foreignId('city_id')->references('id')->on('city')->onDelete('cascade');
+            $table->foreignId('country_id')->references('id')->on('country')->onDelete('cascade');
             $table->string('phone',60)->nullable();
             $table->enum('group', ['shipper','consignee'])->default('shipper');
             $table->string('postal_code',20)->nullable();
