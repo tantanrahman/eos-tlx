@@ -119,10 +119,12 @@ class CourierController extends Controller
      */
     public function autocompleteCourier(Request $request)
     {
-        return Courier::select('name')
+        $couriers = Courier::select('id', 'name as label')
             ->where('name', 'like', "%{$request->term}%")
             ->where('active','=',1)
-            ->pluck('name');
+			->get();
+
+		return response()->json($couriers);
             
     }
 }

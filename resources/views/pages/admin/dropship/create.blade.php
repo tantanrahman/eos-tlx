@@ -58,7 +58,8 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="courier_id">Courier*</label>
-                                <input class="typeaheadCourier form-control" type="text" name="courier_id" autocomplete="off" value="">
+                                <input class="typeaheadCourier form-control" type="text" autocomplete="off" value="">
+                                <input type="hidden" name="courier_id">
                                 @error('courier_id')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
@@ -94,7 +95,8 @@
                             
                             <div class="form-group col-md-3">
                                 <label for="city">Kota*</label>
-                                <input class="typeaheadCity form-control" type="text" name="city" autocomplete="off" value="">
+                                <input class="typeaheadCity form-control" type="text" autocomplete="off" value="">
+                                <input type="hidden" name="city">
                                 @error('city')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>

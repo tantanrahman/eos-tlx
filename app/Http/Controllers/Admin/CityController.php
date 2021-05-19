@@ -99,9 +99,10 @@ class CityController extends Controller
 
     public function autocompleteCity(Request $request)
     {
-        return City::select('city')
+        $cities = City::select('id', 'city as label')
             ->where('city', 'like', "%{$request->term}%")
-            ->pluck('city');
-            
+            ->get();
+
+        return response()->json($cities);
     }
 }
