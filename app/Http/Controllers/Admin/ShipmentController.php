@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\PostalCode;
+use App\Models\Shipment;
 use Illuminate\Http\Request;
 
-class PostalCodeController extends Controller
+class ShipmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,7 @@ class PostalCodeController extends Controller
      */
     public function index()
     {
-        $postalcodes = PostalCode::paginate(10);
-
-        return view('pages.admin.postalcode.index', compact('postalcodes'));
+        //
     }
 
     /**
@@ -44,10 +42,10 @@ class PostalCodeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PostalCode  $postalCode
+     * @param  \App\Models\Shipment  $shipment
      * @return \Illuminate\Http\Response
      */
-    public function show(PostalCode $postalCode)
+    public function show(Shipment $shipment)
     {
         //
     }
@@ -55,10 +53,10 @@ class PostalCodeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\PostalCode  $postalCode
+     * @param  \App\Models\Shipment  $shipment
      * @return \Illuminate\Http\Response
      */
-    public function edit(PostalCode $postalCode)
+    public function edit(Shipment $shipment)
     {
         //
     }
@@ -67,10 +65,10 @@ class PostalCodeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PostalCode  $postalCode
+     * @param  \App\Models\Shipment  $shipment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PostalCode $postalCode)
+    public function update(Request $request, Shipment $shipment)
     {
         //
     }
@@ -78,10 +76,10 @@ class PostalCodeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PostalCode  $postalCode
+     * @param  \App\Models\Shipment  $shipment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PostalCode $postalCode)
+    public function destroy(Shipment $shipment)
     {
         //
     }

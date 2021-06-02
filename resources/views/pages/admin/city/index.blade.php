@@ -18,10 +18,10 @@
     </div>
 
     <section class="content">
-        <div class="container-fluid">   
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive">
+        <div class="container-fluid">
+            <div class="table-responsive">
+                <div class="card">
+                    <div class="card-body">
                         <table class="table table-bordered" id="table_city">
                             <thead class="thead-dark">
                                 <tr>

@@ -40,7 +40,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-3">
                               <label for="resi">Resi*</label>
-                              <input type="text" name="resi" class="form-control @error('resi') is-invalid @enderror" id="resi" value="{{ old('resi') }}" autofocus>
+                              <input type="text" name="resi" class="form-control @error('resi') is-invalid @enderror" id="resi" value="{{ old('resi') }}" autofocus autocomplete="off">
                               @error('resi')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -49,7 +49,7 @@
                             </div>
                             <div class="form-group col-md-3">
                               <label for="name">Nama*</label>
-                              <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}">
+                              <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" autocomplete="off">
                               @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -58,7 +58,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="courier_id">Courier*</label>
-                                <input class="typeaheadCourier form-control" type="text" autocomplete="off" value="">
+                                <input class="typeaheadCourier form-control @error('courier_id') is-invalid @enderror" type="text" autocomplete="off" >
                                 <input type="hidden" name="courier_id">
                                 @error('courier_id')
                                       <span class="invalid-feedback" role="alert">
@@ -69,7 +69,7 @@
                             <div class="form-group col-md-3">
                                 <label for="berat">Berat*</label>
                                 <div class="input-group mb-2 mr-sm-2">
-                                    <input type="text" name="berat" class="form-control @error('berat') is-invalid @enderror" id="berat" value="{{ old('berat') }}">
+                                    <input type="text" name="berat" class="form-control @error('berat') is-invalid @enderror" id="berat" value="{{ old('berat') }}" autocomplete="off">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">KG</div>
                                     </div>
@@ -95,7 +95,7 @@
                             
                             <div class="form-group col-md-3">
                                 <label for="city">Kota*</label>
-                                <input class="typeaheadCity form-control" type="text" autocomplete="off" value="">
+                                <input class="typeaheadCity form-control @error('city') is-invalid @enderror" type="text" autocomplete="off">
                                 <input type="hidden" name="city">
                                 @error('city')
                                       <span class="invalid-feedback" role="alert">
@@ -105,7 +105,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="users_id">Marketing*</label>
-                                <select name="users_id" class="form-control" id="select2dropmark" data-width="100%">
+                                <select name="users_id" class="form-control @error('users_id') is-invalid @enderror" id="select2dropmark" data-width="100%">
                                     <option></option>
                                     @foreach($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }}</option>

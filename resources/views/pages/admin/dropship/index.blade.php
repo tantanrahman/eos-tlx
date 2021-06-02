@@ -49,11 +49,11 @@
                                 <tr>
                                     <th style="display: none">Id</th>
                                     <th width="70px">Tanggal</th>
-                                    <th>Resi</th>
+                                    <th width="70px">Resi</th>
                                     <th>Nama</th>
                                     <th>Courier</th>
                                     <th>Jenis Barang</th>
-                                    <th>Berat (KG)</th>
+                                    <th width="90px">Berat (KG)</th>
                                     <th>Kota</th>
                                     <th>Marketing</th>
                                     <th>Photo</th>

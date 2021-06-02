@@ -24,6 +24,7 @@
   $('#dropship-periode-start').datepicker({
       format: "yyyy-mm-dd",
       autoclose: true,
+	  endDate: "0d",
   }).on('changeDate', function (e) {
 	  var dt = new Date(e.target.value);
 	  $("#dropship-periode-end").datepicker("setStartDate", dt);
@@ -34,6 +35,7 @@
   $('#dropship-periode-end').datepicker({
       format: "yyyy-mm-dd",
       autoclose: true,
+	  endDate: "0d",
   }).on('changeDate', function (e) {
 	  fetch_dropship();
   });

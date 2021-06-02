@@ -55,7 +55,7 @@
                                 <input type="text" name="website" class="form-control @error('website') is-invalid @enderror" id="website" value="{{ old('website') }}">
                                 <small class="form-text text-muted">
                                     <i>ex: https://sicepat.com</i>
-                                  </small>
+                                </small>
                             </div>
                         </div>
                         <br>

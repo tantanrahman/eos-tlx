@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\City;
-use GuzzleHttp\Client;
 use App\Models\Country;
-use App\Models\Student;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,7 +24,7 @@ class CustomerController extends Controller
 
             return DataTables::of($customers)
 				->addColumn('action', function($customer){
-					$button = '<a href="dropship/'.$customer->id.'/edit" data-toggle="tooltip"  data-id="'.$customer->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i> Edit</a>';
+					$button = '<a href="customer/'.$customer->id.'/edit" data-toggle="tooltip"  data-id="'.$customer->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i> Edit</a>';
 					$button .= '&nbsp;&nbsp;';
 					$button .= '<button type="button" name="delete" id="'.$customer->id.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>';
 					return $button;
@@ -62,13 +60,16 @@ class CustomerController extends Controller
 		$this->validate($request, [
 			'account_code'	=> 'required',
 			'name'			=> 'required',
-			'city'		=> 'required',
+			'city'		    => 'required',
+            'phone'         => 'required|numeric',
 			'country_id'	=> 'required',
 			'group'			=> 'required',
 		], [
 			'account_code.required'	=> 'ACCOUNT CODE WAJIB DIISI',
 			'name.required'         => 'NAMA WAJIB DIISI',
 			'city_id.required'		=> 'KOTA WAJIB DIISI',
+            'phone.required'        => 'PHONE WAJIB DIISI',
+            'phone.numeric'         => 'PHONE WAJIB SEMUA ANGKA',
 			'country_id.required'	=> 'NEGARA WAJIB DIISI',
 			'group.required'		=> 'CUSTOMER TYPE WAJIB DIISI',
 		]);
@@ -79,16 +80,16 @@ class CustomerController extends Controller
 		{
 			$data = Customer::create([
 				'account_code'          => Request()->account_code,
-				'name'          => Request()->name,
-				'company_name'    => Request()->company_name,
-				'address'  => Request()->address,
-				'city_id'         => Request()->city,
-				'country_id'          => Request()->country_id,
-				'phone'      => Request()->phone,
-				'group'      => Request()->group,
-				'postal_code'      => Request()->postal_code,
-				'postalcode_id'      => 1,
-				'api_passowrd'      => '',
+				'name'                  => Request()->name,
+				'company_name'          => Request()->company_name,
+				'address'               => Request()->address,
+				'city_id'               => Request()->city,
+				'country_id'            => Request()->country_id,
+				'phone'                 => Request()->phone,
+				'group'                 => Request()->group,
+				'postal_code'           => Request()->postal_code,
+				'postalcode_id'         => 1,
+				'api_passowrd'          => '',
 			]);
 			return redirect(route('admin.customer.index'))->with('toast_success', 'Berhasil Tambah Data');
 		}
@@ -157,6 +158,12 @@ class CustomerController extends Controller
         return response()->json($data);   
     }
 
+    /**
+     * Get Customer ID
+     *
+     * @param Request $request
+     * @return void
+     */
     public function getCustomerId(Request $request)
 	{
 		$source = $request->get('source');

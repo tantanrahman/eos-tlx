@@ -26,10 +26,10 @@ class Customer extends Model
 		'api_passowrd',
     ];
 
-    // public function countries()
-    // {
-    //     return $this->hasMany('App\Models\Country');
-    // }
+    public function countries()
+    {
+        return $this->hasMany('App\Models\Country');
+    }
 
 	public static function get_customer_id($query)
 	{

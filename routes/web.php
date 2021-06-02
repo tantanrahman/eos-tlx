@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\DropshipController;
 use App\Http\Controllers\Admin\OfficeProfileController;
 use App\Http\Controllers\Admin\PackageTypeController;
 use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\Admin\PostalCodeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 
@@ -50,6 +51,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::resource('counter', CounterController::class);
     Route::resource('partner', PartnerController::class);
     Route::resource('packagetype', PackageTypeController::class);
+    Route::resource('postalcode', PostalCodeController::class);
     Route::get('export', [App\Http\Controllers\Admin\DropshipController::class, 'export'])->name('dropship.export');
     Route::get('pdf', [App\Http\Controllers\Admin\DropshipController::class, 'pdf'])->name('dropship.pdf');
     Route::post('searchdateDrop', [App\Http\Controllers\Admin\DropshipController::class, 'searchdateDrop'])->name('searchdateDrop');

@@ -19,7 +19,7 @@
             </a>
           </li>
 
-          <li class="nav-item {{ request()->is('admin/bagpackage*') || request()->is('admin/city*') || request()->is('admin/courier*') || request()->is('admin/country*') || request()->is('admin/partner*') || request()->is('admin/packagetype*') ? 'menu-open' : '' }}">
+          <li class="nav-item {{ request()->is('admin/bagpackage*') || request()->is('admin/city*') || request()->is('admin/courier*') || request()->is('admin/country*') || request()->is('admin/partner*') || request()->is('admin/packagetype*') || request()->is('admin/postalcode*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-database"></i>
             <p style="font-size: 16px">
@@ -62,6 +62,12 @@
                 <a href="{{ route('admin.partner.index') }}" class="nav-link {{ request()->is('admin/partner*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="font-size: 16px">Partner</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.postalcode.index') }}" class="nav-link {{ request()->is('admin/postalcode*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="font-size: 16px">Postal Code</p>
                 </a>
               </li>
             </ul>

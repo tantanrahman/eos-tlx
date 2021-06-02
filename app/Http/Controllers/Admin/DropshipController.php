@@ -156,6 +156,7 @@ class DropshipController extends Controller
      */
     public function update(Request $request, Dropship $dropship)
     {
+        
         $dropship = Dropship::findOrFail($dropship->id);
 
         if($request->file('photo') == "")

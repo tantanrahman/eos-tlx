@@ -15,6 +15,11 @@ class CreatePostalcodeTable extends Migration
     {
         Schema::create('postalcode', function (Blueprint $table) {
             $table->id();
+            $table->string('province',70);
+            $table->string('city',70);
+            $table->string('district',70);
+            $table->string('urban',70);
+            $table->integer('postal_code');
             $table->timestamps();
         });
     }
