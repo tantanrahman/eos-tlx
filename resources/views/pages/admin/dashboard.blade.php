@@ -91,7 +91,7 @@
                       <p>Paket Dropship Hari Ini</p>
                     </div>
                     <div class="icon">
-                      <i class="ion ion-cube"></i>
+                      <i class="fas fa-box-open"></i>
                     </div>
                       {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
                   </div>
