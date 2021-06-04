@@ -119,7 +119,7 @@
           </li>
 
           <li class="nav-item {{ request()->is('admin/shipment*') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ request()->is('admin/shipment*') ? 'active' : '' }}">
+            <a href="{{ route('admin.shipment.index') }}" class="nav-link {{ request()->is('admin/shipment*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-plane-departure"></i>
             <p style="font-size: 16px">
                 Shipment

@@ -15,7 +15,7 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.admin.shipment.index');
     }
 
     /**
