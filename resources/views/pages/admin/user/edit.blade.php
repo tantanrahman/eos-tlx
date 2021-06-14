@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title','Create User')
+@section('title','Edit User')
 
 @section('content')
 <div class="content-wrapper">
@@ -14,7 +14,7 @@
                   <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('admin.user.index') }}">User</a></li>
-                    <li class="breadcrumb-item active">Create User</li>
+                    <li class="breadcrumb-item active">Edit User</li>
                   </ol>
                 </div>
             </div>
@@ -32,24 +32,34 @@
             <div class="card">
                 <div class="card-header bg-secondary">
                     <i class="fas fa-plus"></i>
-                    Create User
+                    Edit User
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.user.store') }}" method="POST">
+                    <form action="{{ route('admin.user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="username">Username*</label>
-                                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" autocomplete="off" value="{{ old('username') }}">
-                                @error('username')
+                              <label for="resi">Username*</label>
+                              <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" id="username" value="{{ $user->username }}" readonly>
+                              @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                              @enderror
                             </div>
+                            {{-- <div class="form-group col-md-6">
+                                <label for="resi">Password*</label>
+                                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" value="{{ $user->password }}">
+                                @error('password')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                @enderror
+                            </div> --}}
                             <div class="form-group col-md-6">
                                 <label for="name">Nama*</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" autocomplete="off" value="{{ old('name') }}">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" autocomplete="off" value="{{ $user->name }}">
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -57,50 +67,46 @@
                                 @enderror
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="role_id">Role*</label>
-                                <select name="role_id" class="form-control" id="select2userrole" data-width="100%">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" autocomplete="off" value="{{ $user->email }}">
+                            </div>
+                            <div class="form-group col-md-6" id="pic-marketing-user" style="display: none">
+                                <label for="users_id">PIC Marketing*</label>
+                                <select name="users_id" class="form-control" id="select2dropmark" data-width="100%">
                                     <option></option>
-                                    @foreach($roles as $role)
-                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    @foreach($marketing as $mkt)
+                                        <option value="{{ $mkt->id }}" {{ ($mkt->id == $user->pic) ? 'selected' : '' }}>{{ $mkt->name }}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="password">Password*</label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                @error('users_id')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
                                 @enderror
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" autocomplete="off" value="{{ old('email') }}">
-                            </div>
-                            <div class="form-group col-md-6" id="pic-marketing-user" style="display: none">
-                                <label for="pic" >PIC Marketing (Wajib Diisi Untuk Agen)</label>
-                                <select name="pic" class="form-control" id="select2userpic" data-width="100%">
-                                    <option></option>
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
                                 <label for="phone">Phone/Whatsapp</label>
-                                <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" autocomplete="off" value="{{ old('phone') }}">
+                                <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" autocomplete="off" value="{{ $user->phone }}">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="instagram">Instagram</label>
-                                <input type="text" class="form-control @error('instagram') is-invalid @enderror" id="instagram" name="instagram" autocomplete="off" value="{{ old('instagram') }}">
+                                <input type="text" class="form-control @error('instagram') is-in    valid @enderror" id="instagram" name="instagram" autocomplete="off" value="{{ $user->instagram }}">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="officeprofile">Office Profile*</label>
                                 <select name="office_id" class="form-control" id="select2userofficeprofile" data-width="100%">
                                     <option></option>
                                     @foreach($officeprofiles as $op)
-                                        <option value="{{ $op->id }}">{{ $op->name }}</option>
+                                        <option value="{{ $op->id }}" {{ ($op->id == $user->office_id) ? 'selected' : '' }}>{{ $op->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="role_id">Role*</label>
+                                <select name="role_id" class="form-control" id="select2userrole" data-width="100%">
+                                    <option></option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}" {{ ($role->id == $user->role_id) ? 'selected' : '' }}>{{ $role->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -108,7 +114,7 @@
                         <br>
                         <div class="float-right">
                             <button type="reset" class="btn btn-warning"><b>RESET</b></button>
-                            <button type="submit" class="btn btn-primary"><b>SIMPAN</b></button>
+                            <button type="submit" class="btn btn-primary"><b>UPDATE</b></button>
                         </div>
                     </form>
                 </div>

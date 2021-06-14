@@ -6,40 +6,45 @@
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-6">
-                    {{-- <button class="btn btn-info" data-toggle="modal" data-target="#ModalCourier">
-                        <i class="nav-icon fas fa-upload"></i>
-                    </button> --}}
-                    <a href="{{ route('admin.user.create') }}" class="btn bg-danger"><i class="nav-icon fas fa-plus"></i></a>
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                  
                 </div>
-            </div>
-            <br>
-            <div class="card">
-                <div class="card-header bg-secondary">
-                    <i class="fa fa-table"></i>
-                    Table of User
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>#</th>
-                            <th>Nama</th>
-                        </tr>
-                        @foreach ($users as $index => $user)
-                            <tr>
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ $user->name }}</td>
-                            </tr>
-                        @endforeach
-                    </table>
-                    <br>
+                <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.user.index') }}">User</a></li>
+                    <li class="breadcrumb-item active">List User</li>
+                  </ol>
                 </div>
             </div>
         </div>
     </div>
 
-    
-                
+    <section class="content">
+        <div class="container-fluid">
+          <div class="table-responsive">
+            <div class="card">
+                <div class="card-body">
+                    <div class="btn-group mb-4" role="group" aria-label="Basic example">
+                        <a href="{{ route('admin.user.create') }}" class="btn bg-info"><i class="nav-icon fas fa-plus"></i> Tambah Data</a>
+                    </div>
+                    <table class="table table-bordered" id="table_user">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>USERNAME</>
+                                <th>NAME</th>
+                                <th>ROLE</th>
+                                <th>ACTIVE</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+
+                    </table>
+                </div>
+            </div>
+          </div>
+        </div>
+    </section>
 </div>
 @endsection

@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\OfficeProfile;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Svg\Tag\Rect;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
@@ -16,11 +19,26 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::get();
+        
+        if($request->ajax())
+        {
+            $users = DB::table('users')
+                    ->join('roles','users.role_id','=','roles.id')
+                    ->select('users.id','users.username','users.name','roles.name AS rolename');
+            
+            return DataTables::of($users)
+                    ->addColumn('action', function($user){
+                        $button = '<a href="user/'.$user->id.'/edit" data-toggle="tooltip" data-id="'.$user->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>';
+                        return $button;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
 
-        return view('pages.admin.user.index', compact('users'));
+        return view('pages.admin.user.index');
+
     }
 
     /**
@@ -31,9 +49,10 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::get();
+        $users      = User::where('role_id','=',2)->get();
         $officeprofiles = OfficeProfile::get();
 
-        return view('pages.admin.user.create', compact('roles', 'officeprofiles'));
+        return view('pages.admin.user.create', compact('roles', 'officeprofiles', 'users'));
     }
 
     /**
@@ -44,37 +63,44 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
-            'username' => 'required',
-            'name' => 'required',
-            'role_id' => 'required',
-            'password' => 'required',
-            'office_id' => 'required'
+            'username'      => 'required',
+            'name'          => 'required',
+            'role_id'       => 'required',
+            'password'      => 'required',
+            'office_id'     => 'required',
         ], [
-            'username.required' => 'USERNAME WAJIB DIISI',
-            'name.required' => 'NAMA WAJIB DIISI',
-            'role_id.required' => 'ROLE WAJIB DIISI',
-            'password.required' => 'PASSWORD WAJIB DIISI',
-            'office_id.required' => 'OFFICE WAJIB DIISI'
+            'username.required'     => 'USERNAME WAJIB DIISI',
+            'name.required'         => 'NAMA WAJIB DIISI',
+            'role_id.required'      => 'ROLE WAJIB DIISI',
+            'password.required'     => 'PASSWORD WAJIB DIISI',
+            'office_id.required'    => 'OFFICE WAJIB DIISI'
         ]);
 
-        $data = User::create([
-            'username' => Request()->username,
-            'name' => Request()->name,
-            'role_id' => Request()->role_id,
-            'office_id' => Request()->office_id,
-            'email' => Request()->email,
-            'password' => Hash::make(Request()->password)
-        ]);
+        $data = User::where('username', '=', $request->input('username'))->first();
 
-        if($data)
+        if($data == null)
         {
-            return redirect(route('admin.user.index'))->with('toast_success', 'Berhasil');
+            $data = User::create([
+                'username'  => Request()->username,
+                'name'      => Request()->name,
+                'role_id'   => Request()->role_id,
+                'office_id' => Request()->office_id,
+                'email'     => Request()->email,
+                'password'  => Hash::make(Request()->password),
+                'pic'       => Request()->pic,
+                'phone'     => Request()->phone,
+                'instagram' => Request()->instagram,
+            ]);
+
+            return redirect(route('admin.user.index'))->with('toast_success', 'Berhasil Menambah User');
         }
-        else 
+            else
         {
-            return redirect(route('admin.user.index'))->with('toast_error', 'Gagal');
+            return redirect(route('admin.user.index'))->with('toast_error', 'Gagal! Username Sudah Ada');
         }
+
     }
     
     /**
@@ -96,7 +122,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $marketing          = User::where('role_id','=',2)->get();
+        $roles              = Role::get();
+        $officeprofiles     = OfficeProfile::get();
+
+        return view('pages.admin.user.edit', compact('user','marketing','roles','officeprofiles'));
     }
 
     /**
@@ -108,7 +138,25 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+
+        $user->update([
+            'name'      => $request->name,
+            'role_id'   => $request->role_id,
+            'office_id' => $request->office_id,
+            'email'     => $request->email,
+            'pic'       => $request->pic,
+            'phone'     => $request->phone,
+            'instagram' => $request->instagram,
+        ]);
+
+        if($user)
+        {
+            return redirect(route('admin.user.index'))->with('toast_success', 'Berhasil');
+        }
+        else 
+        {
+            return redirect(route('admin.user.index'))->with('toast_error', 'Gagal');
+        }
     }
 
     /**
