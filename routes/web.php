@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BagpackageController;
+use App\Http\Controllers\Admin\BagShipmentController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\CountryController;
@@ -54,11 +55,13 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::resource('packagetype', PackageTypeController::class);
     Route::resource('postalcode', PostalCodeController::class);
     Route::resource('shipment', ShipmentController::class);
+    Route::resource('bagshipment', BagShipmentController::class);
     Route::get('export', [App\Http\Controllers\Admin\DropshipController::class, 'export'])->name('dropship.export');
     Route::get('pdf', [App\Http\Controllers\Admin\DropshipController::class, 'pdf'])->name('dropship.pdf');
     Route::post('searchdateDrop', [App\Http\Controllers\Admin\DropshipController::class, 'searchdateDrop'])->name('searchdateDrop');
     
 });
+
 Route::get('autocompleteCity', [App\Http\Controllers\Admin\CityController::class, 'autocompleteCity'])->name('autocompleteCity');
 Route::get('autocompleteCourier', [App\Http\Controllers\Admin\CourierController::class, 'autocompleteCourier'])->name('autocompleteCourier');
 Route::get('autocompleteCountry', [App\Http\Controllers\Admin\CountryController::class, 'autocompleteCountry'])->name('autocompleteCountry');
