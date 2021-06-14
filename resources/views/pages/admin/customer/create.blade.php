@@ -43,7 +43,7 @@
                                 <input type="text" class="form-control @error('account_code') is-invalid @enderror" id="customer-id" name="account_code" readonly value="{{ old('account_code') }}">
                                 @error('account_code')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                            <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -55,7 +55,7 @@
                                     <option value="consignee">Consignee</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-6" id="customer-city-section" style="display: none">
+                            <div class="form-group col-md-6" id="customer-city-section">
                                 <label for="city">City*</label>
                                 <input type="text" class="form-control typeaheadCity @error('city') is-invalid @enderror" value="" autocomplete="off">
                                 @error('city')
@@ -63,11 +63,11 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <input type="hidden" name="city" id="customer-city">
+                                <input type="text" name="city" id="customer-city">
                             </div>
-                            <div class="form-group col-md-6" id="customer-country-section" style="display: none">
+                            <div class="form-group col-md-6" id="customer-country-section">
                                 <label for="city">Country*</label>
-                                <input type="text" class="form-control typeaheadCountry @error('country_id') is-invalid @enderror" value="" autocomplete="off">
+                                <input type="text" name="country_name" class="form-control typeaheadCountry @error('country_id') is-invalid @enderror" value="" autocomplete="off">
                                 @error('country_id')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -106,7 +106,7 @@
                                 <label for="city">Phone</label>
                                 <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}">
                                 <small class="form-text text-muted">
-                                    <i>Inputan Phone hanya Nomor. Jangan menggunakan tanda atau spasi.</i>
+                                    <i>Inputan Phone hanya Nomor.</i>
                                 </small>
                                 @error('phone')
                                     <span class="invalid-feedback" role="alert">
@@ -116,14 +116,22 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="city">Postal Code</label>
-                                <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}">
-                                @error('phone')
+                                <input type="text" class="form-control @error('postal_code') is-invalid @enderror" name="postal_code" value="{{ old('postal_code') }}">
+                                @error('postal_code')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-
+                            <div class="form-group col-md-6" style="display: none">
+                                <label for="city">Created By</label>
+                                <input type="text" class="form-control @error('created_by') is-invalid @enderror" name="created_by" value="{{ Auth::user()->name }}" disabled>
+                                @error('created_by')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
                         <br>
                         <div class="float-right">

@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class CustomerController extends Controller
@@ -20,17 +21,37 @@ class CustomerController extends Controller
     {
         if ($request->ajax())
         {
-			$customers = Customer::get_items();
+            if($request->get('customer_type') == 'shipper')
+            {
+                $customers_shipper = Customer::get_items_shipper();
 
-            return DataTables::of($customers)
-				->addColumn('action', function($customer){
-					$button = '<a href="customer/'.$customer->id.'/edit" data-toggle="tooltip"  data-id="'.$customer->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i> Edit</a>';
-					$button .= '&nbsp;&nbsp;';
-					$button .= '<button type="button" name="delete" id="'.$customer->id.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>';
-					return $button;
-				})
-				->rawColumns(['action'])
-				->make(true);
+                return DataTables::of($customers_shipper)
+                    ->addColumn('action', function($customer){
+                        $button = '<a href="customer/'.$customer->id.'/edit" data-toggle="tooltip"  data-id="'.$customer->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i> Edit</a>';
+                        $button .= '&nbsp;&nbsp;';
+                        $button .= '<button type="button" name="delete" id="'.$customer->id.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>';
+                        return $button;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+            }
+			
+        else 
+            {
+                $customers_consignee = Customer::get_items_consignee();
+
+
+            return DataTables::of($customers_consignee)
+                ->addColumn('action', function($customer){
+                    $button = '<a href="customer/'.$customer->id.'/edit" data-toggle="tooltip"  data-id="'.$customer->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i> Edit</a>';
+                    $button .= '&nbsp;&nbsp;';
+                    $button .= '<button type="button" name="delete" id="'.$customer->id.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>';
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+            }
+            
         }
 
         return view('pages.admin.customer.index');
@@ -57,6 +78,11 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+
+        dd(Request()->account_code);
+
+        $cities = City::find($request->get('city'));
+
 		$this->validate($request, [
 			'account_code'	=> 'required',
 			'name'			=> 'required',
@@ -84,12 +110,12 @@ class CustomerController extends Controller
 				'company_name'          => Request()->company_name,
 				'address'               => Request()->address,
 				'city_id'               => Request()->city,
+                'city_name'             => $cities,
 				'country_id'            => Request()->country_id,
 				'phone'                 => Request()->phone,
 				'group'                 => Request()->group,
 				'postal_code'           => Request()->postal_code,
-				'postalcode_id'         => 1,
-				'api_passowrd'          => '',
+                'created_by'            => Auth::user()->name
 			]);
 			return redirect(route('admin.customer.index'))->with('toast_success', 'Berhasil Tambah Data');
 		}
@@ -146,7 +172,7 @@ class CustomerController extends Controller
 
     /**
      * 
-     * CONSUME API FROM https://zippopotam.us/
+     * 
      * 
      */
 

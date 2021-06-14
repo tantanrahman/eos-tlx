@@ -24,9 +24,8 @@ class CreateCustomerTable extends Migration
             $table->string('phone',60)->nullable();
             $table->enum('group', ['shipper','consignee'])->default('shipper');
             $table->string('postal_code',20)->nullable();
-            $table->foreignId('postalcode_id')->references('id')->on('city')->onDelete('cascade');
             $table->string('sum_key',150)->nullable()->unique();
-            $table->string('api_passowrd',150);
+            $table->string('api_password',150)->nullable();
             $table->timestamps();
         });
     }

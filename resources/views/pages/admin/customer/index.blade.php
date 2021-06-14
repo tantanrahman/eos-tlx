@@ -51,7 +51,25 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <br>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="table_customer2" style="width:100%">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th style="display: none">Id</th>
+                                            <th>Account Code</th>
+                                            <th>Name</th>
+                                            <th>City</th>
+                                            <th>Phone</th>
+                                            <th>Group</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+        
+                                </table>
+                            </div>
+                        </div>
                     </div>
                     
                 </div>
