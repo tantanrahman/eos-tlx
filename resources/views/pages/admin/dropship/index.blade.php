@@ -48,16 +48,16 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th style="display: none">Id</th>
-                                    <th width="70px">Tanggal</th>
-                                    <th width="70px">Resi</th>
-                                    <th>Nama</th>
-                                    <th>Courier</th>
-                                    <th>Jenis Barang</th>
-                                    <th width="90px">Berat (KG)</th>
-                                    <th>Kota</th>
-                                    <th>Marketing</th>
-                                    <th>Photo</th>
-                                    <th>Action</th>
+                                    <th width="70px">TANGGAL</th>
+                                    <th width="70px">RESI</th>
+                                    <th>NAMA</th>
+                                    <th>COURIER</th>
+                                    <th>JENIS BARANG</th>
+                                    <th width="90px">BERAT (KG)</th>
+                                    <th>KOTA</th>
+                                    <th>MARKETING</th>
+                                    <th>PHOTO</th>
+                                    <th>ACTION</th>
                                 </tr>
                             </thead>
 

@@ -39,7 +39,7 @@
                         @csrf
                         @method('PUT')
                         <div class="form-row">
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6">
                               <label for="resi">Resi*</label>
                               <input type="text" name="resi" class="form-control @error('resi') is-invalid @enderror" id="resi" value="{{ $dropship->resi }}" autofocus>
                               @error('resi')
@@ -48,7 +48,7 @@
                                     </span>
                               @enderror
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6">
                               <label for="name">Nama*</label>
                               <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ $dropship->name }}">
                               @error('name')
@@ -57,7 +57,7 @@
                                     </span>
                               @enderror
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6">
                                 <label for="courier_id">Courier*</label>
                                 <select name="courier_id" class="form-control" id="select2dropcourier" data-width="100%">
                                     <option></option>
@@ -71,7 +71,7 @@
                                       </span>
                                 @enderror
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6">
                                 <label for="berat">Berat*</label>
                                 <div class="input-group mb-2 mr-sm-2">
                                     <input type="text" name="berat" class="form-control @error('berat') is-invalid @enderror" id="berat" value="{{ $dropship->berat }}">
@@ -89,7 +89,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6">
                                 <label for="jenis_barang">Jenis Barang*</label>
                                 <input type="text" name="jenis_barang" class="form-control @error('jenis_barang') is-invalid @enderror" id="jenis_barang" value="{{ $dropship->jenis_barang }}">
                                 @error('jenis_barang')
@@ -99,7 +99,7 @@
                                 @enderror
                             </div>
                             
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6">
                                 <label for="city">Kota*</label>
                                 <select name="city" class="form-control" id="select2City" data-width="100%">
                                     <option></option>
@@ -114,7 +114,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6">
                                 <label for="users_id">Marketing*</label>
                                 <select name="users_id" class="form-control" id="select2dropmark" data-width="100%">
                                     <option></option>
@@ -129,9 +129,12 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group col-md-3">
-                                <label class="font-weight-bold">Upload Gambar*</label>
-                                <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo">
+                            <div class="form-group col-md-6">
+                                <label class="font-weight-bold">Upload Gambar</label>
+                                <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo" value="{{ $dropship->photo }}">
+                                <small class="form-text text-muted">
+                                    <i>Jika tidak mengubah gambar. Abaikan saja untuk field ini.</i>
+                                </small>
                                 @error('photo')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

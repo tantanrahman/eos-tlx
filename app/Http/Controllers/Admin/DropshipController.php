@@ -58,9 +58,9 @@ class DropshipController extends Controller
      */
     protected function create()
     {
-        $cities = City::all();
-        $users = User::where('role_id','=',2)->get();
-        $couriers = Courier::where('active','=',1)->get();
+        $cities     = City::all();
+        $users      = User::where('role_id','=',2)->get();
+        $couriers   = Courier::where('active','=',1)->get();
 
         return view('pages.admin.dropship.create', compact('cities','users','couriers'));
     }
@@ -140,9 +140,9 @@ class DropshipController extends Controller
     public function edit(Dropship $dropship)
     {
 
-        $cities = City::all();
-        $users = User::where('role_id','=',2)->get();
-        $couriers = Courier::where('active','=',1)->get();
+        $cities     = City::all();
+        $users      = User::where('role_id','=',2)->get();
+        $couriers   = Courier::where('active','=',1)->get();
 
         return view('pages.admin.dropship.edit', compact('dropship', 'cities', 'users', 'couriers'));
     }
@@ -170,13 +170,13 @@ class DropshipController extends Controller
                 'city'              => $request->city,
                 'users_id'          => $request->users_id,    
             ]);
-        } 
+        }
         else
         {
             //Delete Old Image
             Storage::disk('local')->delete('public/dropship'.$dropship->photo);
 
-            //Upload New Image
+            //Upload New Image  
             $photo = $request->file('photo');
             $photo->storeAs('public/dropship', $photo->hashName());
 
