@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Partner;
 use App\Models\Shipment;
+use App\Models\PackageType;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ShipmentController extends Controller
 {
@@ -25,7 +28,11 @@ class ShipmentController extends Controller
      */
     public function create()
     {
-        //
+        $users          = User::where('role_id','=',2)->get();
+        $packagetypes   = PackageType::all();
+        $partners       = Partner::all();
+
+        return view('pages.admin.shipment.create', compact('packagetypes','partners','users'));
     }
 
     /**
