@@ -48,5 +48,25 @@
         theme: "bootstrap4",
         });
     });
-   
+    $(document).ready(function() {
+        $('#select2shippackagetype').select2({
+        placeholder: "Select a Package Type",
+        allowClear: true,
+        theme: "bootstrap4",
+        });
+    });
+    $(document).ready(function() {
+        $('#select2shippartner').select2({
+        placeholder: "Select a Partner",
+        allowClear: true,
+        theme: "bootstrap4",
+        });
+    });
+    $(document).ready(function() {
+        $('#select2userpic').select2({
+        placeholder: "Select a PIC Marketing",
+        allowClear: true,
+        theme: "bootstrap4",
+        });
+    });
 </script>
