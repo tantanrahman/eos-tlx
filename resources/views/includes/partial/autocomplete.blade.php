@@ -1,4 +1,5 @@
 <script type="text/javascript">
+	
     let city_path = "{{ route('autocompleteCity')  }}"
     $('input.typeaheadCity').typeahead({
 		source: function(query, process) {
