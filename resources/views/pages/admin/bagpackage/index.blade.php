@@ -30,37 +30,29 @@
                     </form>
                 </div>                
             </div>
-
-            <div class="card">
-                <div class="card-header bg-secondary">
-                    <i class="fas fa-table"></i>
-                    Table of Bag Number
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Status</th>
-                        </tr>
-                        @foreach ($bagpackages as $index => $bagpackage)
-                            <tr>
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ $bagpackage->name }}</td>
-                                <td>
-                                    @if ($bagpackage->active == 1)
-                                        <span class="badge badge-success">ACTIVE</span>
-                                    @else
-                                        <span class="badge badge-danger">NOT ACTIVE</span>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
-                </div>
-            </div>
-            
         </div>
     </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="table-responsive">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-bordered" id="table_bagpackage">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>NAME</th>
+                                    <th>ACTIVE</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 @endsection

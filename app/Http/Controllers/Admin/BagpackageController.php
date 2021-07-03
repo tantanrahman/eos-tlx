@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Bagpackage;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Yajra\DataTables\Facades\DataTables;
 
 class BagpackageController extends Controller
 {
@@ -12,12 +13,27 @@ class BagpackageController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
-    public function index()
+    */
+    public function index(Request $request)
     {
-        $bagpackages = Bagpackage::get();
 
-        return view('pages.admin.bagpackage.index', compact('bagpackages'));
+        if ($request->ajax())
+        {
+            
+            $bagpackage = Bagpackage::all();
+
+            return DataTables::of($bagpackage)
+                ->addColumn('action', function($bagpackage){
+                    $button = '<a href="bagpackage/'.$bagpackage->id.'/edit" data-toggle="tooltip"  data-id="'.$bagpackage->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>';
+                    $button .= '&nbsp;&nbsp;';
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+            
+        }
+        
+        return view('pages.admin.bagpackage.index');
     }
 
     /**
@@ -52,7 +68,8 @@ class BagpackageController extends Controller
                 'name' => Request()->name
             ]);
             return redirect(route('admin.bagpackage.index'))->with('toast_success', 'Berhasil menambah Data');
-        } else 
+        } 
+            else 
         {
             return redirect(route('admin.bagpackage.index'))->with('toast_error', 'Gagal! Bag Number Sudah Terdaftar!');
         }
@@ -78,7 +95,7 @@ class BagpackageController extends Controller
      */
     public function edit(Bagpackage $bagpackage)
     {
-        //
+        return view('pages.admin.bagpackage.edit', compact('bagpackage'));
     }
 
     /**
@@ -90,7 +107,18 @@ class BagpackageController extends Controller
      */
     public function update(Request $request, Bagpackage $bagpackage)
     {
-        //
+        $bagpackage->update([
+            'active'  => $request->has('active')
+        ]);
+
+        if($bagpackage)
+        {
+            return redirect(route('admin.bagpackage.index'))->with('toast_success', 'Berhasil Mengubah Status');
+        }
+        else 
+        {
+            return redirect(route('admin.bagpackage.index'))->with('toast_error', 'Gagal!');
+        }
     }
 
     /**
@@ -101,6 +129,6 @@ class BagpackageController extends Controller
      */
     public function destroy(Bagpackage $bagpackage)
     {
-        //
+        
     }
 }

@@ -12,6 +12,7 @@ class Bagpackage extends Model
     protected $table = 'bagpackage';
 
     protected $fillable = [
-        'name'
+        'name',
+        'active'
     ];
 }
