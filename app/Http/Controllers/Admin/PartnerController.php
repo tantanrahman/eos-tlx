@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Partner;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Yajra\DataTables\Facades\DataTables;
 
 class PartnerController extends Controller
 {
@@ -13,11 +14,25 @@ class PartnerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $partners = Partner::get();
+        if ($request->ajax())
+        {
+            
+            $partner = Partner::all();
 
-        return view('pages.admin.partner.index', compact('partners'));
+            return DataTables::of($partner)
+                ->addColumn('action', function($partner){
+                    $button = '<a href="partner/'.$partner->id.'/edit" data-toggle="tooltip"  data-id="'.$partner->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>';
+                    $button .= '&nbsp;&nbsp;';
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+            
+        }
+
+        return view('pages.admin.partner.index');
     }
 
     /**
@@ -78,7 +93,7 @@ class PartnerController extends Controller
      */
     public function edit(Partner $partner)
     {
-        //
+        return view('pages.admin.partner.edit', compact('partner'));
     }
 
     /**
@@ -90,7 +105,20 @@ class PartnerController extends Controller
      */
     public function update(Request $request, Partner $partner)
     {
-        //
+        $partner->update([
+            'reff_id'       => $request->reff_id,
+            'name'          => $request->name,
+            'active'        => $request->has('active')
+        ]);
+
+        if($partner)
+        {
+            return redirect(route('admin.partner.index'))->with('toast_success', 'Berhasil Mengubah Data');
+        }
+        else 
+        {
+            return redirect(route('admin.partner.index'))->with('toast_error', 'Gagal!');
+        }
     }
 
     /**

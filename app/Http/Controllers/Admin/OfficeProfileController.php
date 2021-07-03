@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\OfficeProfile;
 use Illuminate\Http\Request;
+use App\Models\OfficeProfile;
+use App\Http\Controllers\Controller;
+use Yajra\DataTables\Facades\DataTables;
 
 class OfficeProfileController extends Controller
 {
@@ -13,11 +14,16 @@ class OfficeProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $officeprofiles = OfficeProfile::get();
+        $officeprofile = OfficeProfile::get();
 
-        return view('pages.admin.officeprofile.index', compact('officeprofiles'));
+        if($request->ajax())
+        {
+           return DataTables::of($officeprofile)->make(true);
+        }
+
+        return view('pages.admin.officeprofile.index');
     }
 
     /**
@@ -27,7 +33,7 @@ class OfficeProfileController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.officeprofile.create');
     }
 
     /**
@@ -39,16 +45,34 @@ class OfficeProfileController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required'
+            'name'      => 'required',
+            'address'   => 'required'
         ],[
-            'name.required' => 'NAMA OFFICEPROFILE WAJIB DIISI'
+            'name.required'     => 'NAMA ROFILE WAJIB DIISI',
+            'address.required'  => 'ADDRESS WAJIB DIISI'
         ]);
 
         $data = OfficeProfile::create([
-            'name' => Request()->name
+            'name'          => Request()->name,
+            'about'         => Request()->about,
+            'address'       => Request()->address,
+            'embed_gmap'    => Request()->embed_gmap,
+            'facebook'      => Request()->facebook,
+            'whatsapp'      => Request()->whatsapp,
+            'instagram'     => Request()->instagram,
+            'youtube'       => Request()->youtube,
+            'twitter'       => Request()->twitter,
+            'tiktok'        => Request()->tiktok,
         ]);
 
-        return back();
+        if($data)
+        {
+            return redirect(route('admin.officeprofile.index'))->with('toast_success', 'Berhasil');
+        }
+        else 
+        {
+            return redirect(route('admin.officeprofile.index'))->with('toast_error', 'Gagal');
+        }
     }
 
     /**

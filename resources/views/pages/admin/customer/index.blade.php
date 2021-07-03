@@ -39,12 +39,11 @@
                                     <thead class="thead-dark">
                                         <tr>
                                             <th style="display: none">Id</th>
-                                            <th>Account Code</th>
-                                            <th>Name</th>
-                                            <th>City</th>
-                                            <th>Phone</th>
-                                            <th>Group</th>
-                                            <th>Action</th>
+                                            <th>ACCOUNT CODE</th>
+                                            <th>NAME</th>
+                                            <th>CITY</th>
+                                            <th>PHONE</th>
+                                            <th>ACTION</th>
                                         </tr>
                                     </thead>
         
@@ -58,12 +57,11 @@
                                     <thead class="thead-dark">
                                         <tr>
                                             <th style="display: none">Id</th>
-                                            <th>Account Code</th>
-                                            <th>Name</th>
-                                            <th>City</th>
-                                            <th>Phone</th>
-                                            <th>Group</th>
-                                            <th>Action</th>
+                                            <th>ACCOUNT CODE</th>
+                                            <th>NAME</th>
+                                            <th>CITY</th>
+                                            <th>PHONE</th>
+                                            <th>ACTION</th>
                                         </tr>
                                     </thead>
         

@@ -118,7 +118,8 @@
                 return '<span class="badge badge-success">ACTIVE</span>'
               }
           }
-        }
+        },
+        {data:'action',name:'action'},
       ]
     });
   });
@@ -138,17 +139,184 @@
   });
 
   $(document).ready(function() {
+
+    let index_url = '{!! route("admin.customer.index") !!}';
+
     $('#table_customer').DataTable({
       processing : true,
       serverSide : true,
-      ajax : '{!! route("admin.customer.index") !!}',
+      "ajax": {
+				"url": index_url,
+				"data": {
+					"customer_type": 'shipper',
+				}
+			},
       columns: [
         {data:'id',name:'id', visible: false},
         {data:'account_code',name:'account_code'},
         {data:'name',name:'name'},
         {data:'city',name:'city'},
         {data:'phone',name:'phone'},
-        {data:'group',name:'group'},
+        {data:'action',name:'action'},
+      ],
+    });
+  });
+
+  $(document).ready(function() {
+
+    let index_url = '{!! route("admin.customer.index") !!}';
+
+    $('#table_customer2').DataTable({
+      processing : true,
+      serverSide : true,
+      "ajax": {
+				"url": index_url,
+				"data": {
+					"customer_type": 'consignee',
+				}
+			},
+      columns: [
+        {data:'id',name:'id', visible: false},
+        {data:'account_code',name:'account_code'},
+        {data:'name',name:'name'},
+        {data:'city',name:'city'},
+        {data:'phone',name:'phone'},
+        {data:'action',name:'action'},
+      ],
+    });
+  });
+
+  $(document).ready(function() {
+    $('#table_user').DataTable({
+      processing : true,
+      serverSide : true,
+      ajax : '{!! route("admin.user.index") !!}',
+      columns: [
+        {data:'username',name:'users.username'},
+        {data:'name',name:'users.name'},
+        {data:'rolename',name:'role_id'},
+        {
+          data: 'active',
+          render: function(data)
+          {
+              if (data==0)
+              {
+                return '<span class="badge badge-danger">NOT ACTIVE</span>'
+              }
+              else
+              {
+                return '<span class="badge badge-success">ACTIVE</span>'
+              }
+          }
+        },
+        {data:'action',name:'action'}
+      ],
+    });
+  });
+
+  $(document).ready(function() {
+    $('#table_officeprofile').DataTable({
+      processing : true,
+      serverSide : true,
+      ajax : '{!! route("admin.officeprofile.index") !!}',
+      columns: [
+        {data:'id',name:'id'},
+        {data:'name',name:'name'},
+        {
+          data: 'active',
+          render: function(data)
+          {
+              if (data==0)
+              {
+                return '<span class="badge badge-danger">NOT ACTIVE</span>'
+              }
+              else
+              {
+                return '<span class="badge badge-success">ACTIVE</span>'
+              }
+          }
+        },
+      ],
+    });
+  });
+
+  $(document).ready(function() {
+    $('#table_bagpackage').DataTable({
+      processing : true,
+      serverSide : true,
+      ajax : '{!! route("admin.bagpackage.index") !!}',
+      columns: [
+        {data:'id',name:'id'},
+        {data:'name',name:'name'},
+        {
+          data: 'active',
+          render: function(data)
+          {
+              if (data==0)
+              {
+                return '<span class="badge badge-danger">NOT ACTIVE</span>'
+              }
+              else
+              {
+                return '<span class="badge badge-success">ACTIVE</span>'
+              }
+          }
+        },
+        {data:'action',name:'action'},
+      ],
+    });
+  });
+
+  $(document).ready(function() {
+    $('#table_packagetype').DataTable({
+      processing : true,
+      serverSide : true,
+      ajax : '{!! route("admin.packagetype.index") !!}',
+      columns: [
+        {data:'id',name:'id'},
+        {data:'name',name:'name'},
+        {
+          data: 'active',
+          render: function(data)
+          {
+              if (data==0)
+              {
+                return '<span class="badge badge-danger">NOT ACTIVE</span>'
+              }
+              else
+              {
+                return '<span class="badge badge-success">ACTIVE</span>'
+              }
+          }
+        },
+        {data:'action',name:'action'},
+      ],
+    });
+  });
+
+  $(document).ready(function() {
+    $('#table_partner').DataTable({
+      processing : true,
+      serverSide : true,
+      ajax : '{!! route("admin.partner.index") !!}',
+      columns: [
+        {data:'id',name:'id'},
+        {data:'reff_id',name:'reff_id'},
+        {data:'name',name:'name'},
+        {
+          data: 'active',
+          render: function(data)
+          {
+              if (data==0)
+              {
+                return '<span class="badge badge-danger">NOT ACTIVE</span>'
+              }
+              else
+              {
+                return '<span class="badge badge-success">ACTIVE</span>'
+              }
+          }
+        },
         {data:'action',name:'action'},
       ],
     });

@@ -42,39 +42,32 @@
                     </form>
                 </div>                
             </div>
-
-            <div class="card">
-                <div class="card-header bg-secondary">
-                    <i class="fas fa-table"></i>
-                    Table of Partner
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>#</th>
-                            <th>Reff ID</th>
-                            <th>Name</th>
-                            <th>Status</th>
-                        </tr>
-                        @foreach ($partners as $index => $partner)
-                            <tr>
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ $partner->reff_id }}</td>
-                                <td>{{ $partner->name }}</td>
-                                <td>
-                                    @if ($partner->active == 1)
-                                        <span class="badge badge-success">ACTIVE</span>
-                                    @else
-                                        <span class="badge badge-danger">NOT ACTIVE</span>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
-                </div>
-            </div>
             
         </div>
     </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="table-responsive">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-bordered" id="table_partner">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>REFF ID</th>
+                                    <th>NAME</th>
+                                    <th>ACTIVE</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </div>
 @endsection

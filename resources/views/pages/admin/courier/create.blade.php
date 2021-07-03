@@ -6,12 +6,16 @@
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-6">
-                    {{-- <button class="btn btn-info" data-toggle="modal" data-target="#ModalCourier">
-                        <i class="nav-icon fas fa-upload"></i>
-                    </button> --}}
-                    <a href="{{ route('admin.courier.create') }}" class="btn bg-danger"><i class="nav-icon fas fa-plus"></i></a>
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    
+                </div>
+                <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.courier.index') }}">Courier</a></li>
+                    <li class="breadcrumb-item active">Create Courier</li>
+                  </ol>
                 </div>
             </div>
         </div>

@@ -12,7 +12,16 @@ class OfficeProfile extends Model
     protected $table = 'officeprofile';
 
     protected $fillable = [
-        'name'
+        'name',
+        'about',
+        'address',
+        'embed_gmap',
+        'facebook',
+        'whatsapp',
+        'instagram',
+        'youtube',
+        'twitter',
+        'tiktok'
     ];
 
     public function users()

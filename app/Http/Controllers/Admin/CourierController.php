@@ -16,12 +16,21 @@ class CourierController extends Controller
      */
     public function index(Request $request)
     {
-       $couriers = Courier::all();
+        if ($request->ajax())
+        {
+            
+            $courier = Courier::all();
 
-       if($request->ajax())
-       {
-           return DataTables::of($couriers)->make(true);
-       }
+            return DataTables::of($courier)
+                ->addColumn('action', function($courier){
+                    $button = '<a href="courier/'.$courier->id.'/edit" data-toggle="tooltip"  data-id="'.$courier->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>';
+                    $button .= '&nbsp;&nbsp;';
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+            
+        }
        
        return view('pages.admin.courier.index');
     }
@@ -87,7 +96,7 @@ class CourierController extends Controller
      */
     public function edit(Courier $courier)
     {
-        //
+        return view('pages.admin.courier.edit', compact('courier'));
     }
 
     /**
@@ -99,7 +108,19 @@ class CourierController extends Controller
      */
     public function update(Request $request, Courier $courier)
     {
-        //
+        $courier->update([
+            'name'      => $request->name,
+            'active'    => $request->has('active')
+        ]);
+
+        if($courier)
+        {
+            return redirect(route('admin.courier.index'))->with('toast_success', 'Berhasil Mengubah Status');
+        }
+        else 
+        {
+            return redirect(route('admin.courier.index'))->with('toast_error', 'Gagal!');
+        }
     }
 
     /**

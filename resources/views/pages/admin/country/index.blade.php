@@ -26,9 +26,9 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th>#</th>
-                                <th>Nama</th>
-                                <th>Alpha 2 Code</th>
-                                <th>Alpha 3 Code</th>
+                                <th>NAMA</th>
+                                <th>ALPHA 2 CODE</th>
+                                <th>ALPHA 3 CODE</th>
                             </tr>
                         </thead>
 

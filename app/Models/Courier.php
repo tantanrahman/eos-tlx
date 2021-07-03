@@ -16,7 +16,8 @@ class Courier extends Model
         'code_dua',
         'name',
         'logo',
-        'website'
+        'website',
+        'active'
     ];
 
     public function dropships()

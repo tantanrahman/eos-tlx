@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\PackageType;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Yajra\DataTables\Facades\DataTables;
 
 class PackageTypeController extends Controller
 {
@@ -13,11 +14,25 @@ class PackageTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $packageType = PackageType::get();
+        if ($request->ajax())
+        {
+            
+            $packagetype = PackageType::all();
 
-        return view('pages.admin.packagetype.index', compact('packageType'));
+            return DataTables::of($packagetype)
+                ->addColumn('action', function($packagetype){
+                    $button = '<a href="packagetype/'.$packagetype->id.'/edit" data-toggle="tooltip"  data-id="'.$packagetype->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>';
+                    $button .= '&nbsp;&nbsp;';
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+            
+        }
+
+        return view('pages.admin.packagetype.index');
     }
 
     /**
@@ -75,9 +90,9 @@ class PackageTypeController extends Controller
      * @param  \App\Models\PackageType  $packageType
      * @return \Illuminate\Http\Response
      */
-    public function edit(PackageType $packageType)
+    public function edit(PackageType $packagetype)
     {
-        //
+        return view('pages.admin.packagetype.edit', compact('packagetype'));
     }
 
     /**
@@ -87,9 +102,21 @@ class PackageTypeController extends Controller
      * @param  \App\Models\PackageType  $packageType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PackageType $packageType)
+    public function update(Request $request, PackageType $packagetype)
     {
-        //
+        $packagetype->update([
+            'name'      => $request->name,
+            'active'    => $request->has('active')
+        ]);
+
+        if($packagetype)
+        {
+            return redirect(route('admin.packagetype.index'))->with('toast_success', 'Berhasil Mengubah Data');
+        }
+        else 
+        {
+            return redirect(route('admin.packagetype.index'))->with('toast_error', 'Gagal!');
+        }
     }
 
     /**
