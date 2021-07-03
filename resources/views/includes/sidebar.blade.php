@@ -73,6 +73,15 @@
             </ul>
           </li>
 
+          <li class="nav-item {{ request()->is('admin/bagshipment*') ? 'menu-open' : '' }}">
+            <a href="{{ route('admin.bagshipment.index') }}" class="nav-link {{ request()->is('admin/bagshipment*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-briefcase"></i>
+            <p style="font-size: 16px">
+                Bag Shipment
+            </p>
+            </a>
+          </li>
+
           <li class="nav-item {{ request()->is('admin/customer*') ? 'menu-open' : '' }}">
             <a href="{{ route('admin.customer.index') }}" class="nav-link {{ request()->is('admin/customer*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-users"></i>
