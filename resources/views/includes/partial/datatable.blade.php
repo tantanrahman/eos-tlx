@@ -157,6 +157,7 @@
         {data:'name',name:'name'},
         {data:'city',name:'city'},
         {data:'phone',name:'phone'},
+        {data:'created_by',name:'created_by'},
         {data:'action',name:'action'},
       ],
     });
@@ -181,6 +182,7 @@
         {data:'name',name:'name'},
         {data:'city',name:'city'},
         {data:'phone',name:'phone'},
+        {data:'created_by',name:'created_by'},
         {data:'action',name:'action'},
       ],
     });
@@ -305,6 +307,63 @@
         {data:'name',name:'name'},
         {
           data: 'active',
+          render: function(data)
+          {
+              if (data==0)
+              {
+                return '<span class="badge badge-danger">NOT ACTIVE</span>'
+              }
+              else
+              {
+                return '<span class="badge badge-success">ACTIVE</span>'
+              }
+          }
+        },
+        {data:'action',name:'action'},
+      ],
+    });
+  });
+
+  $(document).ready(function() {
+    $('#table_pickupuser').DataTable({
+      processing : true,
+      serverSide : true,
+      ajax : '{!! route("admin.pickupuser.index") !!}',
+      columns: [
+        {data:'id',name:'id'},
+        {data:'name',name:'name'},
+        {data:'jalur',name:'jalur'},
+        {
+          data: 'active',
+          render: function(data)
+          {
+              if (data==0)
+              {
+                return '<span class="badge badge-danger">NOT ACTIVE</span>'
+              }
+              else
+              {
+                return '<span class="badge badge-success">ACTIVE</span>'
+              }
+          }
+        },
+        {data:'action',name:'action'},
+      ],
+    });
+  });
+
+  $(document).ready(function() {
+    $('#table_ongkir').DataTable({
+      processing : true,
+      serverSide : true,
+      ajax : '{!! route("admin.ongkir.index") !!}',
+      columns: [
+        {data:'idx',name:'idx', visible:false},
+        {data:'packagetypes',name:'packagetypes'},
+        {data:'countries',name:'countries'},
+        {data:'prices',name:'prices'},
+        {
+          data: 'status',
           render: function(data)
           {
               if (data==0)

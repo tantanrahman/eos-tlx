@@ -69,4 +69,11 @@
         theme: "bootstrap4",
         });
     });
+    $(document).ready(function() {
+        $('#select2ongkirpackagetype').select2({
+        placeholder: "Select a Package Type",
+        allowClear: true,
+        theme: "bootstrap4",
+        });
+    });
 </script>

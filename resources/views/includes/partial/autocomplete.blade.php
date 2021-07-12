@@ -57,4 +57,23 @@
 		}
 	});
 
+	let customer_path = "{{ route('autocompleteCustomer')  }}"
+	$('input.typeaheadCustomer').typeahead({
+		source: function(query, process) {
+			objects = [];
+			map = {};
+			return $.get(customer_path, { term: query }, function (data) {
+				$.each(data, function(i, object) {
+					map[object.label] = object;
+					objects.push(object.label);
+				});
+				process(objects);
+			});
+		},
+		updater: function(item) {
+			$('input[name="customer_id"]').val(map[item].id);
+			return item;
+		}
+	});
+
 </script>
