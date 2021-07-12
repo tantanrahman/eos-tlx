@@ -55,7 +55,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="country_id">Country*</label>
-                                <input type="text" value="" class="form-control typeaheadCountry @error('country_id') is-invalid @enderror" autocomplete="off">
+                                <input type="text" value="{{ $ongkir->countries }}" class="form-control @error('country_id') is-invalid @enderror" autocomplete="off">
                                 <input type="hidden" name="country_id">
                                 @error('country_id')
                                 <span class="invalid-feedback" role="alert">
