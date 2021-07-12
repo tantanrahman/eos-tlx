@@ -117,7 +117,6 @@
   
 </script>
 
-
 @include('includes.partial.autocomplete')
 @include('includes.partial.datatable')
 @include('includes.partial.select')

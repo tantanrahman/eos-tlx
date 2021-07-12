@@ -19,7 +19,7 @@
             </a>
           </li>
 
-          <li class="nav-item {{ request()->is('admin/bagpackage*') || request()->is('admin/city*') || request()->is('admin/courier*') || request()->is('admin/country*') || request()->is('admin/partner*') || request()->is('admin/packagetype*') || request()->is('admin/postalcode*') ? 'menu-open' : '' }}">
+          <li class="nav-item {{ request()->is('admin/bagpackage*') || request()->is('admin/city*') || request()->is('admin/courier*') || request()->is('admin/country*') || request()->is('admin/partner*') || request()->is('admin/packagetype*') || request()->is('admin/postalcode*') || request()->is('admin/pickupuser*') || request()->is('admin/ongkir*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-database"></i>
             <p style="font-size: 16px">
@@ -53,6 +53,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{ route('admin.ongkir.index') }}" class="nav-link {{ request()->is('admin/ongkir*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="font-size: 16px">Ongkir</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ route('admin.packagetype.index') }}" class="nav-link {{ request()->is('admin/packagetype*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="font-size: 16px">Package Type</p>
@@ -62,6 +68,12 @@
                 <a href="{{ route('admin.partner.index') }}" class="nav-link {{ request()->is('admin/partner*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="font-size: 16px">Partner</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.pickupuser.index') }}" class="nav-link {{ request()->is('admin/pickupuser*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="font-size: 16px">Pickup User</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -120,16 +132,25 @@
 
           <li class="nav-item {{ request()->is('admin/manifest*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link {{ request()->is('admin/manifest*') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-file-archive"></i>
+            <i class="nav-icon fas fa-plane-departure"></i>
             <p style="font-size: 16px">
                 Manifest
             </p>
             </a>
           </li>
 
+          <li class="nav-item {{ request()->is('admin/pickuplist*') ? 'menu-open' : '' }}">
+            <a href="{{ route('admin.pickuplist.index') }}" class="nav-link {{ request()->is('admin/pickuplist*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-motorcycle"></i>
+            <p style="font-size: 16px">
+                Pickup List
+            </p>
+            </a>
+          </li>
+
           <li class="nav-item {{ request()->is('admin/shipment*') ? 'menu-open' : '' }}">
             <a href="{{ route('admin.shipment.index') }}" class="nav-link {{ request()->is('admin/shipment*') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-plane-departure"></i>
+            <i class="nav-icon fas fa-truck"></i>
             <p style="font-size: 16px">
                 Shipment
             </p>
@@ -158,6 +179,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="#" class="nav-link {{ request()->is('admin/profile*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="font-size: 16px">Profile</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ route('admin.role.index') }}" class="nav-link {{ request()->is('admin/role*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="font-size: 16px">Roles</p>
@@ -181,7 +208,7 @@
             </p>
             </a>
           </li>
-
+          
         </ul>
       </nav>
     </div>
