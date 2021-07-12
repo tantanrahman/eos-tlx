@@ -8,7 +8,7 @@
   <div class="content-header">
       <div class="container-fluid">
           <div class="card">
-              <div class="card-header bg-dark">
+              <div class="card-header">
                 <b>CUSTOMER</b>
               </div>
               <div class="card-body">
@@ -77,7 +77,7 @@
               </div>                
           </div>
           <div class="card">
-            <div class="card-header bg-dark">
+            <div class="card-header">
               <b>DROPSHIP</b>
             </div>
             <div class="card-body">
