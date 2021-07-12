@@ -40,7 +40,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="city">Customer ID (Auto Generate)</label>
-                                <input type="text" class="form-control @error('account_code') is-invalid @enderror" id="customer-id" name="account_code" readonly value="{{ old('account_code') }}">
+                                <input type="text" class="form-control @error('account_code') is-invalid @enderror" id="customer-id" name="account_code" readonly value="{{ old('account_code') }}" placeholder="ID akan terisi otomatis">
                                 @error('account_code')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -104,7 +104,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="city">Phone</label>
-                                <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}">
+                                <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" onblur="this.value=removeSpaces(this.value);">
                                 <small class="form-text text-muted">
                                     <i>Inputan Phone hanya Nomor.</i>
                                 </small>

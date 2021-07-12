@@ -74,7 +74,8 @@ class Customer extends Model
 			customer.name,
 			IF(customer.group = 'shipper', city.city, '') as city,
 			customer.phone,
-			customer.group
+			customer.group,
+			customer.created_by
 		");
 
 		$items = self::join('city','customer.city_id','=','city.id')
@@ -91,7 +92,8 @@ class Customer extends Model
 			customer.name,
 			IF(customer.group = 'shipper', city.city, '') as city,
 			customer.phone,
-			customer.group
+			customer.group,
+			customer.created_by
 		");
 
 		$items = self::join('city','customer.city_id','=','city.id')

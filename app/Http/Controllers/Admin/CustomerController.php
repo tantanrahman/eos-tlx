@@ -79,8 +79,6 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
 
-        dd(Request()->account_code);
-
         $cities = City::find($request->get('city'));
 
 		$this->validate($request, [
@@ -95,7 +93,7 @@ class CustomerController extends Controller
 			'name.required'         => 'NAMA WAJIB DIISI',
 			'city_id.required'		=> 'KOTA WAJIB DIISI',
             'phone.required'        => 'PHONE WAJIB DIISI',
-            'phone.numeric'         => 'PHONE WAJIB SEMUA ANGKA',
+            'phone.numeric'         => 'PHONE WAJIB ANGKA SEMUA DAN TANPA SPASI',
 			'country_id.required'	=> 'NEGARA WAJIB DIISI',
 			'group.required'		=> 'CUSTOMER TYPE WAJIB DIISI',
 		]);
@@ -222,4 +220,19 @@ class CustomerController extends Controller
 
 		return response()->json(['status' => true, 'customer_id' => $customer_id]);
 	}
+
+    /**
+     * 
+     * Get Autocomplete Customer
+     * 
+     */
+
+    public function autocompleteCustomer(Request $request)
+    {
+        $customers = Customer::select('id', 'name as label')
+            ->where('name', 'like', "%{$request->term}%")
+            ->get();
+
+        return response()->json($customers);
+    }
 }
