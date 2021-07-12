@@ -12,8 +12,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DropshipController;
 use App\Http\Controllers\Admin\OfficeProfileController;
+use App\Http\Controllers\Admin\OngkirController;
 use App\Http\Controllers\Admin\PackageTypeController;
 use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\Admin\PickuplistController;
+use App\Http\Controllers\Admin\PickupUserController;
 use App\Http\Controllers\Admin\PostalCodeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ShipmentController;
@@ -56,6 +59,9 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::resource('postalcode', PostalCodeController::class);
     Route::resource('shipment', ShipmentController::class);
     Route::resource('bagshipment', BagShipmentController::class);
+    Route::resource('pickuplist', PickuplistController::class);
+    Route::resource('pickupuser', PickupUserController::class);
+    Route::resource('ongkir', OngkirController::class);
     Route::get('export', [App\Http\Controllers\Admin\DropshipController::class, 'export'])->name('dropship.export');
     Route::get('pdf', [App\Http\Controllers\Admin\DropshipController::class, 'pdf'])->name('dropship.pdf');
     Route::post('searchdateDrop', [App\Http\Controllers\Admin\DropshipController::class, 'searchdateDrop'])->name('searchdateDrop');
@@ -65,6 +71,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
 Route::get('autocompleteCity', [App\Http\Controllers\Admin\CityController::class, 'autocompleteCity'])->name('autocompleteCity');
 Route::get('autocompleteCourier', [App\Http\Controllers\Admin\CourierController::class, 'autocompleteCourier'])->name('autocompleteCourier');
 Route::get('autocompleteCountry', [App\Http\Controllers\Admin\CountryController::class, 'autocompleteCountry'])->name('autocompleteCountry');
+Route::get('autocompleteCustomer', [App\Http\Controllers\Admin\CustomerController::class, 'autocompleteCustomer'])->name('autocompleteCustomer');
 Route::get('getCustomerId', [App\Http\Controllers\Admin\CustomerController::class, 'getCustomerId'])->name('getCustomerId');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
