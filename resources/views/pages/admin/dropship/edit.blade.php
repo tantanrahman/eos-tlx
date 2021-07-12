@@ -41,7 +41,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                               <label for="resi">Resi*</label>
-                              <input type="text" name="resi" class="form-control @error('resi') is-invalid @enderror" id="resi" value="{{ $dropship->resi }}" autofocus>
+                              <input type="text" name="resi" class="form-control @error('resi') is-invalid @enderror" id="resi" value="{{ $dropship->resi }}" autofocus oninput="this.value = this.value.toUpperCase()">
                               @error('resi')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

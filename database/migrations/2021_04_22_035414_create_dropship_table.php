@@ -15,8 +15,8 @@ class CreateDropshipTable extends Migration
     {
         Schema::create('dropship', function (Blueprint $table) {
             $table->id();
-            $table->string('resi',50)->unique();
-            $table->string('name',100);
+            $table->string('resi',100)->unique();
+            $table->string('name',150);
             $table->foreignId('courier_id')->references('id')->on('courier')->onDelete('cascade');
             $table->string('jenis_barang',50);
             $table->float('berat',11,2);
