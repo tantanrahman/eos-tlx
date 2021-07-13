@@ -37,7 +37,7 @@ class Dropship extends Model
         return $this->belongsTo('App\Models\City');
     }
 
-    public static function get_items($date_start, $date_end)
+    public static function get_items($date_start, $date_end, $get_courier)
 	{
 		$items = self::join('users','dropship.users_id','=','users.id')
 			->join('courier','dropship.courier_id','=','courier.id')
@@ -52,7 +52,8 @@ class Dropship extends Model
 				'dropship.berat as weight',
 				'city.city as cities',
 				'users.name as users',
-				'dropship.photo'
+				'dropship.photo',
+				'courier.active as status'
 			);
 
 		if ( ! empty($date_start))
@@ -65,6 +66,35 @@ class Dropship extends Model
 			$items->whereDate('dropship.created_at', '<=', $date_end);
 		}
 
+		if ( ! empty($get_courier))
+		{
+			$items->where('courier.active', '=', 1);
+
+			return $items->first();
+		}
+
 		return $items->get();
 	}
+
+	public static function get_items_name($id)
+	{
+		$items_name = self::join('users','dropship.users_id','=','users.id')
+			->join('courier','dropship.courier_id','=','courier.id')
+			->join('city','dropship.city','=','city.id')
+			->select(
+				'dropship.id as idx',
+				'dropship.created_at AS time',
+				'dropship.resi as resis',
+				'dropship.name AS names',
+				'courier.name as couriers',
+				'dropship.jenis_barang as category',
+				'dropship.berat as weight',
+				'city.city as cities',
+				'users.name as users',
+				'dropship.photo'
+			)->where('dropship.id',$id);
+
+		return $items_name->first();
+	}
+	
 }

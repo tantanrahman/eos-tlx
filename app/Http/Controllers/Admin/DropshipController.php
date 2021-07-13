@@ -31,7 +31,7 @@ class DropshipController extends Controller
 			$date_start = ( ! empty($request->get('date_start')) ? $request->get('date_start') : '');
 			$date_end = ( ! empty($request->get('date_end')) ? $request->get('date_end') : '');
 
-			$dropships = Dropship::get_items($date_start, $date_end);
+			$dropships = Dropship::get_items($date_start, $date_end,'');
 
             return DataTables::of($dropships)
                         ->addColumn('photo', function($dropship){
@@ -139,12 +139,12 @@ class DropshipController extends Controller
      */
     public function edit(Dropship $dropship)
     {
+        $get_courier    = true;
+        $edit           = Dropship::get_items_name($dropship->id);
+        $users          = User::where('role_id','=',2)->get();
+        $kurir          = Dropship::get_items('', '', $get_courier);
 
-        $cities     = City::all();
-        $users      = User::where('role_id','=',2)->get();
-        $couriers   = Courier::where('active','=',1)->get();
-
-        return view('pages.admin.dropship.edit', compact('dropship', 'cities', 'users', 'couriers'));
+        return view('pages.admin.dropship.edit', compact('dropship', 'edit', 'users', 'kurir'));
     }
 
     /**
@@ -234,7 +234,7 @@ class DropshipController extends Controller
 		$date_start = ( ! empty($request->get('date_start')) ? $request->get('date_start') : '');
 		$date_end = ( ! empty($request->get('date_end')) ? $request->get('date_end') : '');
 
-		$dropships = Dropship::get_items($date_start, $date_end);
+		$dropships = Dropship::get_items($date_start, $date_end, '');
 
         $pdf = PDF::loadView('pages.admin.dropship.export', compact('dropships'))->setPaper('a4', 'landscape');
         return $pdf->download('Report Dropship '.date("Y-m-d").'.pdf');
