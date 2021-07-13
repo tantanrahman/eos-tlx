@@ -23,7 +23,7 @@
 
     <section class="content">
         <div class="container-fluid">
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
                 Tanda <strong>(*) bintang</strong> menandakan kolom wajib diisi.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
@@ -57,20 +57,18 @@
                                     </span>
                               @enderror
                             </div>
+
                             <div class="form-group col-md-6">
                                 <label for="courier_id">Courier*</label>
-                                <select name="courier_id" class="form-control" id="select2dropcourier" data-width="100%">
-                                    <option></option>
-                                    @foreach($couriers as $courier)
-                                        <option value="{{ $courier->id }}" {{ ($courier->id == $dropship->courier_id) ? 'selected' : '' }}>{{ $courier->name }}</option>
-                                    @endforeach
-                                </select>
+                                <input type="text" value="{{ $kurir->couriers }}" class="form-control typeaheadCourier @error('courier_id') is-invalid @enderror" autocomplete="off">
+                                <input type="hidden" value="{{ $dropship->id }}" name="courier_id">
                                 @error('courier_id')
-                                      <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
+
                             <div class="form-group col-md-6">
                                 <label for="berat">Berat*</label>
                                 <div class="input-group mb-2 mr-sm-2">
@@ -101,16 +99,12 @@
                             
                             <div class="form-group col-md-6">
                                 <label for="city">Kota*</label>
-                                <select name="city" class="form-control" id="select2City" data-width="100%">
-                                    <option></option>
-                                    @foreach($cities as $city)
-                                        <option value="{{ $city->id }}" {{ ($city->id == $dropship->city) ? 'selected' : '' }}>{{ $city->city }}</option>
-                                    @endforeach
-                                </select>
+                                <input type="text" value="{{ $edit->cities }}" class="form-control typeaheadCity @error('city') is-invalid @enderror" autocomplete="off">
+                                <input type="hidden" value="{{ $dropship->id }}" name="city">
                                 @error('city')
-                                      <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
