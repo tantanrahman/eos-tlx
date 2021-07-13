@@ -38,5 +38,18 @@ class Ongkir extends Model
         return $items->get();
     }
 
-    
+    public static function get_items_name($id)
+    {
+        $items = self::join('packagetype','ongkir.packagetype_id','=','packagetype.id')
+                    ->join('country','ongkir.country_id','=','country.id')
+                    ->select(
+                        'ongkir.id as idx',
+                        'packagetype.name as packagetypes',
+                        'country.name as countries',
+                        'ongkir.price as prices',
+                        'ongkir.active as status'
+                    )->where('ongkir.id', $id);
+
+        return $items->first();
+    }
 }

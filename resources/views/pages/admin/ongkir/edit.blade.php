@@ -14,7 +14,7 @@
                   <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('admin.ongkir.index') }}">Ongkir</a></li>
-                    <li class="breadcrumb-item active">Create Ongkir</li>
+                    <li class="breadcrumb-item active">Edit Ongkir</li>
                   </ol>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="packagetype_id">Package Type*</label>
-                                <select class="form-control" id="select2ongkirpackagetype" data-width="100%">
+                                <select name="packagetype_id"class="form-control" id="select2ongkirpackagetype" data-width="100%">
                                     <option></option>
                                     @foreach($packagetype as $ptype)
                                         <option value="{{ $ptype->id }}" {{ ($ptype->id == $ongkir->packagetype_id) ? 'selected' : '' }}>{{ $ptype->name }}</option>
@@ -55,8 +55,8 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="country_id">Country*</label>
-                                <input type="text" value="{{ $ongkir->countries }}" class="form-control @error('country_id') is-invalid @enderror" autocomplete="off">
-                                <input type="hidden" name="country_id">
+                                <input type="text" value="{{ $edit->countries }}" class="form-control typeaheadCountry @error('country_id') is-invalid @enderror" autocomplete="off">
+                                <input type="hidden" value="{{ $ongkir->id }}" name="country_id">
                                 @error('country_id')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

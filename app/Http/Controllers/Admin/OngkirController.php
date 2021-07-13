@@ -110,9 +110,9 @@ class OngkirController extends Controller
 
         $packagetype    = PackageType::where('active','=',1)->get();
         $customer       = Customer::all();
-        $items          = Ongkir::get_items();
+        $edit           = Ongkir::get_items_name($ongkir->id);
 
-        return view('pages.admin.ongkir.edit', compact('ongkir', 'packagetype','customer','items'));
+        return view('pages.admin.ongkir.edit', compact('ongkir', 'packagetype','customer','edit'));
     }
 
     /**
@@ -124,7 +124,27 @@ class OngkirController extends Controller
      */
     public function update(Request $request, Ongkir $ongkir)
     {
-        //
+
+        $ongkir->update([
+            'packagetype_id'        => $request->packagetype_id,
+            'country_id'            => $request->country_id,
+            'customer_id'           => $request->customer_id,
+            'price'                 => $request->price,
+            'modal'                 => $request->modal,
+            'estimation'            => $request->estimation,
+            'estimation_detail'     => $request->estimation_detail,
+            'remark'                => $request->remark,
+            'active'                => $request->has('active')
+        ]);
+
+        if($ongkir)
+        {
+            return redirect(route('admin.ongkir.index'))->with('toast_success', 'Berhasil Mengubah Data');
+        }
+        else 
+        {
+            return redirect(route('admin.ongkir.index'))->with('toast_error', 'Gagal!');
+        }
     }
 
     /**

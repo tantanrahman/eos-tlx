@@ -28,7 +28,7 @@
                                     <th>#</th>
                                     <th>PACKAGE TYPE</th>
                                     <th>COUNTRY</th>
-                                    <th>PRICE</th>
+                                    <th>PRICE (Rp)</th>
                                     <th>ACTIVE</th>
                                     <th>ACTION</th>
                                 </tr>
