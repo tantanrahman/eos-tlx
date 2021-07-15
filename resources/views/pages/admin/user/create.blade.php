@@ -23,7 +23,7 @@
 
     <section class="content">
         <div class="container-fluid">
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
                 Tanda <strong>(*) bintang</strong> menandakan kolom wajib diisi.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>

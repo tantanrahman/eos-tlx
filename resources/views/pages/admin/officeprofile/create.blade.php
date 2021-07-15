@@ -23,7 +23,7 @@
 
     <section class="content">
         <div class="container-fluid">
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
                 Tanda <strong>(*) bintang</strong> menandakan kolom wajib diisi.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
@@ -41,9 +41,6 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <label for=""><b>Nama *</b></label>
                                 <input type="text" class="form-control @error('name') is invalid @enderror" name="name" autofocus oninput="this.value = this.value.toUpperCase()">
-                                <small class="form-text text-muted">
-                                    <i>AUTO CAPITALIZE</i>
-                                </small>
                                 @error('name')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}

@@ -40,16 +40,15 @@ class CustomerController extends Controller
             {
                 $customers_consignee = Customer::get_items_consignee();
 
-
-            return DataTables::of($customers_consignee)
-                ->addColumn('action', function($customer){
-                    $button = '<a href="customer/'.$customer->id.'/edit" data-toggle="tooltip"  data-id="'.$customer->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i> Edit</a>';
-                    $button .= '&nbsp;&nbsp;';
-                    $button .= '<button type="button" name="delete" id="'.$customer->id.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>';
-                    return $button;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
+                return DataTables::of($customers_consignee)
+                    ->addColumn('action', function($customer){
+                        $button = '<a href="customer/'.$customer->id.'/edit" data-toggle="tooltip"  data-id="'.$customer->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i> Edit</a>';
+                        $button .= '&nbsp;&nbsp;';
+                        $button .= '<button type="button" name="delete" id="'.$customer->id.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>';
+                        return $button;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
             }
             
         }
@@ -84,8 +83,8 @@ class CustomerController extends Controller
 		$this->validate($request, [
 			'account_code'	=> 'required',
 			'name'			=> 'required',
-			'city'		    => 'required',
-            'phone'         => 'required|numeric',
+			'city_id'		=> 'required',
+            'phone'         => 'required',
 			'country_id'	=> 'required',
 			'group'			=> 'required',
 		], [
@@ -107,9 +106,10 @@ class CustomerController extends Controller
 				'name'                  => Request()->name,
 				'company_name'          => Request()->company_name,
 				'address'               => Request()->address,
-				'city_id'               => Request()->city,
-                'city_name'             => $cities,
+				'city_id'               => Request()->city_id,
+                'city_name'             => Request()->city_name,
 				'country_id'            => Request()->country_id,
+                'country_name'          => Request()->country_name,
 				'phone'                 => Request()->phone,
 				'group'                 => Request()->group,
 				'postal_code'           => Request()->postal_code,

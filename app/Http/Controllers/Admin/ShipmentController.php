@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Models\Partner;
+use App\Models\Customer;
 use App\Models\Shipment;
 use App\Models\PackageType;
 use Illuminate\Http\Request;
@@ -89,5 +90,19 @@ class ShipmentController extends Controller
     public function destroy(Shipment $shipment)
     {
         //
+    }
+
+    /**
+     * 
+     * Get Autocomplete From Customer
+     */
+
+    public function autocompleteShipment(Request $request)
+    {
+        $customers = Customer::select('id', 'name as label')
+            ->where('name', 'like', "%{$request->term}%")
+            ->get();
+
+        return response()->json($customers);
     }
 }

@@ -16,7 +16,7 @@
 
     <section class="content">
         <div class="container-fluid">    
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
                 Tanda <strong>(*) bintang</strong> menandakan kolom wajib diisi.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
@@ -49,7 +49,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="resi">Name*</label>
-                                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" autofocus autocomplete="off">
+                                        <input type="text" name="name" class="form-control typeaheadCustomer @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" autocomplete="off">
                                         @error('name')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
@@ -57,9 +57,9 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label for="resi">Company Name</label>
-                                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" autofocus autocomplete="off">
-                                        @error('name')
+                                        <label for="company_name">Company Name</label>
+                                        <input type="text" name="company_name" class="form-control typeaheadShipment @error('company_name') is-invalid @enderror" value="{{ old('company_name') }}" autocomplete="off">
+                                        @error('company_name')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
                                               </span>
@@ -77,7 +77,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="resi">Postal Code</label>
-                                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" autofocus autocomplete="off">
+                                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" autocomplete="off">
                                         @error('name')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
@@ -127,7 +127,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="resi">Name*</label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" autofocus autocomplete="off">
+                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}"  autocomplete="off">
                                     @error('name')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -136,7 +136,7 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="resi">Company Name</label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" autofocus autocomplete="off">
+                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}"  autocomplete="off">
                                     @error('name')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -155,7 +155,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="resi">Postal Code</label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" autofocus autocomplete="off">
+                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}"  autocomplete="off">
                                     @error('name')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -236,7 +236,7 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="resi">Values</label>
-                                    <input type="text" name="values" class="form-control @error('values') is-invalid @enderror" id="values" value="{{ old('values') }}" autofocus autocomplete="off">
+                                    <input type="text" name="values" class="form-control @error('values') is-invalid @enderror" id="values" value="{{ old('values') }}"  autocomplete="off">
                                     @error('values')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -271,7 +271,7 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="resi">Connote</label>
-                                    <input type="text" name="values" class="form-control @error('values') is-invalid @enderror" id="values" value="{{ old('values') }}" autofocus autocomplete="off">
+                                    <input type="text" name="values" class="form-control @error('values') is-invalid @enderror" id="values" value="{{ old('values') }}"  autocomplete="off">
                                     @error('values')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -292,7 +292,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="resi">Modal</label>
-                                    <input type="text" name="values" class="form-control uang @error('values') is-invalid @enderror" id="values" value="{{ old('values') }}" autofocus autocomplete="off">
+                                    <input type="text" name="values" class="form-control uang @error('values') is-invalid @enderror" id="values" value="{{ old('values') }}"  autocomplete="off">
                                     @error('values')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -301,7 +301,7 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="resi">Ongkir</label>
-                                    <input type="text" name="values" class="form-control uang @error('values') is-invalid @enderror" id="values" value="{{ old('values') }}" autofocus autocomplete="off">
+                                    <input type="text" name="values" class="form-control uang @error('values') is-invalid @enderror" id="values" value="{{ old('values') }}"  autocomplete="off">
                                     @error('values')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>

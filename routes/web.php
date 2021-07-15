@@ -72,6 +72,7 @@ Route::get('autocompleteCity', [App\Http\Controllers\Admin\CityController::class
 Route::get('autocompleteCourier', [App\Http\Controllers\Admin\CourierController::class, 'autocompleteCourier'])->name('autocompleteCourier');
 Route::get('autocompleteCountry', [App\Http\Controllers\Admin\CountryController::class, 'autocompleteCountry'])->name('autocompleteCountry');
 Route::get('autocompleteCustomer', [App\Http\Controllers\Admin\CustomerController::class, 'autocompleteCustomer'])->name('autocompleteCustomer');
+Route::get('autocompleteShipment', [App\Http\Controllers\Admin\ShipmentController::class, 'autocompleteShipment'])->name('autocompleteShipment');
 Route::get('getCustomerId', [App\Http\Controllers\Admin\CustomerController::class, 'getCustomerId'])->name('getCustomerId');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

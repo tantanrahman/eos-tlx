@@ -17,11 +17,11 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th>#</th>
-                                <th>PROVINCE</th>
-                                <th>CITY</th>
-                                <th>DISTRICT</th>
-                                <th>URBAN</th>
-                                <th>POSTAL CODE</th>
+                                <th>PROVINSI</th>
+                                <th>KAB/KOTA</th>
+                                <th>KECAMATAN</th>
+                                <th>KELURAHAN</th>
+                                <th>KODE POS</th>
                             </tr>
                         </thead>
                         @foreach ($postalcodes as $index => $postalcode)

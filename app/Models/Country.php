@@ -17,10 +17,10 @@ class Country extends Model
         'alpha3code'
     ];
 
-    public function customers()
-    {
-        $this->belongsToMany('App\Models\Customer');
-    }
+    // public function customers()
+    // {
+    //     $this->belongsToMany('App\Models\Customer');
+    // }
 
     public static function get_country_name()
     {

@@ -18,19 +18,23 @@ class Customer extends Model
 		'company_name',
 		'address',
 		'city_id',
+		'city_name',
 		'country_id',
+		'country_name',
 		'phone',
 		'group',
 		'postal_code',
+		'apikey',
 		'postalcode_id',
 		'api_passowrd',
+		'credit',
 		'created_by'
     ];
 
-    public function countries()
-    {
-        return $this->hasMany('App\Models\Country');
-    }
+    // public function countries()
+    // {
+    //     return $this->hasMany('App\Models\Country');
+    // }
 
 	// public static function get_customer_id($query)
 	// {
@@ -90,13 +94,13 @@ class Customer extends Model
 			customer.id,
 			customer.account_code,
 			customer.name,
-			IF(customer.group = 'shipper', city.city, '') as city,
+			customer.country_name,
 			customer.phone,
 			customer.group,
 			customer.created_by
 		");
 
-		$items = self::join('city','customer.city_id','=','city.id')
+		$items = self::join('country','customer.country_id','=','country.id')
 			->select($query)->where('customer.group','=','consignee');
 
 		return $items->get();

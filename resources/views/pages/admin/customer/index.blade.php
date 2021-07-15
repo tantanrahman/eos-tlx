@@ -60,7 +60,7 @@
                                             <th style="display: none">Id</th>
                                             <th>ACCOUNT CODE</th>
                                             <th>NAME</th>
-                                            <th>CITY</th>
+                                            <th>COUNTRY</th>
                                             <th>PHONE</th>
                                             <th>CREATED BY</th>
                                             <th>ACTION</th>
