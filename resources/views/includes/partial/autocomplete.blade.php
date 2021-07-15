@@ -89,6 +89,7 @@
 		source: function(query, process) {
 			objects = [];
 			map = {};
+			
 			return $.get(shipment_path, { term: query }, function (data) {
 				$.each(data, function(i, object) {
 					map[object.label] = object;
@@ -97,8 +98,10 @@
 				process(objects);
 			});
 		},
+
 		updater: function(item) {
-			$('input[name="address"]').val(map[item].address);
+			console.log(map[item].phone);
+			$('input[name="phone"]').val(map[item].phone);
 			return item;
 		}
 	});

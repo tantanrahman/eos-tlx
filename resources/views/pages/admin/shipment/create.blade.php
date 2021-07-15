@@ -49,7 +49,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="resi">Name*</label>
-                                        <input type="text" name="name" class="form-control typeaheadCustomer @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" autocomplete="off">
+                                        <input type="text" name="name" class="form-control typeaheadShipment @error('name') is-invalid @enderror" value="{{ old('name') }}" autocomplete="off">
                                         @error('name')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
@@ -58,7 +58,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="company_name">Company Name</label>
-                                        <input type="text" name="company_name" class="form-control typeaheadShipment @error('company_name') is-invalid @enderror" value="{{ old('company_name') }}" autocomplete="off">
+                                        <input type="text" name="company_name" class="form-control @error('company_name') is-invalid @enderror" value="{{ old('company_name') }}" autocomplete="off">
                                         @error('company_name')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
@@ -77,7 +77,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="resi">Postal Code</label>
-                                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" autocomplete="off">
+                                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" autocomplete="off">
                                         @error('name')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
@@ -85,8 +85,8 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label for="city">Address*</label>
-                                        <textarea rows="3" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" style="resize:none"></textarea>
+                                        <label for="address">Address*</label>
+                                        <textarea rows="3" class="form-control @error('address') is-invalid @enderror" name="address" style="resize:none"></textarea>
                                         @error('address')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -94,9 +94,9 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-12" id="customer-city-section">
-                                        <label for="city">City*</label>
-                                        <input type="text" class="form-control typeaheadCity @error('city') is-invalid @enderror" value="" autocomplete="off">
-                                        @error('city')
+                                        <label for="city_name">City*</label>
+                                        <input name="city_name" type="text" class="form-control @error('city') is-invalid @enderror" value="" autocomplete="off">
+                                        @error('city_name')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -117,7 +117,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                {{-- <div class="col-sm-6">
                     <div class="card">
                         <div class="card-body">
                             <h4>
@@ -127,7 +127,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="resi">Name*</label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}"  autocomplete="off">
+                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"  autocomplete="off">
                                     @error('name')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -136,7 +136,7 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="resi">Company Name</label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}"  autocomplete="off">
+                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"  autocomplete="off">
                                     @error('name')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -155,7 +155,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="resi">Postal Code</label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}"  autocomplete="off">
+                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"  autocomplete="off">
                                     @error('name')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -236,7 +236,7 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="resi">Values</label>
-                                    <input type="text" name="values" class="form-control @error('values') is-invalid @enderror" id="values" value="{{ old('values') }}"  autocomplete="off">
+                                    <input type="text" name="values" class="form-control @error('values') is-invalid @enderror" value="{{ old('values') }}"  autocomplete="off">
                                     @error('values')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -271,7 +271,7 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="resi">Connote</label>
-                                    <input type="text" name="values" class="form-control @error('values') is-invalid @enderror" id="values" value="{{ old('values') }}"  autocomplete="off">
+                                    <input type="text" name="values" class="form-control @error('values') is-invalid @enderror" value="{{ old('values') }}"  autocomplete="off">
                                     @error('values')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -292,7 +292,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="resi">Modal</label>
-                                    <input type="text" name="values" class="form-control uang @error('values') is-invalid @enderror" id="values" value="{{ old('values') }}"  autocomplete="off">
+                                    <input type="text" name="values" class="form-control uang @error('values') is-invalid @enderror" value="{{ old('values') }}"  autocomplete="off">
                                     @error('values')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -301,7 +301,7 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="resi">Ongkir</label>
-                                    <input type="text" name="values" class="form-control uang @error('values') is-invalid @enderror" id="values" value="{{ old('values') }}"  autocomplete="off">
+                                    <input type="text" name="values" class="form-control uang @error('values') is-invalid @enderror" value="{{ old('values') }}"  autocomplete="off">
                                     @error('values')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -332,7 +332,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>    
         </div>
     </section>

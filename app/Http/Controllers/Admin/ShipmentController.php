@@ -99,7 +99,7 @@ class ShipmentController extends Controller
 
     public function autocompleteShipment(Request $request)
     {
-        $customers = Customer::select('id', 'name as label')
+        $customers = Customer::select('id', 'address' ,'name as label', 'city_name', 'phone')
             ->where('name', 'like', "%{$request->term}%")
             ->get();
 
