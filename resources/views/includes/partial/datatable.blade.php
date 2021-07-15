@@ -180,7 +180,7 @@
         {data:'id',name:'id', visible: false},
         {data:'account_code',name:'account_code'},
         {data:'name',name:'name'},
-        {data:'city',name:'city'},
+        {data:'country_name',name:'country_name'},
         {data:'phone',name:'phone'},
         {data:'created_by',name:'created_by'},
         {data:'action',name:'action'},
@@ -360,8 +360,8 @@
       columns: [
         {data:'idx',name:'idx', visible:false},
         {data:'packagetypes',name:'packagetypes'},
-        {data:'countries',name:'countries'},
-        {data:'prices',name:'prices'},
+        {data:'countries',name:'countries', },
+        {data:'prices',name:'prices', render: $.fn.dataTable.render.number('.', '.','')},
         {
           data: 'status',
           render: function(data)

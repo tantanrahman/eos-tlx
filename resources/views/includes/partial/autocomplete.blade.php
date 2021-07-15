@@ -1,10 +1,17 @@
 <script type="text/javascript">
 	
     let city_path = "{{ route('autocompleteCity')  }}"
+
     $('input.typeaheadCity').typeahead({
 		source: function(query, process) {
 			objects = [];
 			map = {};
+
+			// console.log($('#customer-type').val());
+			if ($('#customer-type').length > 0 && $('#customer-type').val() == 'consignee') {
+				return false
+			}
+
 			return $.get(city_path, { term: query }, function (data) {
 				$.each(data, function(i, object) {
 					map[object.label] = object;
@@ -13,8 +20,9 @@
 				process(objects);
 			});
 		},
+
 		updater: function(item) {
-			$('input[name="city"]').val(map[item].id).trigger('change');
+			$('input[name="city_id"]').val(map[item].id).trigger('change');
 			return item;
 		}
     });
@@ -72,6 +80,25 @@
 		},
 		updater: function(item) {
 			$('input[name="customer_id"]').val(map[item].id);
+			return item;
+		}
+	});
+
+	let shipment_path = "{{ route('autocompleteShipment')  }}"
+	$('input.typeaheadShipment').typeahead({
+		source: function(query, process) {
+			objects = [];
+			map = {};
+			return $.get(shipment_path, { term: query }, function (data) {
+				$.each(data, function(i, object) {
+					map[object.label] = object;
+					objects.push(object.label);
+				});
+				process(objects);
+			});
+		},
+		updater: function(item) {
+			$('input[name="address"]').val(map[item].address);
 			return item;
 		}
 	});
