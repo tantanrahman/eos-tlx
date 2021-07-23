@@ -22,7 +22,7 @@
             <div class="table-responsive">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-bordered" id="table_city">
+                        <table class="table table-hover table-bordered" id="table_city">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>#</th>

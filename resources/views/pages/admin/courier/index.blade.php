@@ -19,7 +19,7 @@
                         <div class="btn-group mb-4" role="group" aria-label="Basic example">
                             <a href="{{ route('admin.courier.create') }}" class="btn bg-info"><i class="nav-icon fas fa-plus"></i> Tambah Data</a>
                         </div>
-                        <table class="table table-bordered" id="table_courier">
+                        <table class="table table-hover table-bordered" id="table_courier">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>CODE</th>

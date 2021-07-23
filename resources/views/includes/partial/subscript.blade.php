@@ -22,16 +22,13 @@
 
 	$('body').on('click', '.dropship-export', function (e) {
 		e.preventDefault();
-
 		let export_url = e.target.href,
 			query = {
 				date_start: $('#dropship-periode-start').val(),
 				date_end: $('#dropship-periode-end').val(),
 			},
 			url_params = '';
-
 		url_params = '?' + $.param(query);
-
 		window.location.href = export_url + url_params;
 	});
 
@@ -45,7 +42,7 @@
 			// $('#customer-country-section').hide();
 			$('#customer-country').val(106);
 			$('#customer-name-country').val('Indonesia');
-			$('#customer-name-country').attr("disabled", "disabled");
+			$('#customer-name-country').attr("readonly", "readonly");
 		}
 		else if (e.target.value == 'consignee')
 		{
@@ -54,7 +51,7 @@
 			$('#customer-city').val(0);
 			$('#customer-country').val('');
 			$('#customer-name-country').val('');
-			$("#customer-name-country").removeAttr("disabled");
+			$("#customer-name-country").removeAttr("readonly");
 		}
 
 	});
@@ -96,5 +93,11 @@
 			}
 		});
 	});
+
+	//Format Money for Form
+	$(document).ready(function(){
+		// Format mata uang.
+		$( '.uang' ).mask('000.000.000.000.000.000', {reverse: true});
+	})
   
 </script>

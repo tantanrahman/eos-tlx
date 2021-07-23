@@ -53,16 +53,6 @@ class User extends Authenticatable
      * 
      */
 
-    public function role()
-    {
-        return $this->belongsTo('App\Models\Role');
-    }
-
-    public function officeprofile()
-    {
-        return $this->belongsTo('App\Models\OfficeProfile');
-    }
-
     public function drophips()
     {
         return $this->hasMany('App\Models\dropship');

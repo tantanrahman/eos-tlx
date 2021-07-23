@@ -38,10 +38,19 @@ class DropshipController extends Controller
                             $url = URL::asset("/storage/dropship/".$dropship->photo);
                             return '<img src='.$url.' border="0" height="60" width="100" class="img-rounded" text-align="center" />';
                         })
+                        
                         ->addColumn('action', function($dropship){
-                            $button = '<a href="dropship/'.$dropship->idx.'/edit" data-toggle="tooltip"  data-id="'.$dropship->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i> Edit</a>';
-                            $button .= '&nbsp;&nbsp;';
-                            $button .= '<button type="button" name="delete" id="'.$dropship->idx.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>';     
+                            // $button = '<a href="dropship/'.$dropship->idx.'/edit" data-toggle="tooltip"  data-id="'.$dropship->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i> Edit</a>';
+                            // $button .= '&nbsp;&nbsp;';
+                            // $button .= '<button type="button" name="delete" id="'.$dropship->idx.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>';     
+                            // return $button;
+
+                            $button =   '<div class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="dropship/'.$dropship->idx.'/edit" type="button" class="btn btn-info" data-id="'.$dropship->id.'" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="far fa-edit"></i></a>
+                                            <button type="button" name="delete" id="'.$dropship->idx.'" class="delete btn btn-danger" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
+                                            <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="VIEW"><i class="fas fa-search"></i></button>
+                                        </div>';
+
                             return $button;
                         })
                         ->rawColumns(['photo','action'])
@@ -73,13 +82,16 @@ class DropshipController extends Controller
      */
     public function store(Request $request)
     {
+
+        // dd($request);
+
         $this->validate($request, [
             'resi'              => 'required',
             'name'              => 'required',
             'courier_id'        => 'required',
             'jenis_barang'      => 'required',
             'berat'             => 'required',
-            'city'              => 'required',
+            'city_name'         => 'required',
             'users_id'          => 'required',
             'photo'             => 'required|image|mimes:jpeg,jpg,png'
         ], [
@@ -88,7 +100,7 @@ class DropshipController extends Controller
             'courier_id.required'   => 'COURIER WAJIB DIISI',
             'jenis_barang.required' => 'JENIS BARANG WAJIB DIISI',
             'berat.required'        => 'BERAT WAJIB DIISI',
-            'city.required'         => 'KOTA WAJIB DIISI',
+            'city_name.required'    => 'KOTA WAJIB DIISI',
             'users_id.required'     => 'MARKETING PIC WAJIB DIISI',
             'photo.required'        => 'PHOTO WAJIB DIUPLOAD'
         ]);
@@ -107,10 +119,12 @@ class DropshipController extends Controller
                 'courier_id'    => Request()->courier_id,
                 'jenis_barang'  => Request()->jenis_barang,
                 'berat'         => Request()->berat,
-                'city'          => Request()->city,
+                'city_name'     => Request()->city_name,
+                'city_id'       => Request()->city_id,
                 'users_id'      => Request()->users_id,
                 'photo'         => $photo->hashName()
             ]);
+
             return redirect(route('admin.dropship.index'))->with('toast_success', 'Berhasil Tambah Data');
         }
         else
@@ -167,7 +181,8 @@ class DropshipController extends Controller
                 'courier_id'        => $request->courier_id,
                 'jenis_barang'      => $request->jenis_barang,
                 'berat'             => $request->berat,
-                'city'              => $request->city,
+                'city_name'         => $request->city_name,
+                'city_id'           => $request->city_id,
                 'users_id'          => $request->users_id,    
             ]);
         }
@@ -186,7 +201,8 @@ class DropshipController extends Controller
                 'courier_id'        => $request->courier_id,
                 'jenis_barang'      => $request->jenis_barang,
                 'berat'             => $request->berat,
-                'city'              => $request->city,
+                'city_name'         => $request->city_name,
+                'city_id'           => $request->city_id,
                 'users_id'          => $request->users_id,
                 'photo'             => $photo->hashName()
             ]);
@@ -213,7 +229,6 @@ class DropshipController extends Controller
         $dropship = Dropship::where('id',$id)->delete();
 
         return response()->json($dropship);
-
     }
 
     /**

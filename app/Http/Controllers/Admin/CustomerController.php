@@ -27,9 +27,13 @@ class CustomerController extends Controller
 
                 return DataTables::of($customers_shipper)
                     ->addColumn('action', function($customer){
-                        $button = '<a href="customer/'.$customer->id.'/edit" data-toggle="tooltip"  data-id="'.$customer->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i> Edit</a>';
-                        $button .= '&nbsp;&nbsp;';
-                        $button .= '<button type="button" name="delete" id="'.$customer->id.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>';
+
+                        $button =   '<div class="btn-group" role="group" aria-label="Basic example">
+                                        <a href="customer/'.$customer->id.'/edit" type="button" class="btn btn-info" data-id="'.$customer->id.'" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="far fa-edit"></i></a>
+                                        <button type="button" name="delete" id="'.$customer->id.'" class="delete btn btn-danger" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
+                                        <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="VIEW"><i class="fas fa-search"></i></button>
+                                    </div>';
+
                         return $button;
                     })
                     ->rawColumns(['action'])
@@ -42,9 +46,13 @@ class CustomerController extends Controller
 
                 return DataTables::of($customers_consignee)
                     ->addColumn('action', function($customer){
-                        $button = '<a href="customer/'.$customer->id.'/edit" data-toggle="tooltip"  data-id="'.$customer->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i> Edit</a>';
-                        $button .= '&nbsp;&nbsp;';
-                        $button .= '<button type="button" name="delete" id="'.$customer->id.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>';
+
+                        $button =   '<div class="btn-group" role="group" aria-label="Basic example">
+                                        <a href="customer/'.$customer->id.'/edit" type="button" class="btn btn-info" data-id="'.$customer->id.'" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="far fa-edit"></i></a>
+                                        <button type="button" name="delete" id="'.$customer->id.'" class="delete btn btn-danger" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
+                                        <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="VIEW"><i class="fas fa-search"></i></button>
+                                    </div>';
+
                         return $button;
                     })
                     ->rawColumns(['action'])
@@ -78,7 +86,9 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
 
-        $cities = City::find($request->get('city'));
+        // $cities = City::find($request->get('city'));
+
+        $api_key = Customer::get_apikey();
 
 		$this->validate($request, [
 			'account_code'	=> 'required',
@@ -113,8 +123,10 @@ class CustomerController extends Controller
 				'phone'                 => Request()->phone,
 				'group'                 => Request()->group,
 				'postal_code'           => Request()->postal_code,
+                'apikey'                => md5($api_key),
                 'created_by'            => Auth::user()->name
 			]);
+
 			return redirect(route('admin.customer.index'))->with('toast_success', 'Berhasil Tambah Data');
 		}
 		else
@@ -142,7 +154,9 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        $items  = Customer::get_items_name($customer->id);
+
+        return view('pages.admin.customer.edit', compact('customer','items'));
     }
 
     /**
@@ -163,9 +177,11 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function destroy($id)
     {
-        //
+        $customer = Customer::where('id',$id)->delete();
+
+        return response()->json($customer);
     }
 
     /**

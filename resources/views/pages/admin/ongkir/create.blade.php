@@ -74,7 +74,7 @@
                             <div class="form-group col-md-6">
                                 <label for="price">Harga*</label>
                                 <div class="input-group mb-2 mr-sm-2">
-                                    <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" id="price" value="{{ old('price') }}" autocomplete="off">
+                                    <input type="text" name="price" class="form-control uang @error('price') is-invalid @enderror" id="price" value="{{ old('price') }}" autocomplete="off">
                                 </div>
                                 @error('price')
                                       <span class="invalid-feedback" role="alert">

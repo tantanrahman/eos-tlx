@@ -22,7 +22,7 @@
                         <a href={{ route('admin.ongkir.create') }} class="btn bg-info"><i class="nav-icon fas fa-plus"></i> Tambah Data</a>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="table_ongkir" style="width:100%">
+                        <table class="table table-hover table-bordered" id="table_ongkir" style="width:100%">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>#</th>

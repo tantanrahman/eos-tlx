@@ -25,7 +25,6 @@ class Customer extends Model
 		'group',
 		'postal_code',
 		'apikey',
-		'postalcode_id',
 		'api_passowrd',
 		'credit',
 		'created_by'
@@ -36,23 +35,6 @@ class Customer extends Model
     //     return $this->hasMany('App\Models\Country');
     // }
 
-	// public static function get_customer_id($query)
-	// {
-
-	// 	$query = '622' . date('ym');
-
-	// 	$code = self::where('account_code', 'LIKE', "{$query}%")
-	// 		->orderBy('account_code', 'desc')
-	// 		->select('account_code')
-	// 		->first();
-
-	// 	if ( ! isset($code->account_code))
-	// 	{
-	// 		return $query . '000001';
-	// 	}
-
-	// 	return $query . sprintf("%'.08d", (int)str_replace($query, '', $code->account_code) + 1);
-	// }
 
 	public static function get_customer_id($query)
 	{
@@ -67,7 +49,7 @@ class Customer extends Model
 			return $query . '000001';
 		}
 
-		return $query . sprintf("%'.05d", (int)str_replace($query, '', $code->account_code) + 1);
+		return $query . sprintf("%'.06d", (int)str_replace($query, '', $code->account_code) + 1);
 	}
 
 	public static function get_items_shipper()
@@ -76,7 +58,8 @@ class Customer extends Model
 			customer.id,
 			customer.account_code,
 			customer.name,
-			IF(customer.group = 'shipper', city.city, '') as city,
+			customer.city_name,
+			customer.country_name,
 			customer.phone,
 			customer.group,
 			customer.created_by
@@ -94,6 +77,7 @@ class Customer extends Model
 			customer.id,
 			customer.account_code,
 			customer.name,
+			customer.city_name,
 			customer.country_name,
 			customer.phone,
 			customer.group,
@@ -101,8 +85,46 @@ class Customer extends Model
 		");
 
 		$items = self::join('country','customer.country_id','=','country.id')
-			->select($query)->where('customer.group','=','consignee');
+			    ->select($query)->where('customer.group','=','consignee');
 
 		return $items->get();
+	}
+
+	//GET APIKEY FOR CUSTOMER
+	public static function get_apikey()
+	{
+		$query = DB::raw("
+			customer.name,
+			customer.company_name,
+			customer.address,
+			customer.city_id,
+			customer.country_id,
+			customer.postal_code,
+			customer.phone
+		");
+
+		$apikey = self::join('country','customer.country_id','=','country.id')
+				->join('city','customer.city_id','=','city_id')
+				->select($query);
+
+		return $apikey->get();
+
+	}
+
+	//GET City and Country for Customer
+	public static function get_items_name($id)
+	{
+		$items_name = self::leftjoin('city','customer.city_id','=','city.id')
+				    ->leftjoin('country','customer.country_id','=','country.id')
+				    ->select(
+					  'customer.id',
+					  'customer.account_code',
+					  'customer.city_id',
+					  'customer.city_name',
+					  'customer.country_id',
+					  'customer.country_name'
+				  )->where('customer.id', $id);
+
+		return $items_name->first();
 	}
 }

@@ -94,13 +94,29 @@ class ShipmentController extends Controller
 
     /**
      * 
-     * Get Autocomplete From Customer
+     * Get Autocomplete From Shipper
      */
 
-    public function autocompleteShipment(Request $request)
+    public function autocompleteShipmentShipper(Request $request)
     {
-        $customers = Customer::select('id', 'address' ,'name as label', 'city_name', 'phone')
+        $customers = Customer::select('id', 'account_code','name as label' ,'company_name' ,'address', 'postal_code','city_name', 'phone')
             ->where('name', 'like', "%{$request->term}%")
+            ->where('group','=','shipper')
+            ->get();
+
+        return response()->json($customers);
+    }
+
+    /**
+     * 
+     * Get Autocomplete From Consignee
+     */
+
+    public function autocompleteShipmentConsignee(Request $request)
+    {
+        $customers = Customer::select('id',  'account_code', 'name as label' ,'company_name' ,'address', 'country_name' ,'postal_code','city_name', 'phone')
+            ->where('name', 'like', "%{$request->term}%")
+            ->where('group','=','consignee')
             ->get();
 
         return response()->json($customers);

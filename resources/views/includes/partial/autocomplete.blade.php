@@ -1,13 +1,11 @@
 <script type="text/javascript">
-	
-    let city_path = "{{ route('autocompleteCity')  }}"
 
+    let city_path = "{{ route('autocompleteCity')  }}"
     $('input.typeaheadCity').typeahead({
 		source: function(query, process) {
 			objects = [];
 			map = {};
 
-			// console.log($('#customer-type').val());
 			if ($('#customer-type').length > 0 && $('#customer-type').val() == 'consignee') {
 				return false
 			}
@@ -23,6 +21,7 @@
 
 		updater: function(item) {
 			$('input[name="city_id"]').val(map[item].id).trigger('change');
+			$('input[name="city"]').val(map[item].id).trigger('change');
 			return item;
 		}
     });
@@ -84,13 +83,14 @@
 		}
 	});
 
-	let shipment_path = "{{ route('autocompleteShipment')  }}"
-	$('input.typeaheadShipment').typeahead({
+	//Autocomplete For Shipment - Shipper
+	let shipment_shipper_path = "{{ route('autocompleteShipmentShipper')  }}"
+	$('input.typeaheadShipmentShipper').typeahead({
 		source: function(query, process) {
 			objects = [];
 			map = {};
 			
-			return $.get(shipment_path, { term: query }, function (data) {
+			return $.get(shipment_shipper_path, { term: query }, function (data) {
 				$.each(data, function(i, object) {
 					map[object.label] = object;
 					objects.push(object.label);
@@ -100,8 +100,40 @@
 		},
 
 		updater: function(item) {
-			console.log(map[item].phone);
+			$('input[name="account_code"]').val(map[item].account_code);
+			$('input[name="company_name"]').val(map[item].company_name);
 			$('input[name="phone"]').val(map[item].phone);
+			$('input[name="postal_code"]').val(map[item].postal_code);
+			$('input[name="city_name"]').val(map[item].city_name);
+			$('textarea[name="address"]').val(map[item].address);
+			return item;
+		}
+	});
+
+	//Autocomplete For Shipment - Consignee
+	let shipment_consignee_path = "{{ route('autocompleteShipmentConsignee')  }}"
+	$('input.typeaheadShipmentConsignee').typeahead({
+		source: function(query, process) {
+			objects = [];
+			map = {};
+			
+			return $.get(shipment_consignee_path, { term: query }, function (data) {
+				$.each(data, function(i, object) {
+					map[object.label] = object;
+					objects.push(object.label);
+				});
+				process(objects);
+			});
+		},
+
+		updater: function(item) {
+			$('input[name="con_account_code"]').val(map[item].account_code);
+			$('input[name="con_company_name"]').val(map[item].company_name);
+			$('input[name="con_phone"]').val(map[item].phone);
+			$('input[name="con_postal_code"]').val(map[item].postal_code);
+			$('input[name="con_city_name"]').val(map[item].city_name);
+			$('textarea[name="con_address"]').val(map[item].address);
+			$('input[name="con_country_name"]').val(map[item].country_name);
 			return item;
 		}
 	});

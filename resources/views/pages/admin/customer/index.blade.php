@@ -35,7 +35,7 @@
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <br>
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="table_customer" style="width:100%">
+                                <table class="table table-hover table-bordered" id="table_customer" style="width:100%">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th style="display: none">Id</th>
@@ -54,12 +54,13 @@
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <br>
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="table_customer2" style="width:100%">
+                                <table class="table table-hover table-bordered" id="table_customer2" style="width:100%">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th style="display: none">Id</th>
                                             <th>ACCOUNT CODE</th>
                                             <th>NAME</th>
+                                            <th>CITY</th>
                                             <th>COUNTRY</th>
                                             <th>PHONE</th>
                                             <th>CREATED BY</th>
@@ -77,4 +78,25 @@
         </div>
     </section>
 </div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="hapus-customer" data-backdrop="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">PERHATIAN</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah anda yakin akan menghapus data ini?</p>
+            </div>
+            <div class="modal-footer bg-whitesmoke br">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" name="tombol-hapus" id="tombol-hapus">Hapus Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection

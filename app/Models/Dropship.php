@@ -17,7 +17,8 @@ class Dropship extends Model
         'courier_id',
         'jenis_barang',
         'berat',
-        'city',
+        'city_name',
+		'city_id',
         'users_id',
         'photo'
     ];
@@ -41,7 +42,7 @@ class Dropship extends Model
 	{
 		$items = self::join('users','dropship.users_id','=','users.id')
 			->join('courier','dropship.courier_id','=','courier.id')
-			->join('city','dropship.city','=','city.id')
+			->join('city','dropship.city_id','=','city.id')
 			->select(
 				'dropship.id as idx',
 				'dropship.created_at AS time',
@@ -80,7 +81,7 @@ class Dropship extends Model
 	{
 		$items_name = self::join('users','dropship.users_id','=','users.id')
 			->join('courier','dropship.courier_id','=','courier.id')
-			->join('city','dropship.city','=','city.id')
+			->join('city','dropship.city_id','=','city.id')
 			->select(
 				'dropship.id as idx',
 				'dropship.created_at AS time',

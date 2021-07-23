@@ -82,6 +82,39 @@
       })
   });
 
+  $(document).on('click', '.delete', function () {
+          dataId = $(this).attr('id');
+          $('#hapus-customer').modal('show');
+  });
+      
+  $('#tombol-hapus').click(function () {
+      $.ajax({
+          url: "/admin/customer/" + dataId, 
+          type: 'delete',
+          beforeSend: function () {
+              $('#tombol-hapus').text('Hapus Data'); 
+          },
+          success: function (data) { 
+              setTimeout(function () {
+                  $('#hapus-customer').modal('hide'); 
+                  var oTable = $('#table_customer').dataTable();
+                  oTable.fnDraw(false); 
+              });
+              swal.fire({
+                  icon: 'success',
+                  showConfirmButton: false,
+                  toast: true,
+                  timer: 3000,
+                  timerProgressBar: true,
+                  title: 'Data Berhasil Dihapus',
+                  message: '{{ Session('
+                  delete ')}}',
+                  position: 'top-end'
+              });
+          }
+      })
+  });
+
   $(document).ready(function() {
     $('#table_country').DataTable({
       processing : true,
@@ -155,7 +188,7 @@
         {data:'id',name:'id', visible: false},
         {data:'account_code',name:'account_code'},
         {data:'name',name:'name'},
-        {data:'city',name:'city'},
+        {data:'city_name',name:'city_name'},
         {data:'phone',name:'phone'},
         {data:'created_by',name:'created_by'},
         {data:'action',name:'action'},
@@ -180,6 +213,7 @@
         {data:'id',name:'id', visible: false},
         {data:'account_code',name:'account_code'},
         {data:'name',name:'name'},
+        {data:'city_name',name:'city_name'},
         {data:'country_name',name:'country_name'},
         {data:'phone',name:'phone'},
         {data:'created_by',name:'created_by'},
@@ -376,6 +410,23 @@
               }
           }
         },
+        {data:'action',name:'action'},
+      ],
+    });
+  });
+
+  $(document).ready(function() {
+    $('#table_shipmentdetail').DataTable({
+      processing : true,
+      serverSide : true,
+      ajax : '{!! route("admin.shipment.create") !!}',
+      columns: [
+        {data:'id',name:'id'},
+        {data:'length',name:'length'},
+        {data:'width',name:'width'},
+        {data:'height',name:'height'},
+        {data:'volume',name:'volume'},
+        {data:'total_weight',name:'total_weight'},
         {data:'action',name:'action'},
       ],
     });

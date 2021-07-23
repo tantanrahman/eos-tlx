@@ -34,6 +34,9 @@
                                 @csrf
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
+                                        <input type="text" class="form-control" name="account_code" readonly>
+                                    </div>
+                                    <div class="form-group col-md-12">
                                         <label for="users_id">Marketing*</label>
                                         <select name="users_id" class="form-control @error('users_id') is-invalid @enderror" id="select2dropmark" data-width="100%">
                                             <option></option>
@@ -49,7 +52,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="resi">Name*</label>
-                                        <input type="text" name="name" class="form-control typeaheadShipment @error('name') is-invalid @enderror" value="{{ old('name') }}" autocomplete="off">
+                                        <input type="text" name="name" class="form-control typeaheadShipmentShipper @error('name') is-invalid @enderror" value="{{ old('name') }}" autocomplete="off">
                                         @error('name')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
@@ -76,9 +79,9 @@
                                         <input type="hidden" name="country_id" id="customer-country">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="resi">Postal Code</label>
-                                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" autocomplete="off">
-                                        @error('name')
+                                        <label for="postal_code">Postal Code</label>
+                                        <input type="text" name="postal_code" class="form-control @error('postal_code') is-invalid @enderror" autocomplete="off">
+                                        @error('postal_code')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
                                               </span>
@@ -86,26 +89,26 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="address">Address*</label>
-                                        <textarea rows="3" class="form-control @error('address') is-invalid @enderror" name="address" style="resize:none"></textarea>
+                                        <textarea name="address" rows="3" class="form-control @error('address') is-invalid @enderror" style="resize:none" autocomplete="off"></textarea>
                                         @error('address')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
-                                    <div class="form-group col-md-12" id="customer-city-section">
+                                    <div class="form-group col-md-12">
                                         <label for="city_name">City*</label>
-                                        <input name="city_name" type="text" class="form-control @error('city') is-invalid @enderror" value="" autocomplete="off">
+                                        <input name="city_name" type="text" class="form-control typeaheadCity @error('city_name') is-invalid @enderror" autocomplete="off">
                                         @error('city_name')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                        <input type="hidden" name="city" id="customer-city">
+                                        <input type="hidden" name="city_id" id="customer-city">
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label for="city">Phone</label>
-                                        <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}">
+                                        <label for="phone">Phone</label>
+                                        <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="off">
                                         @error('phone')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -117,7 +120,7 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="col-sm-6">
+                <div class="col-sm-6">
                     <div class="card">
                         <div class="card-body">
                             <h4>
@@ -126,8 +129,11 @@
                             <hr style="border: 2px solid black">
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label for="resi">Name*</label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"  autocomplete="off">
+                                    <input type="text" class="form-control" name="con_account_code" readonly>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="name">Name*</label>
+                                    <input type="text" name="name" class="form-control typeaheadShipmentConsignee @error('name') is-invalid @enderror" value="{{ old('name') }}"  autocomplete="off">
                                     @error('name')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -135,18 +141,18 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label for="resi">Company Name</label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"  autocomplete="off">
-                                    @error('name')
+                                    <label for="con_company_name">Company Name</label>
+                                    <input type="text" name="con_company_name" class="form-control @error('con_company_name') is-invalid @enderror" value="{{ old('con_company_name') }}" autocomplete="off">
+                                    @error('con_company_name')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
                                           </span>
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-12" id="customer-country-section">
-                                    <label for="city">Country*</label>
-                                    <input type="text" class="form-control typeaheadCountry @error('country_id') is-invalid @enderror" value="" autocomplete="off">
-                                    @error('country_id')
+                                    <label for="con_country_name">Country</label>
+                                    <input type="text" name="con_country_name" class="form-control @error('con_country_name') is-invalid @enderror" autocomplete="off">
+                                    @error('con_country_name')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -154,36 +160,36 @@
                                     <input type="hidden" name="country_id" id="customer-country">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="resi">Postal Code</label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"  autocomplete="off">
-                                    @error('name')
+                                    <label for="con_postal_code">Postal Code</label>
+                                    <input type="text" name="con_postal_code" class="form-control @error('con_postal_code') is-invalid @enderror" autocomplete="off">
+                                    @error('con_postal_code')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
                                           </span>
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label for="city">Address*</label>
-                                    <textarea rows="3" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" style="resize:none"></textarea>
-                                    @error('address')
+                                    <label for="con_address">Address*</label>
+                                    <textarea name="con_address" rows="3" class="form-control @error('con_address') is-invalid @enderror" style="resize:none" autocomplete="off"></textarea>
+                                    @error('con_address')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="form-group col-md-12" id="customer-city-section">
-                                    <label for="city">City*</label>
-                                    <input type="text" class="form-control typeaheadCity @error('city') is-invalid @enderror" value="" autocomplete="off">
-                                    @error('city')
+                                <div class="form-group col-md-12">
+                                    <label for="con_city_name">City*</label>
+                                    <input name="con_city_name" type="text" class="form-control @error('con_city_name') is-invalid @enderror" autocomplete="off">
+                                    @error('con_city_name')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                    <input type="hidden" name="city" id="customer-city">
+                                    <input type="hidden" name="city_id" id="customer-city">
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label for="city">Phone</label>
-                                    <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}">
+                                    <label for="con_phone">Phone</label>
+                                    <input type="text" class="form-control @error('con_phone') is-invalid @enderror" name="con_phone" value="{{ old('con_phone') }}" autocomplete="off">
                                     @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -328,11 +334,62 @@
                             </h4>
                             <hr style="border: 2px solid black">
                             <div class="form-row">
-                                
+                                <div class="table-responsive">
+                                    <table id="table_shipmentdetail" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">kg</span>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="input-group">                  
+                                                        <span class="input-group-addon">cm</span>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">cm</span>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">cm</span>
+                                                    </div>
+                                                </th>
+                                                <th colspan="3">
+                                                    <a class="btn btn-default" href="#"
+                                                        id="add_piece"><i class="fa fa-plus"></i>
+                                                        Add Another Package</a>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>Actual Weight (kg)</th>
+                                                <th>Length (cm)</th>
+                                                <th>Width (cm)</th>
+                                                <th>Height (cm)</th>
+                                                <th>Volume (cm<sup>3</sup>)</th>
+                                                <th>Total Weight (kg)</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="4">TOTAL</th>
+                                                <th>0</th>
+                                                <th>0</th>
+                                                <th>
+                                                   
+                                                </th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </div>    
         </div>
     </section>

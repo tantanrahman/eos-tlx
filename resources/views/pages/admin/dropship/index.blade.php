@@ -44,7 +44,7 @@
                         </a>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="table_dropship" style="width:100%">
+                        <table class="table table-hover table-bordered" id="table_dropship" style="width:100%">
                             <thead class="thead-dark">
                                 <tr>
                                     <th style="display: none">Id</th>
@@ -69,7 +69,7 @@
     </section>
 </div>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="konfirmasi-modal" data-backdrop="false">
+<div class="modal fade" tabindex="-1" role="dialog" id="hapus-customer" data-backdrop="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

@@ -38,7 +38,7 @@
             <div class="table-responsive">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-bordered" id="table_bagpackage">
+                        <table class="table table-bordered table-hover" id="table_bagpackage">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>#</th>

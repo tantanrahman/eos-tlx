@@ -100,7 +100,7 @@
                             <div class="form-group col-md-6">
                                 <label for="city">Kota*</label>
                                 <input type="text" value="{{ $edit->cities }}" class="form-control typeaheadCity @error('city') is-invalid @enderror" autocomplete="off">
-                                <input type="hidden" value="{{ $dropship->id }}" name="city">
+                                <input type="hidden" value="{{ $dropship->id }}" name="city_id">
                                 @error('city')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
