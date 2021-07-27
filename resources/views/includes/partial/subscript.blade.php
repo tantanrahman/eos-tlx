@@ -99,5 +99,35 @@
 		// Format mata uang.
 		$( '.uang' ).mask('000.000.000.000.000.000', {reverse: true});
 	})
+
+	$(document).ready(function(){
+		$("#addRow").click(function(){
+
+			let sum_volume = 0;
+			let sum_weight = 0;
+
+			let actual_weight = $("#actual_weight").val();
+			let length = $("#length").val();
+			let width = $("#width").val();
+			let height = $("#height").val();
+			let volume = length * width * height;
+			let total_weight = actual_weight;
+
+			let row = "<tr><td>" + actual_weight + "</td><td>" + length + "</td><td>" + width + "</td><td>" + height + "</td><td>" + volume + "</td><td>" + total_weight + "</td></tr>";
+			$("table tbody").append(row);
+
+			$.each(data, function(i,value){
+				volume.append('<th colspan="4">'+ value.volume +'</th>');
+				total_weight.append('<th>'+ value.weight +'</th>');
+
+				sum_volume += value.volume;
+				sum_weight += value.weight;
+			});
+
+			$("table tfoot").append('<th colspan="4">' + sum_volume + '</th>');
+			$("table tfoot").append('<th>' + sum_weight + '</th>');
+		
+		});
+	});
   
 </script>

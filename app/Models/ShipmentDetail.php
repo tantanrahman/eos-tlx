@@ -25,7 +25,7 @@ class ShipmentDetail extends Model
     public static function get_details()
     {
         $query = DB::raw(
-            "shipment_details.id",
+            "shipment_details.actual_weight",
             "shipment_details.length",
             "shipment_details.width",
             "shipment_details.height",

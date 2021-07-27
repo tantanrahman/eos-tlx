@@ -21,10 +21,6 @@ class ShipmentDetailController extends Controller
             $shipmentdetails = ShipmentDetail::get_details();
 
             return DataTables::of($shipmentdetails)
-                ->addColumn('action', function($shipmentdetails){
-
-                })
-                ->rawColumns(['action'])
                 ->make(true);
         }
 

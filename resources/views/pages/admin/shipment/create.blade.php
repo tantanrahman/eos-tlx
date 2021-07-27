@@ -254,7 +254,7 @@
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <div class="card h-75">
+                    <div class="card">
                         <div class="card-body">
                             <h4>
                                 Redoc :
@@ -289,7 +289,7 @@
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <div class="card h-75">
+                    <div class="card">
                         <div class="card-body">
                             <h4>
                                 Finance :
@@ -329,64 +329,80 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4>
-                                Shipment Details :
-                            </h4>
-                            <hr style="border: 2px solid black">
-                            <div class="form-row">
-                                <div class="table-responsive">
-                                    <table id="table_shipmentdetail" class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">kg</span>
-                                                    </div>
-                                                </th>
-                                                <th>
-                                                    <div class="input-group">                  
-                                                        <span class="input-group-addon">cm</span>
-                                                    </div>
-                                                </th>
-                                                <th>
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">cm</span>
-                                                    </div>
-                                                </th>
-                                                <th>
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">cm</span>
-                                                    </div>
-                                                </th>
-                                                <th colspan="3">
-                                                    <a class="btn btn-default" href="#"
-                                                        id="add_piece"><i class="fa fa-plus"></i>
-                                                        Add Another Package</a>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Actual Weight (kg)</th>
-                                                <th>Length (cm)</th>
-                                                <th>Width (cm)</th>
-                                                <th>Height (cm)</th>
-                                                <th>Volume (cm<sup>3</sup>)</th>
-                                                <th>Total Weight (kg)</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th colspan="4">TOTAL</th>
-                                                <th>0</th>
-                                                <th>0</th>
-                                                <th>
-                                                   
-                                                </th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
+                            <form action="{{ route('admin.shipment.store') }}" method="POST">
+                                @csrf
+                                <h4>
+                                    Shipment Details :
+                                </h4>
+                                <hr style="border: 2px solid black">
+                                <div class="form-row">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <div class="input-group">
+                                                            <input type="text" id="actual_weight" name="actual_weight" class="form-control @error('actual_weight') is-invalid @enderror" id="actual_weight" value="{{ old('actual_weight') }}" autocomplete="off" placeholder="Actual Weight">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">KG</div>
+                                                            </div>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="input-group">                  
+                                                            <input type="text" id="length" name="length" class="form-control @error('length') is-invalid @enderror" id="length" value="{{ old('length') }}" autocomplete="off" placeholder="Length">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">CM</div>
+                                                            </div>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="input-group">                  
+                                                            <input type="text" id="width" name="width" class="form-control @error('width') is-invalid @enderror" id="width" value="{{ old('width') }}" autocomplete="off" placeholder="Width">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">CM</div>
+                                                            </div>
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="input-group">                  
+                                                            <input type="text" id="height" name="height" class="form-control @error('height') is-invalid @enderror" id="height" value="{{ old('height') }}" autocomplete="off" placeholder="Height">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">CM</div>
+                                                            </div>
+                                                        </div>
+                                                    </th>
+                                                    <th colspan="3">
+                                                        <a class="btn btn-info" id="addRow"><i class="fa fa-plus"></i>
+                                                            Add Package</a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="background-color: #000000; color:white">
+                                                    <th>Actual Weight (kg)</th>
+                                                    <th>Length (cm)</th>
+                                                    <th>Width (cm)</th>
+                                                    <th>Height (cm)</th>
+                                                    <th>Volume (cm<sup>3</sup>)</th>
+                                                    <th>Total Weight (kg)</th>
+                                                    <th>Delete</th>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th colspan="4">TOTAL</th>
+                                                    <th>0</th>
+                                                    <th>0</th>
+                                                    <th>
+                                                    
+                                                    </th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

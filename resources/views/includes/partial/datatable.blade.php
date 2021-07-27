@@ -30,8 +30,8 @@
 				{data:'photo',name:'dropship.photo'},
 				{data:'action',name:'action', orderable: false, searchable: false},
 			],
-			destroy: true,
-		});
+			 destroy: true,
+		  });
     }
 
   $(document).ready(function () {
@@ -74,8 +74,6 @@
                   timer: 3000,
                   timerProgressBar: true,
                   title: 'Data Berhasil Dihapus',
-                  message: '{{ Session('
-                  delete ')}}',
                   position: 'top-end'
               });
           }
@@ -107,8 +105,6 @@
                   timer: 3000,
                   timerProgressBar: true,
                   title: 'Data Berhasil Dihapus',
-                  message: '{{ Session('
-                  delete ')}}',
                   position: 'top-end'
               });
           }
@@ -421,13 +417,12 @@
       serverSide : true,
       ajax : '{!! route("admin.shipment.create") !!}',
       columns: [
-        {data:'id',name:'id'},
+        {data:'actual_weight',name:'actual_weight'},
         {data:'length',name:'length'},
         {data:'width',name:'width'},
         {data:'height',name:'height'},
         {data:'volume',name:'volume'},
         {data:'total_weight',name:'total_weight'},
-        {data:'action',name:'action'},
       ],
     });
   });
