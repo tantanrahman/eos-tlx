@@ -12,7 +12,7 @@ class Shipment extends Model
     protected $table = 'shipment';
 
     protected $fillable = [
-        'shipper-id',
+        'shipper_id',
         'consignee_id',
         'packagetype_id',
         'marketing_id',
@@ -47,10 +47,10 @@ class Shipment extends Model
 
 		if ( ! isset($code->connote))
 		{
-			return $query . '000001';
+			return $query . '00001';
 		}
 
-		return $query . sprintf("%'.08d", (int)str_replace($query, '', $code->connote) + 1);
+		return $query . sprintf("%'.05d", (int)str_replace($query, '', $code->connote) + 1);
 	}
 
 }

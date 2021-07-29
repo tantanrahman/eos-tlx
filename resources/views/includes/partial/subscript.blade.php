@@ -102,32 +102,30 @@
 
 	$(document).ready(function(){
 		$("#addRow").click(function(){
+			var table = $("table tbody");
 
-			let sum_volume = 0;
-			let sum_weight = 0;
+			actual_weight = $("#actual_weight").val(),
+			length = $("#length").val(),
+			width = $("#width").val(),
+			height = $("#height").val();
+			volume = length*width*height;
 
-			let actual_weight = $("#actual_weight").val();
-			let length = $("#length").val();
-			let width = $("#width").val();
-			let height = $("#height").val();
-			let volume = length * width * height;
-			let total_weight = actual_weight;
-
-			let row = "<tr><td>" + actual_weight + "</td><td>" + length + "</td><td>" + width + "</td><td>" + height + "</td><td>" + volume + "</td><td>" + total_weight + "</td></tr>";
+			let row = "<tr><td>" + actual_weight + "</td><td>" + length + "</td><td>" + width + "</td><td>" + height + "</td><td>" + volume + "</td></tr>";
 			$("table tbody").append(row);
 
-			$.each(data, function(i,value){
-				volume.append('<th colspan="4">'+ value.volume +'</th>');
-				total_weight.append('<th>'+ value.weight +'</th>');
-
-				sum_volume += value.volume;
-				sum_weight += value.weight;
+			var total_volume = 0;
+			table.find('tr').each(function (i, el) {
+				var $tds = $(el).find('td');
+				
+				var volume = parseInt($tds.eq(4).text());
+				total_volume += volume;
+				console.log(total_volume);
 			});
 
-			$("table tfoot").append('<th colspan="4">' + sum_volume + '</th>');
-			$("table tfoot").append('<th>' + sum_weight + '</th>');
-		
+			$('tfoot th#total-volume').text(total_volume);
 		});
 	});
+
+	
   
 </script>
