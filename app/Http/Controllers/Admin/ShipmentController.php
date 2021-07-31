@@ -8,7 +8,10 @@ use App\Models\Customer;
 use App\Models\Shipment;
 use App\Models\PackageType;
 use Illuminate\Http\Request;
+use App\Models\ShipmentDetail;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Svg\Tag\Rect;
 
 class ShipmentController extends Controller
 {
@@ -44,7 +47,50 @@ class ShipmentController extends Controller
      */
     public function store(Request $request)
     {
-        
+
+        dd($request);
+
+        $api_key = Customer::get_apikey();
+        // $dataCustomer   = Customer::where('account_code', '=', $request->input('account_code'))->first();
+        $dataCustomer = Customer::create([
+            'account_code'          => Request()->account_code,
+            'name'                  => Request()->name,
+            'company_name'          => Request()->company_name,
+            'address'               => Request()->address,
+            'city_id'               => Request()->city_id,
+            'city_name'             => Request()->city_name,
+            'country_id'            => Request()->country_id,
+            'country_name'          => Request()->country_name,
+            'phone'                 => Request()->phone,
+            'group'                 => Request()->group,
+            'postal_code'           => Request()->postal_code,
+            'apikey'                => md5($api_key),
+        ]);
+
+
+        // if($dataCustomer == null)
+        // {
+        //     $dataCustomer = Customer::create([
+		// 		'account_code'          => Request()->account_code,
+		// 		'name'                  => Request()->name,
+		// 		'company_name'          => Request()->company_name,
+		// 		'address'               => Request()->address,
+		// 		'city_id'               => Request()->city_id,
+        //         'city_name'             => Request()->city_name,
+		// 		'country_id'            => Request()->country_id,
+        //         'country_name'          => Request()->country_name,
+		// 		'phone'                 => Request()->phone,
+		// 		'group'                 => Request()->group,
+		// 		'postal_code'           => Request()->postal_code,
+        //         'apikey'                => md5($api_key),
+		// 	]);
+
+        //     // dd($dataCustomer);
+        // } 
+        // else
+        // {
+        //     // dd($dataCustomer);
+        // }
     }
 
     /**

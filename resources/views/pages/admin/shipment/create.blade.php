@@ -22,7 +22,7 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="#" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.shipment.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-sm-6">
@@ -32,11 +32,9 @@
                                     Shipper :
                                 </h4>
                                 <hr style="border: 2px solid black">
-                                <form action="#">
-                                    @csrf
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            <input type="text" class="form-control" name="account_code" readonly>
+                                            <input type="text" id="customer-id" class="form-control" name="account_code" readonly autocomplete="off">
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label for="users_id">Marketing*</label>
@@ -118,7 +116,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -319,9 +316,9 @@
                                     <div class="form-group col-md-12">
                                         <label for="city">Payment</label></label>
                                         <select class="custom-select" id="customer-type" name="group">
-                                            <option selected>Select Payment</option>
-                                            <option value="shipper">Paid</option>
+                                            <option selected readonly>-- Select Payment --</option>
                                             <option value="consignee">Unpaid</option>
+                                            <option value="shipper">Paid</option>
                                         </select>
                                     </div>
                                 </div>

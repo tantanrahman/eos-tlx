@@ -82,6 +82,11 @@
 		});
 	});
 
+	// $('#customer-id').on('change', function () {
+	// 	var typed_name = $(this).val();
+	// 	$('#test').val(typed_name);
+	// });
+
 	$('body').on('change', '#customer-country', function (e) {
 		e.preventDefault();
 
