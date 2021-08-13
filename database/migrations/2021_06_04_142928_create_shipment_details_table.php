@@ -15,7 +15,7 @@ class CreateShipmentDetailsTable extends Migration
     {
         Schema::create('shipment_details', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('shipment_id');
+            $table->unsignedBigInteger('shipment_id');
             $table->bigInteger('actual_weight');
             $table->bigInteger('length');
             $table->bigInteger('width');
@@ -23,6 +23,8 @@ class CreateShipmentDetailsTable extends Migration
             $table->bigInteger('volume');
             $table->bigInteger('total_weight');
             $table->timestamps();
+
+            $table->foreign('shipment_id')->references('id')->on('shipment');
         });
     }
 

@@ -60,6 +60,7 @@
 		},
 		updater: function(item) {
 			$('input[name="country_id"]').val(map[item].id).trigger('change');
+			$('input[name="con_country_id"]').val(map[item].id).trigger('change');
 			return item;
 		}
 	});
@@ -100,10 +101,13 @@
 		},
 
 		updater: function(item) {
+			$('input[name="shipper_id"]').val(map[item].id);
 			$('input[name="account_code"]').val(map[item].account_code);
+			$('input[name="company_id"]').val(map[item].company_id);
 			$('input[name="company_name"]').val(map[item].company_name);
 			$('input[name="phone"]').val(map[item].phone);
 			$('input[name="postal_code"]').val(map[item].postal_code);
+			$('input[name="city_id"]').val(map[item].city_id);
 			$('input[name="city_name"]').val(map[item].city_name);
 			$('textarea[name="address"]').val(map[item].address);
 			return item;
@@ -127,6 +131,7 @@
 		},
 
 		updater: function(item) {
+			$('input[name="con_id"]').val(map[item].id);
 			$('input[name="con_account_code"]').val(map[item].account_code);
 			$('input[name="con_company_name"]').val(map[item].company_name);
 			$('input[name="con_phone"]').val(map[item].phone);

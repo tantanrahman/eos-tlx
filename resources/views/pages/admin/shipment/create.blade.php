@@ -33,18 +33,27 @@
                                 </h4>
                                 <hr style="border: 2px solid black">
                                     <div class="form-row">
+                                        <div class="form-group col-md-6" style="display: none">
+                                            <input type="text" class="form-control @error('created_by') is-invalid @enderror" name="created_by" value="{{ Auth::user()->name }}" disabled>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <input type="text" id="connote" class="form-control" name="connote" readonly autocomplete="off">
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <input type="text" class="form-control" name="shipper_id" readonly autocomplete="off">
+                                        </div>
                                         <div class="form-group col-md-12">
                                             <input type="text" id="customer-id" class="form-control" name="account_code" readonly autocomplete="off">
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <label for="users_id">Marketing*</label>
-                                            <select name="users_id" class="form-control @error('users_id') is-invalid @enderror" id="select2dropmark" data-width="100%">
+                                            <label for="marketing_id">Marketing*</label>
+                                            <select name="marketing_id" class="form-control @error('marketing_id') is-invalid @enderror" id="select2dropmark" data-width="100%">
                                                 <option></option>
                                                 @foreach($users as $user)
                                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                                 @endforeach
                                             </select>
-                                            @error('users_id')
+                                            @error('marketing_id')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -69,14 +78,14 @@
                                             @enderror
                                         </div>
                                         <div class="form-group col-md-12" id="customer-country-section">
-                                            <label for="city">Country</label>
-                                            <input type="text" class="form-control @error('country_id') is-invalid @enderror" value="Indonesia" autocomplete="off" disabled>
-                                            @error('country_id')
+                                            <label for="country_name">Country</label>
+                                            <input type="text" class="form-control @error('country_name') is-invalid @enderror" value="Indonesia" autocomplete="off" disabled>
+                                            @error('country_name')
                                             <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
-                                            <input type="hidden" name="country_id" id="customer-country">
+                                            <input class="form-control" type="hidden" value="106" readonly>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="postal_code">Postal Code</label>
@@ -104,7 +113,7 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
-                                            <input type="hidden" name="city_id" id="customer-city">
+                                            <input class="form-control" type="hidden" name="city_id" id="customer-city">
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label for="phone">Phone</label>
@@ -128,11 +137,14 @@
                                 <hr style="border: 2px solid black">
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <input type="text" class="form-control" name="con_account_code" readonly>
+                                        <input type="text" id="con-customer-id" class="form-control" name="con_account_code" readonly>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <input type="text" class="form-control" name="con_id" readonly>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="name">Name*</label>
-                                        <input type="text" name="name" class="form-control typeaheadShipmentConsignee @error('name') is-invalid @enderror" value="{{ old('name') }}"  autocomplete="off">
+                                        <input type="text" name="con_name" class="form-control typeaheadShipmentConsignee @error('name') is-invalid @enderror" value="{{ old('name') }}"  autocomplete="off">
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -150,13 +162,13 @@
                                     </div>
                                     <div class="form-group col-md-12" id="customer-country-section">
                                         <label for="con_country_name">Country</label>
-                                        <input type="text" name="con_country_name" class="form-control @error('con_country_name') is-invalid @enderror" autocomplete="off">
+                                        <input type="text" name="con_country_name" class="form-control typeaheadCountry @error('con_country_name') is-invalid @enderror" autocomplete="off">
                                         @error('con_country_name')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                        <input type="hidden" name="country_id" id="customer-country">
+                                        <input type="hidden" name="con_country_id" id="con-customer-country">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="con_postal_code">Postal Code</label>
@@ -184,7 +196,7 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                        <input type="hidden" name="city_id" id="customer-city">
+                                        <input type="hidden" name="con_city_id" value="0">
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="con_phone">Phone</label>
@@ -208,14 +220,14 @@
                                 <hr style="border: 2px solid black">
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <label for="users_id">Package Type*</label>
-                                        <select name="users_id" class="form-control @error('packagetype_id') is-invalid @enderror" id="select2shippackagetype" data-width="100%">
+                                        <label for="packagetype_id">Package Type*</label>
+                                        <select name="packagetype_id" class="form-control @error('packagetype_id') is-invalid @enderror" id="select2shippackagetype" data-width="100%">
                                             <option></option>
                                             @foreach($packagetypes as $pt)
                                                 <option value="{{ $pt->id }}">{{ $pt->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('users_id')
+                                        @error('packagetype_id')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -240,8 +252,8 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label for="resi">Values</label>
-                                        <input type="text" name="values" class="form-control @error('values') is-invalid @enderror" value="{{ old('values') }}"  autocomplete="off">
+                                        <label for="values">Values</label>
+                                        <input oninput="this.value = this.value.toUpperCase()" type="text" name="values" class="form-control @error('values') is-invalid @enderror" value="{{ old('values') }}"  autocomplete="off">
                                         @error('values')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -261,23 +273,23 @@
                                 <hr style="border: 2px solid black">
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <label for="users_id">Package Type*</label>
-                                        <select name="users_id" class="form-control @error('packagetype_id') is-invalid @enderror" id="select2shippartner" data-width="100%">
+                                        <label for="partner_id">Partner*</label>
+                                        <select name="partner_id" class="form-control @error('partner_id') is-invalid @enderror" id="select2shippartner" data-width="100%">
                                             <option></option>
                                             @foreach($partners as $partner)
                                                 <option value="{{ $partner->id }}">{{ $partner->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('users_id')
+                                        @error('partner_id')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label for="resi">Connote</label>
-                                        <input type="text" name="values" class="form-control @error('values') is-invalid @enderror" value="{{ old('values') }}"  autocomplete="off">
-                                        @error('values')
+                                        <label for="redoc_connote">Connote</label>
+                                        <input type="text" name="redoc_connote" class="form-control @error('redoc_connote') is-invalid @enderror" value="{{ old('redoc_connote') }}"  autocomplete="off">
+                                        @error('redoc_connote')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -288,6 +300,7 @@
                         </div>
                     </div>
                     <div class="col-sm-4">
+                    
                         <div class="card">
                             <div class="card-body">
                                 <h4>
@@ -296,18 +309,18 @@
                                 <hr style="border: 2px solid black">
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <label for="resi">Modal</label>
-                                        <input type="text" name="values" class="form-control uang @error('values') is-invalid @enderror" value="{{ old('values') }}"  autocomplete="off">
-                                        @error('values')
+                                        <label for="modal">Modal</label>
+                                        <input type="text" name="modal" class="form-control uang @error('modal') is-invalid @enderror" value="{{ old('modal') }}"  autocomplete="off">
+                                        @error('modal')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label for="resi">Ongkir</label>
-                                        <input type="text" name="values" class="form-control uang @error('values') is-invalid @enderror" value="{{ old('values') }}"  autocomplete="off">
-                                        @error('values')
+                                        <label for="ongkir">Ongkir</label>
+                                        <input type="text" name="ongkir" class="form-control uang @error('ongkir') is-invalid @enderror" value="{{ old('ongkir') }}"  autocomplete="off">
+                                        @error('ongkir')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -316,7 +329,7 @@
                                     <div class="form-group col-md-12">
                                         <label for="city">Payment</label></label>
                                         <select class="custom-select" id="customer-type" name="group">
-                                            <option selected readonly>-- Select Payment --</option>
+                                            <option selected disabled>-- Select Payment --</option>
                                             <option value="consignee">Unpaid</option>
                                             <option value="shipper">Paid</option>
                                         </select>
@@ -334,7 +347,7 @@
                                 <hr style="border: 2px solid black">
                                 <div class="form-row">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover" style="width:100%">
+                                        <table class="table table-bordered table-hover" style="width:100%" id="list_pieces">
                                             <thead>
                                                 <tr>
                                                     <th>
@@ -370,7 +383,7 @@
                                                         </div>
                                                     </th>
                                                     <th colspan="3">
-                                                        <a class="btn btn-info" id="addRow"><i class="fa fa-plus"></i>
+                                                        <a class="btn btn-info btn-submit" id="addRow"><i class="fa fa-plus"></i>
                                                             Add Package</a>
                                                     </th>
                                                 </tr>
@@ -390,10 +403,10 @@
                                             <tfoot>
                                                 <tr>
                                                     <th colspan="4">TOTAL</th>
-                                                    <th id="total-volume">0</th>
                                                     <th>0</th>
+                                                    <th id="sum-weight">0</th>
                                                     <th>
-                                                    
+                                                
                                                     </th>
                                                 </tr>
                                             </tfoot>

@@ -65,6 +65,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::get('export', [App\Http\Controllers\Admin\DropshipController::class, 'export'])->name('dropship.export');
     Route::get('pdf', [App\Http\Controllers\Admin\DropshipController::class, 'pdf'])->name('dropship.pdf');
     Route::post('searchdateDrop', [App\Http\Controllers\Admin\DropshipController::class, 'searchdateDrop'])->name('searchdateDrop');
+    Route::post('shipmentDetails', [App\Http\Controllers\Admin\ShipmentController::class, 'shipmentDetails'])->name('shipmentDetails');
     
 });
 
@@ -75,5 +76,8 @@ Route::get('autocompleteCustomer', [App\Http\Controllers\Admin\CustomerControlle
 Route::get('autocompleteShipmentShipper', [App\Http\Controllers\Admin\ShipmentController::class, 'autocompleteShipmentShipper'])->name('autocompleteShipmentShipper');
 Route::get('autocompleteShipmentConsignee', [App\Http\Controllers\Admin\ShipmentController::class, 'autocompleteShipmentConsignee'])->name('autocompleteShipmentConsignee');
 Route::get('getCustomerId', [App\Http\Controllers\Admin\CustomerController::class, 'getCustomerId'])->name('getCustomerId');
+Route::get('getConnote', [App\Http\Controllers\Admin\ShipmentController::class, 'getConnote'])->name('getConnote');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 

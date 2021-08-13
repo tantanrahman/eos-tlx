@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Svg\Tag\Rect;
 use App\Models\User;
 use App\Models\Partner;
 use App\Models\Customer;
@@ -9,9 +10,10 @@ use App\Models\Shipment;
 use App\Models\PackageType;
 use Illuminate\Http\Request;
 use App\Models\ShipmentDetail;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Svg\Tag\Rect;
+use Illuminate\Container\RewindableGenerator;
 
 class ShipmentController extends Controller
 {
@@ -47,50 +49,65 @@ class ShipmentController extends Controller
      */
     public function store(Request $request)
     {
-
         dd($request);
-
         $api_key = Customer::get_apikey();
-        // $dataCustomer   = Customer::where('account_code', '=', $request->input('account_code'))->first();
-        $dataCustomer = Customer::create([
-            'account_code'          => Request()->account_code,
-            'name'                  => Request()->name,
-            'company_name'          => Request()->company_name,
-            'address'               => Request()->address,
-            'city_id'               => Request()->city_id,
-            'city_name'             => Request()->city_name,
-            'country_id'            => Request()->country_id,
-            'country_name'          => Request()->country_name,
-            'phone'                 => Request()->phone,
-            'group'                 => Request()->group,
-            'postal_code'           => Request()->postal_code,
-            'apikey'                => md5($api_key),
-        ]);
+        
+        $dataCustomer = Customer::where('account_code', '=', $request->input('account_code'))->first();
 
+        if($dataCustomer == null)
+        {
+            $dataCustomer = Customer::create([
+				'account_code'          => Request()->account_code,
+				'name'                  => Request()->name,
+				'company_name'          => Request()->company_name,
+				'address'               => Request()->address,
+				'city_id'               => Request()->city_id,
+                'city_name'             => Request()->city_name,
+				'country_id'            => Request()->country_id,
+                'country_name'          => Request()->country_name,
+				'phone'                 => Request()->phone,
+				'group'                 => Request()->group,
+				'postal_code'           => Request()->postal_code,
+                'apikey'                => md5($api_key),
+                'created_by'            => Auth::user()->name
+			]);
 
-        // if($dataCustomer == null)
-        // {
-        //     $dataCustomer = Customer::create([
-		// 		'account_code'          => Request()->account_code,
-		// 		'name'                  => Request()->name,
-		// 		'company_name'          => Request()->company_name,
-		// 		'address'               => Request()->address,
-		// 		'city_id'               => Request()->city_id,
-        //         'city_name'             => Request()->city_name,
-		// 		'country_id'            => Request()->country_id,
-        //         'country_name'          => Request()->country_name,
-		// 		'phone'                 => Request()->phone,
-		// 		'group'                 => Request()->group,
-		// 		'postal_code'           => Request()->postal_code,
-        //         'apikey'                => md5($api_key),
-		// 	]);
+        } 
+        else
+        {
+            $dataShipment = Shipment::create([
+                'shipper_id'            => Request()->shipper_id,
+                'consignee_id'          => Request()->con_id,
+                'packagetype_id'        => Request()->packagetype_id,
+                'marketing_id'          => Request()->marketing_id,
+                'partner_id'            => Request()->partner_id,
+                'connote'               => Request()->connote,
+                'values'                => Request()->values,
+                'redoc_connote'         => Request()->redoc_connote,
+                'redoc_params'          => Request()->redoc_params,
+                'modal'                 => Request()->modal,
+                'payment_method'        => Request()->payment_method,
+                'payment_status'        => Request()->payment_status,
+                'delivery_intructions'  => Request()->delivery_instruction,
+                'remark'                => Request()->remark,
+                'description'           => Request()->description,
+                'created_by'            => Auth::user()->name
+            ]);
 
-        //     // dd($dataCustomer);
-        // } 
-        // else
-        // {
-        //     // dd($dataCustomer);
-        // }
+            $shipmentId = $dataShipment->id;
+            $dataShipmentDetails = ShipmentDetail::create([
+                'shipment_id'           => $shipmentId,
+                'actual_weight'         => Request()->actual_weight,
+                'length'                => Request()->length,
+                'width'                 => Request()->width,
+                'height'                => Request()->height,
+                'volume'                => Request()->volume,
+                'total_weight'          => Request()->total_weight
+            ]);
+
+            
+        }
+
     }
 
     /**
@@ -145,7 +162,7 @@ class ShipmentController extends Controller
 
     public function autocompleteShipmentShipper(Request $request)
     {
-        $customers = Customer::select('id', 'account_code','name as label' ,'company_name' ,'address', 'postal_code','city_name', 'phone')
+        $customers = Customer::select('id',  'account_code', 'name as label' ,'company_name' ,'address', 'country_id','country_name' ,'postal_code','city_id','city_name', 'phone')
             ->where('name', 'like', "%{$request->term}%")
             ->where('group','=','shipper')
             ->get();
@@ -160,11 +177,44 @@ class ShipmentController extends Controller
 
     public function autocompleteShipmentConsignee(Request $request)
     {
-        $customers = Customer::select('id',  'account_code', 'name as label' ,'company_name' ,'address', 'country_name' ,'postal_code','city_name', 'phone')
+        $customers = Customer::select('id',  'account_code', 'name as label' ,'company_name' ,'address', 'country_id','country_name' ,'postal_code','city_id','city_name', 'phone')
             ->where('name', 'like', "%{$request->term}%")
             ->where('group','=','consignee')
             ->get();
 
         return response()->json($customers);
     }
+
+    /**
+     * Get Connote
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function getConnote(Request $request)
+	{
+
+		$connote = Shipment::get_connote($request);
+
+		if (empty($connote))
+		{
+			return response()->json(['status' => false]);
+		}
+
+		return response()->json(['status' => true, 'connote' => $connote]);
+	}
+
+    /**
+     * @param Request $request
+     * 
+     * Create Shipment Details
+     */
+    public function shipmentDetails(Request $request)
+    {
+        $input = $request->all();
+        Log::info($input);
+
+        return response()->json(['success'=>'Got Simple Ajax Request.']);
+    }
+
 }

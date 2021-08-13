@@ -16,7 +16,7 @@ class Shipment extends Model
         'consignee_id',
         'packagetype_id',
         'marketing_id',
-        'courier_id',
+        'partner_id',
         'connote',
         'values',
         'amount',
@@ -35,11 +35,14 @@ class Shipment extends Model
         'created_by'
     ];
 
+    /**
+     * Generate for Connote in Shipment
+     * 
+     */
     public static function get_connote($query)
 	{
 
 		$query = '622' . date('ym');
-
 		$code = self::where('connote', 'LIKE', "{$query}%")
 			->orderBy('connote', 'desc')
 			->select('connote')
@@ -49,8 +52,15 @@ class Shipment extends Model
 		{
 			return $query . '00001';
 		}
-
 		return $query . sprintf("%'.05d", (int)str_replace($query, '', $code->connote) + 1);
 	}
 
+
+    /**
+     * Relation for Shipment and Details
+     */
+    public function details()
+    {
+        return $this->hasMany(ShipmentDetail::class, 'shipment_id','id');
+    }
 }
