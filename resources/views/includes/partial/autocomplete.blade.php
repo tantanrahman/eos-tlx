@@ -139,6 +139,7 @@
 			$('input[name="con_city_name"]').val(map[item].city_name);
 			$('textarea[name="con_address"]').val(map[item].address);
 			$('input[name="con_country_name"]').val(map[item].country_name);
+			$('input[name="con_country_id"]').val(map[item].country_id);
 			return item;
 		}
 	});

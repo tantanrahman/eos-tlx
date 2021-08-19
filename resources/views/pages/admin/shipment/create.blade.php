@@ -397,13 +397,13 @@
                                                     <th>Delete</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="plt">
                                                 
                                             </tbody>
                                             <tfoot>
                                                 <tr>
                                                     <th colspan="4">TOTAL</th>
-                                                    <th>0</th>
+                                                    <th id="total-volume">0</th>
                                                     <th id="sum-weight">0</th>
                                                     <th>
                                                 

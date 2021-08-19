@@ -49,7 +49,7 @@ class ShipmentController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        
         $api_key = Customer::get_apikey();
         
         $dataCustomer = Customer::where('account_code', '=', $request->input('account_code'))->first();
@@ -94,17 +94,43 @@ class ShipmentController extends Controller
                 'created_by'            => Auth::user()->name
             ]);
 
-            $shipmentId = $dataShipment->id;
-            $dataShipmentDetails = ShipmentDetail::create([
-                'shipment_id'           => $shipmentId,
-                'actual_weight'         => Request()->actual_weight,
-                'length'                => Request()->length,
-                'width'                 => Request()->width,
-                'height'                => Request()->height,
-                'volume'                => Request()->volume,
-                'total_weight'          => Request()->total_weight
-            ]);
+            $shipmentId     = $dataShipment->id;
+            $actual_weight  = $request->get('actual_weight');
+            $length         = $request->get('length');
+            $width          = $request->get('width');
+            $height         = $request->get('height');
+            $sum_volume     = $request->get('sum_volume');
+            $sum_weight     = $request->get('sum_weight');
 
+            foreach ($actual_weight as $key => $value) {
+                
+                $num_actual_weight         = $value;
+                $num_length                = $length[$key];
+                $num_width                 = $width[$key];
+                $num_height                = $height[$key];
+                $num_sum_volume            = $sum_volume[$key];
+                $num_sum_weight            = $sum_weight[$key];
+
+                $dataShipmentDetail = ShipmentDetail::create([
+                    'shipment_id'           => $shipmentId,
+                    'actual_weight'         => $num_actual_weight,
+                    'length'                => $num_length,
+                    'width'                 => $num_width,
+                    'height'                => $num_height,
+                    'sum_volume'            => $num_sum_volume,
+                    'sum_weight'            => $num_sum_weight
+                ]);
+
+                if($dataCustomer || $dataShipment || $dataShipmentDetail)
+                {
+                    return redirect(route('admin.shipment.index'))->with('toast_success', 'Berhasil Menambah Shipment');
+                } 
+                else 
+                {
+                    return redirect(route('admin.shipment.index'))->with('toast_success', 'Gagal!');
+                }
+
+            }
             
         }
 

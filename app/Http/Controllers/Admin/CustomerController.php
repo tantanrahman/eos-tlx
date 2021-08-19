@@ -88,8 +88,6 @@ class CustomerController extends Controller
 
         // $cities = City::find($request->get('city'));
 
-        dd($request);
-
         $api_key = Customer::get_apikey();
 
 		$this->validate($request, [

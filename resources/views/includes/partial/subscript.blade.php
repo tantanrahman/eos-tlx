@@ -120,32 +120,6 @@
 		$( '.uang' ).mask('000.000.000.000.000.000', {reverse: true});
 	})
 
-	// $(document).ready(function(){
-	// 	$("#addRow").click(function(){
-	// 		var table = $("table tbody");
-
-	// 		actual_weight 	= $("#actual_weight").val(),
-	// 		length 			= $("#length").val(),
-	// 		width 			= $("#width").val(),
-	// 		height 			= $("#height").val();
-	// 		volume 			= length*width*height;
-
-	// 		let row = "<tr><td>" + actual_weight + "</td><td>" + length + "</td><td>" + width + "</td><td>" + height + "</td><td>" + volume + "</td></tr>";
-	// 		$("table tbody").append(row);
-
-	// 		var total_volume = 0;
-	// 		table.find('tr').each(function (i, el) {
-	// 			var $tds = $(el).find('td');
-				
-	// 			var volume = parseInt($tds.eq(4).text());
-	// 			total_volume += volume;
-
-	// 		});
-
-	// 		$('tfoot th#total-volume').text(total_volume);
-	// 	});
-	// });
-
 	$.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -162,36 +136,47 @@
 		var height 			= $("input[name=height]").val();
 		var sum_volume	 	= length*width*height;
 		var sum_weight 		= Math.ceil(actual_weight);
-		
+
 		$.ajax({
             type:'POST',
             url:"{{ route('admin.shipment.store') }}",
             data:{
-					actual_weight, length, width, height, sum_volume, sum_weight, sum_volume, sum_weight
+					actual_weight, length, width, height, sum_volume, sum_weight, volume, total_weight
 				 },
-			success: function (d) {
-				$("#shipmentDetails").DataTable().row.add($(d).get(0)).draw();
-			}
-			
         });
 
-		let row = "<tr><td>" + actual_weight + "</td><td>" + length + "</td><td>" + width + "</td><td>" + height + "</td><td>" + sum_volume + "</td><td>" + sum_weight + "</td></tr>";
+
+		$("table tbody").on('click','#remove', function(){
+			$(this).closest('tr').remove();
+			var volume = 0;
+			var total_weight = 0;
+				table.find('tr').each(function (i, el) {
+					var sum_volume = parseInt($("#sum_volume").val());
+					var sum_weight = parseInt($("#sum_weight").val());
+						volume 		+= sum_volume;
+					total_weight   	+= sum_weight;
+					});
+
+			$('#total-volume').text(volume);
+			$('#sum-weight').text(total_weight);
+		});
+
+		let row = "<tr><td><input name='actual_weight[]' value='"+actual_weight+"'></td><td><input name='length[]' value='"+length+"'></td><td><input name='width[]' value='"+width+"'></td><td><input name='height[]' value='"+height+"'></td><td><input name='sum_volume[]' id='sum_volume' value='"+sum_volume+"' readonly></td><td><input name='sum_weight[]' id='sum_weight' value='"+sum_weight+"' readonly></td><td><button type='button' id='remove' class='btn btn-danger'><i class='fas fa-trash'></i></button></td></tr>";
 		$("table tbody").append(row);
 
-		// var volume = 0;
-		// var total_weight = 0;
-		// 	table.find('tr').each(function (i, el) {
-	 	// 		var $tds = $(el).find('td');
-	 	// 		var sum_volume = parseInt($tds.eq(4).text());
-		// 		var sum_weight = parseInt($tds.eq(5).text());
-	 	// 		volume 			+= sum_volume;
-		// 		total_weight   	+= sum_weight;
-	 	// 	});
+		var volume = 0;
+		var total_weight = 0;
+			table.find('tr').each(function (i, el) {
+				var sum_volume = parseInt($("#sum_volume").val());
+				var sum_weight = parseInt($("#sum_weight").val());
+				volume 			+= sum_volume;
+				total_weight   	+= sum_weight;
+				});
 
-		// $('tfoot th#total-volume').val(volume);
-		// $('tfoot th#sum-weight').val(total_weight);
+		$('#total-volume').text(volume);
+		$('#sum-weight').text(total_weight);
 
-		
+
     });
   
 </script>

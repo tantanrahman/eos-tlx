@@ -18,8 +18,8 @@ class ShipmentDetail extends Model
         'length',
         'width',
         'height',
-        'volume',
-        'total_weight'
+        'sum_volume',
+        'sum_weight'
     ];
 
     public static function get_details()
