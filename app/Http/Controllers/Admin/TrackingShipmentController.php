@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Tracking;
+use App\Models\TrackingShipment;
 use Illuminate\Http\Request;
 
-class TrackingController extends Controller
+class TrackingShipmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,10 +42,10 @@ class TrackingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tracking  $tracking
+     * @param  \App\Models\TrackingShipment  $trackingShipment
      * @return \Illuminate\Http\Response
      */
-    public function show(Tracking $tracking)
+    public function show(TrackingShipment $trackingShipment)
     {
         //
     }
@@ -53,10 +53,10 @@ class TrackingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Tracking  $tracking
+     * @param  \App\Models\TrackingShipment  $trackingShipment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tracking $tracking)
+    public function edit(TrackingShipment $trackingShipment)
     {
         //
     }
@@ -65,10 +65,10 @@ class TrackingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tracking  $tracking
+     * @param  \App\Models\TrackingShipment  $trackingShipment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tracking $tracking)
+    public function update(Request $request, TrackingShipment $trackingShipment)
     {
         //
     }
@@ -76,10 +76,10 @@ class TrackingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tracking  $tracking
+     * @param  \App\Models\TrackingShipment  $trackingShipment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tracking $tracking)
+    public function destroy(TrackingShipment $trackingShipment)
     {
         //
     }
