@@ -20,6 +20,8 @@ use App\Http\Controllers\Admin\PickupUserController;
 use App\Http\Controllers\Admin\PostalCodeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ShipmentController;
+use App\Http\Controllers\Admin\TrackingShipmentController;
+use App\Http\Controllers\Admin\TrackingStatusController;
 use App\Http\Controllers\Admin\UserController;
 
 /*
@@ -62,6 +64,8 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::resource('pickuplist', PickuplistController::class);
     Route::resource('pickupuser', PickupUserController::class);
     Route::resource('ongkir', OngkirController::class);
+    Route::resource('tracking_status', TrackingStatusController::class);
+    Route::resource('tracking_shipment', TrackingShipmentController::class);
     Route::get('export', [App\Http\Controllers\Admin\DropshipController::class, 'export'])->name('dropship.export');
     Route::get('pdf', [App\Http\Controllers\Admin\DropshipController::class, 'pdf'])->name('dropship.pdf');
     Route::post('searchdateDrop', [App\Http\Controllers\Admin\DropshipController::class, 'searchdateDrop'])->name('searchdateDrop');

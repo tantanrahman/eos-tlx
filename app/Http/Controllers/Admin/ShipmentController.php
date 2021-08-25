@@ -10,9 +10,12 @@ use App\Models\Shipment;
 use App\Models\PackageType;
 use Illuminate\Http\Request;
 use App\Models\ShipmentDetail;
+use Illuminate\Support\Carbon;
+use App\Models\TrackingShipment;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Container\RewindableGenerator;
 
 class ShipmentController extends Controller
@@ -22,8 +25,27 @@ class ShipmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->ajax())
+        {
+            $shipments = Shipment::get_items();
+
+            return DataTables::of($shipments)
+                    // ->addColumn('action', function($shipment){
+
+                    //     $button =   '<div class="btn-group" role="group" aria-label="Basic example">
+                    //                     <a href="shipment/'.$shipment->id.'/edit" type="button" class="btn btn-info" data-id="'.$customer->id.'" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="far fa-edit"></i></a>
+                    //                     <button type="button" name="delete" id="'.$shipment->id.'" class="delete btn btn-danger" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
+                    //                     <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="VIEW"><i class="fas fa-search"></i></button>
+                    //                 </div>';
+
+                    //     return $button;
+                    // })
+                    // ->rawColumns(['action'])
+                    ->make(true);
+        }
+
         return view('pages.admin.shipment.index');
     }
 
@@ -49,91 +71,55 @@ class ShipmentController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $api_key = Customer::get_apikey();
-        
-        $dataCustomer = Customer::where('account_code', '=', $request->input('account_code'))->first();
+            //Process Insert Customer to Customer
+            $account_code           = $request->get('account_code');
+            $name                   = $request->get('name');
+            $company_name           = $request->get('company_name');
+            $address                = $request->get('address');
+            $city_id                = $request->get('city_id');
+            $city_name              = $request->get('city_name');
+            $country_id             = $request->get('country_id');
+            $country_name           = $request->get('country_name');
+            $phone                  = $request->get('phone');
+            $postal_code            = $request->get('postal_code');
+            $concatenateString  = [$name,$company_name,$address,$city_id,$country_id,$postal_code,$phone];
+            $signedKey          = md5(json_encode($concatenateString));
+            dd($signedKey);
 
-        if($dataCustomer == null)
-        {
-            $dataCustomer = Customer::create([
-				'account_code'          => Request()->account_code,
-				'name'                  => Request()->name,
-				'company_name'          => Request()->company_name,
-				'address'               => Request()->address,
-				'city_id'               => Request()->city_id,
-                'city_name'             => Request()->city_name,
-				'country_id'            => Request()->country_id,
-                'country_name'          => Request()->country_name,
-				'phone'                 => Request()->phone,
-				'group'                 => Request()->group,
-				'postal_code'           => Request()->postal_code,
-                'apikey'                => md5($api_key),
-                'created_by'            => Auth::user()->name
-			]);
+            foreach($account_code as $key => $value)
+            {
 
-        } 
-        else
-        {
-            $dataShipment = Shipment::create([
-                'shipper_id'            => Request()->shipper_id,
-                'consignee_id'          => Request()->con_id,
-                'packagetype_id'        => Request()->packagetype_id,
-                'marketing_id'          => Request()->marketing_id,
-                'partner_id'            => Request()->partner_id,
-                'connote'               => Request()->connote,
-                'values'                => Request()->values,
-                'redoc_connote'         => Request()->redoc_connote,
-                'redoc_params'          => Request()->redoc_params,
-                'modal'                 => Request()->modal,
-                'payment_method'        => Request()->payment_method,
-                'payment_status'        => Request()->payment_status,
-                'delivery_intructions'  => Request()->delivery_instruction,
-                'remark'                => Request()->remark,
-                'description'           => Request()->description,
-                'created_by'            => Auth::user()->name
-            ]);
-
-            $shipmentId     = $dataShipment->id;
-            $actual_weight  = $request->get('actual_weight');
-            $length         = $request->get('length');
-            $width          = $request->get('width');
-            $height         = $request->get('height');
-            $sum_volume     = $request->get('sum_volume');
-            $sum_weight     = $request->get('sum_weight');
-
-            foreach ($actual_weight as $key => $value) {
                 
-                $num_actual_weight         = $value;
-                $num_length                = $length[$key];
-                $num_width                 = $width[$key];
-                $num_height                = $height[$key];
-                $num_sum_volume            = $sum_volume[$key];
-                $num_sum_weight            = $sum_weight[$key];
 
-                $dataShipmentDetail = ShipmentDetail::create([
-                    'shipment_id'           => $shipmentId,
-                    'actual_weight'         => $num_actual_weight,
-                    'length'                => $num_length,
-                    'width'                 => $num_width,
-                    'height'                => $num_height,
-                    'sum_volume'            => $num_sum_volume,
-                    'sum_weight'            => $num_sum_weight
+                $num_account_code           = $value;
+                $num_name                   = $name[$key];
+                $num_company_name           = $company_name[$key];
+                $num_address                = $address[$key];
+                $num_city_id                = $city_id[$key];
+                $num_city_name              = $city_name[$key];
+                $num_country_id             = $country_id[$key];
+                $num_country_name           = $country_name[$key];
+                $num_phone                  = $phone[$key];
+                $num_postal_code            = $postal_code[$key];
+                $num_apikey                 = md5($signedKey[$key]);
+            
+                $dataCustomer = Customer::Create([
+                    'account_code'          => $num_account_code,
+                    'name'                  => $num_name,   
+                    'company_name'          => $num_company_name,
+                    'address'               => $num_address,
+                    'city_id'               => $num_city_id,
+                    'city_name'             => $num_city_name,
+                    'country_id'            => $num_country_id,
+                    'country_name'          => $num_country_name,
+                    'phone'                 => $num_phone,
+                    'group'                 => $request->group,
+                    'postal_code'           => $num_postal_code,
+                    'apikey'                => $num_apikey,
+                    'created_by'            => Auth::user()->name
                 ]);
 
-                if($dataCustomer || $dataShipment || $dataShipmentDetail)
-                {
-                    return redirect(route('admin.shipment.index'))->with('toast_success', 'Berhasil Menambah Shipment');
-                } 
-                else 
-                {
-                    return redirect(route('admin.shipment.index'))->with('toast_success', 'Gagal!');
-                }
-
             }
-            
-        }
-
     }
 
     /**

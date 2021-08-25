@@ -76,4 +76,11 @@
         theme: "bootstrap4",
         });
     });
+    $(document).ready(function() {
+        $('#select2partnertracking').select2({
+        placeholder: "Select a Partner",
+        allowClear: true,
+        theme: "bootstrap4",
+        });
+    });
 </script>

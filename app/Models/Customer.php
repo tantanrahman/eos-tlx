@@ -104,7 +104,7 @@ class Customer extends Model
 		");
 
 		$apikey = self::join('country','customer.country_id','=','country.id')
-				->join('city','customer.city_id','=','city_id')
+				->join('city','customer.city_id','=','city.id')
 				->select($query);
 
 		return $apikey->get();

@@ -28,18 +28,19 @@
                         </a>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="table_dropship" style="width:100%">
+                        <table class="table table-bordered" id="table_shipment" style="width:100%">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th style="display: none">ID</th>
+                                    <th>CREATED AT</th>
                                     <th>CONNOTE</th>
-                                    <th>SHIPPER NAME</th>
+                                    <th>SHIPPER NAME </th>
                                     <th>CONSIGNEE NAME</th>
                                     <th>DESCRIPTION</th>
-                                    <th>PIECES</th>
+                                    <th>COUNTRY</th>
                                     <th>WEIGHT</th>
                                     <th>CREATED BY</th>
                                     <th>MARKETING</th>
+                                    <th>PAYMENT STATUS</th>
                                     <th>PRINTED</th>
                                 </tr>
                             </thead>

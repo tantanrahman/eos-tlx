@@ -48,7 +48,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::get();
+        $roles      = Role::get();
         $users      = User::where('role_id','=',2)->get();
         $officeprofiles = OfficeProfile::get();
 

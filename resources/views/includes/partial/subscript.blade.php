@@ -137,13 +137,13 @@
 		var sum_volume	 	= length*width*height;
 		var sum_weight 		= Math.ceil(actual_weight);
 
-		$.ajax({
-            type:'POST',
-            url:"{{ route('admin.shipment.store') }}",
-            data:{
-					actual_weight, length, width, height, sum_volume, sum_weight, volume, total_weight
-				 },
-        });
+		// $.ajax({
+        //     type:'POST',
+        //     url:"{{ route('admin.shipment.store') }}",
+        //     data:{
+		// 			actual_weight, length, width, height, sum_volume, sum_weight, volume, total_weight
+		// 		 },
+        // });
 
 
 		$("table tbody").on('click','#remove', function(){
@@ -151,9 +151,10 @@
 			var volume = 0;
 			var total_weight = 0;
 				table.find('tr').each(function (i, el) {
-					var sum_volume = parseInt($("#sum_volume").val());
-					var sum_weight = parseInt($("#sum_weight").val());
-						volume 		+= sum_volume;
+					var $tds = $(el).find('td');
+					var sum_volume 	= parseInt($tds.eq(4).children().val());
+					var sum_weight 	= parseInt($tds.eq(5).children().val());
+					volume 			+= sum_volume;
 					total_weight   	+= sum_weight;
 					});
 
@@ -161,17 +162,18 @@
 			$('#sum-weight').text(total_weight);
 		});
 
-		let row = "<tr><td><input name='actual_weight[]' value='"+actual_weight+"'></td><td><input name='length[]' value='"+length+"'></td><td><input name='width[]' value='"+width+"'></td><td><input name='height[]' value='"+height+"'></td><td><input name='sum_volume[]' id='sum_volume' value='"+sum_volume+"' readonly></td><td><input name='sum_weight[]' id='sum_weight' value='"+sum_weight+"' readonly></td><td><button type='button' id='remove' class='btn btn-danger'><i class='fas fa-trash'></i></button></td></tr>";
+		let row = "<tr><td><input name='actual_weight[]' class='form-control' value='"+actual_weight+"'></td><td><input name='length[]' class='form-control' value='"+length+"'></td><td><input name='width[]' class='form-control' value='"+width+"'></td><td><input name='height[]' class='form-control' value='"+height+"'></td><td><input name='sum_volume[]' id='sum_volume' class='form-control' value='"+sum_volume+"' readonly></td><td><input name='sum_weight[]' id='sum_weight' class='form-control' value='"+sum_weight+"' readonly></td><td><button type='button' id='remove' class='btn btn-danger'><i class='fas fa-trash'></i></button></td></tr>";
 		$("table tbody").append(row);
 
 		var volume = 0;
 		var total_weight = 0;
 			table.find('tr').each(function (i, el) {
-				var sum_volume = parseInt($("#sum_volume").val());
-				var sum_weight = parseInt($("#sum_weight").val());
-				volume 			+= sum_volume;
-				total_weight   	+= sum_weight;
-				});
+				var $tds = $(el).find('td');
+				var sum_volume = parseInt($tds.eq(4).children().val());
+				var sum_weight = parseInt($tds.eq(5).children().val());
+				volume += sum_volume;
+				total_weight += sum_weight;
+			});
 
 		$('#total-volume').text(volume);
 		$('#sum-weight').text(total_weight);

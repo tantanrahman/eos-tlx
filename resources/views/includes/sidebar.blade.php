@@ -19,7 +19,7 @@
             </a>
           </li>
 
-          <li class="nav-item {{ request()->is('admin/bagpackage*') || request()->is('admin/city*') || request()->is('admin/courier*') || request()->is('admin/country*') || request()->is('admin/partner*') || request()->is('admin/packagetype*') || request()->is('admin/postalcode*') || request()->is('admin/pickupuser*') || request()->is('admin/ongkir*') ? 'menu-open' : '' }}">
+          <li class="nav-item {{ request()->is('admin/bagpackage*') || request()->is('admin/city*') || request()->is('admin/courier*') || request()->is('admin/country*') || request()->is('admin/partner*') || request()->is('admin/packagetype*') || request()->is('admin/postalcode*') || request()->is('admin/pickupuser*') || request()->is('admin/ongkir*') || request()->is('admin/tracking_status*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-database"></i>
             <p style="font-size: 16px">
@@ -80,6 +80,12 @@
                 <a href="{{ route('admin.postalcode.index') }}" class="nav-link {{ request()->is('admin/postalcode*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="font-size: 16px">Postal Code</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.tracking_status.index') }}" class="nav-link {{ request()->is('admin/tracking_status*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="font-size: 16px">Tracking Status</p>
                 </a>
               </li>
             </ul>
@@ -198,6 +204,17 @@
               </li>
             </ul>
           </li>
+
+          <li class="nav-item {{ request()->is('admin/tracking_shipment*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is('admin/tracking_shipment*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-map-marked-alt"></i>
+            <p style="font-size: 16px">
+                Tracking Shipment
+            </p>
+            </a>
+          </li>
+
+          <li class="nav-header"></li>
 
           <li class="nav-item {{ request()->is('admin/support*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link {{ request()->is('admin/support*') ? 'active' : '' }}">

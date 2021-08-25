@@ -73,7 +73,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <input class="form-control" type="hidden" name="country_id" id="customer-country">
+                                <input class="form-control" type="text" name="country_id" id="customer-country">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="name">Name*</label>

@@ -426,5 +426,81 @@
       ],
     });
   });
+
+  $(document).ready(function() {
+    $('#table_trackingstatus').DataTable({
+      processing : true,
+      serverSide : true,
+      ajax : '{!! route("admin.tracking_status.index") !!}',
+      columns: [
+        {data:'id',name:'id'},
+        {data:'partner_id',name:'partner_id'},
+        {data:'status',name:'status'},
+        {
+          data: 'active',
+          render: function(data)
+          {
+              if (data==0)
+              {
+                return '<span class="badge badge-danger">NOT ACTIVE</span>'
+              }
+              else
+              {
+                return '<span class="badge badge-success">ACTIVE</span>'
+              }
+          }
+        },
+        {data:'created_by',name:'created_by'},
+        {data:'action',name:'action'},
+      ],
+    });
+  });
+
+  $(document).ready(function() {
+    $('#table_shipment').DataTable({
+      processing : true,
+      serverSide : true,
+      ajax : '{!! route("admin.shipment.index") !!}',
+      columns: [
+        {data:'time',name:'time'},
+        {data:'connote',name:'connote'},
+        {data:'ship_name',name:'ship_name'},
+        {data:'con_name',name:'con_name'},
+        {data:'description',name:'description'},
+        {data:'cou_name',name:'cou_name'},
+        {data:'weight',name:'weight'},
+        {data:'created',name:'created'},
+        {data:'marketing',name:'marketing'},
+        {
+          data: 'payment_status',
+          render: function(data)
+          {
+              if (data==null)
+              {
+                return '<span class="badge badge-danger">UNPAID</span>'
+              }
+              else
+              {
+                return '<span class="badge badge-success">PAID</span>'
+              }
+          }
+        },
+        {
+          data: 'printed',
+          render: function(data)
+          {
+              if (data==0)
+              {
+                return '<span class="badge badge-danger">NOT PRINTED</span>'
+              }
+              else
+              {
+                return '<span class="badge badge-success">PRINTED</span>'
+              }
+          }
+        },
+      ],
+    });
+  });
  
 </script>
