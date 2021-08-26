@@ -71,55 +71,46 @@ class ShipmentController extends Controller
      */
     public function store(Request $request)
     {
-            //Process Insert Customer to Customer
-            $account_code           = $request->get('account_code');
-            $name                   = $request->get('name');
-            $company_name           = $request->get('company_name');
-            $address                = $request->get('address');
-            $city_id                = $request->get('city_id');
-            $city_name              = $request->get('city_name');
-            $country_id             = $request->get('country_id');
-            $country_name           = $request->get('country_name');
-            $phone                  = $request->get('phone');
-            $postal_code            = $request->get('postal_code');
-            $concatenateString  = [$name,$company_name,$address,$city_id,$country_id,$postal_code,$phone];
-            $signedKey          = md5(json_encode($concatenateString));
-            dd($signedKey);
 
-            foreach($account_code as $key => $value)
-            {
+        //INPUT CUSTOMER TO DATABASE
+        $acount_codes       = $request->account_code;
+        $names              = $request->name;
+        $company            = $request->company_name;
+        $addresses          = $request->address;
+        $cit_name           = $request->city_name;
+        $cit_id             = $request->city_id;
+        $cou_name           = $request->country_name;
+        $cou_id             = $request->country_id;
+        $postal             = $request->postal_code;
+        $phones             = $request->phone;
+        $group              = $request->group;
+        $created            = json_encode($request->created_by);
+        
 
-                
+        foreach ($acount_codes as $key => $value) {
 
-                $num_account_code           = $value;
-                $num_name                   = $name[$key];
-                $num_company_name           = $company_name[$key];
-                $num_address                = $address[$key];
-                $num_city_id                = $city_id[$key];
-                $num_city_name              = $city_name[$key];
-                $num_country_id             = $country_id[$key];
-                $num_country_name           = $country_name[$key];
-                $num_phone                  = $phone[$key];
-                $num_postal_code            = $postal_code[$key];
-                $num_apikey                 = md5($signedKey[$key]);
-            
-                $dataCustomer = Customer::Create([
-                    'account_code'          => $num_account_code,
-                    'name'                  => $num_name,   
-                    'company_name'          => $num_company_name,
-                    'address'               => $num_address,
-                    'city_id'               => $num_city_id,
-                    'city_name'             => $num_city_name,
-                    'country_id'            => $num_country_id,
-                    'country_name'          => $num_country_name,
-                    'phone'                 => $num_phone,
-                    'group'                 => $request->group,
-                    'postal_code'           => $num_postal_code,
-                    'apikey'                => $num_apikey,
-                    'created_by'            => Auth::user()->name
-                ]);
+            $concatenateString          = [$names,$company,$addresses,$cit_id,$cou_id,$postal,$phones];
+            $signedKey                  = md5(json_encode($concatenateString));
+            $api_key                    = json_encode([$signedKey]);
 
-            }
+            $dataCustomers[] = Customer::create([
+                'account_code'  => $value,
+                'name'          => $names[$key],
+                'company_name'  => $company[$key],
+                'address'       => $addresses[$key],
+                'city_name'     => $cit_name[$key],
+                'city_id'       => $cit_id[$key],
+                'country_name'  => $cou_name[$key],
+                'country_id'    => $cou_id[$key],
+                'postal_code'   => $postal[$key],
+                'phone'         => $phones[$key],
+                'group'         => $group[$key],
+                'apikey'        => $api_key,
+                'created_by'    => $created
+            ]);
+        }
+
+        dd($dataCustomers);
     }
 
     /**

@@ -43,13 +43,13 @@
                                             <input type="hidden" class="form-control" name="apikey[0]" readonly>
                                         </div> --}}
                                         <div>
-                                            <input type="text" class="form-control" name="id[0]" readonly>
+                                            <input type="text" class="form-control" name="id[]" readonly>
                                         </div>
                                         <div>
-                                            <input type="text" id="customer-id" class="form-control" name="account_code[0]" readonly>
+                                            <input type="text" id="customer-id" class="form-control" name="account_code[]" readonly>
                                         </div>
                                         <div>
-                                            <input type="text" class="form-control" name="group[0]" value="shipper" readonly>
+                                            <input type="text" class="form-control" name="group[]" value="shipper" readonly>
                                         </div>
                                         <div>
                                             <input type="hidden" class="form-control" name="status_eng" readonly value="Prepared at TLX Office">
@@ -70,7 +70,7 @@
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label for="resi">Name*</label>
-                                            <input type="text" name="name[0]" class="form-control typeaheadShipmentShipper @error('name[0]') is-invalid @enderror" value="{{ old('name[0]') }}" autocomplete="off">
+                                            <input type="text" name="name[]" class="form-control typeaheadShipmentShipper @error('name[0]') is-invalid @enderror" value="{{ old('name[0]') }}" autocomplete="off">
                                             @error('name[0]')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -79,7 +79,7 @@
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label for="company_name">Company Name</label>
-                                            <input type="text" name="company_name[0]" class="form-control @error('company_name') is-invalid @enderror" value="{{ old('company_name') }}" autocomplete="off">
+                                            <input type="text" name="company_name[]" class="form-control @error('company_name') is-invalid @enderror" value="{{ old('company_name') }}" autocomplete="off">
                                             @error('company_name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -88,17 +88,17 @@
                                         </div>
                                         <div class="form-group col-md-12" id="customer-country-section">
                                             <label for="country_name">Country</label>
-                                            <input type="text" name="country_name[0]" class="form-control @error('country_name') is-invalid @enderror" value="Indonesia" autocomplete="off" readonly>
+                                            <input type="text" name="country_name[]" class="form-control @error('country_name') is-invalid @enderror" value="Indonesia" autocomplete="off" readonly>
                                             @error('country_name')
                                             <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
-                                            <input class="form-control" name="country_id[0]" type="text" value="106" readonly>
+                                            <input class="form-control" name="country_id[]" type="text" value="106" readonly>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="postal_code">Postal Code</label>
-                                            <input type="text" name="postal_code[0]" class="form-control @error('postal_code') is-invalid @enderror" autocomplete="off">
+                                            <input type="text" name="postal_code[]" class="form-control @error('postal_code') is-invalid @enderror" autocomplete="off">
                                             @error('postal_code')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -107,7 +107,7 @@
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label for="address">Address*</label>
-                                            <textarea name="address[0]" rows="3" class="form-control @error('address') is-invalid @enderror" style="resize:none" autocomplete="off"></textarea>
+                                            <textarea name="address[]" rows="3" class="form-control @error('address') is-invalid @enderror" style="resize:none" autocomplete="off"></textarea>
                                             @error('address')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -116,7 +116,7 @@
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label for="city_name">City*</label>
-                                            <input name="city_name[0]" type="text" class="form-control typeaheadCity @error('city_name') is-invalid @enderror" autocomplete="off">
+                                            <input name="city_name[]" type="text" class="form-control typeaheadCity @error('city_name') is-invalid @enderror" autocomplete="off">
                                             @error('city_name')
                                             <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -126,7 +126,7 @@
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label for="phone">Phone</label>
-                                            <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone[0]" value="{{ old('phone') }}" autocomplete="off">
+                                            <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone[]" value="{{ old('phone') }}" autocomplete="off">
                                             @error('phone')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -146,10 +146,10 @@
                                 <hr style="border: 2px solid black">
                                 <div class="form-row">
                                     <div>
-                                        <input type="text" id="con-customer-id" class="form-control" name="account_code[1]" readonly>
+                                        <input type="text" id="con-customer-id" class="form-control" name="account_code[]" readonly>
                                     </div>
                                     <div>
-                                        <input type="text" class="form-control" name="id[1]" readonly>
+                                        <input type="text" class="form-control" name="id[]" readonly>
                                     </div>
                                     {{-- <div>
                                         <input type="hidden" class="form-control" name="apikey[1]" readonly>
@@ -159,7 +159,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="name">Name*</label>
-                                        <input type="text" name="name[1]" class="form-control typeaheadShipmentConsignee @error('con_name') is-invalid @enderror" value="{{ old('con_name') }}"  autocomplete="off">
+                                        <input type="text" name="name[]" class="form-control typeaheadShipmentConsignee @error('con_name') is-invalid @enderror" value="{{ old('con_name') }}"  autocomplete="off">
                                         @error('con_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -168,7 +168,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="con_company_name">Company Name</label>
-                                        <input type="text" name="company_name[1]" class="form-control @error('con_company_name') is-invalid @enderror" value="{{ old('con_company_name') }}" autocomplete="off">
+                                        <input type="text" name="company_name[]" class="form-control @error('con_company_name') is-invalid @enderror" value="{{ old('con_company_name') }}" autocomplete="off">
                                         @error('con_company_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -177,7 +177,7 @@
                                     </div>
                                     <div class="form-group col-md-12" id="customer-country-section">
                                         <label for="con_country_name">Country</label>
-                                        <input type="text" name="country_name[1]" class="form-control typeaheadCountry @error('con_country_name') is-invalid @enderror" autocomplete="off">
+                                        <input type="text" name="country_name[]" class="form-control typeaheadCountry @error('con_country_name') is-invalid @enderror" autocomplete="off">
                                         @error('con_country_name')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -187,7 +187,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="con_postal_code">Postal Code</label>
-                                        <input type="text" name="postal_code[1]" class="form-control @error('con_postal_code') is-invalid @enderror" autocomplete="off">
+                                        <input type="text" name="postal_code[]" class="form-control @error('con_postal_code') is-invalid @enderror" autocomplete="off">
                                         @error('con_postal_code')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -196,7 +196,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="con_address">Address*</label>
-                                        <textarea name="address[1]" rows="3" class="form-control @error('con_address') is-invalid @enderror" style="resize:none" autocomplete="off"></textarea>
+                                        <textarea name="address[]" rows="3" class="form-control @error('con_address') is-invalid @enderror" style="resize:none" autocomplete="off"></textarea>
                                         @error('con_address')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -205,7 +205,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="con_city_name">City*</label>
-                                        <input name="city_name[1]" type="text" class="form-control @error('con_city_name') is-invalid @enderror" autocomplete="off">
+                                        <input name="city_name[]" type="text" class="form-control @error('con_city_name') is-invalid @enderror" autocomplete="off">
                                         @error('con_city_name')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -215,7 +215,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="con_phone">Phone</label>
-                                        <input type="text" class="form-control @error('con_phone') is-invalid @enderror" name="phone[1]" value="{{ old('con_phone') }}" autocomplete="off">
+                                        <input type="text" class="form-control @error('con_phone') is-invalid @enderror" name="phone[]" value="{{ old('con_phone') }}" autocomplete="off">
                                         @error('phone')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -226,7 +226,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    {{-- <div class="col-sm-4">
                         <div class="card">
                             <div class="card-body">
                                 <h4>
@@ -352,7 +352,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-body">   
