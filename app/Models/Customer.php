@@ -29,13 +29,12 @@ class Customer extends Model
 		'credit',
 		'created_by'
     ];
-
-    // public function countries()
-    // {
-    //     return $this->hasMany('App\Models\Country');
-    // }
-
-
+	
+	/** 
+	 * @author Tantan
+	 * @description Get ID Customer
+	 * @created 1 Sep 2021
+	*/
 	public static function get_customer_id($query)
 	{
 
@@ -52,6 +51,21 @@ class Customer extends Model
 		return $query . sprintf("%'.06d", (int)str_replace($query, '', $code->account_code) + 1);
 	}
 
+	/**
+	 * @author Tantan
+	 * @description Get ID for Next Customer
+	 * @created 1 Sep 2021
+	 */
+	public static function get_id_shipment()
+	{
+		
+	}
+
+	/**
+	 * @author Tantan 
+	 * @description Get Query for Shipper
+	 * @created 28 Aug 2021
+	 */
 	public static function get_items_shipper()
 	{
 		$query = DB::raw("
@@ -62,15 +76,21 @@ class Customer extends Model
 			customer.country_name,
 			customer.phone,
 			customer.group,
-			customer.created_by
+			customer.created_by,
+			customer.created_at
 		");
 
 		$items = self::join('city','customer.city_id','=','city.id')
-			->select($query)->where('customer.group','=','shipper');
+			->select($query)->where('group','=','shipper');
 
 		return $items->get();
 	}
 
+	/**
+	 * @author Tantan 
+	 * @description Get Query for Consignee
+	 * @created 28 Aug 2021
+	 */
 	public static function get_items_consignee()
 	{
 		$query = DB::raw("
@@ -90,7 +110,11 @@ class Customer extends Model
 		return $items->get();
 	}
 
-	//GET APIKEY FOR CUSTOMER
+	/**
+	 * @author Tantan 
+	 * @description Generate apikey for unique code Customer
+	 * @created 26 Aug 2021
+	 */
 	public static function get_apikey()
 	{
 		$query = DB::raw("
@@ -105,13 +129,19 @@ class Customer extends Model
 
 		$apikey = self::join('country','customer.country_id','=','country.id')
 				->join('city','customer.city_id','=','city.id')
-				->select($query);
+				->select($query)
+				->orderBy(DB::raw('RAND()'))->take(8);
 
 		return $apikey->get();
 
 	}
 
-	//GET City and Country for Customer
+	/**
+	 * @author Tantan
+	 * @description Get Names for City and Country
+	 * @param [type] $id
+	 * @created 26 Aug 2021
+	 */
 	public static function get_items_name($id)
 	{
 		$items_name = self::leftjoin('city','customer.city_id','=','city.id')
@@ -126,5 +156,35 @@ class Customer extends Model
 				  )->where('customer.id', $id);
 
 		return $items_name->first();
+	}
+
+	/**
+	 * @author Tantan
+	 * @decription Get Next ID from Auto Increments
+	 * @created 2 Sep 2021
+	 */
+	public static function next_id()
+	{
+		$id = DB::select("SHOW TABLE STATUS LIKE 'customer'");
+		$next_id = $id[0]->Auto_increment;
+
+		return $next_id;
+
+	}
+	
+
+	/**
+	 * @author Tantan
+	 * @description Relation for Customer
+	 * @created 26 Aug 2021
+	 */
+	public function shipper()
+	{
+		return $this->hasMany(Shipment::class, 'shipper_id','id');
+	}
+
+	public function consignee()
+	{
+		return $this->hasMany(Shipment::class, 'consignee_id','id');
 	}
 }

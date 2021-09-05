@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ url('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
     <link rel="stylesheet" href="{{ url('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url('plugins/jqvmap/jqvmap.min.css') }}">
+    <link rel="stylesheet" href="{{ url('dist/css/style.css') }}">
     <link rel="stylesheet" href="{{ url('dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ url('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <link rel="stylesheet" href="{{ url('plugins/daterangepicker/daterangepicker.css') }}">

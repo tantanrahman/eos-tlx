@@ -135,6 +135,7 @@
 		var width 			= $("input[name=width]").val();
 		var height 			= $("input[name=height]").val();
 		var sum_volume	 	= length*width*height;
+		var volumetrick		= sum_volume/5000;
 		var sum_weight 		= Math.ceil(actual_weight);
 
 		// $.ajax({
@@ -177,8 +178,6 @@
 
 		$('#total-volume').text(volume);
 		$('#sum-weight').text(total_weight);
-
-
     });
-  
+	
 </script>

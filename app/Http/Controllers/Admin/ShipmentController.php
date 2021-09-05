@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Partner;
 use App\Models\Customer;
 use App\Models\Shipment;
+use Barryvdh\DomPDF\PDF;
 use App\Models\PackageType;
 use Illuminate\Http\Request;
 use App\Models\ShipmentDetail;
@@ -29,20 +30,44 @@ class ShipmentController extends Controller
     {
         if($request->ajax())
         {
-            $shipments = Shipment::get_items();
-
+            $shipments  = Shipment::get_items();
+           
             return DataTables::of($shipments)
-                    // ->addColumn('action', function($shipment){
+                    ->addColumn('action', function($shipment){
 
-                    //     $button =   '<div class="btn-group" role="group" aria-label="Basic example">
-                    //                     <a href="shipment/'.$shipment->id.'/edit" type="button" class="btn btn-info" data-id="'.$customer->id.'" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="far fa-edit"></i></a>
-                    //                     <button type="button" name="delete" id="'.$shipment->id.'" class="delete btn btn-danger" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
-                    //                     <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="VIEW"><i class="fas fa-search"></i></button>
-                    //                 </div>';
+                        $button =   '<div class="btn-group" role="group" aria-label="Basic example">
+                                        <a href="shipment/'.$shipment->idx.'/edit" type="button" class="btn btn-info btn-sm" data-id="'.$shipment->idx.'" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="far fa-edit"></i></a>
+                                        <button type="button" name="delete" id="'.$shipment->idx.'" class="delete btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
+                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="VIEW"><i class="fas fa-search"></i></button>
+                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-placement="top" data-target="#ModalPrint" title="PRINT"><i class="fas fa-print"></i></button>
+                                    </div>
+                                    
+                                    <div class="modal fade" id="ModalPrint" tabindex="-1" role="dialog" aria-labelledby="ModalCourier" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h6 class="modal-title" id="exampleModalLongTitle">PRINT</h6>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>
+                                    
+                                            <form action="" method="POST" enctype="multipart/form-data">
+                                            <div class="modal-body">
+                                                <button type="reset" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</button>
+                                                <button type="reset" class="btn btn-info"><i class="far fa-envelope"></i> Label</button>
+                                                <button type="reset" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Invoice</button>
+                                            </div>
+                                            </form>
+                                            
+                                        </div>
+                                        </div>
+                                    </div>
+                                    ';
 
-                    //     return $button;
-                    // })
-                    // ->rawColumns(['action'])
+                        return $button;
+                    })
+                    ->rawColumns(['action'])
                     ->make(true);
         }
 
@@ -59,8 +84,9 @@ class ShipmentController extends Controller
         $users          = User::where('role_id','=',2)->get();
         $packagetypes   = PackageType::all();
         $partners       = Partner::all();
+        $nextId         = Customer::next_id();
 
-        return view('pages.admin.shipment.create', compact('packagetypes','partners','users'));
+        return view('pages.admin.shipment.create', compact('packagetypes','partners','users','nextId'));
     }
 
     /**
@@ -70,47 +96,175 @@ class ShipmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-
-        //INPUT CUSTOMER TO DATABASE
-        $acount_codes       = $request->account_code;
-        $names              = $request->name;
-        $company            = $request->company_name;
-        $addresses          = $request->address;
-        $cit_name           = $request->city_name;
-        $cit_id             = $request->city_id;
-        $cou_name           = $request->country_name;
-        $cou_id             = $request->country_id;
-        $postal             = $request->postal_code;
-        $phones             = $request->phone;
-        $group              = $request->group;
-        $created            = json_encode($request->created_by);
+    {        
         
+        $validateData = Customer::where('account_code', '=', $request->input('account_code'))->first();
+        
+        if($validateData === null)
+        {
+            //Input Customer for Shipment
+            $acount_codes       = $request->account_code;
+            $idx                = $request->id;
+            $names              = $request->name;
+            $company            = $request->company_name;
+            $addresses          = $request->address;
+            $cit_name           = $request->city_name;
+            $cit_id             = $request->city_id;
+            $cou_name           = $request->country_name;
+            $cou_id             = $request->country_id;
+            $postal             = $request->postal_code;
+            $phones             = $request->phone;
+            $group              = $request->group;
+            
+    
+            foreach ($acount_codes as $key => $value) 
+            {
+    
+                $apikey = Customer::get_apikey();
+    
+                $dataCustomers = Customer::create([
+                    'account_code'  => $value,
+                    'id'            => $idx[$key],
+                    'name'          => $names[$key],
+                    'company_name'  => $company[$key],
+                    'address'       => $addresses[$key],
+                    'city_name'     => $cit_name[$key],
+                    'city_id'       => $cit_id[$key],
+                    'country_name'  => $cou_name[$key],
+                    'country_id'    => $cou_id[$key],
+                    'postal_code'   => $postal[$key],
+                    'phone'         => $phones[$key],
+                    'group'         => $group[$key],
+                    'apikey'        => md5($apikey),
+                    'created_by'    => Auth::user()->name
+                ]);
 
-        foreach ($acount_codes as $key => $value) {
+            }
 
-            $concatenateString          = [$names,$company,$addresses,$cit_id,$cou_id,$postal,$phones];
-            $signedKey                  = md5(json_encode($concatenateString));
-            $api_key                    = json_encode([$signedKey]);
-
-            $dataCustomers[] = Customer::create([
-                'account_code'  => $value,
-                'name'          => $names[$key],
-                'company_name'  => $company[$key],
-                'address'       => $addresses[$key],
-                'city_name'     => $cit_name[$key],
-                'city_id'       => $cit_id[$key],
-                'country_name'  => $cou_name[$key],
-                'country_id'    => $cou_id[$key],
-                'postal_code'   => $postal[$key],
-                'phone'         => $phones[$key],
-                'group'         => $group[$key],
-                'apikey'        => $api_key,
-                'created_by'    => $created
+            //Input Shipment to Database
+            $dataShipment = Shipment::create([
+                'packagetype_id'        => $request->packagetype_id,
+                'shipper_id'            => $request->id[0],
+                'consignee_id'          => $request->id[1],
+                'marketing_id'          => $request->marketing_id,
+                'partner_id'            => $request->partner_id,
+                'connote'               => $request->connote,
+                'values'                => $request->values,
+                'redoc_connote'         => $request->redoc_connote,
+                'redoc_params'          => $request->redoc_params,
+                'modal'                 => $request->modal,
+                'payment_method'        => $request->payment_method,
+                'payment_status'        => $request->payment_status,
+                'delivery_intructions'  => $request->delivery_intructions,
+                'remark'                => $request->remark,
+                'description'           => $request->description,
+                'created_by'            => Auth::user()->name
             ]);
+
+            $shipmentId         = $dataShipment->id;
+            $actual_weights     = $request->actual_weight;
+            $lengths            = $request->length;
+            $widths             = $request->width;
+            $heights            = $request->height;
+            $sum_volumes        = $request->sum_volume;
+            $sum_weights        = $request->sum_weight;
+
+            foreach ($actual_weights as $key => $value) 
+            {
+
+                //Input Shipment Details (Volume)
+                $dataShipmentDetail[] = ShipmentDetail::create([
+                    'shipment_id'           => $shipmentId,
+                    'actual_weight'         => $actual_weights[$key],
+                    'length'                => $lengths[$key],
+                    'width'                 => $widths[$key],
+                    'height'                => $heights[$key],
+                    'sum_volume'            => $sum_volumes[$key],
+                    'sum_weight'            => $sum_weights[$key]
+                ]);
+
+                $currentDate    = date('Y-m-d H:i:s');
+                $apiKey         = TrackingShipment::get_apikey();
+
+                //Input Data Tracking
+                $dataTracking = TrackingShipment::create([
+                    'shipment_id'       => $shipmentId,
+                    'track_time'        => $currentDate,
+                    'status_eng'        => Request()->status_eng,
+                    'status_ind'        => Request()->status_ind,
+                    'apikey'            => md5($apiKey)
+                ]);
+            }
+            
+        }
+        else
+        {
+
+            //Input Shipment to Database
+            $dataShipment = Shipment::create([
+                'packagetype_id'        => $request->packagetype_id,
+                'shipper_id'            => $request->id[0],
+                'consignee_id'          => $request->id[1],
+                'marketing_id'          => $request->marketing_id,
+                'partner_id'            => $request->partner_id,
+                'connote'               => $request->connote,
+                'values'                => $request->values,
+                'redoc_connote'         => $request->redoc_connote,
+                'redoc_params'          => $request->redoc_params,
+                'modal'                 => $request->modal,
+                'payment_method'        => $request->payment_method,
+                'payment_status'        => $request->payment_status,
+                'delivery_intructions'  => $request->delivery_intructions,
+                'remark'                => $request->remark,
+                'description'           => $request->description,
+                'created_by'            => Auth::user()->name
+            ]);
+
+            $shipmentId         = $dataShipment->id;
+            $actual_weights     = $request->actual_weight;
+            $lengths            = $request->length;
+            $widths             = $request->width;
+            $heights            = $request->height;
+            $sum_volumes        = $request->sum_volume;
+            $sum_weights        = $request->sum_weight;
+
+            foreach ($actual_weights as $key => $value) 
+            {
+
+                //Input Shipment Details (Volume)
+                $dataShipmentDetail[] = ShipmentDetail::create([
+                    'shipment_id'           => $shipmentId,
+                    'actual_weight'         => $actual_weights[$key],
+                    'length'                => $lengths[$key],
+                    'width'                 => $widths[$key],
+                    'height'                => $heights[$key],
+                    'sum_volume'            => $sum_volumes[$key],
+                    'sum_weight'            => $sum_weights[$key]
+                ]);
+
+                $currentDate    = date('Y-m-d H:i:s');
+                $apiKey         = TrackingShipment::get_apikey();
+
+                //Input Data Tracking
+                $dataTracking = TrackingShipment::create([
+                    'shipment_id'       => $shipmentId,
+                    'track_time'        => $currentDate,
+                    'status_eng'        => Request()->status_eng,
+                    'status_ind'        => Request()->status_ind,
+                    'apikey'            => md5($apiKey)
+                ]);
+            }
+
         }
 
-        dd($dataCustomers);
+        if($dataCustomers || $dataShipment)
+        {
+            return redirect(route('admin.shipment.index'))->with('toast_success', 'Berhasil menambah Data');
+        }
+        else
+        {
+            return redirect(route('admin.shipment.create'))->with('toast_error', 'Gagal!');
+        }
     }
 
     /**
@@ -153,9 +307,11 @@ class ShipmentController extends Controller
      * @param  \App\Models\Shipment  $shipment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Shipment $shipment)
+    public function destroy($id)
     {
-        //
+        $shipment = Shipment::where('id',$id)->delete();
+
+        return response()->json($shipment);
     }
 
     /**
@@ -218,6 +374,21 @@ class ShipmentController extends Controller
         Log::info($input);
 
         return response()->json(['success'=>'Got Simple Ajax Request.']);
+    }
+
+    /**
+     * @author Tantan
+     * @description Print Resi for Shipment
+     * @created 3 Sep 2021
+     */
+    public function cetakConnote(Request $request, $id)
+    {
+
+		$shipment = Shipment::get_items();
+
+        $pdf = PDF::loadView('pages.admin.shipment.print.connoteresi', compact('shipment'))->setPaper('a4', 'landscape');
+        return $pdf->download('Report Dropship '.date("Y-m-d").'.pdf');
+
     }
 
 }

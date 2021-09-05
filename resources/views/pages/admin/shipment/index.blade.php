@@ -42,6 +42,7 @@
                                     <th>MARKETING</th>
                                     <th>PAYMENT STATUS</th>
                                     <th>PRINTED</th>
+                                    <th>ACTION</th>
                                 </tr>
                             </thead>
 
@@ -52,4 +53,25 @@
         </div>
     </section>
 </div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="hapus-shipment" data-backdrop="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">PERHATIAN</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah anda yakin akan menghapus data ini?</p>
+            </div>
+            <div class="modal-footer bg-whitesmoke br">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" name="action-hapus-shipment" id="action-hapus-shipment">Hapus Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection

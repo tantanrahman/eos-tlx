@@ -1,116 +1,59 @@
 <script>
-    function fetch_dropship()
-    {
-    	let index_url = '{!! route("admin.dropship.index") !!}',
-			query = {
-				date_start: $('#dropship-periode-start').val(),
-				date_end: $('#dropship-periode-end').val(),
-			};
+  /** 
+   * @author Tantan 
+   * @updated 3 Sep 2021
+   * @description Datatable Index for Dropship
+   * 
+  */
+  function fetch_dropship()
+  {
+    let index_url = '{!! route("admin.dropship.index") !!}',
+    query = {
+      date_start: $('#dropship-periode-start').val(),
+      date_end: $('#dropship-periode-end').val(),
+    };
 
-		$('#table_dropship').DataTable({
-			processing : true,
-			serverSide : true,
-			"ajax": {
-				"url": index_url,
-				"data": {
-					"date_start": query.date_start,
-					"date_end": query.date_end,
-				}
-			},
-			columns: [
-				{data:'idx',name:'idx', visible: false},
-				{data:'time',name:'time'},
-				{data:'resis',name:'resis'},
-				{data:'names',name:'names'},
-				{data:'couriers',name:'couriers'},
-				{data:'category',name:'category'},
-				{data:'weight',name:'weight'},
-				{data:'cities',name:'cities'},
-				{data:'users',name:'users'},
-				{data:'photo',name:'dropship.photo'},
-				{data:'action',name:'action', orderable: false, searchable: false},
-			],
-			 destroy: true,
-		  });
-    }
+  $('#table_dropship').DataTable({
+    processing : true,
+    serverSide : true,
+    "ajax": {
+      "url": index_url,
+      "data": {
+        "date_start": query.date_start,
+        "date_end": query.date_end,
+      }
+    },
+    columns: [
+      {data:'idx',name:'idx', visible: false},
+      {data:'time',name:'time'},
+      {data:'resis',name:'resis'},
+      {data:'names',name:'names'},
+      {data:'couriers',name:'couriers'},
+      {data:'category',name:'category'},
+      {data:'weight',name:'weight'},
+      {data:'cities',name:'cities'},
+      {data:'users',name:'users'},
+      {data:'photo',name:'dropship.photo'},
+      {data:'action',name:'action', orderable: false, searchable: false},
+    ],
+      destroy: true,
+    });
+  }
 
-  $(document).ready(function () {
-      $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-      });
-  });
-
+  //For Filter Date in Dropship
   $(document).ready(function() {
   	if ($('#dropship-periode-start').length)
     {
-		fetch_dropship();
-	}
+		  fetch_dropship();
+	  }
   });
 
-  $(document).on('click', '.delete', function () {
-          dataId = $(this).attr('id');
-          $('#konfirmasi-modal').modal('show');
-  });
-      
-  $('#tombol-hapus').click(function () {
-      $.ajax({
-          url: "/admin/dropship/" + dataId, 
-          type: 'delete',
-          beforeSend: function () {
-              $('#tombol-hapus').text('Hapus Data'); 
-          },
-          success: function (data) { 
-              setTimeout(function () {
-                  $('#konfirmasi-modal').modal('hide'); 
-                  var oTable = $('#table_dropship').dataTable();
-                  oTable.fnDraw(false); 
-              });
-              swal.fire({
-                  icon: 'success',
-                  showConfirmButton: false,
-                  toast: true,
-                  timer: 3000,
-                  timerProgressBar: true,
-                  title: 'Data Berhasil Dihapus',
-                  position: 'top-end'
-              });
-          }
-      })
-  });
-
-  $(document).on('click', '.delete', function () {
-          dataId = $(this).attr('id');
-          $('#hapus-customer').modal('show');
-  });
-      
-  $('#tombol-hapus').click(function () {
-      $.ajax({
-          url: "/admin/customer/" + dataId, 
-          type: 'delete',
-          beforeSend: function () {
-              $('#tombol-hapus').text('Hapus Data'); 
-          },
-          success: function (data) { 
-              setTimeout(function () {
-                  $('#hapus-customer').modal('hide'); 
-                  var oTable = $('#table_customer').dataTable();
-                  oTable.fnDraw(false); 
-              });
-              swal.fire({
-                  icon: 'success',
-                  showConfirmButton: false,
-                  toast: true,
-                  timer: 3000,
-                  timerProgressBar: true,
-                  title: 'Data Berhasil Dihapus',
-                  position: 'top-end'
-              });
-          }
-      })
-  });
-
+  /** 
+   * @author Tantan 
+   * @updated 3 Sep 2021
+   * @description Datatable Index for Country
+   * 
+  */
   $(document).ready(function() {
     $('#table_country').DataTable({
       processing : true,
@@ -125,6 +68,12 @@
     });
   });
 
+  /** 
+   * @author Tantan 
+   * @updated 3 Sep 2021
+   * @description Datatable Index for Courier
+   * 
+  */
   $(document).ready(function() {
     $('#table_courier').DataTable({
       processing : true,
@@ -153,6 +102,12 @@
     });
   });
 
+  /** 
+   * @author Tantan 
+   * @updated 3 Sep 2021
+   * @description Datatable Index for City
+   * 
+  */
   $(document).ready(function() {
     $('#table_city').DataTable({
       processing : true,
@@ -167,8 +122,13 @@
     });
   });
 
+  /** 
+   * @author Tantan 
+   * @updated 3 Sep 2021
+   * @description Datatable Index for Customer Shipper
+   * 
+  */
   $(document).ready(function() {
-
     let index_url = '{!! route("admin.customer.index") !!}';
 
     $('#table_customer').DataTable({
@@ -192,11 +152,17 @@
     });
   });
 
+  /** 
+   * @author Tantan 
+   * @updated 3 Sep 2021
+   * @description Datatable Index for Customer Consignee
+   * 
+  */
   $(document).ready(function() {
 
     let index_url = '{!! route("admin.customer.index") !!}';
 
-    $('#table_customer2').DataTable({
+    $('#table_customer_con').DataTable({
       processing : true,
       serverSide : true,
       "ajax": {
@@ -218,6 +184,12 @@
     });
   });
 
+  /** 
+   * @author Tantan 
+   * @updated 3 Sep 2021
+   * @description Datatable Index for User
+   * 
+  */
   $(document).ready(function() {
     $('#table_user').DataTable({
       processing : true,
@@ -246,6 +218,12 @@
     });
   });
 
+  /** 
+   * @author Tantan 
+   * @updated 3 Sep 2021
+   * @description Datatable Index for Office Profile
+   * 
+  */
   $(document).ready(function() {
     $('#table_officeprofile').DataTable({
       processing : true,
@@ -271,7 +249,13 @@
       ],
     });
   });
-
+  
+  /** 
+   * @author Tantan 
+   * @updated 3 Sep 2021
+   * @description Datatable Index for Bag Number
+   * 
+  */
   $(document).ready(function() {
     $('#table_bagpackage').DataTable({
       processing : true,
@@ -299,6 +283,12 @@
     });
   });
 
+  /** 
+   * @author Tantan 
+   * @updated 3 Sep 2021
+   * @description Datatable Index for Package Type
+   * 
+  */
   $(document).ready(function() {
     $('#table_packagetype').DataTable({
       processing : true,
@@ -326,6 +316,12 @@
     });
   });
 
+  /** 
+   * @author Tantan 
+   * @updated 3 Sep 2021
+   * @description Datatable Index for Partner
+   * 
+  */
   $(document).ready(function() {
     $('#table_partner').DataTable({
       processing : true,
@@ -354,6 +350,12 @@
     });
   });
 
+  /** 
+   * @author Tantan 
+   * @updated 3 Sep 2021
+   * @description Datatable Index for Pickup User
+   * 
+  */
   $(document).ready(function() {
     $('#table_pickupuser').DataTable({
       processing : true,
@@ -367,14 +369,14 @@
           data: 'active',
           render: function(data)
           {
-              if (data==0)
-              {
-                return '<span class="badge badge-danger">NOT ACTIVE</span>'
-              }
-              else
-              {
-                return '<span class="badge badge-success">ACTIVE</span>'
-              }
+            if (data==0)
+            {
+              return '<span class="badge badge-danger">NOT ACTIVE</span>'
+            }
+            else
+            {
+              return '<span class="badge badge-success">ACTIVE</span>'
+            }
           }
         },
         {data:'action',name:'action'},
@@ -382,6 +384,12 @@
     });
   });
 
+  /** 
+   * @author Tantan 
+   * @updated 3 Sep 2021
+   * @description Datatable Index for Ongkir
+   * 
+  */
   $(document).ready(function() {
     $('#table_ongkir').DataTable({
       processing : true,
@@ -411,6 +419,12 @@
     });
   });
 
+  /** 
+   * @author Tantan 
+   * @updated 3 Sep 2021
+   * @description Datatable Index for Shipment Detail
+   * 
+  */
   $(document).ready(function() {
     $('#table_shipmentdetail').DataTable({
       processing : true,
@@ -427,6 +441,12 @@
     });
   });
 
+  /** 
+   * @author Tantan 
+   * @updated 3 Sep 2021
+   * @description Datatable Index for Tracking Status
+   * 
+  */
   $(document).ready(function() {
     $('#table_trackingstatus').DataTable({
       processing : true,
@@ -456,6 +476,12 @@
     });
   });
 
+  /** 
+   * @author Tantan 
+   * @updated 3 Sep 2021
+   * @description Datatable Index for Shipment
+   * 
+  */
   $(document).ready(function() {
     $('#table_shipment').DataTable({
       processing : true,
@@ -468,7 +494,20 @@
         {data:'con_name',name:'con_name'},
         {data:'description',name:'description'},
         {data:'cou_name',name:'cou_name'},
-        {data:'weight',name:'weight'},
+        {
+          data:'weight',name:'weight', 
+          render: function(data) 
+          {
+            if (data==null) 
+            {
+              return "0 KG"
+            }
+            else
+            {
+              return data + " KG"
+            }
+          }
+        },
         {data:'created',name:'created'},
         {data:'marketing',name:'marketing'},
         {
@@ -499,8 +538,15 @@
               }
           }
         },
+        {data:'action',name:'action'},
       ],
+      drawCallback: function() {
+        $('[data-toggle="popover"]').popover({
+          html:true
+        });
+      }
     });
   });
- 
+
+  
 </script>

@@ -1,4 +1,4 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ url('plugins/jquery/jquery.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script><i class="ri-psychotherapy-line"></i>
 <script src="{{ url('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
@@ -22,7 +22,8 @@
 <script src="{{ url('dist/js/jquery.mask.min.js') }}"></script>
 
 @include('sweetalert::alert')
-@include('includes.partial.subscript')
+@include('includes.partial.molekul')
 @include('includes.partial.autocomplete')
 @include('includes.partial.datatable')
+@include('includes.partial.delete')
 @include('includes.partial.select')

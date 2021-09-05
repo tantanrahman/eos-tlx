@@ -54,7 +54,7 @@
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <br>
                             <div class="table-responsive">
-                                <table class="table table-hover table-bordered" id="table_customer2" style="width:100%">
+                                <table class="table table-hover table-bordered" id="table_customer_con" style="width:100%">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th style="display: none">Id</th>
@@ -93,7 +93,7 @@
             </div>
             <div class="modal-footer bg-whitesmoke br">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger" name="tombol-hapus" id="tombol-hapus">Hapus Data</button>
+                <button type="button" class="btn btn-danger" name="action-hapus-customer" id="action-hapus-customer">Hapus Data</button>
             </div>
         </div>
     </div>

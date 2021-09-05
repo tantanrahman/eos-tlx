@@ -69,7 +69,7 @@
     </section>
 </div>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="hapus-customer" data-backdrop="false">
+<div class="modal fade" tabindex="-1" role="dialog" id="hapus-dropship" data-backdrop="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -83,7 +83,7 @@
             </div>
             <div class="modal-footer bg-whitesmoke br">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger" name="tombol-hapus" id="tombol-hapus">Hapus Data</button>
+                <button type="button" class="btn btn-danger" name="action-hapus-dropship" id="action-hapus-dropship">Hapus Data</button>
             </div>
         </div>
     </div>
