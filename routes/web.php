@@ -70,7 +70,9 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::get('pdf', [App\Http\Controllers\Admin\DropshipController::class, 'pdf'])->name('dropship.pdf');
     Route::post('searchdateDrop', [App\Http\Controllers\Admin\DropshipController::class, 'searchdateDrop'])->name('searchdateDrop');
     Route::post('shipmentDetails', [App\Http\Controllers\Admin\ShipmentController::class, 'shipmentDetails'])->name('shipmentDetails');
-    Route::get('/print/{id}/connote', [App\Http\Controllers\Admin\ShipmentController::class, 'cetakResiShipment'])->name('cetakResiShipment');
+    Route::get('/print/{id}/connote', [App\Http\Controllers\Admin\ShipmentController::class, 'cetakConnote'])->name('cetakConnote');
+    Route::get('/print/{id}/label', [App\Http\Controllers\Admin\ShipmentController::class, 'cetakLabel'])->name('cetakLabel');
+    Route::get('/print/{id}/invoice', [App\Http\Controllers\Admin\ShipmentController::class, 'cetakInvoice'])->name('cetakInvoice');
 });
 
 Route::get('autocompleteCity', [App\Http\Controllers\Admin\CityController::class, 'autocompleteCity'])->name('autocompleteCity');

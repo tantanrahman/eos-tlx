@@ -14,6 +14,10 @@ class ChangeEnumGroupCustomerTable extends Migration
     public function up()
     {
         Schema::table('customer', function (Blueprint $table) {
+            $table->dropColumn('group');
+        });
+        
+        Schema::table('customer', function (Blueprint $table) {
             $table->string('group',100)->after('phone')->nullable();
         });
     }

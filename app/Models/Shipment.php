@@ -61,7 +61,7 @@ class Shipment extends Model
      * @description Get Query For Datatable
      * @created 1 Sep 2021
      */
-    public static function get_items()
+    public static function get_items($idx)
     {
 
         $items = self::leftjoin('customer','shipment.shipper_id','=','customer.id')
@@ -69,9 +69,9 @@ class Shipment extends Model
                      ->leftjoin('country','con.country_id','=','country.id')
                      ->leftjoin('shipment_details','shipment.id','=','shipment_details.shipment_id')
                      ->join('users','shipment.marketing_id','=','users.id')
-                     ->select('shipment.id AS idx','shipment.created_at AS time','shipment.connote AS connote','con.name AS con_name','customer.name AS ship_name','shipment.description AS description','country.name AS cou_name','shipment_details.sum_weight AS weight','shipment.created_by AS created','users.name AS marketing','shipment.payment_status AS payment_status','shipment.printed AS printed');
+                     ->select('shipment.id AS idx','shipment.created_at AS time','shipment.connote AS connote','con.name AS con_name','customer.name AS ship_name','customer.address AS ship_address','customer.account_code AS account_code','shipment.description AS description','country.name AS cou_name','shipment_details.sum_weight AS weight','shipment.created_by AS created','users.name AS marketing','shipment.payment_status AS payment_status','shipment.printed AS printed');
 
-        return $items->get();
+        return $items->get($idx);
     }
 
     /**

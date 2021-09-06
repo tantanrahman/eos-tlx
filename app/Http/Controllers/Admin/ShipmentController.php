@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Partner;
 use App\Models\Customer;
 use App\Models\Shipment;
-use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Models\PackageType;
 use Illuminate\Http\Request;
 use App\Models\ShipmentDetail;
@@ -30,7 +30,8 @@ class ShipmentController extends Controller
     {
         if($request->ajax())
         {
-            $shipments  = Shipment::get_items();
+            $idx = [];
+            $shipments  = Shipment::get_items($idx);
            
             return DataTables::of($shipments)
                     ->addColumn('action', function($shipment){
@@ -39,10 +40,10 @@ class ShipmentController extends Controller
                                         <a href="shipment/'.$shipment->idx.'/edit" type="button" class="btn btn-info btn-sm" data-id="'.$shipment->idx.'" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="far fa-edit"></i></a>
                                         <button type="button" name="delete" id="'.$shipment->idx.'" class="delete btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
                                         <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="VIEW"><i class="fas fa-search"></i></button>
-                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-placement="top" data-target="#ModalPrint" title="PRINT"><i class="fas fa-print"></i></button>
+                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-placement="top" data-target="#ModalPrint'.$shipment->idx.'" data-id="{{$shipment->idx}}" title="PRINT"><i class="fas fa-print"></i></button>
                                     </div>
                                     
-                                    <div class="modal fade" id="ModalPrint" tabindex="-1" role="dialog" aria-labelledby="ModalCourier" aria-hidden="true">
+                                    <div class="modal fade" id="ModalPrint'.$shipment->idx.'" tabindex="-1" role="dialog" aria-labelledby="ModalCourier" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -52,13 +53,11 @@ class ShipmentController extends Controller
                                             </button>
                                             </div>
                                     
-                                            <form action="" method="POST" enctype="multipart/form-data">
                                             <div class="modal-body">
-                                                <button type="reset" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</button>
-                                                <button type="reset" class="btn btn-info"><i class="far fa-envelope"></i> Label</button>
-                                                <button type="reset" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Invoice</button>
+                                                <a href="print/'.$shipment->idx.'/connote" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
+                                                <a href="print/'.$shipment->idx.'/label" type="button" class="btn btn-info"><i class="far fa-envelope"></i> Label</a>
+                                                <a href="print/'.$shipment->idx.'/invoice" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Invoice</a>
                                             </div>
-                                            </form>
                                             
                                         </div>
                                         </div>
@@ -381,14 +380,49 @@ class ShipmentController extends Controller
      * @description Print Resi for Shipment
      * @created 3 Sep 2021
      */
-    public function cetakConnote(Request $request, $id)
+    public function cetakConnote(Request $request, $idx)
     {
 
-		$shipment = Shipment::get_items();
+        $getShipment = Shipment::get_items($idx);
+        // dd($getShipment);
 
-        $pdf = PDF::loadView('pages.admin.shipment.print.connoteresi', compact('shipment'))->setPaper('a4', 'landscape');
-        return $pdf->download('Report Dropship '.date("Y-m-d").'.pdf');
+        $pdf = PDF::loadView('pages.admin.shipment.print.connoteresi', compact('getShipment'));
+
+        return $pdf->download('Connote.pdf');
 
     }
 
+    /**
+     * @author Tantan
+     * @description Print Label for Shipment
+     * @created 6 Sep 2021
+     */
+    public function cetakLabel(Request $request, $idx)
+    {
+
+        $getShipment = Shipment::get_items($idx);
+        // dd($getShipment);
+
+        $pdf = PDF::loadView('pages.admin.shipment.print.labelresi', compact('getShipment'));
+
+        return $pdf->download('Label.pdf');
+
+    }
+
+    /**
+     * @author Tantan
+     * @description Print Invoice for Shipment
+     * @created 6 Sep 2021
+     */
+    public function cetakInvoice(Request $request, $idx)
+    {
+
+        $getShipment = Shipment::get_items($idx);
+        // dd($getShipment);
+
+        $pdf = PDF::loadView('pages.admin.shipment.print.invoiceresi', compact('getShipment'));
+
+        return $pdf->download('Invoice.pdf');
+
+    }
 }
