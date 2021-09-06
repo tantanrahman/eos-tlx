@@ -24,8 +24,8 @@ class UserSeeder extends Seeder
             'office_id'     => 1,
             'username'      => 'developer',
             'name'          => 'Developer',
-            'email'         => 'tantanfaturrahman@tlx.co.id',
-            'password'      => bcrypt('miracle000'),
+            'email'         => 'adamason.nnn@gmail.com',
+            'password'      => bcrypt('pentaho1999'),
         ]);
     }
 }
