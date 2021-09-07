@@ -29,9 +29,12 @@ class ShipmentController extends Controller
     public function index(Request $request)
     {
         if($request->ajax())
-        {
+        {   
+            $date_start = ( ! empty($request->get('date_start')) ? $request->get('date_start') : '');
+			$date_end = ( ! empty($request->get('date_end')) ? $request->get('date_end') : '');
+
             $idx = [];
-            $shipments  = Shipment::get_items($idx);
+            $shipments  = Shipment::get_items($date_start,$date_end);
            
             return DataTables::of($shipments)
                     ->addColumn('action', function($shipment){
@@ -39,7 +42,7 @@ class ShipmentController extends Controller
                         $button =   '<div class="btn-group" role="group" aria-label="Basic example">
                                         <a href="shipment/'.$shipment->idx.'/edit" type="button" class="btn btn-info btn-sm" data-id="'.$shipment->idx.'" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="far fa-edit"></i></a>
                                         <button type="button" name="delete" id="'.$shipment->idx.'" class="delete btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
-                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="VIEW"><i class="fas fa-search"></i></button>
+                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-placement="top" data-target="#ModalShow'.$shipment->idx.'" data-id="{{$shipment->idx}}" title="VIEW"><i class="fas fa-search"></i></button>
                                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-placement="top" data-target="#ModalPrint'.$shipment->idx.'" data-id="{{$shipment->idx}}" title="PRINT"><i class="fas fa-print"></i></button>
                                     </div>
                                     
@@ -55,6 +58,26 @@ class ShipmentController extends Controller
                                     
                                             <div class="modal-body">
                                                 <a href="print/'.$shipment->idx.'/connote" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
+                                                <a href="print/'.$shipment->idx.'/label" type="button" class="btn btn-info"><i class="far fa-envelope"></i> Label</a>
+                                                <a href="print/'.$shipment->idx.'/invoice" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Invoice</a>
+                                            </div>
+                                            
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal fade" id="ModalShow'.$shipment->idx.'" tabindex="-1" role="dialog" aria-labelledby="ModalShow" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h6 class="modal-title" id="exampleModalLongTitle">VIEW</h6>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>
+                                    
+                                            <div class="modal-body">
+                                                <a href="'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
                                                 <a href="print/'.$shipment->idx.'/label" type="button" class="btn btn-info"><i class="far fa-envelope"></i> Label</a>
                                                 <a href="print/'.$shipment->idx.'/invoice" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Invoice</a>
                                             </div>
@@ -272,9 +295,13 @@ class ShipmentController extends Controller
      * @param  \App\Models\Shipment  $shipment
      * @return \Illuminate\Http\Response
      */
-    public function show(Shipment $shipment)
+    public function show(Shipment $shipment, User $users)
     {
-        //
+        $getShipment    = Shipment::get_items_name($shipment->id);
+
+        $getUser        = User::get_items_name($shipment->id);
+
+        return view('pages.admin.shipment.show', compact('getShipment','getUser'));
     }
 
     /**
@@ -380,10 +407,10 @@ class ShipmentController extends Controller
      * @description Print Resi for Shipment
      * @created 3 Sep 2021
      */
-    public function cetakConnote(Request $request, $idx)
-    {
-
-        $getShipment = Shipment::get_items($idx);
+    public function cetakConnote(Request $request)
+    {   
+    
+        $getShipment = Shipment::get_items();
         // dd($getShipment);
 
         $pdf = PDF::loadView('pages.admin.shipment.print.connoteresi', compact('getShipment'));
@@ -397,10 +424,10 @@ class ShipmentController extends Controller
      * @description Print Label for Shipment
      * @created 6 Sep 2021
      */
-    public function cetakLabel(Request $request, $idx)
+    public function cetakLabel(Request $request, $date_start, $date_end)
     {
 
-        $getShipment = Shipment::get_items($idx);
+        $getShipment = Shipment::get_items($date_start,$date_end);
         // dd($getShipment);
 
         $pdf = PDF::loadView('pages.admin.shipment.print.labelresi', compact('getShipment'));
@@ -414,15 +441,30 @@ class ShipmentController extends Controller
      * @description Print Invoice for Shipment
      * @created 6 Sep 2021
      */
-    public function cetakInvoice(Request $request, $idx)
+    public function cetakInvoice(Request $request, $date_start, $date_end)
     {
 
-        $getShipment = Shipment::get_items($idx);
+        $getShipment = Shipment::get_items($date_start,$date_end);
         // dd($getShipment);
 
         $pdf = PDF::loadView('pages.admin.shipment.print.invoiceresi', compact('getShipment'));
 
         return $pdf->download('Invoice.pdf');
 
+    }
+
+    /**
+     * @author Tantan
+     * @description Search Date Shipment 
+     * @created 7 Sep 2021
+     */
+    public function searchdateShipment(Request $request)
+    {
+        $fromDate       = date('Y-m-d 00:00:00', strtotime($request->post('periode_start')));
+		$toDate         = date('Y-m-d 23:59:59', strtotime($request->post('periode_end')));
+
+        $data = Shipment::whereBetween('created_at', [$fromDate, $toDate])->get();
+
+        // return view('pages.admin.dropship.index', compact('data'));
     }
 }

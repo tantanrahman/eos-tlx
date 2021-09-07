@@ -232,17 +232,22 @@ class DropshipController extends Controller
     }
 
     /**
-     * Export XLS Dropship
+     * @author Tantan
+     * @description Export Dropship XLSX
+     * @created 7 Sep 2021
      */
 
     public function export()
     {
         return Excel::download(new DropshipExport(), 'Report Dropship '.date("Y-m-d").'.xlsx');
+
     }
 
     /**
-     * Download and Print PDF
-    */
+     * @author Tantan
+     * @description Export Dropship PDF
+     * @created 7 Sep 2021
+     */
 
     public function pdf(Request $request)
     {
@@ -261,7 +266,6 @@ class DropshipController extends Controller
 		$toDate         = date('Y-m-d 23:59:59', strtotime($request->post('periode_end')));
 
         $data = Dropship::whereBetween('created_at', [$fromDate, $toDate])->get();
-		dd($data);
 
         // return view('pages.admin.dropship.index', compact('data'));
     }

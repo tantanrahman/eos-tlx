@@ -54,7 +54,7 @@ class DropshipExport implements FromView
 		$date_end = ( ! empty($_GET['date_end']) ? $_GET['date_end'] : '');
 
 		return view('pages.admin.dropship.export', [
-            'dropships' => Dropship::get_items($date_start, $date_end)
+            'dropships' => Dropship::get_items($date_start, $date_end,'')
         ]);
     }
 }

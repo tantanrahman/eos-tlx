@@ -55,17 +55,16 @@ class CourierController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'code' => 'required',
-            'name' => 'required'
+            'reff_id'   => 'required',
+            'name'      => 'required'
         ], [
-            'code.required' => "CODE WAJIB DIISI",
-            'name.required' => "NAMA WAJIB DIISI"
+            'reff_id.required'  => "Code Wajib Diisi!",
+            'name.required'     => "Nama Wajib Diisi!"
         ]);
 
         $data = Courier::create([
-            'code' => Request()->code,
-            'code_dua' => Request()->code_dua,
-            'name' => Request()->name
+            'reff_id'   => Request()->code,
+            'name'      => Request()->name
         ]);
 
         if($data)

@@ -80,8 +80,7 @@
       serverSide : true,
       ajax : '{!! route("admin.courier.index") !!}',
       columns: [
-        {data:'code',name:'code'},
-        {data:'code_dua',name:'code_dua'},
+        {data:'reff_id',name:'reff_id'},
         {data:'name',name:'name'},
         {
           data: 'active',
@@ -482,11 +481,24 @@
    * @description Datatable Index for Shipment
    * 
   */
-  $(document).ready(function() {
+  function shipment_fetch()
+  {
+    let index_url = '{!! route("admin.shipment.index") !!}',
+    query = {
+      date_start: $('#shipment-periode-start').val(),
+      date_end: $('#shipment-periode-end').val(),
+    };
+
     $('#table_shipment').DataTable({
       processing : true,
       serverSide : true,
-      ajax : '{!! route("admin.shipment.index") !!}',
+      "ajax": {
+        "url": index_url,
+        "data": {
+          "date_start": query.date_start,
+          "date_end": query.date_end,
+        }
+      },
       columns: [
         {data:'time',name:'time'},
         {data:'connote',name:'connote'},
@@ -540,13 +552,16 @@
         },
         {data:'action',name:'action'},
       ],
-      drawCallback: function() {
-        $('[data-toggle="popover"]').popover({
-          html:true
-        });
-      }
+      destroy: true,
     });
-  });
+  }
 
+  //For Filter Date in Shipment
+  $(document).ready(function() {
+  	if ($('#shipment-periode-start').length)
+    {
+		  shipment_fetch();
+	  }
+  });
   
 </script>

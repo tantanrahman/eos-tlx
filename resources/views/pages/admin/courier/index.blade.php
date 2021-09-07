@@ -22,8 +22,7 @@
                         <table class="table table-hover table-bordered" id="table_courier">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>CODE</th>
-                                    <th>CODE 2</th>
+                                    <th>REFF ID</th>
                                     <th>NAME</th>
                                     <th>ACTIVE</th>
                                     <th>ACTION</th>

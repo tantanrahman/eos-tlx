@@ -41,14 +41,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                               <label for="code">Code*</label>
-                              <input type="text" name="code" class="form-control @error('code') is-invalid @enderror" id="code" value="{{ old('code') }}" autofocus>
-                            </div>
-                            <div class="form-group col-md-6">
-                              <label for="code_dua">Code 2</label>
-                              <input type="text" name="code_dua" class="form-control @error('code_dua') is-invalid @enderror" id="code_dua" value="{{ old('code_dua') }}">
-                              <small class="form-text text-muted">
-                                <i>Jika tidak ada Code tambahan. Samakan dengan Code pertama.</i>
-                              </small>
+                              <input type="text" name="reff_id" class="form-control @error('reff_id') is-invalid @enderror" id="reff_id" value="{{ old('reff_id') }}" autofocus>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="name">Name*</label>

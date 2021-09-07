@@ -12,10 +12,8 @@ class Courier extends Model
     protected $table = 'courier';
 
     protected $fillable = [
-        'code',
-        'code_dua',
+        'reff_id',
         'name',
-        'logo',
         'website',
         'active'
     ];

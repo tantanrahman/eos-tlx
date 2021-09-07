@@ -32,6 +32,38 @@
 		window.location.href = export_url + url_params;
 	});
 
+	// Date Periode for Shipment
+	$('#shipment-periode-start').datepicker({
+		format: "yyyy-mm-dd",
+		autoclose: true,
+		endDate: "0d",
+	}).on('changeDate', function (e) {
+		var dt = new Date(e.target.value);
+		$("#shipment-periode-end").datepicker("setStartDate", dt);
+
+		shipment_fetch();
+	});
+
+	$('#shipment-periode-end').datepicker({
+		format: "yyyy-mm-dd",
+		autoclose: true,
+		endDate: "0d",
+	}).on('changeDate', function (e) {
+		shipment_fetch();
+	});
+
+	$('body').on('click', '.shipment-export', function (e) {
+		e.preventDefault();
+		let export_url = e.target.href,
+			query = {
+				date_start: $('#shipment-periode-start').val(),
+				date_end: $('#shipment-periode-end').val(),
+			},
+			url_params = '';
+		url_params = '?' + $.param(query);
+		window.location.href = export_url + url_params;
+	});
+
 	//CUSTOMER TYPE
 	$('body').on('change', '#customer-type', function (e) {
 		e.preventDefault();

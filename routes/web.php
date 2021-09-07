@@ -69,6 +69,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::get('export', [App\Http\Controllers\Admin\DropshipController::class, 'export'])->name('dropship.export');
     Route::get('pdf', [App\Http\Controllers\Admin\DropshipController::class, 'pdf'])->name('dropship.pdf');
     Route::post('searchdateDrop', [App\Http\Controllers\Admin\DropshipController::class, 'searchdateDrop'])->name('searchdateDrop');
+    Route::post('searchdateShipment', [App\Http\Controllers\Admin\DropshipController::class, 'searchdateShipment'])->name('searchdateShipment');
     Route::post('shipmentDetails', [App\Http\Controllers\Admin\ShipmentController::class, 'shipmentDetails'])->name('shipmentDetails');
     Route::get('/print/{id}/connote', [App\Http\Controllers\Admin\ShipmentController::class, 'cetakConnote'])->name('cetakConnote');
     Route::get('/print/{id}/label', [App\Http\Controllers\Admin\ShipmentController::class, 'cetakLabel'])->name('cetakLabel');
