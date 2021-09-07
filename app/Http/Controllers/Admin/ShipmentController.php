@@ -77,9 +77,8 @@ class ShipmentController extends Controller
                                             </div>
                                     
                                             <div class="modal-body">
-                                                <a href="'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
-                                                <a href="print/'.$shipment->idx.'/label" type="button" class="btn btn-info"><i class="far fa-envelope"></i> Label</a>
-                                                <a href="print/'.$shipment->idx.'/invoice" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Invoice</a>
+                                                <a href="shipment/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
+                                                
                                             </div>
                                             
                                         </div>
