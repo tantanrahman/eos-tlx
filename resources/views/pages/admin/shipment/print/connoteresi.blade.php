@@ -31,7 +31,6 @@
     </table>
 </header>
 
-<div></div>
 @foreach ($getShipment as $index => $items)
 <table border="1" style="width: 100s" cellpadding="0" cellspacing="0" class="page-break">
     <tr>

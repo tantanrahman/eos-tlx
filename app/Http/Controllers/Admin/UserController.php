@@ -24,9 +24,7 @@ class UserController extends Controller
         
         if($request->ajax())
         {
-            $users = DB::table('users')
-                    ->join('roles','users.role_id','=','roles.id')
-                    ->select('users.id','users.username','users.name','roles.name AS rolename');
+            $users  = User::get_items_name();
             
             return DataTables::of($users)
                     ->addColumn('action', function($user){

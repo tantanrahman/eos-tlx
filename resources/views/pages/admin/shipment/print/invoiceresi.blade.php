@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ url('plugins/bootstrap/css/bootstrap.min.css') }}">
+
 <style>
     th, td, tr { 
         font-size: 12px;
@@ -16,18 +16,17 @@
     <tr>
         <td rowspan="3"><img src="{{ asset('img/tlx_logo.png') }}" style="width:90;"></td>
         <td width=10></td>
-        <th>{{ $getUser->op_name }}</th>
+        <th>{{ $getUser[0]->op_name }}</th>
     </tr>
     <tr>
         <td width=10></td>
-        <td style="font-size: 8;">{{ $getUser->op_address }}</td>
+        <td style="font-size: 8;">{{ $getUser[0]->op_address }}</td>
     </tr>
     <tr>
         <td width=10></td>
-        <td style="font-size: 8;">{{ $getUser->op_address }}</td>
+        <td style="font-size: 8;">{{ $getUser[0]->op_address }}</td>
     </tr>
 </table>
-<hr>
 <table style="width: 100%; border-style: solid;" >
     <tr>
         <td style="font-size: 22; text-align:center;"><b>Commercial Invoice</b></td>
@@ -124,12 +123,15 @@
                 </tr>
                 <tr>
                     <td>Unit :</td>
-                    <td style="border-bottom-style: solid">1
+                    <td style="border-bottom-style: solid">
+                        @php
+                            echo count($getShipment)
+                        @endphp
                     </td>
                 </tr>
                 <tr>
                     <td>Total Weight :</td>
-                    <td style="border-bottom-style: solid">{{ $getShipment[0]->actual_weight }} kg
+                    <td style="border-bottom-style: solid">{{ $getShipment->sum('actual_weight') }} kg
                     </td>
                 </tr>
                 <tr>
@@ -146,7 +148,7 @@
 </table>
 <br />
 <br />
-<table style="width: 100%" border="1" cellpadding="3">
+<table style="width: 100%;" border="1" cellpadding="1" cellspacing="1">
     <tr align="center">
         <td><b>QUANTITY & DESCRIPTION</b></td>
         <td><b>VOLUME</b></td>
@@ -162,9 +164,15 @@
     @endforeach
 
     <tr>
-        <td><b></b></td>
+        <td>
+            <b>
+            @php
+                echo count($getShipment)
+            @endphp
+            </b>
+        </td>
         <td align="right"><b>TOTAL WEIGHT</b></td>
-        <td><b>{{ $getShipment[0]->actual_weight }} kg</b></td>
+        <td><b>{{ $getShipment->sum('actual_weight') }} kg</b></td>
     </tr>
 </table>
 <p>The Value declared is of customs clearance purpose only no commercial value.</p>

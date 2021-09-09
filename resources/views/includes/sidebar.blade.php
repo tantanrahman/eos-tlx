@@ -91,14 +91,14 @@
             </ul>
           </li>
 
-          <li class="nav-item {{ request()->is('admin/bagshipment*') ? 'menu-open' : '' }}">
+          {{-- <li class="nav-item {{ request()->is('admin/bagshipment*') ? 'menu-open' : '' }}">
             <a href="{{ route('admin.bagshipment.index') }}" class="nav-link {{ request()->is('admin/bagshipment*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-briefcase"></i>
             <p style="font-size: 14px">
                 Bag Shipment
             </p>
             </a>
-          </li>
+          </li> --}}
 
           <li class="nav-item {{ request()->is('admin/customer*') ? 'menu-open' : '' }}">
             <a href="{{ route('admin.customer.index') }}" class="nav-link {{ request()->is('admin/customer*') ? 'active' : '' }}">
@@ -118,7 +118,7 @@
             </a>
           </li>
 
-          <li class="nav-item {{ request()->is('admin/finance*') ? 'menu-open' : '' }}">
+          {{-- <li class="nav-item {{ request()->is('admin/finance*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link {{ request()->is('admin/finance*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-money-bill-wave"></i>
             <p style="font-size: 14px">
@@ -152,7 +152,7 @@
                 Pickup List
             </p>
             </a>
-          </li>
+          </li> --}}
 
           <li class="nav-item {{ request()->is('admin/shipment*') ? 'menu-open' : '' }}">
             <a href="{{ route('admin.shipment.index') }}" class="nav-link {{ request()->is('admin/shipment*') ? 'active' : '' }}">
@@ -205,7 +205,7 @@
             </ul>
           </li>
 
-          <li class="nav-item {{ request()->is('admin/tracking_shipment*') ? 'menu-open' : '' }}">
+          {{-- <li class="nav-item {{ request()->is('admin/tracking_shipment*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link {{ request()->is('admin/tracking_shipment*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-map-marked-alt"></i>
             <p style="font-size: 14px">
@@ -224,7 +224,7 @@
                 <span class="right badge badge-danger">PDF</span>
             </p>
             </a>
-          </li>
+          </li> --}}
           
         </ul>
       </nav>

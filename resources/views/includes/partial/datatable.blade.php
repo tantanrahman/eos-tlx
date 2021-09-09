@@ -195,9 +195,9 @@
       serverSide : true,
       ajax : '{!! route("admin.user.index") !!}',
       columns: [
-        {data:'username',name:'users.username'},
-        {data:'name',name:'users.name'},
-        {data:'rolename',name:'role_id'},
+        {data:'username',name:'username'},
+        {data:'name',name:'name'},
+        {data:'role',name:'role'},
         {
           data: 'active',
           render: function(data)
@@ -212,7 +212,7 @@
               }
           }
         },
-        
+        {data:'action',name:'action'}
       ],
     });
   });
@@ -509,9 +509,11 @@
         {data:'ship_name',name:'ship_name'},
         {data:'con_name',name:'con_name'},
         {data:'description',name:'description'},
+        {data:'partner_name',name:'partner_name'},
+        {data:'redoc_connote',name:'redoc_connote'},
         {data:'cou_name',name:'cou_name'},
         {
-          data:'total_weight',name:'total_weight', 
+          data:'weight',name:'weight', 
           render: function(data) 
           {
             if (data==null) 

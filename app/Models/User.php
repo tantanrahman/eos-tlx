@@ -58,10 +58,18 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\dropship');
     }
 
+    /**
+     * @author Tantan
+     * @description Get Data For Relation User
+     * @return void
+     * @created 9 Sep 2021
+     */
     public static function get_items_name()
     {
 
-        $items   = self::join('officeprofile','users.office_profile_id','=','officeprofile.id')->select('officeprofile.name AS op_name','officeprofile.address AS op_address','users.username AS username','officeprofile.photo AS photo','officeprofile.whatsapp AS phone');
+        $items   = self::leftjoin('officeprofile','users.office_id','=','officeprofile.id')
+                        ->leftjoin('roles','users.role_id','=','roles.id')
+                        ->select('officeprofile.name AS op_name','officeprofile.address AS op_address','users.username AS username','officeprofile.photo AS photo','officeprofile.whatsapp AS phone','users.name AS name','roles.name AS role');
     
         return $items->get();
     }

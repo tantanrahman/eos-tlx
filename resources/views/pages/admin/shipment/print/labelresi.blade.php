@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="{{ url('plugins/bootstrap/css/bootstrap.min.css') }}">
 <style>
     th, td, tr { 
         font-size: 12px;
@@ -11,28 +10,32 @@
         padding: 1;
         margin: 1;
     }
+    .page-break{
+        page-break-after: always;
+    }
 </style>
 <table>
     <tr>
         <td rowspan="3"><img src="{{ asset('img/tlx_logo.png') }}" style="width:90;"></td>
         <td width=10></td>
-        <th>{{ $getUser->op_name }}</th>
+        <th>{{ $getUser[0]->op_name }}</th>
     </tr>
     <tr>
         <td width=10></td>
-        <td style="font-size: 8;">{{ $getUser->op_address }}</td>
+        <td style="font-size: 8;">{{ $getUser[0]->op_address }}</td>
     </tr>
     <tr>
         <td width=10></td>
-        <td style="font-size: 8;">{{ $getUser->op_address }}</td>
+        <td style="font-size: 8;">{{ $getUser[0]->op_address }}</td>
     </tr>
 </table>
 <hr border="1">
 
 @foreach ($getShipment as $index => $items)
+<div class="page-break">
     <table style="font-size: 10; width:100%">
         <tr>
-            <td style="font-size: 8">SHIPPING DATE: {{ date("d M Y H:i") }}</td>
+            <td style="font-size: 10">SHIPPING DATE: {{ date("d M Y H:i") }}</td>
             <td style="font-size: 12" align="center">ACCOUNT : <b>{{ $items['ship_ac'] }}</b></td>
         </tr>
         <tr>
@@ -46,9 +49,6 @@
                 </center>
             </td>
         </tr>
-    </table>
-    <hr>
-    <table style="width: 100%">
         <tr>
             <td style="font-size: 22"><b>DELIVER TO</b></td>
             <td align="right" style="font-size: 22"><b>{{ $items['cou_code_dua'] }}</b></td>
@@ -59,26 +59,26 @@
             <br />PHONE: {{ $items['con_phone'] }}
             </td>
         </tr>
-    </table>
-
-    <table style="font-size: 10; width:100%" border="1">
-        <tr>
-            <td width="177" style="border-color: black black white white"><b>DELIVERY INSTRUCTIONS</b></td>
-            <td width="100" align="center" style="border-color: black black white black"><b>NO. OF PIECES</b></td>
-            <td style="border-color: black white white black"><b>CONSIGNMENT WEIGHT</b></td>
-        </tr>
-        <tr>
-            <td style="border-color: white black white white"></td>
-            <td rowspan="2" style="font-size: 13; border-color: white black black black" align="center"><b>@php echo $index + 1 @endphp OF @php echo count($getShipment) @endphp</b></td>
-            
-            <td rowspan="2" style="font-size: 13; border-color: white white black black" align="center"><b>
-                {{ $items['actual_weight'] }} KG</b></td>
-        </tr>
-        <tr>
-            <td style="border-color: white black black white"></td>
-        </tr>
+        <table border="1" style="width:100%" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="177" style="border-color: black black white white"><b>DELIVERY INSTRUCTIONS</b></td>
+                <td width="100" align="center" style="border-color: black black white black"><b>NO. OF PIECES</b></td>
+                <td style="border-color: black white white black"><b>CONSIGNMENT WEIGHT</b></td>
+            </tr>
+            <tr>
+                <td style="border-color: white black white white"></td>
+                <td rowspan="2" style="font-size: 13; border-color: white black black black" align="center"><b>@php echo $index + 1 @endphp OF @php echo count($getShipment) @endphp</b></td>
+                
+                <td rowspan="2" style="font-size: 13; border-color: white white black black" align="center"><b>
+                    {{ $items['actual_weight'] }} KG</b></td>
+            </tr>
+            <tr>
+                <td style="border-color: white black black white"></td>
+            </tr>
+        </table>
     </table>
     <p style="font-size: 8">I/WE AGREE THAT CARRIERS STANDARD TERMS AND CONDITIONS APPLY TO THIS SHIPMENT AND LIMIT THE
         CARRIERS LIABILITY. THE WARSAW CONVENTION MAY ALSO APPLY.</p>
     <h1></h1>
+</div>
 @endforeach

@@ -42,13 +42,13 @@
             <div class="card">
                 <div class="card-body">
                     <div class="btn-group mb-4" role="group" aria-label="Basic example">
-                        <a href="{{ route('admin.shipment.create') }}" class="btn bg-info"><i class="nav-icon fas fa-plus"></i> Tambah Data</a>
-                        <a href="#" class="btn bg-secondary dropship-export">
+                        <a href="{{ route('admin.shipment.create') }}" class="btn bg-info"><i class="nav-icon fas fa-plus"></i> Buat Connote</a>
+                        {{-- <a href="#" class="btn bg-secondary dropship-export">
                             <i class="fas fa-file-excel"></i> Excel
                         </a>
                         <a href="#" class="btn bg-secondary dropship-export">
                             <i class="fas fa-file-pdf"></i> PDF
-                        </a>
+                        </a> --}}
                     </div>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="table_shipment" data-order='[0,"DESC"]' style="width:100%">
@@ -59,6 +59,8 @@
                                     <th>SHIPPER NAME </th>
                                     <th>CONSIGNEE NAME</th>
                                     <th>DESCRIPTION</th>
+                                    <th>PARTNER</th>
+                                    <th>REDOC CONNOTE</th>
                                     <th>COUNTRY</th>
                                     <th>WEIGHT</th>
                                     <th>CREATED BY</th>

@@ -32,7 +32,7 @@
                     <table class="table table-bordered" id="table_user">
                         <thead class="thead-dark">
                             <tr>
-                                <th>USERNAME</>
+                                <th>USERNAME</th>
                                 <th>NAME</th>
                                 <th>ROLE</th>
                                 <th>ACTIVE</th>

@@ -26,6 +26,8 @@ class ShipmentController extends Controller
     {
         $partners   = Partner::get();
 
+        // <a href="shipment/'.$shipment->idx.'/edit" type="button" class="btn btn-info btn-sm" data-id="'.$shipment->idx.'" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="far fa-edit"></i></a>
+
         if($request->ajax())
         {   
             $date_start = ( ! empty($request->get('date_start')) ? $request->get('date_start') : '');
@@ -39,9 +41,8 @@ class ShipmentController extends Controller
                     ->addColumn('action', function($shipment){
 
                         $button =   '<div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="shipment/'.$shipment->idx.'/edit" type="button" class="btn btn-info btn-sm" data-id="'.$shipment->idx.'" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="far fa-edit"></i></a>
+                                        
                                         <button type="button" name="delete" id="'.$shipment->idx.'" class="delete btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
-                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-placement="top" data-target="#ModalShow'.$shipment->idx.'" data-id="{{$shipment->idx}}" title="VIEW"><i class="fas fa-search"></i></button>
                                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-placement="top" data-target="#ModalPrint'.$shipment->idx.'" data-id="{{$shipment->idx}}" title="PRINT"><i class="fas fa-print"></i></button>
                                     </div>
                                     
@@ -116,8 +117,6 @@ class ShipmentController extends Controller
      */
     public function store(Request $request)
     {        
-
-        dd($request);
         
         $validateData = Customer::where('account_code', '=', $request->input('account_code'))->first();
         
@@ -307,7 +306,12 @@ class ShipmentController extends Controller
      */
     public function edit(Shipment $shipment)
     {
-        //
+        $users          = User::where('role_id','=',2)->get();
+        $packagetypes   = PackageType::where('active','=',1)->get();
+        $partners       = Partner::where('active','=',1)->get();
+        $customers      = Customer::get();
+
+        return view('pages.admin.shipment.edit', compact('shipment', 'users', 'packagetypes', 'partners', 'customers'));
     }
 
     /**
