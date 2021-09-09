@@ -212,7 +212,7 @@
               }
           }
         },
-        {data:'action',name:'action'}
+        
       ],
     });
   });
@@ -245,6 +245,8 @@
               }
           }
         },
+        {data:'photo',name:'photo'},
+        {data:'action',name:'action'}
       ],
     });
   });
@@ -509,7 +511,7 @@
         {data:'description',name:'description'},
         {data:'cou_name',name:'cou_name'},
         {
-          data:'weight',name:'weight', 
+          data:'total_weight',name:'total_weight', 
           render: function(data) 
           {
             if (data==null) 

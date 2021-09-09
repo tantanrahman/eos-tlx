@@ -24,7 +24,7 @@ class PrintController extends Controller
         
         $pdf = PDF::loadView('pages.admin.shipment.print.connoteresi', compact('getShipment','getUser'))->setPaper('a4','landscape');
 
-        return $pdf->stream('Connote-'.$getShipment[0]['connote'].'.pdf');
+        return $pdf->setOptions(['isHtml5ParserEnabled' => false, 'isRemoteEnabled' => true])->stream('Connote-'.$getShipment[0]['connote'].'.pdf');
 
     }
 

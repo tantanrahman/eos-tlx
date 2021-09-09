@@ -28,6 +28,8 @@
                                     <th>#</th>
                                     <th>NAME</th>
                                     <th>ACTIVE</th>
+                                    <th>PHOTO</th>
+                                    <th>ACTION</th>
                                 </tr>
                             </thead>
 

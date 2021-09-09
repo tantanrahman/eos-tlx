@@ -71,7 +71,8 @@ class Shipment extends Model
                      ->leftjoin('shipment_details','shipment.id','=','shipment_details.shipment_id')
                      ->leftjoin('partner','shipment.partner_id','=','partner.id')
                      ->join('users','shipment.marketing_id','=','users.id')
-                     ->select('shipment.id AS idx','shipment.created_at AS time','shipment.connote AS connote','con.name AS con_name','customer.name AS ship_name','customer.address AS ship_address','customer.account_code AS account_code','shipment.description AS description','country.name AS cou_name','shipment_details.sum_weight AS weight','shipment.created_by AS created','users.name AS marketing','shipment.payment_status AS payment_status','shipment.printed AS printed')->orderBy('shipment.created_at','DESC');
+                     ->select('shipment.id AS idx','shipment.created_at AS time','shipment.connote AS connote','con.name AS con_name','customer.name AS ship_name','customer.address AS ship_address','customer.account_code AS account_code','shipment.description AS description','country.name AS cou_name','shipment_details.sum_weight AS weight','shipment.created_by AS created','users.name AS marketing','shipment.payment_status AS payment_status','shipment.printed AS printed')
+                     ->orderBy('shipment.created_at','DESC');
 
             if ( ! empty($date_start))
             {

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\OfficeProfile;
+use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 class OfficeProfileController extends Controller
@@ -16,11 +18,23 @@ class OfficeProfileController extends Controller
      */
     public function index(Request $request)
     {
-        $officeprofile = OfficeProfile::get();
 
         if($request->ajax())
         {
-           return DataTables::of($officeprofile)->make(true);
+            $officeprofile = OfficeProfile::get();
+        
+            return DataTables::of($officeprofile)
+                ->addColumn('photo', function($officeprofile){
+                    $url = URL::asset("/storage/officeprofile/".$officeprofile->photo);
+                    return '<img src='.$url.' border="0" height="60" width="100" class="img-rounded" text-align="center" />';
+                })
+                ->addColumn('action', function($officeprofile){
+                    $button = '<a href="officeprofile/'.$officeprofile->id.'/edit" data-toggle="tooltip"  data-id="'.$officeprofile->id.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>';
+                    $button .= '&nbsp;&nbsp;';
+                    return $button;
+                })
+                ->rawColumns(['photo','action'])
+                ->make(true);
         }
 
         return view('pages.admin.officeprofile.index');
@@ -52,6 +66,10 @@ class OfficeProfileController extends Controller
             'address.required'  => 'ADDRESS WAJIB DIISI'
         ]);
 
+        //UPLOAD GAMBAR
+        $photo = $request->file('photo');
+        $photo->storeAs('public/officeprofile', $photo->hashName());
+        
         $data = OfficeProfile::create([
             'name'          => Request()->name,
             'about'         => Request()->about,
@@ -63,6 +81,7 @@ class OfficeProfileController extends Controller
             'youtube'       => Request()->youtube,
             'twitter'       => Request()->twitter,
             'tiktok'        => Request()->tiktok,
+            'photo'         => $photo->hashName()
         ]);
 
         if($data)
@@ -92,9 +111,9 @@ class OfficeProfileController extends Controller
      * @param  \App\Models\OfficeProfile  $officeProfile
      * @return \Illuminate\Http\Response
      */
-    public function edit(OfficeProfile $officeProfile)
+    public function edit(OfficeProfile $officeprofile)
     {
-        //
+        return view('pages.admin.officeprofile.edit', compact('officeprofile'));
     }
 
     /**
@@ -104,9 +123,57 @@ class OfficeProfileController extends Controller
      * @param  \App\Models\OfficeProfile  $officeProfile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OfficeProfile $officeProfile)
+    public function update(Request $request, OfficeProfile $officeprofile)
     {
-        //
+        $officeprofile = OfficeProfile::findOrFail($officeprofile->id);
+
+        if($request->file('photo') == "")
+        {
+            $officeprofile->update([
+                'name'          => Request()->name,
+                'about'         => Request()->about,
+                'address'       => Request()->address,
+                'embed_gmap'    => Request()->embed_gmap,
+                'facebook'      => Request()->facebook,
+                'whatsapp'      => Request()->whatsapp,
+                'instagram'     => Request()->instagram,
+                'youtube'       => Request()->youtube,
+                'twitter'       => Request()->twitter,
+                'tiktok'        => Request()->tiktok,    
+            ]);
+        }
+        else
+        {
+            //Delete Old Image
+            Storage::disk('local')->delete('public/officeprofile'.$officeprofile->photo);
+
+            //Upload New Image  
+            $photo = $request->file('photo');
+            $photo->storeAs('public/officeprofile', $photo->hashName());
+
+            $officeprofile->update([
+                'name'          => Request()->name,
+                'about'         => Request()->about,
+                'address'       => Request()->address,
+                'embed_gmap'    => Request()->embed_gmap,
+                'facebook'      => Request()->facebook,
+                'whatsapp'      => Request()->whatsapp,
+                'instagram'     => Request()->instagram,
+                'youtube'       => Request()->youtube,
+                'twitter'       => Request()->twitter,
+                'tiktok'        => Request()->tiktok,
+                'photo'         => $photo->hashName()
+            ]);
+        }
+
+        if($officeprofile)
+        {
+            return redirect(route('admin.officeprofile.index'))->with('toast_success', 'Berhasil Update Data');
+        }
+        else 
+        {
+            return redirect(route('admin.officeprofile.index'))->with('toast_error', 'Gagal');
+        }
     }
 
     /**

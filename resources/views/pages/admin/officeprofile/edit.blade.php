@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title','Create Office Profile')
+@section('title','Edit Office Profile')
 
 @section('content')
 <div class="content-wrapper">
@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-
+    
     <section class="content">
         <div class="container-fluid">
             <div class="alert alert-primary alert-dismissible fade show" role="alert">
@@ -35,12 +35,13 @@
                     Input Office Profile
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.officeprofile.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.officeprofile.update', $officeprofile->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <label for=""><b>Nama *</b></label>
-                                <input type="text" class="form-control @error('name') is invalid @enderror" name="name" autofocus oninput="this.value = this.value.toUpperCase()">
+                                <input type="text" class="form-control @error('name') is invalid @enderror" name="name" autofocus oninput="this.value = this.value.toUpperCase()" value="{{ $officeprofile->name }}">
                                 @error('name')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
@@ -49,7 +50,7 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <label for=""><b>About</b></label>
-                                <textarea name="about" id="about" rows="3" class="form-control"></textarea>
+                                <textarea name="about" id="about" rows="3" class="form-control">{{ $officeprofile->about }}</textarea>
                                 @error('about')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
@@ -60,7 +61,7 @@
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <label for=""><b>Address</b></label>
-                                <textarea name="address" id="address" rows="3" class="form-control"></textarea>
+                                <textarea name="address" id="address" rows="3" class="form-control">{{ $officeprofile->address }}</textarea>
                                 @error('address')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
@@ -69,7 +70,7 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <label for=""><b>Embed Gmap</b></label>
-                                <textarea name="embed_gmap" id="embed_gmap" rows="3" class="form-control"></textarea>
+                                <textarea name="embed_gmap" id="embed_gmap" rows="3" class="form-control">{{ $officeprofile->embed_gmap }}</textarea>
                                 @error('embed_gmap')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
@@ -80,7 +81,7 @@
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <label for=""><b>Facebook</b></label>
-                                <input type="text" class="form-control @error('facebook') is invalid @enderror" name="facebook" autofocus>
+                                <input type="text" class="form-control @error('facebook') is invalid @enderror" value="{{ $officeprofile->facebook }}" name="facebook" autofocus>
                                 <small class="form-text text-muted">
                                     <i>https://facebook.com/<b>contoh_medsos</b></i>
                                 </small>
@@ -92,7 +93,7 @@
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <label for=""><b>Whatsapp</b></label>
-                                <input type="text" class="form-control @error('whatsapp') is invalid @enderror" name="whatsapp" autofocus>
+                                <input type="text" class="form-control @error('whatsapp') is invalid @enderror" value="{{ $officeprofile->whatsapp }}" name="whatsapp" autofocus>
                                 <small class="form-text text-muted">
                                     <i>6281221222333</b></i>
                                 </small>
@@ -104,7 +105,7 @@
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <label for=""><b>Instagram</b></label>
-                                <input type="text" class="form-control @error('instagram') is invalid @enderror" name="instagram" autofocus>
+                                <input type="text" class="form-control @error('instagram') is invalid @enderror" {{ $officeprofile->instagram }} name="instagram" autofocus>
                                 <small class="form-text text-muted">
                                     <i>https://instagram.com/<b>contoh_medsos</b></i>
                                 </small>
@@ -118,7 +119,7 @@
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <label for=""><b>Youtube</b></label>
-                                <input type="text" class="form-control @error('youtube') is invalid @enderror" name="youtube" autofocus>
+                                <input type="text" class="form-control @error('youtube') is invalid @enderror" value="{{ $officeprofile->youtube }}" name="youtube" autofocus>
                                 <small class="form-text text-muted">
                                     <i>https://youtube.com/<b>contoh_medsos</b></i>
                                 </small>
@@ -130,7 +131,7 @@
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <label for=""><b>Twitter</b></label>
-                                <input type="text" class="form-control @error('twitter') is invalid @enderror" name="twitter" autofocus>
+                                <input type="text" class="form-control @error('twitter') is invalid @enderror" value="{{ $officeprofile->twitter }}" name="twitter" autofocus>
                                 <small class="form-text text-muted">
                                     <i>https://twitter.com/<b>contoh_medsos</b></i>
                                 </small>
@@ -142,7 +143,7 @@
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <label for=""><b>Tiktok</b></label>
-                                <input type="text" class="form-control @error('tiktok') is invalid @enderror" name="tiktok" autofocus>
+                                <input type="text" class="form-control @error('tiktok') is invalid @enderror" value="{{ $officeprofile->tiktok }}" name="tiktok" autofocus>
                                 <small class="form-text text-muted">
                                     <i>https://tiktok.com/<b>contoh_medsos</b></i>
                                 </small>
@@ -154,7 +155,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="font-weight-bold">Upload Logo*</label>
-                                <input type="file" class="form-control-file @error('photo') is-invalid @enderror" name="photo">
+                                <input type="file" class="form-control-file @error('photo') is-invalid @enderror" value="{{ $officeprofile->photo }}" name="photo">
                                 @error('photo')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -173,4 +174,3 @@
         </div>
     </section>
 </div>
-@endsection

@@ -22,7 +22,8 @@ class OfficeProfile extends Model
         'instagram',
         'youtube',
         'twitter',
-        'tiktok'
+        'tiktok',
+        'photo'
     ];
 
     public function users()

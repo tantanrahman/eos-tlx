@@ -116,6 +116,8 @@ class ShipmentController extends Controller
      */
     public function store(Request $request)
     {        
+
+        dd($request);
         
         $validateData = Customer::where('account_code', '=', $request->input('account_code'))->first();
         
