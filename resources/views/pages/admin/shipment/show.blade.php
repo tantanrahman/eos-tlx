@@ -1,5 +1,5 @@
 <style>
-    th, td, tr { font-size: 14px; }
+    th, td, tr { font-size: 14px; border-collapse: collapse; }
 </style>
 <table>
     <tr>
@@ -10,11 +10,20 @@
         <td>{{ $getUser->op_address }}</td>
     </tr>
 </table>
+<table></table>
 <table border="1" cellpadding="3">
     <tr>
         <td style="background-color: gray;"><b>A. SHIPPER</b></td>
-        <td align="center" style="border-bottom-color: white">
+        <td align="center" style="border-bottom-color: gray;">
             <b>CONSIGNMENT NOTE</b>
+            
+        </td>
+        <td>
+            @php
+                $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
+            @endphp
+            
+            {!! $generator->getBarcode($getShipment->connote, $generator::TYPE_CODE_128) !!}
         </td>
     </tr>
     <tr>
@@ -23,12 +32,12 @@
                 <tr>
                     <td width="51">A.1. Account</td>
                     <td width="5">:</td>
-                    <td width="225">{{ $getShipment->ship_ac }} / {{ $getShipment->marketing }}</td>
+                    <td width="225">{{ $getShipment->ship_ac }} / {{ $getUser->username }}</td>
                 </tr>
                 <tr>
                     <td>A.2. Name</td>
                     <td>:</td>
-                    <td>{{ $getShipment->ship_name }} / {{ $getShipment->marketing }}</td>
+                    <td>{{ $getShipment->ship_name }} / {{ $getUser->username }}</td>
                 </tr>
                 <tr>
                     <td>A.3. Address</td>
@@ -48,13 +57,14 @@
     <tr>
         <td style="background-color: gray;"><b>B. CONSIGNEE</b></td>
         <td style="background-color: gray;"><b>D. AUTHORIZATION</b></td>
+        <tr></tr>
     </tr>
     <tr>
         <td>
             <table>
                 <tr>
-                    <td width="51">B.1. Name</td>
-                    <td width="5">:</td>
+                    <td>B.1. Name</td>
+                    <td>:</td>
                     <td>{{ $getShipment->con_name }}</td>
                 </tr>
                 <tr>

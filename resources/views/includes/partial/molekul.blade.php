@@ -44,6 +44,10 @@
 		shipment_fetch();
 	});
 
+	$('body').on('change', '#partner_multiple', function (e) {
+		shipment_fetch();
+	});
+
 	$('#shipment-periode-end').datepicker({
 		format: "yyyy-mm-dd",
 		autoclose: true,
@@ -158,6 +162,7 @@
         }
     });
    
+	//Calculate For Shipment Details
     $(".btn-submit").click(function(e){
   
         e.preventDefault();
@@ -169,15 +174,6 @@
 		var sum_volume	 	= length*width*height;
 		var volumetrick		= sum_volume/5000;
 		var sum_weight 		= Math.ceil(actual_weight);
-
-		// $.ajax({
-        //     type:'POST',
-        //     url:"{{ route('admin.shipment.store') }}",
-        //     data:{
-		// 			actual_weight, length, width, height, sum_volume, sum_weight, volume, total_weight
-		// 		 },
-        // });
-
 
 		$("table tbody").on('click','#remove', function(){
 			$(this).closest('tr').remove();
@@ -211,5 +207,12 @@
 		$('#total-volume').text(volume);
 		$('#sum-weight').text(total_weight);
     });
+
+	$(document).ready(function() {
+		$('.partner-multiple-select').select2({
+			theme: "bootstrap4",
+			placeholder: "Select a Partner"
+		});
+	});
 	
 </script>

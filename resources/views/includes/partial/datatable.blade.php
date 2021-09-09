@@ -487,6 +487,7 @@
     query = {
       date_start: $('#shipment-periode-start').val(),
       date_end: $('#shipment-periode-end').val(),
+      partner: $('#partner_multiple').val(),
     };
 
     $('#table_shipment').DataTable({
@@ -497,6 +498,7 @@
         "data": {
           "date_start": query.date_start,
           "date_end": query.date_end,
+          "partner": query.partner,
         }
       },
       columns: [

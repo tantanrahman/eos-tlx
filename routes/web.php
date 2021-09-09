@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\ShipmentController;
 use App\Http\Controllers\Admin\TrackingShipmentController;
 use App\Http\Controllers\Admin\TrackingStatusController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\PrintController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,9 +72,10 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::post('searchdateDrop', [App\Http\Controllers\Admin\DropshipController::class, 'searchdateDrop'])->name('searchdateDrop');
     Route::post('searchdateShipment', [App\Http\Controllers\Admin\DropshipController::class, 'searchdateShipment'])->name('searchdateShipment');
     Route::post('shipmentDetails', [App\Http\Controllers\Admin\ShipmentController::class, 'shipmentDetails'])->name('shipmentDetails');
-    Route::get('/print/{id}/connote', [App\Http\Controllers\Admin\ShipmentController::class, 'cetakConnote'])->name('cetakConnote');
-    Route::get('/print/{id}/label', [App\Http\Controllers\Admin\ShipmentController::class, 'cetakLabel'])->name('cetakLabel');
-    Route::get('/print/{id}/invoice', [App\Http\Controllers\Admin\ShipmentController::class, 'cetakInvoice'])->name('cetakInvoice');
+    Route::get('searchmultiplepartner', [App\Http\Controllers\Admin\ShipmentController::class, 'searchmultiplepartner'])->name('searchmultiplepartner');
+    Route::get('printConnote/{shipment}', [App\Http\Controllers\Admin\PrintController::class, 'printConnote'])->name('printConnote');
+    Route::get('printLabel/{shipment}', [App\Http\Controllers\Admin\PrintController::class, 'printLabel'])->name('printLabel');
+    Route::get('printInvoice/{shipment}', [App\Http\Controllers\Admin\PrintController::class, 'printInvoice'])->name('printInvoice');
 });
 
 Route::get('autocompleteCity', [App\Http\Controllers\Admin\CityController::class, 'autocompleteCity'])->name('autocompleteCity');

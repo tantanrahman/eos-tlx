@@ -2,22 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Svg\Tag\Rect;
 use App\Models\User;
 use App\Models\Partner;
 use App\Models\Customer;
 use App\Models\Shipment;
-use Barryvdh\DomPDF\Facade as PDF;
 use App\Models\PackageType;
 use Illuminate\Http\Request;
 use App\Models\ShipmentDetail;
-use Illuminate\Support\Carbon;
 use App\Models\TrackingShipment;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Container\RewindableGenerator;
 
 class ShipmentController extends Controller
 {
@@ -28,13 +24,16 @@ class ShipmentController extends Controller
      */
     public function index(Request $request)
     {
+        $partners   = Partner::get();
+
         if($request->ajax())
         {   
             $date_start = ( ! empty($request->get('date_start')) ? $request->get('date_start') : '');
-			$date_end = ( ! empty($request->get('date_end')) ? $request->get('date_end') : '');
+			$date_end   = ( ! empty($request->get('date_end')) ? $request->get('date_end') : '');
+            $partner    = ( ! empty($request->get('partner')) ? $request->get('partner') : '');
 
             $idx = [];
-            $shipments  = Shipment::get_items($date_start,$date_end);
+            $shipments  = Shipment::get_items($date_start,$date_end,$partner);
            
             return DataTables::of($shipments)
                     ->addColumn('action', function($shipment){
@@ -57,9 +56,9 @@ class ShipmentController extends Controller
                                             </div>
                                     
                                             <div class="modal-body">
-                                                <a href="print/'.$shipment->idx.'/connote" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
-                                                <a href="print/'.$shipment->idx.'/label" type="button" class="btn btn-info"><i class="far fa-envelope"></i> Label</a>
-                                                <a href="print/'.$shipment->idx.'/invoice" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Invoice</a>
+                                                <a href="printConnote/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
+                                                <a href="printLabel/'.$shipment->idx.'" type="button" class="btn btn-info"><i class="far fa-envelope"></i> Label</a>
+                                                <a href="printInvoice/'.$shipment->idx.'" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Invoice</a>
                                             </div>
                                             
                                         </div>
@@ -78,7 +77,6 @@ class ShipmentController extends Controller
                                     
                                             <div class="modal-body">
                                                 <a href="shipment/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
-                                                
                                             </div>
                                             
                                         </div>
@@ -92,7 +90,7 @@ class ShipmentController extends Controller
                     ->make(true);
         }
 
-        return view('pages.admin.shipment.index');
+        return view('pages.admin.shipment.index', compact('partners'));
     }
 
     /**
@@ -296,11 +294,7 @@ class ShipmentController extends Controller
      */
     public function show(Shipment $shipment, User $users)
     {
-        $getShipment    = Shipment::get_items_name($shipment->id);
-
-        $getUser        = User::get_items_name($shipment->id);
-
-        return view('pages.admin.shipment.show', compact('getShipment','getUser'));
+        //
     }
 
     /**
@@ -370,8 +364,8 @@ class ShipmentController extends Controller
     }
 
     /**
-     * Get Connote
-     *
+     * @author Tantan
+     * @decription generate connote
      * @param Request $request
      * @return void
      */
@@ -403,57 +397,6 @@ class ShipmentController extends Controller
 
     /**
      * @author Tantan
-     * @description Print Resi for Shipment
-     * @created 3 Sep 2021
-     */
-    public function cetakConnote(Request $request)
-    {   
-    
-        $getShipment = Shipment::get_items();
-        // dd($getShipment);
-
-        $pdf = PDF::loadView('pages.admin.shipment.print.connoteresi', compact('getShipment'));
-
-        return $pdf->download('Connote.pdf');
-
-    }
-
-    /**
-     * @author Tantan
-     * @description Print Label for Shipment
-     * @created 6 Sep 2021
-     */
-    public function cetakLabel(Request $request, $date_start, $date_end)
-    {
-
-        $getShipment = Shipment::get_items($date_start,$date_end);
-        // dd($getShipment);
-
-        $pdf = PDF::loadView('pages.admin.shipment.print.labelresi', compact('getShipment'));
-
-        return $pdf->download('Label.pdf');
-
-    }
-
-    /**
-     * @author Tantan
-     * @description Print Invoice for Shipment
-     * @created 6 Sep 2021
-     */
-    public function cetakInvoice(Request $request, $date_start, $date_end)
-    {
-
-        $getShipment = Shipment::get_items($date_start,$date_end);
-        // dd($getShipment);
-
-        $pdf = PDF::loadView('pages.admin.shipment.print.invoiceresi', compact('getShipment'));
-
-        return $pdf->download('Invoice.pdf');
-
-    }
-
-    /**
-     * @author Tantan
      * @description Search Date Shipment 
      * @created 7 Sep 2021
      */
@@ -466,4 +409,5 @@ class ShipmentController extends Controller
 
         // return view('pages.admin.dropship.index', compact('data'));
     }
+
 }

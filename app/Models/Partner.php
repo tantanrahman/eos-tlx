@@ -16,4 +16,16 @@ class Partner extends Model
         'name',
         'active'
     ];
+
+    /**
+     * @author Tantan
+     * @description Multiple Filter Shipment
+     * @created 7 Sep 2021
+     */
+    public static function get_partner_filter()
+    {
+        $items = self::select('name');
+
+        return $items->get();
+    }
 }

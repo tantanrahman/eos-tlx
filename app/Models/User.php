@@ -61,7 +61,7 @@ class User extends Authenticatable
     public static function get_items_name()
     {
 
-        $items   = self::join('officeprofile','users.office_profile_id','=','officeprofile.id')->select('officeprofile.name AS op_name','officeprofile.address AS op_address');
+        $items   = self::join('officeprofile','users.office_profile_id','=','officeprofile.id')->select('officeprofile.name AS op_name','officeprofile.address AS op_address','users.username AS username');
     
         return $items->first();
     }
