@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ShipmentExport;
 use App\Models\User;
 use App\Models\Partner;
 use App\Models\Customer;
@@ -13,6 +14,7 @@ use App\Models\TrackingShipment;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class ShipmentController extends Controller
@@ -337,6 +339,18 @@ class ShipmentController extends Controller
         $shipment = Shipment::where('id',$id)->delete();
 
         return response()->json($shipment);
+    }
+    
+    /**
+     * @author Tantan
+     * @description Export Shipment XLSX
+     * @created 10 Sep 2021
+     */
+
+    public function exportShipment()
+    {
+        return Excel::download(new ShipmentExport(), 'Shipment '.date("Y-m-d").'.xlsx');
+
     }
 
     /**

@@ -43,10 +43,10 @@
                 <div class="card-body">
                     <div class="btn-group mb-4" role="group" aria-label="Basic example">
                         <a href="{{ route('admin.shipment.create') }}" class="btn bg-info"><i class="nav-icon fas fa-plus"></i> Buat Connote</a>
-                        {{-- <a href="#" class="btn bg-secondary dropship-export">
+                        <a href="{{ route('admin.shipment.export') }}" class="btn bg-secondary">
                             <i class="fas fa-file-excel"></i> Excel
                         </a>
-                        <a href="#" class="btn bg-secondary dropship-export">
+                        {{-- <a href="#" class="btn bg-secondary dropship-export">
                             <i class="fas fa-file-pdf"></i> PDF
                         </a> --}}
                     </div>

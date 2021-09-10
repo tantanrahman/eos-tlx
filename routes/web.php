@@ -68,6 +68,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::resource('tracking_status', TrackingStatusController::class);
     Route::resource('tracking_shipment', TrackingShipmentController::class);
     Route::get('export', [App\Http\Controllers\Admin\DropshipController::class, 'export'])->name('dropship.export');
+    Route::get('exportShipment', [App\Http\Controllers\Admin\ShipmentController::class, 'exportShipment'])->name('shipment.export');
     Route::get('pdf', [App\Http\Controllers\Admin\DropshipController::class, 'pdf'])->name('dropship.pdf');
     Route::post('searchdateDrop', [App\Http\Controllers\Admin\DropshipController::class, 'searchdateDrop'])->name('searchdateDrop');
     Route::post('searchdateShipment', [App\Http\Controllers\Admin\DropshipController::class, 'searchdateShipment'])->name('searchdateShipment');
