@@ -117,22 +117,9 @@ class Customer extends Model
 	 */
 	public static function get_apikey()
 	{
-		$query = DB::raw("
-			customer.name,
-			customer.company_name,
-			customer.address,
-			customer.city_id,
-			customer.country_id,
-			customer.postal_code,
-			customer.phone
-		");
 
-		$apikey = self::join('country','customer.country_id','=','country.id')
-				->join('city','customer.city_id','=','city.id')
-				->select($query)
-				->orderBy(DB::raw('RAND()'))->take(8);
-
-		return $apikey->get();
+		$code = substr(strftime("%Y", time()),2);
+		return $code;
 
 	}
 

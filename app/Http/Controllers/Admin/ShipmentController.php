@@ -105,8 +105,10 @@ class ShipmentController extends Controller
         $packagetypes   = PackageType::all();
         $partners       = Partner::all();
         $nextId         = Customer::next_id();
+        $apikey         = Customer::get_apikey();
+        $dateRan        = sha1(date("Y-m-d H:i:s"));
 
-        return view('pages.admin.shipment.create', compact('packagetypes','partners','users','nextId'));
+        return view('pages.admin.shipment.create', compact('packagetypes','partners','users','nextId','apikey', 'dateRan'));
     }
 
     /**
@@ -116,8 +118,8 @@ class ShipmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
-        
+    {   
+
         $validateData = Customer::where('account_code', '=', $request->input('account_code'))->first();
         
         if($validateData === null)
@@ -135,12 +137,10 @@ class ShipmentController extends Controller
             $postal             = $request->postal_code;
             $phones             = $request->phone;
             $group              = $request->group;
+            $apikey             = $request->apikey;
             
-    
             foreach ($acount_codes as $key => $value) 
             {
-    
-                $apikey = Customer::get_apikey();
     
                 $dataCustomers[] = Customer::create([
                     'account_code'  => $value,
@@ -155,7 +155,7 @@ class ShipmentController extends Controller
                     'postal_code'   => $postal[$key],
                     'phone'         => $phones[$key],
                     'group'         => $group[$key],
-                    'apikey'        => md5($apikey),
+                    'apikey'        => md5($apikey[$key]),
                     'created_by'    => Auth::user()->name
                 ]);
 
@@ -195,7 +195,7 @@ class ShipmentController extends Controller
                 //Input Shipment Details (Volume)
                 $dataShipmentDetail[] = ShipmentDetail::create([
                     'shipment_id'           => $shipmentId,
-                    'actual_weight'         => $actual_weights[$key],
+                    'actual_weight'         => $value,
                     'length'                => $lengths[$key],
                     'width'                 => $widths[$key],
                     'height'                => $heights[$key],

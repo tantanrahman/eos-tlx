@@ -39,9 +39,9 @@
                                         <div>
                                             <input type="hidden" id="connote" class="form-control" name="connote" readonly>
                                         </div>
-                                        {{-- <div>
-                                            <input type="hidden" class="form-control" name="apikey[0]" readonly>
-                                        </div> --}}
+                                        <div>
+                                            <input type="hidden" class="form-control" name="apikey[0]" value="{{ $apikey + $nextId }}" readonly>
+                                        </div>
                                         <div>
                                             <input type="hidden" class="form-control" name="id[0]" value="{{ $nextId ?? '' }}" readonly>
                                         </div>
@@ -151,9 +151,9 @@
                                     <div>
                                         <input type="hidden" class="form-control" name="id[1]" value="{{ $nextId + 1 ?? '' }}" readonly>
                                     </div>
-                                    {{-- <div>
-                                        <input type="hidden" class="form-control" name="apikey[1]" readonly>
-                                    </div> --}}
+                                    <div>
+                                        <input type="hidden" class="form-control" name="apikey[1]" value="{{ $apikey + $nextId + 1 }}" readonly>
+                                    </div>
                                     <div>
                                         <input type="hidden" class="form-control" name="group[]" value="consignee" readonly>
                                     </div>
