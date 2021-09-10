@@ -142,7 +142,7 @@ class ShipmentController extends Controller
     
                 $apikey = Customer::get_apikey();
     
-                $dataCustomers = Customer::create([
+                $dataCustomers[] = Customer::create([
                     'account_code'  => $value,
                     'id'            => $idx[$key],
                     'name'          => $names[$key],
