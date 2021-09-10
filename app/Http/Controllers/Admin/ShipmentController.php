@@ -277,7 +277,7 @@ class ShipmentController extends Controller
 
         }
 
-        if($dataCustomers || $dataShipment)
+        if($dataShipment)
         {
             return redirect(route('admin.shipment.index'))->with('toast_success', 'Berhasil menambah Data');
         }
