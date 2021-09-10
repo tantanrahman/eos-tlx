@@ -1,45 +1,35 @@
-<style>
-    th, td {
-        font-family: sans-serif;
-        font-size: 12px;
-        
-    }
-
-    @page {
-        margin: 10;
-    }
-    header { position: fixed; top: -60px; left: 0px; right: 0px; background-color: lightblue; height: 50px; }
-    
-    .page-break{
-        page-break-after: always;
-    }
-
-</style>
-
+<html>
+<head>
+    <title>Shipment | Connote</title>
+    <link rel="stylesheet" href="{{ asset('dis') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/print_style.css') }}">
+</head>
+<body>
 <header>
-    <table cellpadding="0" cellspacing="0">
+    <table  cellpadding="1" cellspacing="0" style="width:100%">
         <tr>
-            <td rowspan="3" style="padding-right: 20%px !important"><img src="{{ url("storage/officeprofile/".$getUser[0]->photo) }}" style="width:90;"></td>
+            <td rowspan="3" style="padding-right: -100px !important"><img src="{{ url("storage/officeprofile/".$getUser[0]->photo) }}" style="width:90;"></td>
             <th style="text-align: left">{{ $getUser[0]->op_name }}</th>
         </tr>
         <tr>
             <td style="font-size: 8;">{{ $getUser[0]->op_address }}</td>
         </tr>
         <tr>
-            <td style="font-size: 8;">{{ $getUser[0]->phone }}</td>
+            <td style="font-size: 8;">Phone: {{ $getUser[0]->phone }}</td>
         </tr>
     </table>
 </header>
-
+    
+<main>
 @foreach ($getShipment as $index => $items)
-<table border="1" style="width: 100s" cellpadding="0" cellspacing="0" class="page-break">
+<table border="1" style="width: 100%" cellpadding="3" cellspacing="0" class="page-break">
     <tr>
-        <th style="background-color: gray; width:50%;">A. SHIPPER</th>
-        <th style="text-align: center; border-bottom-style: hidden; border-bottom-color: white;">CONSIGNMENT NOTE</th>
+        <th style="text-align: left; background-color: gray; width:50%;">A. SHIPPER</th>
+        <th style="text-align: center; border-bottom-style: hidden;">CONSIGNMENT NOTE</th>
     </tr>
     <tr>
         <td>
-            <table>
+            <table style="width: 100%">
                 <tr>
                     <td>A.1. Account</td>
                     <td>:</td>
@@ -62,7 +52,7 @@
                 </tr>
             </table>
         </td>
-        <td style="border-top-color: white">
+        <td style="border-top-style: hidden">
             <center>
             <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
                 $items->connote, 'C93')}}" height="45" width="300">
@@ -72,12 +62,12 @@
         </td>
     </tr>
     <tr>
-        <th style="background-color: gray;">B. CONSIGNEE</th>
-        <th style="background-color: gray;">D. AUTHORIZATION</th>
+        <th style="text-align: left; background-color: gray;"> B. CONSIGNEE</th>
+        <th style="text-align: left; background-color: gray;">D. AUTHORIZATION</th>
     </tr>
     <tr>
         <td>
-            <table>
+            <table style="width: 100%">
                 <tr>
                     <td>B.1. Name</td>
                     <td>:</td>
@@ -123,7 +113,7 @@
     </tr>
     <tr>
         <td>
-            <table>
+            <table style="width: 100%">
                 <tr>
                     <td>C.1. Description</td>
                     <td>:</td>
@@ -177,8 +167,8 @@
         </td>
     </tr>
     <tr>
-        <td style="border-top-style: hidden; mt:3;">
-            <table class="center" border="1" style="width: 100%; solid black; margin-left: 10; margin-right: 10;" cellpadding="0" cellspacing="0">
+        <td rowspan="3" style="border-top-style: hidden; mt:3;">
+            <table class="center" border="1" style="width: 100%; solid black; margin-left: 10; margin-right: 10;" cellpadding="3">
                 <tr>
                     <th><b>Quantity</b></th>
                     <th><b>Length</b></th>
@@ -195,13 +185,41 @@
                     </tr>
                 @endforeach
             </table>
+            <p style="text-align: center; font-size:14; border-top-style: hidden"><b>{{ $items->partner }}</b></p>
+        </td>
+        <td style="background-color: gray;"><b>E. DELIVERY INSTRUCTIONS</b></td>
+        
+    </tr>
+    <tr>
+        
+        <td>{{ $items['delivery_intructions'] }}</td>
+    </tr>
+    
+    {{-- <tr>
+        <td rowspan="3" style="border-top-style: hidden; margin-top:3px">
+            <table class="center" border="1" style="width: 100%; border-collapse:collapse;">
+                <tr>
+                    <th><b>Quantity</b></th>
+                    <th><b>Length</b></th>
+                    <th><b>Width</b></th>
+                    <th><b>Height</b></th>
+                </tr>
+                @foreach ($getShipment as $index => $details)
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $details['length'] }} cm</td>
+                    <td>{{ $details['width'] }} cm</td>
+                    <td>{{ $details['height'] }} cm</td>
+                </tr>
+                @endforeach
+            </table>
+            <p align="center" style="font-size: 22px"><b>{{ $items->partner }}</b></p>
         </td>
         <td style="background-color: gray;"><b>E. DELIVERY INSTRUCTIONS</b></td>
     </tr>
     <tr>
-        <td rowspan="2" style="text-align: center; font-size:14; border-top-style: hidden"><b>{{ $items->partner }}</b></td>
         <td>{{ $items['delivery_intructions'] }}</td>
-    </tr>
+    </tr> --}}
     <tr>
         <td>
             <table>
@@ -231,3 +249,6 @@
         </td>
     </tr>
 @endforeach
+    </main>
+</body>
+</html>

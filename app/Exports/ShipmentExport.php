@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Http\Controllers\Admin\ShipmentDetailController;
 use App\Models\Shipment;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -18,9 +19,10 @@ class ShipmentExport implements FromView
     // }
 
     public function view(): View
-    {
-		$date_start = ( ! empty($_GET['date_start']) ? $_GET['date_start'] : '');
-		$date_end = ( ! empty($_GET['date_end']) ? $_GET['date_end'] : '');
+    {   
+
+		$date_start         = ( ! empty($_GET['date_start']) ? $_GET['date_start'] : '');
+		$date_end           = ( ! empty($_GET['date_end']) ? $_GET['date_end'] : '');
 
 		return view('pages.admin.shipment.export', [
             'shipments' => Shipment::get_items($date_start, $date_end, '')
