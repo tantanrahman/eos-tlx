@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\ShipmentExport;
 use App\Models\User;
+use App\Models\Country;
 use App\Models\Partner;
 use App\Models\Customer;
 use App\Models\Shipment;
 use App\Models\PackageType;
 use Illuminate\Http\Request;
 use App\Models\ShipmentDetail;
+use App\Exports\ShipmentExport;
 use App\Models\TrackingShipment;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
@@ -109,8 +110,9 @@ class ShipmentController extends Controller
         $nextId         = Customer::next_id();
         $apikey         = Customer::get_apikey();
         $dateRan        = sha1(date("Y-m-d H:i:s"));
+        $countries      = Country::all();
 
-        return view('pages.admin.shipment.create', compact('packagetypes','partners','users','nextId','apikey', 'dateRan'));
+        return view('pages.admin.shipment.create', compact('packagetypes','partners','users','nextId','apikey', 'dateRan','countries'));
     }
 
     /**
@@ -134,7 +136,6 @@ class ShipmentController extends Controller
             $addresses          = $request->address;
             $cit_name           = $request->city_name;
             $cit_id             = $request->city_id;
-            $cou_name           = $request->country_name;
             $cou_id             = $request->country_id;
             $postal             = $request->postal_code;
             $phones             = $request->phone;
@@ -152,7 +153,6 @@ class ShipmentController extends Controller
                     'address'       => $addresses[$key],
                     'city_name'     => $cit_name[$key],
                     'city_id'       => $cit_id[$key],
-                    'country_name'  => $cou_name[$key],
                     'country_id'    => $cou_id[$key],
                     'postal_code'   => $postal[$key],
                     'phone'         => $phones[$key],

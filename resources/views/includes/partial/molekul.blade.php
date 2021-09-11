@@ -130,7 +130,7 @@
 		});
 	});
 	
-	$('body').on('change', '#con-customer-country', function (e) {
+	$('body').on('change', '#select2countryshipment', function (e) {
 		e.preventDefault();
 
 		let customer_id_path = "{{ route('getCustomerId')  }}";
@@ -140,6 +140,7 @@
 				$('#con-customer-id').val(rsp.customer_id);
 			}
 		});
+
 	});
 
 	$(document).ready(function(e){

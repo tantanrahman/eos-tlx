@@ -48,11 +48,11 @@
                 <td align="center">{{ $shipment->con_address }}</td>
                 <td align="center">{{ $shipment->con_city_name }}</td>
                 <td align="center">{{ $shipment->con_postal_code }}</td>
-                <td align="center">{{ $shipment->con_cou_name }}</td>
+                <td align="center">{{ $shipment->cou_name }}</td>
                 <td align="center">{{ $shipment->con_phone }}</td>
                 <td align="center">{{ $shipment->description }}</td>
                 <td align="center"></td>
-                <td align="center">{{ $shipment->sum('weight') }}</td>
+                <td align="center">{{ $shipment->actual_weight }}</td>
                 <td align="center">{{ $shipment->values }}</td>
                 <td align="center">{{ $shipment->partner_name }}</td>
                 <td align="center">{{ $shipment->marketing }}</td>

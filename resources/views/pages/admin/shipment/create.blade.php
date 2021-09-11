@@ -88,7 +88,7 @@
                                         </div>
                                         <div class="form-group col-md-12" id="customer-country-section">
                                             <label for="country_name">Country</label>
-                                            <input type="text" name="country_name[0]" class="form-control @error('country_name') is-invalid @enderror" value="Indonesia" autocomplete="off" readonly>
+                                            <input type="text" class="form-control @error('country_name') is-invalid @enderror" value="Indonesia" autocomplete="off" readonly>
                                             @error('country_name')
                                             <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -116,7 +116,7 @@
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label for="city_name">City*</label>
-                                            <input name="city_name[0]" type="text" class="form-control typeaheadCity @error('city_name') is-invalid @enderror" autocomplete="off">
+                                            <input name="city_name[0]" type="text" class="form-control typeaheadCity @error('city_name') is-invalid @enderror" autocomplete="nope">
                                             @error('city_name')
                                             <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -146,7 +146,7 @@
                                 <hr style="border: 2px solid black">
                                 <div class="form-row">
                                     <div>
-                                        <input type="hidden" id="con-customer-id" class="form-control" name="account_code[1]" readonly>
+                                        <input type="text" id="con-customer-id" class="form-control" name="account_code[1]" readonly>
                                     </div>
                                     <div>
                                         <input type="hidden" class="form-control" name="id[1]" value="{{ $nextId + 1 ?? '' }}" readonly>
@@ -177,13 +177,17 @@
                                     </div>
                                     <div class="form-group col-md-12" id="customer-country-section">
                                         <label for="con_country_name">Country</label>
-                                        <input type="text" name="country_name[1]" class="form-control typeaheadCountry @error('con_country_name') is-invalid @enderror" autocomplete="off">
+                                        <select name="country_id[1]" class="form-control @error('marketing_id') is-invalid @enderror" id="select2countryshipment" data-width="100%">
+                                            <option></option>
+                                            @foreach($countries as $country)
+                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                            @endforeach
+                                        </select>
                                         @error('con_country_name')
                                         <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
-                                        <input type="hidden" name="country_id[1]" id="con-customer-country">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="con_postal_code">Postal Code</label>

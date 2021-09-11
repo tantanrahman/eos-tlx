@@ -1,14 +1,13 @@
 <html>
 <head>
-    <title>Connote | Shipment</title>
-    <link rel="stylesheet" href="{{ asset('dis') }}">
+    <title>Shipment | Connote</title>
     <link rel="stylesheet" href="{{ asset('dist/css/print_style.css') }}">
 </head>
 <body>
 <header>
-    <table  cellpadding="1" cellspacing="0" style="width:100%">
+    <table cellpadding="1" cellspacing="0" style="width:100%">
         <tr>
-            <td rowspan="3" style="padding-right: -100px !important"><img src="{{ url("storage/officeprofile/".$getUser[0]->photo) }}" style="width:90;"></td>
+            <td width="100" rowspan="3"><img src="{{ url("storage/officeprofile/".$getUser[0]->photo) }}" style="width:90;"></td>
             <th style="text-align: left">{{ $getUser[0]->op_name }}</th>
         </tr>
         <tr>
@@ -19,7 +18,6 @@
         </tr>
     </table>
 </header>
-    
 <main>
 @foreach ($getShipment as $index => $items)
 <table border="1" style="width: 100%" cellpadding="3" cellspacing="0" class="page-break">
@@ -38,7 +36,7 @@
                 <tr>
                     <td>A.2. Name</td>
                     <td>:</td>
-                    <td>{{ $items['ship_name'] }} / {{ $getUser[0]->username }}</td>
+                    <td>{{ $items->ship_company_name === null ? $items['ship_name'] ." / ". $getUser[0]->username : $items->ship_company_name ." / ". $getUser[0]->username }}</td>
                 </tr>
                 <tr>
                     <td>A.3. Address</td>

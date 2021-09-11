@@ -62,9 +62,15 @@
 		updater: function(item) {
 			$('input[name="country_id"]').val(map[item].id).trigger('change');
 			$('input[name="country_id[1]"]').val(map[item].id).trigger('change');
+			$('input[name="country_name[1]"]').val(map[item].id).trigger('change');
 			return item;
 		}
 	});
+
+	// $('#select2countryshipment').on('change', function()
+	// {
+	// 	alert(this.value);
+	// });
 
 	let customer_path = "{{ route('autocompleteCustomer')  }}"
 	$('input.typeaheadCustomer').typeahead({
@@ -139,7 +145,7 @@
 			$('input[name="postal_code[1]"]').val(map[item].postal_code);
 			$('input[name="city_name[1]"]').val(map[item].city_name);
 			$('textarea[name="address[1]"]').val(map[item].address);
-			$('input[name="country_name[1]"]').val(map[item].country_name);
+			$('select[name="country_name[1]"]').val(map[item].country_name);
 			$('input[name="country_id[1]"]').val(map[item].country_id);
 			return item;
 		}

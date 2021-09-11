@@ -511,7 +511,7 @@
         {data:'description',name:'description'},
         {data:'partner_name',name:'partner_name'},
         {data:'redoc_connote',name:'redoc_connote'},
-        {data:'cou_name',name:'cou_name'},
+        {data:'con_cou_name',name:'con_cou_name'},
         {
           data:'weight',name:'weight', 
           render: function(data) 

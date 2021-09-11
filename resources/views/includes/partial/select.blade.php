@@ -83,4 +83,11 @@
         theme: "bootstrap4",
         });
     });
+    $(document).ready(function() {
+        $('#select2countryshipment').select2({
+        placeholder: "Select a Country",
+        allowClear: true,
+        theme: "bootstrap4",
+        });
+    });
 </script>

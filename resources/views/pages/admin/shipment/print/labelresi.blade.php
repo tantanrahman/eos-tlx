@@ -50,7 +50,7 @@
             </td>
         </tr>
         <tr>
-            <td style="font-size: 22"><b>DELIVER TO</b></td>
+            <td style="font-size: 22; border-top-color:black !important"><b>DELIVER TO</b></td>
             <td align="right" style="font-size: 22"><b>{{ $items['cou_code_dua'] }}</b></td>
         </tr>
         <tr>
@@ -59,21 +59,21 @@
             <br />PHONE: {{ $items['con_phone'] }}
             </td>
         </tr>
-        <table border="1" style="width:100%" cellpadding="0" cellspacing="0">
+        <table border="1" style="width:100%">
             <tr>
-                <td width="177" style="border-color: black black white white"><b>DELIVERY INSTRUCTIONS</b></td>
-                <td width="100" align="center" style="border-color: black black white black"><b>NO. OF PIECES</b></td>
-                <td style="border-color: black white white black"><b>CONSIGNMENT WEIGHT</b></td>
+                <td width="177" align="center"><b>DESCRIPTION</b></td>
+                <td width="177" align="center"><b>DELIVERY INSTRUCTIONS</b></td>
+                <td width="100" align="center"><b>NO. OF PIECES</b></td>
+                <td align="center"><b>CONSIGNMENT WEIGHT</b></td>
             </tr>
             <tr>
-                <td style="border-color: white black white white"></td>
-                <td rowspan="2" style="font-size: 13; border-color: white black black black" align="center"><b>@php echo $index + 1 @endphp OF @php echo count($getShipment) @endphp</b></td>
-                
-                <td rowspan="2" style="font-size: 13; border-color: white white black black" align="center"><b>
+                <td align="center">
+                   {{ $items->description }}
+                </td>
+                <td align="center">{{ $items['delivery_intructions'] }}</td>
+                <td style="font-size: 13;" align="center"><b>@php echo $index + 1 @endphp OF @php echo count($getShipment) @endphp</b></td>
+                <td style="font-size: 13;" align="center"><b>
                     {{ $items['actual_weight'] }} KG</b></td>
-            </tr>
-            <tr>
-                <td style="border-color: white black black white"></td>
             </tr>
         </table>
     </table>

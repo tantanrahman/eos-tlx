@@ -47,7 +47,7 @@
         <td>
             <center>
                 <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
-                    $getShipment[0]->connote, 'C39')}}" height="45" width="200">
+                    $getShipment[0]->connote, 'C93')}}" height="60" width="300">
                     <br>
                     <div style="word-spacing: 10px">{{ $getShipment[0]->connote }}</div>
             </center>
@@ -61,7 +61,7 @@
         <td>
             <table style="width: 100%">
                 <tr>
-                    <td>Name : </td>
+                    <td width="100">Name : </td>
                     <td style="border-bottom-style: solid">{{ $getShipment[0]->ship_name }}
                     </td>
                 </tr>
@@ -85,7 +85,7 @@
         <td>
             <table style="width: 100%">
                 <tr>
-                    <td>Name :</td>
+                    <td width="100">Name :</td>
                     <td style="border-bottom-style: solid">{{ $getShipment[0]->con_name }}
                     </td>
                 </tr>
@@ -117,7 +117,7 @@
         <td>
             <table style="width: 100%">
                 <tr>
-                    <td>Consignment Number :</td>
+                    <td width="100">Consignment Number :</td>
                     <td style="border-bottom-style: solid">{{ $getShipment[0]->connote }}
                     </td>
                 </tr>
@@ -141,7 +141,7 @@
                 </tr>
             </table>
         </td>
-        <td align="center" style="font-size: 20;color: gray">
+        <td align="center" style="font-size: 22;color: gray">
             {{ $getShipment[0]->partner }}
         </td>
     </tr>
