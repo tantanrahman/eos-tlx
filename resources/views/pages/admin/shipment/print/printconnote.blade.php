@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Shipment | Connote</title>
+    <title>Connote | Shipment</title>
     <link rel="stylesheet" href="{{ asset('dis') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/print_style.css') }}">
 </head>
@@ -31,8 +31,8 @@
         <td>
             <table style="width: 100%">
                 <tr>
-                    <td>A.1. Account</td>
-                    <td>:</td>
+                    <td width="90">A.1. Account</td>
+                    <td width="10">:</td>
                     <td>{{ $items['ship_ac'] }} / {{ $getUser[0]->username }}</td>
                 </tr>
                 <tr>
@@ -69,8 +69,8 @@
         <td>
             <table style="width: 100%">
                 <tr>
-                    <td>B.1. Name</td>
-                    <td>:</td>
+                    <td width="90">B.1. Name</td>
+                    <td width="10">:</td>
                     <td>{{ $items['con_name'] }}</td>
                 </tr>
                 <tr>
@@ -115,8 +115,8 @@
         <td>
             <table style="width: 100%">
                 <tr>
-                    <td>C.1. Description</td>
-                    <td>:</td>
+                    <td width="150">C.1. Description</td>
+                    <td width="10">:</td>
                     <td>{{ $items['description'] }}</td>
                 </tr>
                 <tr>
