@@ -7,7 +7,7 @@
 <header>
     <table  cellpadding="1" cellspacing="0" style="width:100%">
         <tr>
-            <td rowspan="3" style="padding-right: -90px !important"><img src="{{ url("storage/officeprofile/".$getUser[0]->photo) }}" style="width:90;"></td>
+            <td width="100" rowspan="3" style="padding-right: -90px !important"><img src="{{ url("storage/officeprofile/".$getUser[0]->photo) }}" style="width:90;"></td>
             <th style="text-align: left">{{ $getUser[0]->op_name }}</th>
         </tr>
         <tr>
