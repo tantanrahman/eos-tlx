@@ -177,7 +177,7 @@
                                     </div>
                                     <div class="form-group col-md-12" id="customer-country-section">
                                         <label for="con_country_name">Country</label>
-                                        <select name="country_id[1]" class="form-control @error('marketing_id') is-invalid @enderror" id="select2countryshipment" data-width="100%">
+                                        <select name="country_id[1]" class="form-control" id="select2countryshipment" data-width="100%">
                                             <option></option>
                                             @foreach($countries as $country)
                                                 <option value="{{ $country->id }}">{{ $country->name }}</option>

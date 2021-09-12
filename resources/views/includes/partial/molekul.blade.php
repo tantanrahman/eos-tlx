@@ -74,16 +74,12 @@
 
 		if (e.target.value == 'shipper')
 		{
-			// $('#customer-city-section').show();
-			// $('#customer-country-section').hide();
 			$('#customer-country').val(106);
 			$('#customer-name-country').val('Indonesia');
 			$('#customer-name-country').attr("readonly", "readonly");
 		}
 		else if (e.target.value == 'consignee')
 		{
-			// $('#customer-city-section').hide();
-			// $('#customer-country-section').show();
 			$('#customer-city').val(0);
 			$('#customer-country').val('');
 			$('#customer-name-country').val('');
@@ -96,7 +92,7 @@
 	$('body').on('change', '#select2userrole', function (e) {
 		e.preventDefault();
 
-		if (e.target.value == 3)
+		if (e.target.value == 11)
 		{
 			$('#pic-marketing-user').show();
 		}
@@ -176,7 +172,7 @@
 		var volumetrick		= sum_volume/5000;
 		var sum_weight 		= Math.ceil(actual_weight);
 
-		$("table tbody").on('click','#remove', function(){
+		$("table tbody").on('click','#removeSD', function(){
 			$(this).closest('tr').remove();
 			var volume = 0;
 			var total_weight = 0;
@@ -192,7 +188,7 @@
 			$('#sum-weight').text(total_weight);
 		});
 
-		let row = "<tr><td><input name='actual_weight[]' class='form-control' value='"+actual_weight+"'></td><td><input name='length[]' class='form-control' value='"+length+"'></td><td><input name='width[]' class='form-control' value='"+width+"'></td><td><input name='height[]' class='form-control' value='"+height+"'></td><td><input name='sum_volume[]' id='sum_volume' class='form-control' value='"+sum_volume+"' readonly></td><td><input name='sum_weight[]' id='sum_weight' class='form-control' value='"+sum_weight+"' readonly></td><td><button type='button' id='remove' class='btn btn-danger'><i class='fas fa-trash'></i></button></td></tr>";
+		let row = "<tr><td><input name='actual_weight[]' class='form-control' value='"+actual_weight+"'></td><td><input name='length[]' class='form-control' value='"+length+"'></td><td><input name='width[]' class='form-control' value='"+width+"'></td><td><input name='height[]' class='form-control' value='"+height+"'></td><td><input name='sum_volume[]' id='sum_volume' class='form-control' value='"+sum_volume+"' readonly></td><td><input name='sum_weight[]' id='sum_weight' class='form-control' value='"+sum_weight+"' readonly></td><td><button type='button' id='removeSD' class='btn btn-danger'><i class='fas fa-trash'></i></button></td></tr>";
 		$("table tbody").append(row);
 
 		var volume = 0;
@@ -214,6 +210,22 @@
 			theme: "bootstrap4",
 			placeholder: "Select a Partner"
 		});
+	});
+
+	$("table tbody").on('click','#remove', function(){
+			$(this).closest('tr').remove();
+			var volume = 0;
+			var total_weight = 0;
+				table.find('tr').each(function (i, el) {
+					var $tds = $(el).find('td');
+					var sum_volume 	= parseInt($tds.eq(4).children().val());
+					var sum_weight 	= parseInt($tds.eq(5).children().val());
+					volume 			+= sum_volume;
+					total_weight   	+= sum_weight;
+					});
+
+			$('#total-volume').text(volume);
+			$('#sum-weight').text(total_weight);
 	});
 	
 </script>

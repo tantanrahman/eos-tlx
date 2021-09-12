@@ -5,17 +5,9 @@
 @section('content')
 <div class="content-wrapper">
     <div class="content-header">
-        {{-- <div class="container-fluid">
-            <div class="card">
-                <div class="card-body">
-                    
-                </div>
-            </div>
-        </div> --}}
+    
     </div>
-    @php
-        dd($shipment->shipper_id[0])
-    @endphp
+    
     <section class="content">
         <div class="container-fluid">    
             <div class="alert alert-primary alert-dismissible fade show" role="alert">
@@ -40,16 +32,16 @@
                                             <input type="hidden" name="created_by[]" value="{{ Auth::user()->name }}" readonly>
                                         </div>
                                         <div>
-                                            <input type="text" class="form-control" name="connote" value="{{ $shipment->connote }}" readonly>
+                                            <input type="hidden" class="form-control" name="connote" value="{{ $shipment->connote }}" readonly>
                                         </div>
                                         {{-- <div>
                                             <input type="hidden" class="form-control" name="apikey[0]" readonly>
                                         </div> --}}
                                         <div>
-                                            <input type="text" class="form-control" name="id[0]" value="{{ $shipment->shipper_id }}" readonly>
+                                            <input type="hidden" class="form-control" name="id[0]" value="{{ $shipment->shipper_id }}" readonly>
                                         </div>
                                         <div>
-                                            <input type="text" id="customer-id" class="form-control" value="{{ $shipment->shipper_id['account_code'] }}" name="account_code[0]" readonly>
+                                            <input type="text" id="customer-id" class="form-control" value="{{ $shipper->account_code }}" name="account_code[0]" readonly>
                                         </div>
                                         <div>
                                             <input type="hidden" class="form-control" name="group[]" value="shipper" readonly>
@@ -73,7 +65,7 @@
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label for="resi">Name*</label>
-                                            <input type="text" name="name[0]" class="form-control typeaheadShipmentShipper @error('name[0]') is-invalid @enderror" value="{{ old('name[0]') }}" autocomplete="off">
+                                            <input type="text" name="name[0]" class="form-control typeaheadShipmentShipper @error('name[0]') is-invalid @enderror" value="{{ $shipper->name }}" autocomplete="off">
                                             @error('name[0]')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -82,7 +74,7 @@
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label for="company_name">Company Name</label>
-                                            <input type="text" name="company_name[0]" class="form-control @error('company_name') is-invalid @enderror" value="{{ old('company_name') }}" autocomplete="off">
+                                            <input type="text" name="company_name[0]" class="form-control @error('company_name') is-invalid @enderror" value="{{ $shipper->company_name }}" autocomplete="off">
                                             @error('company_name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -101,7 +93,7 @@
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="postal_code">Postal Code</label>
-                                            <input type="text" name="postal_code[0]" class="form-control @error('postal_code') is-invalid @enderror" autocomplete="off">
+                                            <input type="text" name="postal_code[0]" class="form-control @error('postal_code') is-invalid @enderror" autocomplete="off" value="{{ $shipper->postal_code }}">
                                             @error('postal_code')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -110,7 +102,7 @@
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label for="address">Address*</label>
-                                            <textarea name="address[0]" rows="3" class="form-control @error('address') is-invalid @enderror" style="resize:none" autocomplete="off"></textarea>
+                                            <textarea name="address[0]" rows="3" class="form-control @error('address') is-invalid @enderror" style="resize:none" autocomplete="off">{{ $shipper->address }}</textarea>
                                             @error('address')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -119,17 +111,17 @@
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label for="city_name">City*</label>
-                                            <input name="city_name[0]" type="text" class="form-control typeaheadCity @error('city_name') is-invalid @enderror" autocomplete="off">
+                                            <input name="city_name[0]" type="text" class="form-control typeaheadCity @error('city_name') is-invalid @enderror" autocomplete="off" value="{{ $shipper->city_name }}">
                                             @error('city_name')
                                             <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
-                                            <input class="form-control" type="hidden" name="city_id[0]" id="customer-city">
+                                            <input class="form-control" type="hidden" value="{{ $shipper->city_id }}" name="city_id[0]" id="customer-city">
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label for="phone">Phone</label>
-                                            <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone[0]" value="{{ old('phone') }}" autocomplete="off">
+                                            <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone[0]" value="{{ $shipper->phone }}" autocomplete="off">
                                             @error('phone')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -162,7 +154,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="name">Name*</label>
-                                        <input type="text" name="name[1]" class="form-control typeaheadShipmentConsignee @error('con_name') is-invalid @enderror" value="{{ old('con_name') }}"  autocomplete="off">
+                                        <input type="text" name="name[1]" class="form-control typeaheadShipmentConsignee @error('con_name') is-invalid @enderror" value="{{ $consignee->name }}"  autocomplete="off">
                                         @error('con_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -171,7 +163,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="con_company_name">Company Name</label>
-                                        <input type="text" name="company_name[1]" class="form-control @error('con_company_name') is-invalid @enderror" value="{{ old('con_company_name') }}" autocomplete="off">
+                                        <input type="text" name="company_name[1]" class="form-control @error('con_company_name') is-invalid @enderror" value="{{ $consignee->company_name }}" autocomplete="off">
                                         @error('con_company_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -180,8 +172,13 @@
                                     </div>
                                     <div class="form-group col-md-12" id="customer-country-section">
                                         <label for="con_country_name">Country</label>
-                                        <input type="text" name="country_name[1]" class="form-control typeaheadCountry @error('con_country_name') is-invalid @enderror" autocomplete="off">
-                                        @error('con_country_name')
+                                        <select class="form-control" id="select2countryshipment" data-width="100%">
+                                            <option></option>
+                                            @foreach($countries as $country)
+                                                <option value="{{ $country->id }}" {{ ($country->id == $consignee->country_id) ? 'selected' : '' }}>{{ $country->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('con_country_id')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -190,7 +187,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="con_postal_code">Postal Code</label>
-                                        <input type="text" name="postal_code[1]" class="form-control @error('con_postal_code') is-invalid @enderror" autocomplete="off">
+                                        <input type="text" value="{{ $consignee->postal_code }}" name="postal_code[1]" class="form-control @error('con_postal_code') is-invalid @enderror" autocomplete="off">
                                         @error('con_postal_code')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -199,7 +196,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="con_address">Address*</label>
-                                        <textarea name="address[1]" rows="3" class="form-control @error('con_address') is-invalid @enderror" style="resize:none" autocomplete="off"></textarea>
+                                        <textarea name="address[1]" rows="3" class="form-control @error('con_address') is-invalid @enderror" style="resize:none" autocomplete="off">{{ $consignee->address }}</textarea>
                                         @error('con_address')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -208,7 +205,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="con_city_name">City*</label>
-                                        <input name="city_name[1]" type="text" class="form-control @error('con_city_name') is-invalid @enderror" autocomplete="off">
+                                        <input name="city_name[1]" type="text" class="form-control @error('con_city_name') is-invalid @enderror" autocomplete="off" value="{{ $consignee->city_name }}">
                                         @error('con_city_name')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -218,7 +215,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="con_phone">Phone</label>
-                                        <input type="text" class="form-control @error('con_phone') is-invalid @enderror" name="phone[1]" value="{{ old('con_phone') }}" autocomplete="off">
+                                        <input type="text" class="form-control @error('con_phone') is-invalid @enderror" name="phone[1]" value="{{ $consignee->phone }}" autocomplete="off">
                                         @error('phone')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -239,43 +236,54 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="packagetype_id">Package Type*</label>
-                                        <select name="packagetype_id" class="form-control @error('packagetype_id') is-invalid @enderror" id="select2shippackagetype" data-width="100%">
-                                            <option></option>
+                                        <select name="packagetype_id"
+                                            class="form-control @error('packagetype_id') is-invalid @enderror"
+                                            id="select2shippackagetype" data-width="100%">
                                             @foreach($packagetypes as $pt)
-                                                <option value="{{ $pt->id }}">{{ $pt->name }}</option>
+                                            <option value="{{ $pt->id }}"
+                                                {{$shipment->packagetype_id == $pt->id ? 'selected' : ''}}>
+                                                {{ $pt->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('packagetype_id')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="city">Description*</label>
-                                        <textarea oninput="this.value = this.value.toUpperCase()" rows="3" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" style="resize:none"></textarea>
+                                        <textarea oninput="this.value = this.value.toUpperCase()" rows="3"
+                                            class="form-control @error('description') is-invalid @enderror"
+                                            name="description" value="{{ old('description') }}"
+                                            style="resize:none">{{$shipment->description}}</textarea>
                                         @error('description')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="city">Delivery Instruction</label>
-                                        <textarea oninput="this.value = this.value.toUpperCase()" rows="3" class="form-control @error('delivery_instruction') is-invalid @enderror" name="delivery_instructions" value="{{ old('delivery_instruction') }}" style="resize:none"></textarea>
-                                        @error('delivery_instruction')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <textarea oninput="this.value = this.value.toUpperCase()" rows="3"
+                                            class="form-control @error('delivery_intructions') is-invalid @enderror"
+                                            name="delivery_intructions" value="{{ old('delivery_intructions') }}"
+                                            style="resize:none">{{$shipment->delivery_intructions}}</textarea>
+                                        @error('delivery_intructions')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="values">Values</label>
-                                        <input oninput="this.value = this.value.toUpperCase()" type="text" name="values" class="form-control @error('values') is-invalid @enderror" value="{{ old('values') }}"  autocomplete="off">
+                                        <input oninput="this.value = this.value.toUpperCase()" type="text" name="values"
+                                            class="form-control @error('values') is-invalid @enderror"
+                                            value="{{ $shipment->values }}" autocomplete="off">
                                         @error('values')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
                                 </div>
@@ -292,25 +300,31 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="partner_id">Partner*</label>
-                                        <select name="partner_id" class="form-control @error('partner_id') is-invalid @enderror" id="select2shippartner" data-width="100%">
+                                        <select name="partner_id"
+                                            class="form-control @error('partner_id') is-invalid @enderror"
+                                            id="select2shippartner" data-width="100%">
                                             <option></option>
                                             @foreach($partners as $partner)
-                                                <option value="{{ $partner->id }}">{{ $partner->name }}</option>
+                                            <option value="{{ $partner->id }}"
+                                                {{$shipment->partner_id == $partner->id ? "selected" : ""}}>
+                                                {{ $partner->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('partner_id')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="redoc_connote">Connote</label>
-                                        <input type="text" name="redoc_connote" class="form-control @error('redoc_connote') is-invalid @enderror" value="{{ old('redoc_connote') }}"  autocomplete="off">
+                                        <input type="text" name="redoc_connote"
+                                            class="form-control @error('redoc_connote') is-invalid @enderror"
+                                            value="{{ $shipment->redoc_connote }}" autocomplete="off">
                                         @error('redoc_connote')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
                                 </div>
@@ -328,7 +342,7 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="modal">Modal</label>
-                                        <input type="text" name="modal" class="form-control uang @error('modal') is-invalid @enderror" value="{{ old('modal') }}"  autocomplete="off">
+                                        <input type="text" name="modal" class="form-control uang @error('modal') is-invalid @enderror" value="{{ $shipment->modal }}"  autocomplete="off">
                                         @error('modal')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -337,7 +351,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="ongkir">Ongkir</label>
-                                        <input type="text" name="ongkir" class="form-control uang @error('ongkir') is-invalid @enderror" value="{{ old('ongkir') }}"  autocomplete="off">
+                                        <input type="text" name="ongkir" class="form-control uang @error('ongkir') is-invalid @enderror" value="{{ $shipment->ongkir }}"  autocomplete="off">
                                         @error('ongkir')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -346,10 +360,9 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="city">Payment</label></label>
-                                        <select class="custom-select" id="customer-type" name="group">
-                                            <option selected disabled>-- Select Payment --</option>
-                                            <option value="consignee">Unpaid</option>
-                                            <option value="shipper">Paid</option>
+                                        <select class="custom-select" name="payment_status">
+                                            <option value="0" {{ $shipment->payment_status == 0 ? 'selected' : '' }}>Unpaid</option>
+                                            <option value="1" {{ $shipment->payment_status == 1 ? 'selected' : '' }}>Paid</option>
                                         </select>
                                     </div>
                                 </div>
@@ -365,43 +378,57 @@
                                 <hr style="border: 2px solid black">
                                 <div class="form-row">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover" style="width:100%" id="list_pieces">
+                                        <table class="table table-bordered table-hover" style="width:100%"
+                                            id="list_pieces">
                                             <thead>
                                                 <tr>
                                                     <th>
                                                         <div class="input-group">
-                                                            <input type="text" id="actual_weight" name="actual_weight" class="form-control @error('actual_weight') is-invalid @enderror" id="actual_weight" value="{{ old('actual_weight') }}" autocomplete="off" placeholder="Actual Weight">
+                                                            <input type="text" id="actual_weight" name="actual_weight"
+                                                                class="form-control @error('actual_weight') is-invalid @enderror"
+                                                                id="actual_weight" value="{{ old('actual_weight') }}"
+                                                                autocomplete="off" placeholder="Actual Weight">
                                                             <div class="input-group-prepend">
                                                                 <div class="input-group-text">KG</div>
                                                             </div>
                                                         </div>
                                                     </th>
                                                     <th>
-                                                        <div class="input-group">                  
-                                                            <input type="text" id="length" name="length" class="form-control @error('length') is-invalid @enderror" id="length" value="{{ old('length') }}" autocomplete="off" placeholder="Length">
+                                                        <div class="input-group">
+                                                            <input type="text" id="length" name="length"
+                                                                class="form-control @error('length') is-invalid @enderror"
+                                                                id="length" value="{{ old('length') }}"
+                                                                autocomplete="off" placeholder="Length">
                                                             <div class="input-group-prepend">
                                                                 <div class="input-group-text">CM</div>
                                                             </div>
                                                         </div>
                                                     </th>
                                                     <th>
-                                                        <div class="input-group">                  
-                                                            <input type="text" id="width" name="width" class="form-control @error('width') is-invalid @enderror" id="width" value="{{ old('width') }}" autocomplete="off" placeholder="Width">
+                                                        <div class="input-group">
+                                                            <input type="text" id="width" name="width"
+                                                                class="form-control @error('width') is-invalid @enderror"
+                                                                id="width" value="{{ old('width') }}" autocomplete="off"
+                                                                placeholder="Width">
                                                             <div class="input-group-prepend">
                                                                 <div class="input-group-text">CM</div>
                                                             </div>
                                                         </div>
                                                     </th>
                                                     <th>
-                                                        <div class="input-group">                  
-                                                            <input type="text" id="height" name="height" class="form-control @error('height') is-invalid @enderror" id="height" value="{{ old('height') }}" autocomplete="off" placeholder="Height">
+                                                        <div class="input-group">
+                                                            <input type="text" id="height" name="height"
+                                                                class="form-control @error('height') is-invalid @enderror"
+                                                                id="height" value="{{ old('height') }}"
+                                                                autocomplete="off" placeholder="Height">
                                                             <div class="input-group-prepend">
                                                                 <div class="input-group-text">CM</div>
                                                             </div>
                                                         </div>
                                                     </th>
                                                     <th colspan="3">
-                                                        <a class="btn btn-info btn-submit" id="addRow"><i class="fa fa-plus"></i>
+                                                        <a class="btn btn-info btn-submit" id="addRow"><i
+                                                                class="fa fa-plus"></i>
                                                             Add Package</a>
                                                     </th>
                                                 </tr>
@@ -416,7 +443,20 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="plt">
-                                                
+                                                @foreach ($shipmentdetails as $item)
+                                               
+                                                <tr>
+                                                    <td>{{$item->actual_weight}}</td>
+                                                    <td>{{$item->length}}</td>
+                                                    <td>{{$item->width}}</td>
+                                                    <td>{{$item->height}}</td>
+                                                    <td>{{$item->sum_volume}}</td>
+                                                    <td>{{$item->sum_weight}}</td>
+                                                    <td>
+                                                        <button type='button' id='remove' class='btn btn-sm btn-danger'><i class='fas fa-trash'></i></button>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
                                             </tbody>
                                             <tfoot>
                                                 <tr>
@@ -424,7 +464,7 @@
                                                     <th id="total-volume">0</th>
                                                     <th id="sum-weight">0</th>
                                                     <th>
-                                                
+
                                                     </th>
                                                 </tr>
                                             </tfoot>

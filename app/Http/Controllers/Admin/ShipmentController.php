@@ -28,6 +28,10 @@ class ShipmentController extends Controller
     public function index(Request $request)
     {
         $partners   = Partner::get();
+        
+        // $idx = [];
+        // $shipments  = Shipment::get_items('','','');
+        // dd($shipments);
 
         // <a href="shipment/'.$shipment->idx.'/edit" type="button" class="btn btn-info btn-sm" data-id="'.$shipment->idx.'" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="far fa-edit"></i></a>
 
@@ -39,12 +43,63 @@ class ShipmentController extends Controller
 
             $idx = [];
             $shipments  = Shipment::get_items($date_start,$date_end,$partner);
+            
            
             return DataTables::of($shipments)
                     ->addColumn('action', function($shipment){
+                        if($shipment->partner_name == "GDEX")
+                        
+                        {
+                            $button =   '<div class="btn-group" role="group" aria-label="Basic example">
+                                        <a href="shipment/'.$shipment->idx.'/edit" data-toggle="tooltip"  data-id="'.$shipment->idx.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>
+                                        <button type="button" name="delete" id="'.$shipment->idx.'" class="delete btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
+                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-placement="top" data-target="#ModalPrint'.$shipment->idx.'" data-id="{{$shipment->idx}}" title="PRINT"><i class="fas fa-print"></i></button>
+                                    </div>
+                                    
+                                    <div class="modal fade" id="ModalPrint'.$shipment->idx.'" tabindex="-1" role="dialog" aria-labelledby="ModalCourier" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h6 class="modal-title" id="exampleModalLongTitle">PRINT</h6>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>
+                                    
+                                            <div class="modal-body">
+                                                <a href="printConnote/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
+                                                <a href="printLabel/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="far fa-envelope"></i> Label</a>
+                                                <a href="printInvoice/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Invoice</a>
+                                                <a href="printGdex/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Print GDEX</a>
+                                            </div>
+                                            
+                                        </div>
+                                        </div>
+                                    </div>
 
-                        $button =   '<div class="btn-group" role="group" aria-label="Basic example">
-                                        
+                                    <div class="modal fade" id="ModalShow'.$shipment->idx.'" tabindex="-1" role="dialog" aria-labelledby="ModalShow" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h6 class="modal-title" id="exampleModalLongTitle">VIEW</h6>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>
+                                    
+                                            <div class="modal-body">
+                                                <a href="shipment/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
+                                            </div>
+                                            
+                                        </div>
+                                        </div>
+                                    </div>
+                                    ';
+                        }
+                        else
+                        {
+                            $button =   '<div class="btn-group" role="group" aria-label="Basic example">
+                                        <a href="shipment/'.$shipment->idx.'/edit" data-toggle="tooltip"  data-id="'.$shipment->idx.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>
                                         <button type="button" name="delete" id="'.$shipment->idx.'" class="delete btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
                                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-placement="top" data-target="#ModalPrint'.$shipment->idx.'" data-id="{{$shipment->idx}}" title="PRINT"><i class="fas fa-print"></i></button>
                                     </div>
@@ -87,6 +142,7 @@ class ShipmentController extends Controller
                                         </div>
                                     </div>
                                     ';
+                        }
 
                         return $button;
                     })
@@ -308,12 +364,15 @@ class ShipmentController extends Controller
      */
     public function edit(Shipment $shipment)
     {
-        $users          = User::where('role_id','=',2)->get();
-        $packagetypes   = PackageType::where('active','=',1)->get();
-        $partners       = Partner::where('active','=',1)->get();
-        $customers      = Customer::get();
+        $users              = User::where('role_id','=',2)->get();
+        $packagetypes       = PackageType::where('active','=',1)->get();
+        $partners           = Partner::where('active','=',1)->get();
+        $shipper            = Customer::where('id', $shipment->shipper_id)->first();
+        $consignee          = Customer::where('id', $shipment->consignee_id)->first();
+        $countries          = Country::all();
+        $shipmentdetails    = ShipmentDetail::where('shipment_id', $shipment->id)->get();
 
-        return view('pages.admin.shipment.edit', compact('shipment', 'users', 'packagetypes', 'partners', 'customers'));
+        return view('pages.admin.shipment.edit', compact('shipment', 'users', 'packagetypes', 'partners', 'shipper','consignee','countries','shipmentdetails'));
     }
 
     /**
@@ -325,7 +384,7 @@ class ShipmentController extends Controller
      */
     public function update(Request $request, Shipment $shipment)
     {
-        //
+        dd($request);
     }
 
     /**
