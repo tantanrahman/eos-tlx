@@ -91,7 +91,7 @@ class PrintController extends Controller
             'receiverMobile' => $consignee->phone,
             'receiverAddress1' => $consignee->address,
             'receiverPostcode' => $consignee->postal_code,
-            'receiverCountry' => 'Indonesia',
+            'receiverCountry' => 'Malaysia',
         ]]);
 
         $get = Http::withHeaders([

@@ -62,6 +62,7 @@
 			query = {
 				date_start: $('#shipment-periode-start').val(),
 				date_end: $('#shipment-periode-end').val(),
+				partner: $('#shipment-excel').val(),
 			},
 			url_params = '';
 		url_params = '?' + $.param(query);
@@ -212,6 +213,7 @@
 		});
 	});
 
+	//Remove Row Edit Shipment
 	$("table tbody").on('click','#remove', function(){
 			$(this).closest('tr').remove();
 			var volume = 0;

@@ -23,9 +23,10 @@ class ShipmentExport implements FromView
 
 		$date_start         = ( ! empty($_GET['date_start']) ? $_GET['date_start'] : '');
 		$date_end           = ( ! empty($_GET['date_end']) ? $_GET['date_end'] : '');
+        $partner            = ( ! empty($_GET['partner']) ? $_GET['partner'] : '');
 
 		return view('pages.admin.shipment.export', [
-            'shipments' => Shipment::get_items($date_start, $date_end, '')
+            'shipments' => Shipment::get_items($date_start, $date_end, $partner)
         ]);
     }
 }

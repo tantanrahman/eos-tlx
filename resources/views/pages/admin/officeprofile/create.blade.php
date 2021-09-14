@@ -154,7 +154,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="font-weight-bold">Upload Logo*</label>
-                                <input type="file" class="form-control-file @error('photo') is-invalid @enderror" name="photo">
+                                <input type="file" id="photo" class="form-control-file @error('photo') is-invalid @enderror" name="photo">
                                 @error('photo')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

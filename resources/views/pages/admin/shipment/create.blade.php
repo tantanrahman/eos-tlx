@@ -146,7 +146,7 @@
                                 <hr style="border: 2px solid black">
                                 <div class="form-row">
                                     <div>
-                                        <input type="text" id="con-customer-id" class="form-control" name="account_code[1]" readonly>
+                                        <input type="hidden" id="con-customer-id" class="form-control" name="account_code[1]" readonly>
                                     </div>
                                     <div>
                                         <input type="hidden" class="form-control" name="id[1]" value="{{ $nextId + 1 ?? '' }}" readonly>
@@ -180,7 +180,7 @@
                                         <select name="country_id[1]" class="form-control" id="select2countryshipment" data-width="100%">
                                             <option></option>
                                             @foreach($countries as $country)
-                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                <option autofocus value="{{ $country->id }}">{{ $country->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('con_country_name')

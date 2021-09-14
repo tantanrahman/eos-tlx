@@ -7,7 +7,7 @@
 <header>
     <table cellpadding="1" cellspacing="0" style="width:100%">
         <tr>
-            <td width="100" rowspan="3"><img src="{{ url("storage/officeprofile/".$getUser[0]->photo) }}" style="width:90;"></td>
+            <td width="100" rowspan="3"><img src="{{ url("storage/officeprofile/".$getUser[0]->photo ?? url('public/img/tlx_logo.png'))}}" style="width:90;"></td>
             <th style="text-align: left">{{ $getUser[0]->op_name }}</th>
         </tr>
         <tr>
@@ -36,12 +36,12 @@
                 <tr>
                     <td>A.2. Name</td>
                     <td>:</td>
-                    <td>{{ $items->ship_company_name === null ? $items['ship_name'] ." / ". $getUser[0]->username : $items->ship_company_name ." / ". $getUser[0]->username }}</td>
+                    <td>{{ $items->ship_company_name === null ? $items['ship_name'] ." / ". $items->marketing : $items->ship_company_name ." / ". $items->marketing }}</td>
                 </tr>
                 <tr>
                     <td>A.3. Address</td>
                     <td>:</td>
-                    <td>{{ $items['ship_address'] }}</td>
+                    <td>{{ $items['ship_address'] }} {{ $items['ship_postal_code'] }} {{ $items['ship_city_name'] }}</td>
                 </tr>
                 <tr>
                     <td>A.4. Phone</td>
@@ -53,14 +53,19 @@
         <td style="border-top-style: hidden">
             <center>
             <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
-                $items->connote, 'C93')}}" height="45" width="300">
+                $items->connote, 'C93')}}" height="58" width="300">
+                {{-- <img src="data:image/png;base64, {{ DNS1D::getBarcodePNG($items->connote, 'C93',5,55,array(5,5,5), true) }}" alt="barcode" height="40" width="500"/> --}}
                 <br>
-                <div style="word-spacing: 10px">{{ $items['connote'] }}</div>
+                <div>
+                    <b>
+                    
+                    </b>
+                </div>
             </center>
         </td>
     </tr>
     <tr>
-        <th style="text-align: left; background-color: gray;"> B. CONSIGNEE</th>
+        <th style="text-align: left; background-color: gray;">B. CONSIGNEE</th>
         <th style="text-align: left; background-color: gray;">D. AUTHORIZATION</th>
     </tr>
     <tr>
@@ -74,7 +79,7 @@
                 <tr>
                     <td>B.2. Address</td>
                     <td>:</td>
-                    <td>{{ $items['con_address'] }}</td>
+                    <td>{{ $items['con_address'] }} {{ $items['con_postal_code'] }} {{ $items['con_city_name'] }}</td>
                 </tr>
                 <tr>
                     <td>B.3. Phone</td>
@@ -83,7 +88,7 @@
                 </tr>
             </table>
         </td>
-        <td rowspan="3" style="border-top-color: white; font-size:6; padding-bottom: -10% !important; padding-top: -1% !important; padding-right:20px !important; text-align: justify;">
+        <td rowspan="3" style="border-top-color: white; font-size:7; padding-bottom: -7% !important; padding-top: -1% !important; padding-right:20px !important; text-align: justify;">
             <ul>
                 <li>
                     SAAT PENGIRIM MENGGUNAKAN JASA <b>{{ $getUser[0]->op_name }}</b> BERARTI BAIK PENGIRIM, PENERIMA, DAN ATAU SEMUA PIHAK YANG BERKEPENTINGAN TERHADAP BARANG KIRIMAN TERSEBUT SEPAKAT UNTUK MENYETUJUI SYARAT DAN KETENTUAN YANG BERLAKU DI <b>{{ $getUser[0]->op_name }}</b>.
@@ -141,13 +146,13 @@
                 <tr>
                     <td>C.5. Actual Weight</td>
                     <td>:</td>
-                    <td>{{ $items['actual_weight'] }} kg</td>
+                    <td>{{ number_format($items['actual_weight'], 2, '.', '') }} kg</td>
                 </tr>
 
                 <tr>
                     <td>C.6. Volumetric</td>
                     <td>:</td>
-                    <td>{{ $items['sum_volume']/5000 }} kg</td>
+                    <td>{{ number_format($items['sum_volume']/5000, 2, '.', '') }} kg</td>
                 </tr>
 
                 <tr>
@@ -155,9 +160,9 @@
                     <td>:</td>
                     <td>
                         @if ($items['sum_volume']/5000 >= $items['actual_weight'])
-                            {{ $items['sum_volume']/5000 }} kg
+                            {{ number_format($items['sum_volume']/5000, 2, '.', '') }} kg
                         @else
-                            {{ $items['actual_weight'] }} kg
+                            {{ number_format($items['actual_weight'], 2, '.', '') }} kg
                         @endif
                     </td>
                 </tr>
@@ -193,31 +198,6 @@
         <td>{{ $items['delivery_intructions'] }}</td>
     </tr>
     
-    {{-- <tr>
-        <td rowspan="3" style="border-top-style: hidden; margin-top:3px">
-            <table class="center" border="1" style="width: 100%; border-collapse:collapse;">
-                <tr>
-                    <th><b>Quantity</b></th>
-                    <th><b>Length</b></th>
-                    <th><b>Width</b></th>
-                    <th><b>Height</b></th>
-                </tr>
-                @foreach ($getShipment as $index => $details)
-                <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $details['length'] }} cm</td>
-                    <td>{{ $details['width'] }} cm</td>
-                    <td>{{ $details['height'] }} cm</td>
-                </tr>
-                @endforeach
-            </table>
-            <p align="center" style="font-size: 22px"><b>{{ $items->partner }}</b></p>
-        </td>
-        <td style="background-color: gray;"><b>E. DELIVERY INSTRUCTIONS</b></td>
-    </tr>
-    <tr>
-        <td>{{ $items['delivery_intructions'] }}</td>
-    </tr> --}}
     <tr>
         <td>
             <table>
@@ -247,6 +227,6 @@
         </td>
     </tr>
 @endforeach
-    </main>
+</main>
 </body>
 </html>

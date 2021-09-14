@@ -15,6 +15,7 @@ use App\Models\TrackingShipment;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -29,12 +30,6 @@ class ShipmentController extends Controller
     {
         $partners   = Partner::get();
         
-        // $idx = [];
-        // $shipments  = Shipment::get_items('','','');
-        // dd($shipments);
-
-        // <a href="shipment/'.$shipment->idx.'/edit" type="button" class="btn btn-info btn-sm" data-id="'.$shipment->idx.'" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="far fa-edit"></i></a>
-
         if($request->ajax())
         {   
             $date_start = ( ! empty($request->get('date_start')) ? $request->get('date_start') : '');
@@ -384,7 +379,9 @@ class ShipmentController extends Controller
      */
     public function update(Request $request, Shipment $shipment)
     {
-        dd($request);
+        $shipment = Shipment::findOrFail($shipment->id);
+
+
     }
 
     /**
@@ -476,17 +473,23 @@ class ShipmentController extends Controller
 
     /**
      * @author Tantan
-     * @description Search Date Shipment 
-     * @created 7 Sep 2021
+     * @description Get Api City API Zippopota
+     * @param Request $request
+     * @return void
      */
-    public function searchdateShipment(Request $request)
+    public function getCityApi(Request $request)
     {
-        $fromDate       = date('Y-m-d 00:00:00', strtotime($request->post('periode_start')));
-		$toDate         = date('Y-m-d 23:59:59', strtotime($request->post('periode_end')));
-
-        $data = Shipment::whereBetween('created_at', [$fromDate, $toDate])->get();
-
-        // return view('pages.admin.dropship.index', compact('data'));
+        $a              = 'Malaysia';
+        $response       = Http::get('https://api.zippopotam.us/MY/53000');
+        $data           = json_decode($response->body());
+        
+        if($a === $data->country)
+        {
+            echo "Sama";
+        }
+        else
+        {
+            echo "Gagal";
+        }
     }
-
 }

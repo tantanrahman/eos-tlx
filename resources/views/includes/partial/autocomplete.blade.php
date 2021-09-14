@@ -67,11 +67,6 @@
 		}
 	});
 
-	// $('#select2countryshipment').on('change', function()
-	// {
-	// 	alert(this.value);
-	// });
-
 	let customer_path = "{{ route('autocompleteCustomer')  }}"
 	$('input.typeaheadCustomer').typeahead({
 		source: function(query, process) {
@@ -150,5 +145,21 @@
 			return item;
 		}
 	});
+
+	public function getCity()
+	{
+		var city = document.getElementById("city").value;
+		var state = document.getElementById("state").value;
+		var client = new XMLHttpRequest();
+		client.open("GET", "http://api.zippopotam.us/us/" + state + "/" + city, true);
+		client.onreadystatechange = function() {
+			if (client.readyState == 4) {
+			document.getElementById("result").innerHTML = 
+				JSON.stringify(JSON.parse(client.responseText), null, 4);
+			};
+		};
+		client.send();
+		return false;
+	}
 
 </script>

@@ -260,15 +260,5 @@ class DropshipController extends Controller
         return $pdf->download('Report Dropship '.date("Y-m-d").'.pdf');
     }
 
-    public function searchdateDrop(Request $request)
-    {
-        $fromDate       = date('Y-m-d 00:00:00', strtotime($request->post('periode_start')));
-		$toDate         = date('Y-m-d 23:59:59', strtotime($request->post('periode_end')));
-
-        $data = Dropship::whereBetween('created_at', [$fromDate, $toDate])->get();
-
-        // return view('pages.admin.dropship.index', compact('data'));
-    }
-
     
 }

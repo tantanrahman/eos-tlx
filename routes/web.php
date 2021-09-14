@@ -79,6 +79,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::get('printInvoice/{shipment}', [App\Http\Controllers\Admin\PrintController::class, 'printInvoice'])->name('printInvoice');
     Route::get('printGdex/{shipment}', [App\Http\Controllers\Admin\PrintController::class, 'printgdexDev'])->name('printgdexDev');
     Route::get('apiPostalCode', [App\Http\Controllers\Admin\ApiEksContoller::class, 'apiPostalCode'])->name('apiPostalCode');
+    Route::get('getCityApi', [App\Http\Controllers\Admin\ShipmentController::class, 'getCityApi'])->name('getCityApi');
 });
 
 Route::get('autocompleteCity', [App\Http\Controllers\Admin\CityController::class, 'autocompleteCity'])->name('autocompleteCity');

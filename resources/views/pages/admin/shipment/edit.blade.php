@@ -34,14 +34,11 @@
                                         <div>
                                             <input type="hidden" class="form-control" name="connote" value="{{ $shipment->connote }}" readonly>
                                         </div>
-                                        {{-- <div>
-                                            <input type="hidden" class="form-control" name="apikey[0]" readonly>
-                                        </div> --}}
                                         <div>
                                             <input type="hidden" class="form-control" name="id[0]" value="{{ $shipment->shipper_id }}" readonly>
                                         </div>
                                         <div>
-                                            <input type="text" id="customer-id" class="form-control" value="{{ $shipper->account_code }}" name="account_code[0]" readonly>
+                                            <input type="hidden" id="customer-id" class="form-control" value="{{ $shipper->account_code }}" name="account_code[0]" readonly>
                                         </div>
                                         <div>
                                             <input type="hidden" class="form-control" name="group[]" value="shipper" readonly>
@@ -443,6 +440,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="plt">
+                                                @php
+                                                    $totalv = 0;
+                                                @endphp
                                                 @foreach ($shipmentdetails as $item)
                                                
                                                 <tr>
@@ -450,24 +450,28 @@
                                                     <td>{{$item->length}}</td>
                                                     <td>{{$item->width}}</td>
                                                     <td>{{$item->height}}</td>
-                                                    <td>{{$item->sum_volume}}</td>
-                                                    <td>{{$item->sum_weight}}</td>
+                                                    <td align="right">{{$item->sum_volume}}</td>
+                                                    <td align="right">{{$item->sum_weight}}</td>
                                                     <td>
                                                         <button type='button' id='remove' class='btn btn-sm btn-danger'><i class='fas fa-trash'></i></button>
                                                     </td>
                                                 </tr>
+                                                @php
+                                                    $totalv += $item->sum_volume;
+                                                @endphp
                                                 @endforeach
                                             </tbody>
-                                            <tfoot>
+                                            
+                                            {{-- <tfoot>
                                                 <tr>
                                                     <th colspan="4">TOTAL</th>
-                                                    <th id="total-volume">0</th>
-                                                    <th id="sum-weight">0</th>
+                                                    <th style="text-align: right" id="total-volume">0</th>
+                                                    <th style="text-align: right" id="sum-weight">0</th>
                                                     <th>
 
                                                     </th>
                                                 </tr>
-                                            </tfoot>
+                                            </tfoot> --}}
                                         </table>
                                     </div>
                                 </div>

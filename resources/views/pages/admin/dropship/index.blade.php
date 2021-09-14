@@ -8,23 +8,22 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('admin.searchdateDrop') }}" method="POST">
-                        @csrf
-                        <div class="form-group row">
-                            <div class="col-sm-6 col-md-6">
-                                <div class="input-group" id="event_period">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="far fa-calendar-alt"></i>
-                                        </span>
-                                    </div>
-                                    <input type="text" class="form-control actual_range" name="periode_start" id="dropship-periode-start" autocomplete="off">
-                                    <span class="input-group-text rounded-0">TO</span>
-                                    <input type="text" class="form-control actual_range" name="periode_end" id="dropship-periode-end" autocomplete="off">
+                    
+                    <div class="form-group row">
+                        <div class="col-sm-6 col-md-6">
+                            <div class="input-group" id="event_period">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </span>
                                 </div>
+                                <input type="text" class="form-control actual_range" name="periode_start" id="dropship-periode-start" autocomplete="off">
+                                <span class="input-group-text rounded-0">TO</span>
+                                <input type="text" class="form-control actual_range" name="periode_end" id="dropship-periode-end" autocomplete="off">
                             </div>
                         </div>
-                    </form>
+                    </div>
+                    
                 </div>
             </div>
         </div>
