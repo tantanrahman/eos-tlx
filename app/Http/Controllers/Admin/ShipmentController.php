@@ -39,6 +39,7 @@ class ShipmentController extends Controller
             $idx = [];
             $shipments  = Shipment::get_items($date_start,$date_end,$partner);
             
+            // <a href="shipment/'.$shipment->idx.'/edit" data-toggle="tooltip"  data-id="'.$shipment->idx.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>
            
             return DataTables::of($shipments)
                     ->addColumn('action', function($shipment){
@@ -46,7 +47,7 @@ class ShipmentController extends Controller
                         
                         {
                             $button =   '<div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="shipment/'.$shipment->idx.'/edit" data-toggle="tooltip"  data-id="'.$shipment->idx.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>
+                                        
                                         <button type="button" name="delete" id="'.$shipment->idx.'" class="delete btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
                                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-placement="top" data-target="#ModalPrint'.$shipment->idx.'" data-id="{{$shipment->idx}}" title="PRINT"><i class="fas fa-print"></i></button>
                                     </div>
