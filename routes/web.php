@@ -61,6 +61,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::resource('packagetype', PackageTypeController::class);
     Route::resource('postalcode', PostalCodeController::class);
     Route::resource('shipment', ShipmentController::class);
+    Route::resource('shipmentdetails', ShipmentController::class);
     Route::resource('bagshipment', BagShipmentController::class);
     Route::resource('pickuplist', PickuplistController::class);
     Route::resource('pickupuser', PickupUserController::class);

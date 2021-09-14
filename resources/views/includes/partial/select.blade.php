@@ -84,7 +84,14 @@
         });
     });
     $(document).ready(function() {
-        $('#select2countryshipment').select2({
+        $('#select2countryshipshipment').select2({
+        placeholder: "Select a Country",
+        allowClear: true,
+        theme: "bootstrap4",
+        });
+    });
+    $(document).ready(function() {
+        $('#select2countryconshipment').select2({
         placeholder: "Select a Country",
         allowClear: true,
         theme: "bootstrap4",

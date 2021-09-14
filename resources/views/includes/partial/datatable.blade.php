@@ -532,7 +532,7 @@
           data: 'payment_status',
           render: function(data)
           {
-              if (data==null)
+              if (data === null)
               {
                 return '<span class="badge badge-danger">UNPAID</span>'
               }

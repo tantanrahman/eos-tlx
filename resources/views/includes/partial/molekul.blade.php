@@ -212,22 +212,5 @@
 			placeholder: "Select a Partner"
 		});
 	});
-
-	//Remove Row Edit Shipment
-	$("table tbody").on('click','#remove', function(){
-			$(this).closest('tr').remove();
-			var volume = 0;
-			var total_weight = 0;
-				table.find('tr').each(function (i, el) {
-					var $tds = $(el).find('td');
-					var sum_volume 	= parseInt($tds.eq(4).children().val());
-					var sum_weight 	= parseInt($tds.eq(5).children().val());
-					volume 			+= sum_volume;
-					total_weight   	+= sum_weight;
-					});
-
-			$('#total-volume').text(volume);
-			$('#sum-weight').text(total_weight);
-	});
 	
 </script>

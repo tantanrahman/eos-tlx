@@ -378,10 +378,87 @@ class ShipmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Shipment $shipment)
-    {
-        $shipment = Shipment::findOrFail($shipment->id);
+    {   
 
+        $shipper    = Customer::findOrFail($shipment->shipper_id);
+        $consignee  = Customer::findOrFail($shipment->consignee_id);
 
+        $shipper->update([
+            'account_code'  => $request->account_code[0],
+            'name'          => $request->name[0],
+            'company_name'  => $request->company_name[0],
+            'address'       => $request->address[0],
+            'city_name'     => $request->city_name[0],
+            'city_id'       => $request->city_id[0],
+            'country_id'    => $request->country_id[0],
+            'postal_code'   => $request->postal_code[0],
+            'phone'         => $request->phone[0],
+        ]);
+
+        $consignee->update([
+            'account_code'  => $request->account_code[1],
+            'name'          => $request->name[1],
+            'company_name'  => $request->company_name[1],
+            'address'       => $request->address[1],
+            'city_name'     => $request->city_name[1],
+            'city_id'       => $request->city_id[1],
+            'country_id'    => $request->country_id[1],
+            'postal_code'   => $request->postal_code[1],
+            'phone'         => $request->phone[1],
+        ]);
+
+        $dataShipment = Shipment::findOrFail($shipment->id);
+        
+        //Input Shipment to Database
+        $dataShipment->update([
+            'packagetype_id'        => $request->packagetype_id,
+            'marketing_id'          => $request->marketing_id,
+            'partner_id'            => $request->partner_id,
+            'connote'               => $request->connote,
+            'values'                => $request->values,
+            'redoc_connote'         => $request->redoc_connote,
+            'redoc_params'          => $request->redoc_params,
+            'modal'                 => $request->modal,
+            'payment_method'        => $request->payment_method,
+            'payment_status'        => $request->payment_status,
+            'delivery_intructions'  => $request->delivery_intructions,
+            'remark'                => $request->remark,
+            'description'           => $request->description,
+            'created_by'            => Auth::user()->name
+        ]);
+
+        $shipmentId         = $dataShipment->id;
+        $actual_weights     = $request->actual_weight;
+        $lengths            = $request->length;
+        $widths             = $request->width;
+        $heights            = $request->height;
+        $sum_volumes        = $request->sum_volume;
+        $sum_weights        = $request->sum_weight;
+
+        foreach ($actual_weights ?: [] as $key => $value) 
+        {
+
+            //Input Shipment Details (Volume)
+            $shipmentId->update([
+                'shipment_id'           => $shipmentId,
+                'actual_weight'         => $value,
+                'length'                => $lengths[$key],
+                'width'                 => $widths[$key],
+                'height'                => $heights[$key],
+                'sum_volume'            => $sum_volumes[$key],
+                'sum_weight'            => $sum_weights[$key]
+            ]);
+
+        }
+
+        if($dataShipment)
+        {
+            return redirect(route('admin.shipment.index'))->with('toast_success', 'Berhasil Mengubah Data');
+        }
+        else
+        {
+            return redirect(route('admin.shipment.index'))->with('toast_error', 'Gagal! Edit Data!');
+        }
     }
 
     /**

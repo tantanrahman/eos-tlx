@@ -18,24 +18,31 @@
         </tr>
     </table>
 </header>
+<table style="width: 100%; border-style: solid;" >
+    <tr>
+        <td style="font-size: 22; text-align:center;"><b>Commercial Invoice</b></td>
+    </tr>
+</table>
 <main>
-    <table style="width:100%">
+    <table style="width:100%; margin-top:20px;">
         <tr>
             <td>
-                <table>
+                <table style="width: 100%">
                     <tr>
-                        <td style="font-size: 16px;">Shipping Date :</td>
+                        <td width=120 style="font-size: 16px;">Shipping Date :</td>
                         <td style="font-size: 16px;"><u><?= date('d/m/Y', strtotime($getShipment[0]->time)) ?></u>
                         </td>
                     </tr>
                 </table>
             </td>
-            <td>
+            <td width=120>
                 <center>
                     <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
                         $getShipment[0]->connote, 'C93')}}" height="60" width="300">
                         <br>
-                        <div style="word-spacing: 10px">{{ $getShipment[0]->connote }}</div>
+                        <div class="letter-space3">
+                            <b>{{ $getShipment[0]->connote }}</b>
+                        </div>
                 </center>
             </td>
         </tr>
@@ -136,14 +143,16 @@
     <br />
     <table style="width: 100%; border-collapse:collapse;" border="1" cellpadding="1" cellspacing="1">
         <tr align="center">
-            <td><b>QUANTITY & DESCRIPTION</b></td>
+            <td><b>QUANTITY</b></td>
+            <td><b>DESCRIPTION</b></td>
             <td><b>VOLUME</b></td>
             <td><b>WEIGHT</b></td>
         </tr>
         
         @foreach ($getShipment as $index => $details)
             <tr>
-                <td>{{ $index + 1 }} {{ $details->description }}</td>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ $details->description }}</td>
                 <td>{{ $details->length }} cm x {{ $details->width }} cm x {{ $details->height }} cm</td>
                 <td>{{ $details->actual_weight }} kg</td>
             </tr>
@@ -157,6 +166,7 @@
                 @endphp
                 </b>
             </td>
+            <td></td>
             <td align="right"><b>TOTAL WEIGHT</b></td>
             <td><b>{{ $getShipment->sum('actual_weight') }} kg</b></td>
         </tr>

@@ -87,14 +87,18 @@
                                             @enderror
                                         </div>
                                         <div class="form-group col-md-12" id="customer-country-section">
-                                            <label for="country_name">Country</label>
-                                            <input type="text" class="form-control @error('country_name') is-invalid @enderror" value="Indonesia" autocomplete="off" readonly>
-                                            @error('country_name')
+                                            <label for="ship_country_name">Country</label>
+                                            <select name="country_id[0]" class="form-control" id="select2countryshipshipment" data-width="100%">
+                                                <option></option>
+                                                @foreach($countries as $country)
+                                                    <option autofocus value="{{ $country->id }}">{{ $country->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('con_country_name')
                                             <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                             @enderror
-                                            <input class="form-control" name="country_id[0]" type="hidden" value="106" readonly>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="postal_code">Postal Code</label>
@@ -177,7 +181,7 @@
                                     </div>
                                     <div class="form-group col-md-12" id="customer-country-section">
                                         <label for="con_country_name">Country</label>
-                                        <select name="country_id[1]" class="form-control" id="select2countryshipment" data-width="100%">
+                                        <select name="country_id[1]" class="form-control" id="select2countryconshipment" data-width="100%">
                                             <option></option>
                                             @foreach($countries as $country)
                                                 <option autofocus value="{{ $country->id }}">{{ $country->name }}</option>
@@ -347,10 +351,10 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="city">Payment</label></label>
-                                        <select class="custom-select" id="customer-type" name="group">
+                                        <select class="custom-select" name="payment_status">
                                             <option selected disabled>-- Select Payment --</option>
-                                            <option value="consignee">Unpaid</option>
-                                            <option value="shipper">Paid</option>
+                                            <option value="0">Unpaid</option>
+                                            <option value="1">Paid</option>
                                         </select>
                                     </div>
                                 </div>

@@ -88,8 +88,10 @@ class ShipmentDetailController extends Controller
      * @param  \App\Models\ShipmentDetail  $shipmentDetail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ShipmentDetail $shipmentDetail)
+    public function destroy($id)
     {
-        //
+        $details = ShipmentDetail::where('id',$id)->delete();
+
+        return response()->json($details);
     }
 }

@@ -38,9 +38,11 @@
             <td height="100">
                 <center>
                     <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
-                        $items->connote, 'C93')}}" height="70" width="300">
+                        $items->connote, 'C93', )}}" height="70" width="300">
                         <br>
-                        <div style="word-spacing: 10px">{{ $items['connote'] }}</div>
+                        <div class="letter-space2">
+                            {{ $items['connote'] }}
+                        </div>
                 </center>
             </td>
         </tr>

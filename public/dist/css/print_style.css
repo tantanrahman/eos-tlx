@@ -13,6 +13,27 @@ header {
     page-break-after: always; 
 }
 
+.letter-space {
+    letter-spacing:17px; 
+    width:300; 
+    margin-left:70; 
+    margin-top:-10;
+}
+
+.letter-space2 {
+    letter-spacing:17px; 
+    width:300; 
+    margin-left:15; 
+    margin-top:-10;
+}
+
+.letter-space3 {
+    letter-spacing:17px; 
+    width:300; 
+    margin-left:15; 
+    margin-top:-10;
+}
+
 p:last-child { 
     page-break-after: never; 
 }
