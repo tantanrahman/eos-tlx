@@ -3,7 +3,7 @@
     <title>Shipment | Connote</title>
     <link rel="stylesheet" href="{{ asset('dist/css/print_style.css') }}">
 </head>
-<body>
+<body style="background-image: url('img/tlx_logo.png')">
 <header>
     <table cellpadding="1" cellspacing="0" style="width:100%">
         <tr>
@@ -29,22 +29,27 @@
         <td>
             <table style="width: 100%">
                 <tr>
-                    <td width="90">A.1. Account</td>
+                    <td width="100">A.1. Account</td>
                     <td width="10">:</td>
                     <td>{{ $items['ship_ac'] }} / {{ $getUser[0]->username }}</td>
                 </tr>
                 <tr>
                     <td>A.2. Name</td>
                     <td>:</td>
-                    <td>{{ $items->ship_company_name === null ? $items['ship_name'] ." / ". $items->marketing : $items->ship_company_name ." / ". $items->marketing }}</td>
+                    <td>{{ $items->ship_company_name === null ? $items['ship_name'] ." / ". $items->marketing : $items->ship_company_name ." / ". $items['ship_name'] ." / ". $items->marketing }}</td>
                 </tr>
                 <tr>
                     <td>A.3. Address</td>
                     <td>:</td>
-                    <td>{{ $items['ship_address'] }} {{ $items['ship_postal_code'] }} {{ $items['ship_city_name'] }}</td>
+                    <td>{{ $items['ship_address'] }} {{ $items['ship_city_name'] }} {{ $items['ship_cou_name'] }}</td>
                 </tr>
                 <tr>
-                    <td>A.4. Phone</td>
+                    <td>A.4. Postal Code</td>
+                    <td>:</td>
+                    <td>{{ $items['ship_postal_code'] }}</td>
+                </tr>
+                <tr>
+                    <td>A.5. Phone</td>
                     <td>:</td>
                     <td>{{ $items['ship_phone'] }}</td>
                 </tr>
@@ -72,17 +77,22 @@
         <td>
             <table style="width: 100%">
                 <tr>
-                    <td width="90">B.1. Name</td>
+                    <td width="100">B.1. Name</td>
                     <td width="10">:</td>
                     <td>{{ $items['con_name'] }}</td>
                 </tr>
                 <tr>
                     <td>B.2. Address</td>
                     <td>:</td>
-                    <td>{{ $items['con_address'] }} {{ $items['con_postal_code'] }} {{ $items['con_city_name'] }}</td>
+                    <td>{{ $items['con_address'] }} {{ $items['con_city_name'] }} {{ $items['con_cou_name'] }}</td>
                 </tr>
                 <tr>
-                    <td>B.3. Phone</td>
+                    <td>B.3. Postal Code</td>
+                    <td>:</td>
+                    <td>{{ $items['con_postal_code'] }}</td>
+                </tr>
+                <tr>
+                    <td>B.4. Phone</td>
                     <td>:</td>
                     <td>{{ $items['con_phone'] }}</td>
                 </tr>
@@ -170,7 +180,7 @@
         </td>
     </tr>
     <tr>
-        <td rowspan="3" style="border-top-style: hidden; mt:3;">
+        <td rowspan="3" style="border-top-style: hidden;">
             <table class="center" border="1" style="width: 100%; solid black; margin-left: 10; margin-right: 10;" cellpadding="3">
                 <tr>
                     <th><b>Quantity</b></th>

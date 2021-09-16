@@ -127,7 +127,7 @@
 		});
 	});
 	
-	$('body').on('change', '#select2countryshipment', function (e) {
+	$('body').on('change', '#select2countryconshipment', function (e) {
 		e.preventDefault();
 
 		let customer_id_path = "{{ route('getCustomerId')  }}";

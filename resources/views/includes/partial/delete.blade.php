@@ -59,6 +59,7 @@
     */
     $(document).on('click', '.delete', function () {
           dataId = $(this).attr('id');
+          console.log(dataId)
           $('#hapus-customer').modal('show');
     });
       
@@ -126,4 +127,33 @@
             }
         })
     });
+
+    /** 
+     * @author Tantan
+     * @modified 15 Sep 2021
+     * @description Delete Shipment Details
+     * 
+    */
+    $("table tbody").on('click','.removeSD', function(){
+		var id = $(this).attr('id');
+        var row = $(this).closest('tr');
+		$.ajax({
+			url: "/admin/shipmentdetails/" + id,
+			type: 'DELETE',
+			data: {id: id},
+			
+			success:function(data)
+			{
+				if(data)
+				{
+					$(this).closest('tr').remove();
+                    window.location.reload();
+				} 
+				else
+				{
+					alert('Error!');
+				}
+			}
+		})
+	});
 </script>

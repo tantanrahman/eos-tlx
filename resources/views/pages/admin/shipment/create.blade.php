@@ -94,7 +94,7 @@
                                                     <option autofocus value="{{ $country->id }}">{{ $country->name }}</option>
                                                 @endforeach
                                             </select>
-                                            @error('con_country_name')
+                                            @error('country_id[0]')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -267,8 +267,8 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="city">Delivery Instruction</label>
-                                        <textarea oninput="this.value = this.value.toUpperCase()" rows="3" class="form-control @error('delivery_instruction') is-invalid @enderror" name="delivery_instructions" value="{{ old('delivery_instruction') }}" style="resize:none"></textarea>
-                                        @error('delivery_instruction')
+                                        <textarea oninput="this.value = this.value.toUpperCase()" rows="3" class="form-control @error('delivery_intructions') is-invalid @enderror" name="delivery_intructions" value="{{ old('delivery_intructions') }}" style="resize:none"></textarea>
+                                        @error('delivery_intructions')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

@@ -31,14 +31,23 @@
                                         <div>
                                             <input type="hidden" name="created_by[]" value="{{ Auth::user()->name }}" readonly>
                                         </div>
-                                        <div>
-                                            <input type="hidden" class="form-control" name="connote" value="{{ $shipment->connote }}" readonly>
+                                        <div class="form-group col-md-12">
+                                            <label for="connote">Connote</label>
+                                            <input type="text" name="connote" class="form-control @error('connote') is-invalid @enderror" value="{{ $shipment->connote }}" autocomplete="off">
+                                            @error('connote')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
+                                        {{-- <div>
+                                            <input type="text" class="form-control" name="connote" value="{{ $shipment->connote }}" readonly>
+                                        </div> --}}
                                         <div>
                                             <input type="hidden" class="form-control" name="id[0]" value="{{ $shipment->shipper_id }}" readonly>
                                         </div>
                                         <div>
-                                            <input type="text" id="customer-id" class="form-control" value="{{ $shipper->account_code }}" name="account_code[0]" readonly>
+                                            <input type="hidden" id="customer-id" class="form-control" value="{{ $shipper->account_code }}" name="account_code[0]" readonly>
                                         </div>
                                         <div>
                                             <input type="hidden" class="form-control" name="group[]" value="shipper" readonly>
@@ -80,10 +89,10 @@
                                         </div>
                                         <div class="form-group col-md-12" id="customer-country-section">
                                             <label for="con_country_name">Country</label>
-                                            <select name="country_id[0]" class="form-control" id="select2countryconshipment" data-width="100%">
+                                            <select name="country_id[0]" class="form-control" id="select2countryshipshipment" data-width="100%">
                                                 <option></option>
                                                 @foreach($countries as $country)
-                                                <option value="{{ $country->id }}" {{ ($country->id == $consignee->country_id) ? 'selected' : '' }}>{{ $country->name }}</option>
+                                                <option value="{{ $country->id }}" {{ ($country->id == $shipper->country_id) ? 'selected' : '' }}>{{ $country->name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('con_country_name')
@@ -142,7 +151,7 @@
                                 <hr style="border: 2px solid black">
                                 <div class="form-row">
                                     <div>
-                                        <input type="text" id="con-customer-id" class="form-control" name="account_code[1]" value="{{ $consignee->account_code }}" readonly>
+                                        <input type="hidden" id="con-customer-id" class="form-control" name="account_code[1]" value="{{ $consignee->account_code }}" readonly>
                                     </div>
                                     <div>
                                         <input type="hidden" class="form-control" name="id[1]" value="{{ $shipment->consignee_id }}" readonly>
@@ -173,18 +182,17 @@
                                     </div>
                                     <div class="form-group col-md-12" id="customer-country-section">
                                         <label for="con_country_name">Country</label>
-                                        <select class="form-control" name="country_id[1]" id="select2countryshipment" data-width="100%">
+                                        <select name="country_id[0]" class="form-control" id="select2countryconshipment" data-width="100%">
                                             <option></option>
                                             @foreach($countries as $country)
-                                                <option value="{{ $country->id }}" {{ ($country->id == $consignee->country_id) ? 'selected' : '' }}>{{ $country->name }}</option>
+                                            <option value="{{ $country->id }}" {{ ($country->id == $consignee->country_id) ? 'selected' : '' }}>{{ $country->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('con_country_id')
+                                        @error('con_country_name')
                                         <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
-                                        {{-- <input type="hidden" name="country_id[1]" id="con-customer-country"> --}}
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="con_postal_code">Postal Code</label>
@@ -380,7 +388,7 @@
                                 <div class="form-row">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover" style="width:100%"
-                                            id="list_pieces">
+                                            id="table_shipmentdetails">
                                             <thead>
                                                 <tr>
                                                     <th>
@@ -448,7 +456,7 @@
                                                     $totalv = 0;
                                                 @endphp
                                                 @foreach ($shipmentdetails as $item)
-                                               
+                                                
                                                 <tr>
                                                     <td>{{$item->actual_weight}}</td>
                                                     <td>{{$item->length}}</td>
@@ -457,7 +465,7 @@
                                                     <td align="right">{{$item->sum_volume}}</td>
                                                     <td align="right">{{$item->sum_weight}}</td>
                                                     <td>
-                                                        <button type='button' id='remove' class='btn btn-sm btn-danger'><i class='fas fa-trash'></i></button>
+                                                        <button type='button' id='{{ $item->id }}' class='btn btn-danger removeSD'><i class='fas fa-trash'></i></button>
                                                     </td>
                                                 </tr>
                                                 @php
@@ -491,5 +499,25 @@
             </form>
         </div>
     </section>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="hapus-shipmentdetails" data-backdrop="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">PERHATIAN</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah anda yakin akan menghapus data ini?</p>
+            </div>
+            <div class="modal-footer bg-whitesmoke br">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" name="action-hapus-shipment" id="action-hapus-shipment">Hapus Data</button>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

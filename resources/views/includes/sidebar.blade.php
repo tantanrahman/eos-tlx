@@ -19,6 +19,10 @@
             </a>
           </li>
 
+          <hr style="width: 100%">
+
+          <a href="{{ route('admin.shipment.create') }}" class="btn bg-warning"><b>Create Connote</b></a>
+          <li class="nav-header">Menu</li>
           <li class="nav-item {{ request()->is('admin/bagpackage*') || request()->is('admin/city*') || request()->is('admin/courier*') || request()->is('admin/country*') || request()->is('admin/partner*') || request()->is('admin/packagetype*') || request()->is('admin/postalcode*') || request()->is('admin/pickupuser*') || request()->is('admin/ongkir*') || request()->is('admin/tracking_status*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-database"></i>
@@ -172,12 +176,6 @@
             </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('admin.counter.index') }}" class="nav-link {{ request()->is('admin/counter*') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p style="font-size: 14px">Counter</p>
-                </a>
-              </li>
               <li class="nav-item">
                 <a href="{{ route('admin.officeprofile.index') }}" class="nav-link {{ request()->is('admin/officeprofile*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>

@@ -22,19 +22,26 @@ class ShipmentDetail extends Model
         'sum_weight'
     ];
 
+    /**
+     * @author Tantan 
+     * @description get Details from Shipment Details
+     * @created 16 Sep 2021
+     */
     public static function get_details()
     {
-        $query = DB::raw(
-            "shipment_details.actual_weight",
-            "shipment_details.length",
-            "shipment_details.width",
-            "shipment_details.height",
-            "shipment_details.volume",
-            "shipment_details.total_weight",
-        );
+        $items = self::leftjoin('shipment','shipment_details.shipment_id','=','shipment.id')
+                    ->select(
+                        'shipment_details.id',
+                        'shipment.id',
+                        'shipment_details.actual_weight',
+                        'shipment_details.length',
+                        'shipment_details.width',
+                        'shipment_details.height',
+                        'shipment_details.sum_volume',
+                        'shipment_details.sum_weight',
+                    );
 
-        $items = self::select($query);
-
-        return $items->get();
+            return $items->first();
     }
+    
 }

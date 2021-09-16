@@ -55,7 +55,7 @@
                 <table style="width: 100%">
                     <tr>
                         <td width="100">Name : </td>
-                        <td style="border-bottom-style: solid">{{ $getShipment[0]->ship_name }}
+                        <td style="border-bottom-style: solid">{{ $getShipment[0]->ship_company_name }} / {{ $getShipment[0]->ship_name }}
                         </td>
                     </tr>
                     <tr>
@@ -64,8 +64,13 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>Postal Code :</td>
+                        <td style="border-bottom-style: solid">{{ $getShipment[0]->ship_postal_code }}
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Country :</td>
-                        <td style="border-bottom-style: solid">{{ $getShipment[0]->cou_name }}
+                        <td style="border-bottom-style: solid">{{ $getShipment[0]->ship_cou_name }}
                         </td>
                     </tr>
                     <tr>
@@ -79,7 +84,7 @@
                 <table style="width: 100%">
                     <tr>
                         <td width="100">Name :</td>
-                        <td style="border-bottom-style: solid">{{ $getShipment[0]->con_name }}
+                        <td style="border-bottom-style: solid">{{ $getShipment[0]->con_company_name }} / {{ $getShipment[0]->con_name }}
                         </td>
                     </tr>
                     <tr>
@@ -88,8 +93,13 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>Postal Code :</td>
+                        <td style="border-bottom-style: solid">{{ $getShipment[0]->con_postal_code }}
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Country :</td>
-                        <td style="border-bottom-style: solid">{{ $getShipment[0]->cou_name }}
+                        <td style="border-bottom-style: solid">{{ $getShipment[0]->con_cou_name }}
                         </td>
                     </tr>
                     <tr>

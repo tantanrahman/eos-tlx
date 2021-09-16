@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\TrackingShipmentController;
 use App\Http\Controllers\Admin\TrackingStatusController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\PrintController;
+use App\Http\Controllers\Admin\ShipmentDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,12 +57,11 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::resource('dropship', DropshipController::class);
     Route::resource('customer', CustomerController::class);
     Route::resource('country', CountryController::class);
-    Route::resource('counter', CounterController::class);
     Route::resource('partner', PartnerController::class);
     Route::resource('packagetype', PackageTypeController::class);
     Route::resource('postalcode', PostalCodeController::class);
     Route::resource('shipment', ShipmentController::class);
-    Route::resource('shipmentdetails', ShipmentController::class);
+    Route::resource('shipmentdetails', ShipmentDetailController::class);
     Route::resource('bagshipment', BagShipmentController::class);
     Route::resource('pickuplist', PickuplistController::class);
     Route::resource('pickupuser', PickupUserController::class);

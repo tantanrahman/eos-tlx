@@ -15,7 +15,6 @@ use App\Models\TrackingShipment;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -39,7 +38,7 @@ class ShipmentController extends Controller
             $idx = [];
             $shipments  = Shipment::get_items($date_start,$date_end,$partner);
             
-            // <a href="shipment/'.$shipment->idx.'/edit" data-toggle="tooltip"  data-id="'.$shipment->idx.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>
+            // 
            
             return DataTables::of($shipments)
                     ->addColumn('action', function($shipment){
@@ -47,7 +46,7 @@ class ShipmentController extends Controller
                         
                         {
                             $button =   '<div class="btn-group" role="group" aria-label="Basic example">
-                                        
+                                        <a href="shipment/'.$shipment->idx.'/edit" data-toggle="tooltip"  data-id="'.$shipment->idx.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>
                                         <button type="button" name="delete" id="'.$shipment->idx.'" class="delete btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
                                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-placement="top" data-target="#ModalPrint'.$shipment->idx.'" data-id="{{$shipment->idx}}" title="PRINT"><i class="fas fa-print"></i></button>
                                     </div>
@@ -94,7 +93,7 @@ class ShipmentController extends Controller
                         }
                         else
                         {
-                            $button =   '<div class="btn-group" role="group" aria-label="Basic example">
+                            $button ='<div class="btn-group" role="group" aria-label="Basic example">
                                         <a href="shipment/'.$shipment->idx.'/edit" data-toggle="tooltip"  data-id="'.$shipment->idx.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>
                                         <button type="button" name="delete" id="'.$shipment->idx.'" class="delete btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
                                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-placement="top" data-target="#ModalPrint'.$shipment->idx.'" data-id="{{$shipment->idx}}" title="PRINT"><i class="fas fa-print"></i></button>
@@ -308,7 +307,7 @@ class ShipmentController extends Controller
                 //Input Shipment Details (Volume)
                 $dataShipmentDetail[] = ShipmentDetail::create([
                     'shipment_id'           => $shipmentId,
-                    'actual_weight'         => $actual_weights[$key],
+                    'actual_weight'         => $value,
                     'length'                => $lengths[$key],
                     'width'                 => $widths[$key],
                     'height'                => $heights[$key],
@@ -383,7 +382,7 @@ class ShipmentController extends Controller
 
         $shipper    = Customer::findOrFail($shipment->shipper_id);
         $consignee  = Customer::findOrFail($shipment->consignee_id);
-
+        
         $shipper->update([
             'account_code'  => $request->account_code[0],
             'name'          => $request->name[0],
@@ -436,13 +435,15 @@ class ShipmentController extends Controller
         $sum_volumes        = $request->sum_volume;
         $sum_weights        = $request->sum_weight;
 
+        $details = ShipmentDetail::get_details();
+
         foreach ($actual_weights ?: [] as $key => $value) 
         {
-
-            //Input Shipment Details (Volume)
-            $shipmentId->update([
+            
+            $details->updateOrCreate([
+                'id'                    => $value,
                 'shipment_id'           => $shipmentId,
-                'actual_weight'         => $value,
+                'actual_weight'         => $actual_weights[$key],
                 'length'                => $lengths[$key],
                 'width'                 => $widths[$key],
                 'height'                => $heights[$key],
@@ -549,25 +550,4 @@ class ShipmentController extends Controller
         return response()->json(['success'=>'Got Simple Ajax Request.']);
     }
 
-    /**
-     * @author Tantan
-     * @description Get Api City API Zippopota
-     * @param Request $request
-     * @return void
-     */
-    public function getCityApi(Request $request)
-    {
-        $a              = 'Malaysia';
-        $response       = Http::get('https://api.zippopotam.us/MY/53000');
-        $data           = json_decode($response->body());
-        
-        if($a === $data->country)
-        {
-            echo "Sama";
-        }
-        else
-        {
-            echo "Gagal";
-        }
-    }
 }

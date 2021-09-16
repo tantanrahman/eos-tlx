@@ -62,7 +62,6 @@
 		updater: function(item) {
 			$('input[name="country_id"]').val(map[item].id).trigger('change');
 			$('input[name="country_id[1]"]').val(map[item].id).trigger('change');
-			$('input[name="country_name[1]"]').val(map[item].id).trigger('change');
 			return item;
 		}
 	});
@@ -112,7 +111,7 @@
 			$('input[name="city_id[0]"]').val(map[item].city_id);
 			$('input[name="city_name[0]"]').val(map[item].city_name);
 			$('textarea[name="address[0]"]').val(map[item].address);
-			$('typeahead:select[name="country_id[0]"]').val(map[item].country_id);
+			$('select[name="country_id[0]"]').val(map[item].country_id).trigger('change');
 			return item;
 		}
 	});
@@ -141,10 +140,7 @@
 			$('input[name="postal_code[1]"]').val(map[item].postal_code);
 			$('input[name="city_name[1]"]').val(map[item].city_name);
 			$('textarea[name="address[1]"]').val(map[item].address);
-			// $('select[name="country_name[1]"]').val(map[item].country_name);
-			$('#select2countryshipshipment').on('typeahead:selected', function(item) {
-				alert(map[item].country_id);
-			});
+			$('select[name="country_id[1]"]').val(map[item].country_id).trigger('change');
 			return item;
 		}
 	});

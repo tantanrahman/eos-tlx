@@ -129,6 +129,8 @@ class Shipment extends Model
             return $items->get();
     }
 
+    
+
     /**
      * @author Tantan
      * @description Relation for Shipment
