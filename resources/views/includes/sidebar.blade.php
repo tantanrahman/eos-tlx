@@ -19,7 +19,7 @@
             </a>
           </li>
 
-          <hr style="width: 100%">
+          <hr style="width: 100%; border: solid 1px white;">
 
           <a href="{{ route('admin.shipment.create') }}" class="btn bg-warning"><b>Create Connote</b></a>
           <li class="nav-header">Menu</li>

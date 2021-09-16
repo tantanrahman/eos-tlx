@@ -31,7 +31,7 @@
                 <tr>
                     <td width="100">A.1. Account</td>
                     <td width="10">:</td>
-                    <td>{{ $items['ship_ac'] }} / {{ $getUser[0]->username }}</td>
+                    <td>{{ $items['ship_ac'] }} / {{ $getUser[0]->created }}</td>
                 </tr>
                 <tr>
                     <td>A.2. Name</td>

@@ -182,7 +182,7 @@
                                     </div>
                                     <div class="form-group col-md-12" id="customer-country-section">
                                         <label for="con_country_name">Country</label>
-                                        <select name="country_id[0]" class="form-control" id="select2countryconshipment" data-width="100%">
+                                        <select name="country_id[1]" class="form-control" id="select2countryconshipment" data-width="100%">
                                             <option></option>
                                             @foreach($countries as $country)
                                             <option value="{{ $country->id }}" {{ ($country->id == $consignee->country_id) ? 'selected' : '' }}>{{ $country->name }}</option>
