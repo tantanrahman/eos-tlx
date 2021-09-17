@@ -196,7 +196,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="con_postal_code">Postal Code</label>
-                                        <input type="text" value="{{ $consignee->postal_code }}" name="postal_code[1]" class="form-control @error('con_postal_code') is-invalid @enderror" autocomplete="off">
+                                        <input type="text" id="consignee_postalcode" value="{{ $consignee->postal_code }}" name="postal_code[1]" class="form-control @error('con_postal_code') is-invalid @enderror" autocomplete="off">
                                         @error('con_postal_code')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -214,7 +214,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="con_city_name">City*</label>
-                                        <input name="city_name[1]" type="text" class="form-control @error('con_city_name') is-invalid @enderror" autocomplete="off" value="{{ $consignee->city_name }}">
+                                        <input name="city_name[1]" id="city-1" type="text" class="form-control @error('con_city_name') is-invalid @enderror" autocomplete="off" value="{{ $consignee->city_name }}">
                                         @error('con_city_name')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -521,3 +521,19 @@
     </div>
 </div>
 @endsection
+@push('script')
+<script>
+    $('#consignee_postalcode').on('keyup',function(e){
+            var client = new XMLHttpRequest();
+            client.open("GET", "https://api.zippopotam.us/"+$('#select2countryconshipment').val()+"/"+e.target.value, true);
+            client.onreadystatechange = function() {
+            if(client.readyState == 4) {
+                
+            $('#city-1').val(JSON.parse(client.responseText).places ? JSON.parse(client.responseText).places[0].state : '');
+            };
+            };
+            
+            client.send();
+        })
+</script>
+@endpush

@@ -76,8 +76,16 @@
             </td>
             <td align="center">{{ $items['delivery_intructions'] }}</td>
             <td style="font-size: 13;" align="center"><b>@php echo $index + 1 @endphp OF @php echo count($getShipment) @endphp</b></td>
-            <td style="font-size: 13;" align="center"><b>
-                {{ $items['actual_weight'] }} KG</b></td>
+            <td style="font-size: 13;" align="center">
+                <b>
+                    @if ($getShipment->sum('sum_volume')/5000 >= $getShipment->sum('actual_weight'))
+                            {{ ceil(number_format($getShipment->sum('sum_volume')/5000, 2, '.', '')) }} kg
+                    @else
+                        {{ ceil(number_format($getShipment->sum('actual_weight'), 2, '.', '')) }} kg
+                    @endif
+                    
+                </b>
+            </td>
         </tr>
         <p class="page-break" style="font-size: 11">I/WE AGREE THAT CARRIERS STANDARD TERMS AND CONDITIONS APPLY TO THIS SHIPMENT AND LIMIT THE
             CARRIERS LIABILITY. THE WARSAW CONVENTION MAY ALSO APPLY.</p>

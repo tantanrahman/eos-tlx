@@ -1,5 +1,5 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="{{ url('plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ url('dist/js/jquery3-5.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script><i class="ri-psychotherapy-line"></i>
 <script src="{{ url('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <script>

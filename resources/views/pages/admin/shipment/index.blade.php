@@ -25,13 +25,13 @@
                             </div>
                         </div>
                     </form>
-                    <form action="{{ route('admin.shipment.index') }}" method="GET">
-                        <select class="partner-multiple-select form-control" name="partner[]" multiple="multiple" id="partner_multiple">
-                            @foreach($partners as $partners)
-                                <option value="{{ $partners->id }}">{{ $partners->name }}</option>
-                            @endforeach
-                        </select>
-                    </form>
+                    
+                    <select class="partner-multiple-select form-control" name="partner[]" multiple="multiple" id="partner_multiple">
+                        @foreach($partners as $partners)
+                            <option value="{{ $partners->id }}">{{ $partners->name }}</option>
+                        @endforeach
+                    </select>
+                    
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                         </a> --}}
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="table_shipment" data-order='[0,"DESC"]' style="width:100%">
+                        <table class="table table-bordered table-hover" id="table_shipment" data-order='[0,"DESC"]' style="width:100%">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>CREATED AT</th>

@@ -24,7 +24,7 @@
     'bold_italic' => $rootDir . '/lib/fonts/Courier-BoldOblique',
   ),
   'helvetica' => array(
-    'normal' => $rootDir . '/lib/fonts/Helvetica',
+    'normal' => $fontDir . '/helvetica_normal_0133b4e0605509746218c0c3dc5bfb89',
     'bold' => $rootDir . '/lib/fonts/Helvetica-Bold',
     'italic' => $rootDir . '/lib/fonts/Helvetica-Oblique',
     'bold_italic' => $rootDir . '/lib/fonts/Helvetica-BoldOblique',

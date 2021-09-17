@@ -7,19 +7,20 @@
     <!-- Preloader -->
     {{-- <div class="preloader dark-mode flex-column justify-content-center align-items-center">
       <img class="animation__wobble" src="{{ url('img/favicon.png') }}" height="100" width="100">
-    </div> --}}
+  </div> --}}
 
-    @include('includes.navbar')
+  @include('includes.navbar')
 
-    @include('includes.sidebar')
+  @include('includes.sidebar')
 
-    @yield('content')
+  @yield('content')
 
-    @include('includes.footer')
+  @include('includes.footer')
 
   </div>
 
-    @include('includes.script')
-
+  @include('includes.script')
+  @stack('script')
 </body>
+
 </html>

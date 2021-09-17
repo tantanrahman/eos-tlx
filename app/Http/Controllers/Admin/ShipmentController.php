@@ -256,6 +256,9 @@ class ShipmentController extends Controller
                     'sum_weight'            => $sum_weights[$key]
                 ]);
 
+                
+            }
+
                 $currentDate    = date('Y-m-d H:i:s');
                 $apiKey         = TrackingShipment::get_apikey();
 
@@ -267,7 +270,6 @@ class ShipmentController extends Controller
                     'status_ind'        => Request()->status_ind,
                     'apikey'            => md5($apiKey)
                 ]);
-            }
             
         }
         else
@@ -315,18 +317,20 @@ class ShipmentController extends Controller
                     'sum_weight'            => $sum_weights[$key]
                 ]);
 
-                $currentDate    = date('Y-m-d H:i:s');
-                $apiKey         = TrackingShipment::get_apikey();
-
-                //Input Data Tracking
-                $dataTracking = TrackingShipment::create([
-                    'shipment_id'       => $shipmentId,
-                    'track_time'        => $currentDate,
-                    'status_eng'        => Request()->status_eng,
-                    'status_ind'        => Request()->status_ind,
-                    'apikey'            => md5($apiKey)
-                ]);
+                
             }
+
+            $currentDate    = date('Y-m-d H:i:s');
+            $apiKey         = TrackingShipment::get_apikey();
+
+            //Input Data Tracking
+            $dataTracking = TrackingShipment::create([
+                'shipment_id'       => $shipmentId,
+                'track_time'        => $currentDate,
+                'status_eng'        => Request()->status_eng,
+                'status_ind'        => Request()->status_ind,
+                'apikey'            => md5($apiKey)
+            ]);
 
         }
 

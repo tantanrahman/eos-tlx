@@ -23,6 +23,7 @@
         <td style="font-size: 22; text-align:center;"><b>Commercial Invoice</b></td>
     </tr>
 </table>
+
 <main>
     <table style="width:100%; margin-top:20px;">
         <tr>
@@ -134,7 +135,12 @@
                     </tr>
                     <tr>
                         <td>Total Weight :</td>
-                        <td style="border-bottom-style: solid">{{ $getShipment->sum('actual_weight') }} kg
+                        <td style="border-bottom-style: solid">
+                            @if ($getShipment->sum('sum_volume')/5000 >= $getShipment->sum('actual_weight'))
+                            {{ ceil(number_format($getShipment->sum('sum_volume')/5000, 2, '.', '')) }} kg
+                            @else
+                                {{ ceil(number_format($getShipment->sum('actual_weight'), 2, '.', '')) }} kg
+                            @endif
                         </td>
                     </tr>
                     <tr>

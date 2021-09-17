@@ -21,7 +21,8 @@
 
           <hr style="width: 100%; border: solid 1px white;">
 
-          <a href="{{ route('admin.shipment.create') }}" class="btn bg-warning"><b>Create Connote</b></a>
+          <a href="{{ route('admin.shipment.create') }}" class="btn btn-sm bg-warning"><b>Create Connote</b></a>
+
           <li class="nav-header">Menu</li>
           <li class="nav-item {{ request()->is('admin/bagpackage*') || request()->is('admin/city*') || request()->is('admin/courier*') || request()->is('admin/country*') || request()->is('admin/partner*') || request()->is('admin/packagetype*') || request()->is('admin/postalcode*') || request()->is('admin/pickupuser*') || request()->is('admin/ongkir*') || request()->is('admin/tracking_status*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">

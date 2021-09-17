@@ -19,6 +19,7 @@
     </table>
 </header>
 <main>
+
 @foreach ($getShipment as $index => $items)
 <table border="1" style="width: 100%" cellpadding="3" cellspacing="0" class="page-break">
     <tr>
@@ -31,7 +32,7 @@
                 <tr>
                     <td width="100">A.1. Account</td>
                     <td width="10">:</td>
-                    <td>{{ $items['ship_ac'] }} / {{ $getUser[0]->created }}</td>
+                    <td>{{ $items['ship_ac'] }} / {{ $items['created'] }}</td>
                 </tr>
                 <tr>
                     <td>A.2. Name</td>
@@ -142,11 +143,13 @@
                 <tr>
                     <td>C.3. Quantity</td>
                     <td>:</td>
-                    <td>@php
-                        echo $index + 1
-                    @endphp of @php
-                        echo count($getShipment)
-                    @endphp</td>
+                    <td>
+                        @php
+                            echo $index + 1
+                        @endphp of @php
+                            echo count($getShipment)
+                        @endphp
+                    </td>
                 </tr>
                 <tr>
                     <td>C.4. Value</td>
@@ -156,23 +159,23 @@
                 <tr>
                     <td>C.5. Actual Weight</td>
                     <td>:</td>
-                    <td>{{ number_format($items['actual_weight'], 2, '.', '') }} kg</td>
+                    <td>{{ number_format($getShipment->sum('actual_weight'), 2, '.', '') }} kg</td>
                 </tr>
 
                 <tr>
                     <td>C.6. Volumetric</td>
                     <td>:</td>
-                    <td>{{ number_format($items['sum_volume']/5000, 2, '.', '') }} kg</td>
+                    <td>{{ number_format($getShipment->sum('sum_volume')/5000, 2, '.', '') }} kg</td>
                 </tr>
 
                 <tr>
                     <td>C.7. Chargeable Weight</td>
                     <td>:</td>
                     <td>
-                        @if ($items['sum_volume']/5000 >= $items['actual_weight'])
-                            {{ number_format($items['sum_volume']/5000, 2, '.', '') }} kg
+                        @if ($getShipment->sum('sum_volume')/5000 >= $getShipment->sum('actual_weight'))
+                            {{ ceil(number_format($getShipment->sum('sum_volume')/5000, 2, '.', '')) }} kg
                         @else
-                            {{ number_format($items['actual_weight'], 2, '.', '') }} kg
+                            {{ ceil(number_format($getShipment->sum('actual_weight'), 2, '.', '')) }} kg
                         @endif
                     </td>
                 </tr>
@@ -192,9 +195,9 @@
                 @foreach ($getShipment as $index => $details)
                     <tr>
                         <td>{{ $index + 1 }}</td>
-                        <td>{{ $details['length'] }} cm</td>
-                        <td>{{ $details['width'] }} cm</td>
-                        <td>{{ $details['height'] }} cm</td>
+                        <td>{{ number_format($details['length'], 2, '.', '') }} cm</td>
+                        <td>{{ number_format($details['width'], 2, '.', '') }} cm</td>
+                        <td>{{ number_format($details['height'], 2, '.', '') }} cm</td>
                     </tr>
                 @endforeach
             </table>

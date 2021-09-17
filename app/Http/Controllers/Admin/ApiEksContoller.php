@@ -17,11 +17,12 @@ class ApiEksContoller extends Controller
      */
     public function apiPostalCode()
     {   
-        $countries      = Country::first();
 
         $response       = Http::get('https://api.zippopotam.us/MY/53000');
 
         $data           = json_decode($response->body());
+
+        return $data;
 
     }
 }
