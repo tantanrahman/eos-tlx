@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Country;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Http;
 
 class ApiEksContoller extends Controller
@@ -15,14 +16,26 @@ class ApiEksContoller extends Controller
      * @created 12 Sep 2021
      * @return void
      */
-    public function apiPostalCode()
-    {   
+    public function getCityAction(Request $request)
+    {
+        $country = Country::where('id', $request->id)->first();
+        $response = Http::get('https://api.zippopotam.us/' . $country->alpha2code . '/' . $request->postal_code . '');
+        $response = json_decode($response->body());
+        if (isset($response->places)) {
+            $response = ['place' => $response->places[0]->{'place name'} . ', ' . $response->places[0]->state];
+        } else {
+            $city = Customer::where('country_id', $country->id)->where('postal_code', $request->postal_code)->first();
 
-        $response       = Http::get('https://api.zippopotam.us/MY/53000');
+            if ($city != false) {
+                $response = [
+                    'place' => $city->city_name
+                ];
+            } else {
+                $response = [];
+            }
+        }
 
-        $data           = json_decode($response->body());
-
-        return $data;
-
+        return response($response);
     }
+    
 }

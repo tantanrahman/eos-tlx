@@ -145,4 +145,20 @@
 		}
 	});
 
+	//Get City Name from Country and Postal Code resource Zippopotam 
+    $('#consignee_postalcode').on('keyup',function(e){
+		loading = true
+		var client = new XMLHttpRequest();
+		client.open("GET", "/getcity?id="+$('#select2countryconshipment').val()+"&postal_code="+e.target.value, true);
+		client.onreadystatechange = function() {
+				if(client.readyState == 4) {
+					$('#city-1').val(!Array.isArray(JSON.parse(client.responseText)) ? JSON.parse(client.responseText).place : $('#select2countryconshipment').children().filter(":selected").text());
+				loading = false
+			};
+		};
+		
+		client.send();
+	})
+	
+
 </script>

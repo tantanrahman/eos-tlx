@@ -102,6 +102,8 @@ class PrintController extends Controller
 
         $a = $get->getBody();
 
+        dd($a);
+
         $response = new StreamedResponse(function () use ($a) {
             while (!$a->eof()) {
                 echo $a->read(8192);

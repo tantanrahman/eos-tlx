@@ -116,12 +116,12 @@
     <br />
     <br />
     
-    <table style="width: 100%">
+    <table style="width: 100%; font-size:15px;">
         <tr>
             <td width="250">
                 <table>
                     <tr>
-                        <td width="140">Consignment Number :</td>
+                        <td width="180">Consignment Number :</td>
                         <td style="border-bottom-style: solid">{{ $getShipment[0]->connote }}
                         </td>
                     </tr>
@@ -157,7 +157,7 @@
     </table>
     <br />
     <br />
-    <table style="width: 100%; border-collapse:collapse;" border="1" cellpadding="1" cellspacing="1">
+    <table style="width: 100%; border-collapse:collapse; font-size: 18px;" border="1" cellpadding="1" cellspacing="1">
         <tr align="center">
             <td><b>QUANTITY</b></td>
             <td><b>DESCRIPTION</b></td>
@@ -169,8 +169,8 @@
             <tr>
                 <td>{{ $index + 1 }}</td>
                 <td>{{ $details->description }}</td>
-                <td>{{ $details->length }} cm x {{ $details->width }} cm x {{ $details->height }} cm</td>
-                <td>{{ $details->actual_weight }} kg</td>
+                <td style="text-align: right">{{ $details->length }} cm x {{ $details->width }} cm x {{ $details->height }} cm</td>
+                <td style="text-align: right">{{ $details->actual_weight }} kg</td>
             </tr>
         @endforeach
     
@@ -184,7 +184,7 @@
             </td>
             <td></td>
             <td align="right"><b>TOTAL WEIGHT</b></td>
-            <td><b>{{ $getShipment->sum('actual_weight') }} kg</b></td>
+            <td style="text-align: right"><b>{{ $getShipment->sum('actual_weight') }} kg</b></td>
         </tr>
     </table>
     <p>The Value declared is of customs clearance purpose only no commercial value.</p>

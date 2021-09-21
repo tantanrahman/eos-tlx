@@ -205,17 +205,17 @@
           </li>
 
           {{-- <li class="nav-item {{ request()->is('admin/tracking_shipment*') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ request()->is('admin/tracking_shipment*') ? 'active' : '' }}">
+            <a href="{{ route('admin.tracking_shipment.index') }}" class="nav-link {{ request()->is('admin/tracking_shipment*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-map-marked-alt"></i>
             <p style="font-size: 14px">
                 Tracking Shipment
             </p>
             </a>
-          </li>
+          </li> --}}
 
           <li class="nav-header"></li>
 
-          <li class="nav-item {{ request()->is('admin/support*') ? 'menu-open' : '' }}">
+          {{-- <li class="nav-item {{ request()->is('admin/support*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link {{ request()->is('admin/support*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-question"></i>
             <p style="font-size: 14px">

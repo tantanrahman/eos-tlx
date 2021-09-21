@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ApiEksContoller;
 use App\Http\Controllers\Admin\BagpackageController;
 use App\Http\Controllers\Admin\BagShipmentController;
 use App\Http\Controllers\Admin\CityController;
@@ -45,8 +46,10 @@ Route::get('/debug-sentry', function () {
     throw new Exception('My first Sentry error!');
 });
 
+Route::get('/getcity', [ApiEksContoller::class, 'getCityAction']);
+
 Auth::routes();
-Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
+Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::resource('/', DashboardController::class);
     Route::resource('role', RoleController::class);
     Route::resource('officeprofile', OfficeProfileController::class);
@@ -92,6 +95,3 @@ Route::get('autocompleteShipmentConsignee', [App\Http\Controllers\Admin\Shipment
 Route::get('getCustomerId', [App\Http\Controllers\Admin\CustomerController::class, 'getCustomerId'])->name('getCustomerId');
 Route::get('getConnote', [App\Http\Controllers\Admin\ShipmentController::class, 'getConnote'])->name('getConnote');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-

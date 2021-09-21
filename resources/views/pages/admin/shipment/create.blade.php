@@ -213,7 +213,8 @@
                                             data-width="100%">
                                             <option></option>
                                             @foreach($countries as $country)
-                                            <option autofocus value="{{ $country->id }}">{{ $country->name }}
+                                            <option data-name="{{$country->name}}" data-id="{{$country->alpha2code}}"
+                                                autofocus value="{{ $country->id }}">{{ $country->name }}
                                             </option>
                                             @endforeach
                                         </select>
@@ -498,7 +499,6 @@
                                                     <th id="total-volume">0</th>
                                                     <th id="sum-weight">0</th>
                                                     <th>
-
                                                     </th>
                                                 </tr>
                                             </tfoot>
@@ -519,19 +519,3 @@
     </section>
 </div>
 @endsection
-{{-- @push('script')
-<script>
-    $('#consignee_postalcode').on('keyup',function(e){
-            var client = new XMLHttpRequest();
-            client.open("GET", "https://api.zippopotam.us/"+$('#select2countryconshipment').val()+"/"+e.target.value, true);
-            client.onreadystatechange = function() {
-            if(client.readyState == 4) {
-                
-            $('#city-1').val(JSON.parse(client.responseText).places ? JSON.parse(client.responseText).places[0].state : '');
-            };
-            };
-            
-            client.send();
-        })
-</script>
-@endpush --}}

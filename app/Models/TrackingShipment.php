@@ -29,4 +29,13 @@ class TrackingShipment extends Model
 		return $apikey->get();
 
 	}
+
+    //GET CONNOTE FOR UPLOADING
+    public static function get_connote()
+    {
+        $connote = self::join('shipment','tracking_shipment.shipment_id','=','shipment.id')
+                    ->select('shipment.connote AS connote');
+
+        return $connote->first();
+    }
 }

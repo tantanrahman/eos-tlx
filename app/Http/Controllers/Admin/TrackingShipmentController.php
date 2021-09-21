@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\TrackingShipment;
 use Illuminate\Http\Request;
+use App\Imports\ImportTracking;
+use App\Models\TrackingShipment;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TrackingShipmentController extends Controller
 {
@@ -15,7 +17,7 @@ class TrackingShipmentController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.admin.tracking_shipment.index');
     }
 
     /**
@@ -82,5 +84,20 @@ class TrackingShipmentController extends Controller
     public function destroy(TrackingShipment $trackingShipment)
     {
         //
+    }
+
+    /**
+     * @author Tantan
+     * @description Import Tracking Shipment
+     * @created 18 Sep 2021
+     */
+    public function importTracking(Request $request)
+    {
+
+        Excel::import(new ImportTracking, request()->file('file'));
+        
+        dd($request->file('file'));
+
+        return redirect()->route('admin.tracking_shipment.index')->with(['success' => 'Data Berhasil Diupload!']);
     }
 }
