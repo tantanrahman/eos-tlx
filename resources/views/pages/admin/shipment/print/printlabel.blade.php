@@ -21,6 +21,7 @@
 
 <div>
     @foreach ($getShipment as $index => $items)
+  
     <hr>
     <table style="font-size: 10; width:100%;">
         <tr>
@@ -32,6 +33,8 @@
                 <br />
                 {{ $items->ship_company_name === null ? $items['ship_name'] ." / ". $getUser[0]->username : $items->ship_company_name ." / ". $items['ship_name'] ." / ". $getUser[0]->username }}
                 <br />
+                {{ $items['ship_address'] }} {{ $items['ship_postal_code'] }}
+                <br /> 
                 {{ $items['ship_city_name'] ." / ". $items['ship_cou_name'] }}
                 <br />PH: {{ $items['ship_phone'] }}
                 </td>

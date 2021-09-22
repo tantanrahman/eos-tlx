@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use App\Models\Customer;
 use App\Models\Shipment;
-use Illuminate\Http\Request;
 use App\Models\ShipmentDetail;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Controllers\Controller;
@@ -68,7 +67,7 @@ class PrintController extends Controller
 
     /**
      * @author Tantan
-     * @description Print GDEX API
+     * @description Print GDEX API Development
      * @param Shipment $shipment
      * @created 12 Sep 2021
      */
@@ -82,16 +81,17 @@ class PrintController extends Controller
             'ApiToken' => 'D9eee80b-a1fd-4ee7-b20c-08c0b98b874a',
             'Subscription-Key' => '69ec39d5951c48d9a2bd7d12a4b698c2'
         ])->post('https://myopenapi.gdexpress.com/api/demo/prime/CreateConsignment', [[
-            'shipmentType' => "Parcel",
-            'totalPiece' => $dataDetail->count(),
-            'shipmentWeight' => $dataDetail->sum('actual_weight'),
-            'isDangerousGoods' => true,
-            'companyName' => $consignee->company_name,
-            'receiverName' => $consignee->name,
-            'receiverMobile' => $consignee->phone,
-            'receiverAddress1' => $consignee->address,
-            'receiverPostcode' => $consignee->postal_code,
-            'receiverCountry' => 'Malaysia',
+            'shipmentType'      => "Parcel",
+            'totalPiece'        => $dataDetail->count(),
+            'shipmentWeight'    => $dataDetail->sum('actual_weight'),
+            'isDangerousGoods'  => true,
+            'companyName'       => $consignee->company_name,
+            'receiverName'      => $consignee->name,
+            'receiverMobile'    => $consignee->phone,
+            'receiverAddress1'  => $consignee->address,
+            'receiverAddress2'  => $consignee->city_name,
+            'receiverPostcode'  => $consignee->postal_code,
+            'receiverCountry'   => $consignee->country_name
         ]]);
 
         $get = Http::withHeaders([
@@ -117,8 +117,8 @@ class PrintController extends Controller
 
     /**
      * @author Tantan
-     * @description Print GDEX API
-     * @param Shipment $shipment
+     * @description Print GDEX API Production
+     * @param Shipment $shipment 
      * @created 12 Sep 2021
      */
     public function printgdexprod($id)
@@ -131,16 +131,17 @@ class PrintController extends Controller
             'ApiToken' => '89d61ec8-c53b-4cf3-be61-ce54dd5f46d7',
             'Subscription-Key' => '648d8cef45904f048d58982e21076988'
         ])->post('https://myopenapi.gdexpress.com/api/prime/CreateConsignment', [[
-            'shipmentType' => "Parcel",
-            'totalPiece' => $dataDetail->count(),
-            'shipmentWeight' => $dataDetail->sum('actual_weight'),
-            'isDangerousGoods' => true,
-            'companyName' => $consignee->company_name,
-            'receiverName' => $consignee->name,
-            'receiverMobile' => $consignee->phone,
-            'receiverAddress1' => $consignee->address,
-            'receiverPostcode' => $consignee->postal_code,
-            'receiverCountry' => 'Indonesia',
+            'shipmentType'      => "Parcel",
+            'totalPiece'        => $dataDetail->count(),
+            'shipmentWeight'    => $dataDetail->sum('actual_weight'),
+            'isDangerousGoods'  => true,
+            'companyName'       => $consignee->company_name,
+            'receiverName'      => $consignee->name,
+            'receiverMobile'    => $consignee->phone,
+            'receiverAddress1'  => $consignee->address,
+            'receiverAddress2'  => $consignee->city_name,
+            'receiverPostcode'  => $consignee->postal_code,
+            'receiverCountry'   => $consignee->country_name,
         ]]);
 
         $get = Http::withHeaders([
@@ -161,4 +162,5 @@ class PrintController extends Controller
 
         return $response;
     }
+    
 }

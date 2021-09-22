@@ -26,7 +26,7 @@
                         </div>
                     </form>
                     
-                    <select class="partner-multiple-select form-control" name="partner[]" multiple="multiple" id="partner_multiple">
+                    <select class="partner-multiple-select form-control" name="partner" multiple="multiple" id="partner_multiple">
                         @foreach($partners as $partners)
                             <option value="{{ $partners->id }}">{{ $partners->name }}</option>
                         @endforeach

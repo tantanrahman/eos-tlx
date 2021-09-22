@@ -97,5 +97,11 @@
         theme: "bootstrap4",
         });
     });
+    $(document).ready(function() {
+		$('.partner-multiple-select').select2({
+			theme: "bootstrap4",
+			placeholder: "Select a Partner"
+		});
+	});
     
 </script>

@@ -65,7 +65,7 @@ class ShipmentController extends Controller
                                                 <a href="printConnote/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
                                                 <a href="printLabel/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="far fa-envelope"></i> Label</a>
                                                 <a href="printInvoice/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Invoice</a>
-                                                <a href="printGdex/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Print GDEX</a>
+                                                <a href="printGdex/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Print GDEX</a>
                                             </div>
                                             
                                         </div>
@@ -174,7 +174,7 @@ class ShipmentController extends Controller
      */
     public function store(Request $request)
     {   
-
+        
         $validateData = Customer::where('account_code', '=', $request->input('account_code'))->first();
         
         if($validateData === null)
@@ -209,7 +209,7 @@ class ShipmentController extends Controller
                     'phone'         => $phones[$key],
                     'group'         => $group[$key],
                     'apikey'        => md5($apikey[$key]),
-                    'created_by'    => Auth::user()->name
+                    'created_by'    => Auth::user()->id
                 ]);
 
             }
@@ -231,7 +231,7 @@ class ShipmentController extends Controller
                 'delivery_intructions'  => $request->delivery_intructions,
                 'remark'                => $request->remark,
                 'description'           => $request->description,
-                'created_by'            => Auth::user()->name
+                'created_by'            => Auth::user()->id
             ]);
 
             $shipmentId         = $dataShipment->id;
@@ -292,7 +292,7 @@ class ShipmentController extends Controller
                 'delivery_intructions'  => $request->delivery_intructions,
                 'remark'                => $request->remark,
                 'description'           => $request->description,
-                'created_by'            => Auth::user()->name
+                'created_by'            => Auth::user()->id
             ]);
 
             $shipmentId         = $dataShipment->id;
@@ -317,7 +317,6 @@ class ShipmentController extends Controller
                     'sum_weight'            => $sum_weights[$key]
                 ]);
 
-                
             }
 
             $currentDate    = date('Y-m-d H:i:s');
@@ -333,10 +332,11 @@ class ShipmentController extends Controller
             ]);
 
         }
+        
 
         if($dataShipment)
         {
-            return redirect(route('admin.shipment.index'))->with('toast_success', 'Berhasil menambah Data');
+            return redirect(route('admin.shipment.edit', $dataShipment->id))->with('toast_success', 'Berhasil menambah Data');
         }
         else
         {
@@ -428,7 +428,7 @@ class ShipmentController extends Controller
             'delivery_intructions'  => $request->delivery_intructions,
             'remark'                => $request->remark,
             'description'           => $request->description,
-            'created_by'            => Auth::user()->name
+            'created_by'            => Auth::user()->id
         ]);
 
         $shipmentId         = $dataShipment->id;

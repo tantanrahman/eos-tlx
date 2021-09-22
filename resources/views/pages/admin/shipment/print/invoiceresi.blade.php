@@ -148,7 +148,7 @@
 </table>
 <br />
 <br />
-<table style="width: 100%;" border="1" cellpadding="1" cellspacing="1">
+<table style="width: 100%; font-size: 18px !important;" border="1" cellpadding="1" cellspacing="1">
     <tr align="center">
         <td><b>QUANTITY & DESCRIPTION</b></td>
         <td><b>VOLUME</b></td>

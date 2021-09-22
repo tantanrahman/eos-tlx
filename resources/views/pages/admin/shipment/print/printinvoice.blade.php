@@ -157,7 +157,7 @@
     </table>
     <br />
     <br />
-    <table style="width: 100%; border-collapse:collapse; font-size: 18px;" border="1" cellpadding="1" cellspacing="1">
+    <table style="width: 100%; border-collapse:collapse; font-size: 15x;" border="1" cellpadding="1" cellspacing="1">
         <tr align="center">
             <td><b>QUANTITY</b></td>
             <td><b>DESCRIPTION</b></td>

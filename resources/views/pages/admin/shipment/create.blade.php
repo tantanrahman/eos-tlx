@@ -34,7 +34,7 @@
                                 <hr style="border: 2px solid black">
                                 <div class="form-row">
                                     <div>
-                                        <input type="hidden" name="created_by[]" value="{{ Auth::user()->name }}"
+                                        <input type="hidden" name="created_by[]" value="{{ Auth::user()->id }}"
                                             readonly>
                                     </div>
                                     <div>
@@ -298,7 +298,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="city">Description*</label>
-                                        <textarea oninput="this.value = this.value.toUpperCase()" rows="3"
+                                        <textarea rows="3"
                                             class="form-control @error('description') is-invalid @enderror"
                                             name="description" value="{{ old('description') }}"
                                             style="resize:none"></textarea>
@@ -310,7 +310,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="city">Delivery Instruction</label>
-                                        <textarea oninput="this.value = this.value.toUpperCase()" rows="3"
+                                        <textarea rows="3"
                                             class="form-control @error('delivery_intructions') is-invalid @enderror"
                                             name="delivery_intructions" value="{{ old('delivery_intructions') }}"
                                             style="resize:none"></textarea>

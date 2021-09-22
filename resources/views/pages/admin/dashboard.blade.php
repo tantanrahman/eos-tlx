@@ -76,10 +76,26 @@
                 </div>
               </div>                
           </div>
-                     
+          <h3>Please Check for This</h3>
+          <ol>
+            <li>Cek login menggunakan akun masing-masing.</li>
+            <li>Cek nama pembuat connote</li>
+            <li>Cek Postal Code/Zip Code Connote</li>
+            <li>Cek Delivery Intruction di setiap Print</li>
+            <li>Cek Company name di connote</li>
+            <li>Cek Address di Label</li>
+            <li>Cek sehabis buat connote ada icon print di kanan atas</li>
+          </ol>
+
+          <h3>Catatan</h3>
+          <ol>
+            <li>Untuk API gdex dimatikan terlebih dahulu karena bug production</li>
+          </ol>
         </div>
       </div>
   </div>
 </div>
+
+
 
 @endsection

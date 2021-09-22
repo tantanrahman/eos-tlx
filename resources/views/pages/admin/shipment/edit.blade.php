@@ -10,11 +10,9 @@
     
     <section class="content">
         <div class="container-fluid">    
-            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                Tanda <strong>(*) bintang</strong> menandakan kolom wajib diisi.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="alert alert-primary" role="alert" style="text-align: right;">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-placement="top" data-target="#ModalPrint" data-id="{{$shipment->id}}" title="PRINT"><i class="fas fa-print"></i></button>
+                <a href="{{ route('admin.shipment.create') }}" type="button" class="btn btn-secondary"><i class="fas fa-plus"></i></a>
             </div>
             <form action="{{ route('admin.shipment.update', $shipment->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -262,7 +260,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="city">Description*</label>
-                                        <textarea oninput="this.value = this.value.toUpperCase()" rows="3"
+                                        <textarea rows="3"
                                             class="form-control @error('description') is-invalid @enderror"
                                             name="description" value="{{ old('description') }}"
                                             style="resize:none">{{$shipment->description}}</textarea>
@@ -274,7 +272,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="city">Delivery Instruction</label>
-                                        <textarea oninput="this.value = this.value.toUpperCase()" rows="3"
+                                        <textarea rows="3"
                                             class="form-control @error('delivery_intructions') is-invalid @enderror"
                                             name="delivery_intructions" value="{{ old('delivery_intructions') }}"
                                             style="resize:none">{{$shipment->delivery_intructions}}</textarea>
@@ -520,20 +518,31 @@
         </div>
     </div>
 </div>
-@endsection
-@push('script')
-<script>
-    $('#consignee_postalcode').on('keyup',function(e){
-            var client = new XMLHttpRequest();
-            client.open("GET", "https://api.zippopotam.us/"+$('#select2countryconshipment').val()+"/"+e.target.value, true);
-            client.onreadystatechange = function() {
-            if(client.readyState == 4) {
-                
-            $('#city-1').val(JSON.parse(client.responseText).places ? JSON.parse(client.responseText).places[0].state : '');
-            };
-            };
+
+<div class="modal fade" id="ModalPrint" tabindex="-1" role="dialog" aria-labelledby="ModalCourier" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h6 class="modal-title" id="exampleModalLongTitle">PRINT</h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+
+        <div class="modal-body">
+            <a href="{{ route('admin.printConnote', $shipment->id) }}" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
+            <a href="{{ route('admin.printLabel', $shipment->id) }}" target="_blank" type="button" class="btn btn-info"><i class="far fa-envelope"></i> Label</a>
+            <a href="{{ route('admin.printInvoice', $shipment->id) }}" target="_blank" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Invoice</a>
             
-            client.send();
-        })
-</script>
-@endpush
+            @if ($shipment->partner_id == 8)
+                <a href="{{ route('admin.printgdexDev', $shipment->id) }}" target="_blank" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Print GDEX</a>
+            @endif
+
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+@endsection
+

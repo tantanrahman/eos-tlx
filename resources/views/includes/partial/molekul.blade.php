@@ -206,11 +206,6 @@
 		$('#sum-weight').text(total_weight);
     });
 
-	$(document).ready(function() {
-		$('.partner-multiple-select').select2({
-			theme: "bootstrap4",
-			placeholder: "Select a Partner"
-		});
-	});
+	
 	
 </script>

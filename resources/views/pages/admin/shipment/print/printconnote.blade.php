@@ -30,9 +30,9 @@
         <td>
             <table style="width: 100%">
                 <tr>
-                    <td width="100">A.1. Account</td>
+                    <td width="150">A.1. Account</td>
                     <td width="10">:</td>
-                    <td>{{ $items['ship_ac'] }} / {{ $items['created'] }}</td>
+                    <td>{{ $items['ship_ac'] }} / {{ $items['ac_username'] }}</td>
                 </tr>
                 <tr>
                     <td>A.2. Name</td>
@@ -45,7 +45,7 @@
                     <td>{{ $items['ship_address'] }} {{ $items['ship_city_name'] }} {{ $items['ship_cou_name'] }}</td>
                 </tr>
                 <tr>
-                    <td>A.4. Postal Code</td>
+                    <td>A.4. Postal Code / Zip Code</td>
                     <td>:</td>
                     <td>{{ $items['ship_postal_code'] }}</td>
                 </tr>
@@ -78,9 +78,9 @@
         <td>
             <table style="width: 100%">
                 <tr>
-                    <td width="100">B.1. Name</td>
+                    <td width="150">B.1. Name</td>
                     <td width="10">:</td>
-                    <td>{{ $items['con_name'] }}</td>
+                    <td>{{ $items->con_company_name === null ? $items['con_name'] : $items->con_company_name ." / ". $items['con_name'] }}</td>
                 </tr>
                 <tr>
                     <td>B.2. Address</td>
@@ -88,7 +88,7 @@
                     <td>{{ $items['con_address'] }} {{ $items['con_city_name'] }} {{ $items['con_cou_name'] }}</td>
                 </tr>
                 <tr>
-                    <td>B.3. Postal Code</td>
+                    <td>B.3. Postal Code / Zip Code</td>
                     <td>:</td>
                     <td>{{ $items['con_postal_code'] }}</td>
                 </tr>
@@ -207,7 +207,6 @@
         
     </tr>
     <tr>
-        
         <td>{{ $items['delivery_intructions'] }}</td>
     </tr>
     
