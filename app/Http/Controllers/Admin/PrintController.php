@@ -128,9 +128,9 @@ class PrintController extends Controller
         $dataDetail = ShipmentDetail::where('shipment_id', $id)->get();
         $consignee  = Customer::where('id', $data->consignee_id)->first();
         $create     = Http::withHeaders([
-            'ApiToken' => 'D9eee80b-a1fd-4ee7-b20c-08c0b98b874a',
-            'Subscription-Key' => '69ec39d5951c48d9a2bd7d12a4b698c2'
-        ])->post('https://myopenapi.gdexpress.com/api/demo/prime/CreateConsignment', [[
+            'ApiToken' => '89d61ec8-c53b-4cf3-be61-ce54dd5f46d7',
+            'Subscription-Key' => '648d8cef45904f048d58982e21076988'
+        ])->post('https://myopenapi.gdexpress.com/api/prime/CreateConsignment', [[
             'shipmentType' => "Parcel",
             'totalPiece' => $dataDetail->count(),
             'shipmentWeight' => $dataDetail->sum('actual_weight'),
@@ -145,9 +145,9 @@ class PrintController extends Controller
 
         $get = Http::withHeaders([
             "response-type" => 'arraybuffer',
-            'ApiToken' => 'D9eee80b-a1fd-4ee7-b20c-08c0b98b874a',
-            'Subscription-Key' => '69ec39d5951c48d9a2bd7d12a4b698c2'
-        ])->accept('application/zip')->post('https://myopenapi.gdexpress.com/api/demo/prime/GetConsignmentDocument', $create->collect()['r']);
+            'ApiToken' => '89d61ec8-c53b-4cf3-be61-ce54dd5f46d7',
+            'Subscription-Key' => '648d8cef45904f048d58982e21076988'
+        ])->accept('application/zip')->post('https://myopenapi.gdexpress.com/api/prime/GetConsignmentDocumentt', $create->collect()['r']);
 
         $a = $get->getBody();
 
