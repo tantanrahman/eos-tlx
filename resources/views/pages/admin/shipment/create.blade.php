@@ -48,9 +48,12 @@
                                         <input type="hidden" class="form-control" name="id[0]"
                                             value="{{ $nextId ?? '' }}" readonly>
                                     </div>
-                                    <div>
-                                        <input type="hidden" id="customer-id" class="form-control"
-                                            name="account_code[0]" readonly>
+                                    <div class="form-group col-md-6">
+                                        <div>
+                                            <input type="text" id="customer-id" class="form-control"
+                                                name="account_code[0]" readonly>
+                                        </div>
+                                        <small>Terisi otomatis! Dan wajib terisi!</small>
                                     </div>
                                     <div>
                                         <input type="hidden" class="form-control" name="group[]" value="shipper"
@@ -80,7 +83,7 @@
                                         <label for="resi">Name*</label>
                                         <input type="text" name="name[0]"
                                             class="form-control typeaheadShipmentShipper @error('name[0]') is-invalid @enderror"
-                                            value="{{ old('name[0]') }}" autocomplete="off">
+                                            value="{{ old('name[0]') }}" autocomplete="nope">
                                         @error('name[0]')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -169,9 +172,12 @@
                                 </h4>
                                 <hr style="border: 2px solid black">
                                 <div class="form-row">
-                                    <div>
-                                        <input type="hidden" id="con-customer-id" class="form-control"
-                                            name="account_code[1]" readonly>
+                                    <div class="form-group col-md-6">
+                                        <div>
+                                            <input type="text" id="con-customer-id" class="form-control"
+                                                name="account_code[1]" readonly>
+                                        </div>
+                                        <small>Terisi otomatis! Dan wajib terisi!</small>
                                     </div>
                                     <div>
                                         <input type="hidden" class="form-control" name="id[1]"
@@ -189,7 +195,7 @@
                                         <label for="name">Name*</label>
                                         <input type="text" name="name[1]"
                                             class="form-control typeaheadShipmentConsignee @error('con_name') is-invalid @enderror"
-                                            value="{{ old('con_name') }}" autocomplete="off">
+                                            value="{{ old('con_name') }}" autocomplete="nope">
                                         @error('con_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

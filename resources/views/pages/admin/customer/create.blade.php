@@ -125,7 +125,7 @@
                             </div>
                             <div class="form-group col-md-6" style="display: none">
                                 <label for="city">Created By</label>
-                                <input type="text" class="form-control @error('created_by') is-invalid @enderror" name="created_by" value="{{ Auth::user()->name }}" disabled>
+                                <input type="text" class="form-control @error('created_by') is-invalid @enderror" name="created_by" value="{{ Auth::user()->id }}" disabled>
                                 @error('created_by')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

@@ -55,7 +55,7 @@ class DropshipController extends Controller
                         })
                         ->rawColumns(['photo','action'])
                         ->make(true);
-       }
+        }
        
        return view('pages.admin.dropship.index');
     }  

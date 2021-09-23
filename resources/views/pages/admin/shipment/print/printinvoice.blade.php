@@ -65,7 +65,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Postal Code :</td>
+                        <td>Postal / Zip Code :</td>
                         <td style="border-bottom-style: solid">{{ $getShipment[0]->ship_postal_code }}
                         </td>
                     </tr>
@@ -94,7 +94,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Postal Code :</td>
+                        <td>Postal / Zip Code :</td>
                         <td style="border-bottom-style: solid">{{ $getShipment[0]->con_postal_code }}
                         </td>
                     </tr>

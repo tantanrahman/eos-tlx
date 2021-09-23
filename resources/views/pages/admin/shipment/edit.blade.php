@@ -29,6 +29,12 @@
                                         <div>
                                             <input type="hidden" name="created_by[]" value="{{ Auth::user()->name }}" readonly>
                                         </div>
+                                        <div class="form-group col-md-6">
+                                            <div>
+                                                <input type="text" id="customer-id" class="form-control" value="{{ $shipper->account_code }}" name="account_code[0]" readonly>
+                                            </div>
+                                            <small>Terisi otomatis! Dan wajib terisi!</small>
+                                        </div>
                                         <div class="form-group col-md-12">
                                             <label for="connote">Connote</label>
                                             <input type="text" name="connote" class="form-control @error('connote') is-invalid @enderror" value="{{ $shipment->connote }}" autocomplete="off">
@@ -44,9 +50,7 @@
                                         <div>
                                             <input type="hidden" class="form-control" name="id[0]" value="{{ $shipment->shipper_id }}" readonly>
                                         </div>
-                                        <div>
-                                            <input type="hidden" id="customer-id" class="form-control" value="{{ $shipper->account_code }}" name="account_code[0]" readonly>
-                                        </div>
+                                        
                                         <div>
                                             <input type="hidden" class="form-control" name="group[]" value="shipper" readonly>
                                         </div>
@@ -148,8 +152,11 @@
                                 </h4>
                                 <hr style="border: 2px solid black">
                                 <div class="form-row">
-                                    <div>
-                                        <input type="hidden" id="con-customer-id" class="form-control" name="account_code[1]" value="{{ $consignee->account_code }}" readonly>
+                                    <div class="form-group col-md-6">
+                                        <div>
+                                            <input type="text" id="con-customer-id" class="form-control" name="account_code[1]" value="{{ $consignee->account_code }}" readonly>
+                                        </div>
+                                        <small>Terisi otomatis! Dan wajib terisi!</small>
                                     </div>
                                     <div>
                                         <input type="hidden" class="form-control" name="id[1]" value="{{ $shipment->consignee_id }}" readonly>

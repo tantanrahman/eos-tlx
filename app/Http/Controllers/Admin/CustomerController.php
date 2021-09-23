@@ -124,7 +124,7 @@ class CustomerController extends Controller
 				'group'                 => Request()->group,
 				'postal_code'           => Request()->postal_code,
                 'apikey'                => md5($api_key),
-                'created_by'            => Auth::user()->name
+                'created_by'            => Auth::user()->id
 			]);
 
 			return redirect(route('admin.customer.index'))->with('toast_success', 'Berhasil Tambah Data');

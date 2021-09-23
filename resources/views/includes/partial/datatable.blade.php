@@ -145,7 +145,7 @@
         {data:'name',name:'name'},
         {data:'city_name',name:'city_name'},
         {data:'phone',name:'phone'},
-        {data:'created_by',name:'created_by'},
+        {data:'user_name',name:'user_name'},
         {data:'action',name:'action'},
       ],
     });
@@ -177,7 +177,7 @@
         {data:'city_name',name:'city_name'},
         {data:'country_name',name:'country_name'},
         {data:'phone',name:'phone'},
-        {data:'created_by',name:'created_by'},
+        {data:'user_name',name:'user_name'},
         {data:'action',name:'action'},
       ],
     });

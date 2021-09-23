@@ -171,7 +171,7 @@
 		var height 			= $("input[name=height]").val();
 		var sum_volume	 	= length*width*height;
 		var volumetrick		= sum_volume/5000;
-		var sum_weight 		= Math.ceil(actual_weight);
+		var sum_weight 		= (volumetrick>actual_weight) ? (volumetrick) : (actual_weight)
 
 		$("table tbody").on('click','#removeSD', function(){
 			$(this).closest('tr').remove();
@@ -197,9 +197,9 @@
 			table.find('tr').each(function (i, el) {
 				var $tds = $(el).find('td');
 				var sum_volume = parseInt($tds.eq(4).children().val());
-				var sum_weight = parseInt($tds.eq(5).children().val());
+				var sum_weight = parseFloat($tds.eq(5).children().val());
 				volume += sum_volume;
-				total_weight += sum_weight;
+				total_weight += Math.ceil(sum_weight);
 			});
 
 		$('#total-volume').text(volume);

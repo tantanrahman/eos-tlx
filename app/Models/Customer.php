@@ -77,11 +77,13 @@ class Customer extends Model
 			customer.phone,
 			customer.group,
 			customer.created_by,
-			customer.created_at
+			customer.created_at,
+			users.name AS user_name
 		");
 
 		$items = self::join('city','customer.city_id','=','city.id')
-			->select($query)->where('group','=','shipper');
+						->join('users','customer.created_by','=','users.id')
+						->select($query)->where('group','=','shipper');
 
 		return $items->get();
 	}
@@ -101,11 +103,13 @@ class Customer extends Model
 			customer.country_name,
 			customer.phone,
 			customer.group,
-			customer.created_by
+			customer.created_by,
+			users.name AS user_name
 		");
 
 		$items = self::join('country','customer.country_id','=','country.id')
-			    ->select($query)->where('customer.group','=','consignee');
+						->join('users','customer.created_by','=','users.id')
+			    		->select($query)->where('customer.group','=','consignee');
 
 		return $items->get();
 	}

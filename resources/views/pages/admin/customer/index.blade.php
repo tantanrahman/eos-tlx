@@ -19,9 +19,9 @@
             <div class="card">
                 <div class="card-body">
                     <div class="btn-group mb-4" role="group" aria-label="Basic example">
-                        <a href="{{ route('admin.customer.create') }}" class="btn bg-info"><i class="nav-icon fas fa-plus"></i> Tambah Data</a>
-                        <a href="#" class="btn bg-secondary"><i class="fas fa-file-excel"></i> Excel</a>
-                        <a href="#" class="btn bg-secondary"><i class="fas fa-file-pdf"></i> PDF</a>
+                        <a href="{{ route('admin.customer.create') }}" class="btn btn-sm bg-info"><i class="nav-icon fas fa-plus"></i> Tambah Data</a>
+                        <a href="#" class="btn btn-sm bg-secondary"><i class="fas fa-file-excel"></i> Excel</a>
+                        <a href="#" class="btn btn-sm bg-secondary"><i class="fas fa-file-pdf"></i> PDF</a>
                     </div>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
