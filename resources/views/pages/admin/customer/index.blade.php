@@ -48,7 +48,7 @@
                                         </tr>
                                     </thead>
         
-                                </table>
+                                    </table>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">

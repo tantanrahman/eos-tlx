@@ -57,7 +57,7 @@
                 <td align="center">{{ $shipment->partner_name }}</td>
                 <td align="center">{{ $shipment->marketing }}</td>
                 <td align="center">{{ $shipment->redoc_connote }}</td>
-                <td align="center">{{ $shipment->created }}</td>
+                <td align="center">{{ $shipment->ac_name }}</td>
                 <td align="center">{{ $shipment->modal }}</td>
                 <td align="center">{{ $shipment->ongkir }}</td>
                 <td align="center">{{ $shipment->margin }}</td>

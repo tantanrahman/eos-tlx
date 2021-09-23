@@ -16,6 +16,7 @@
 <script src="{{ url('dist/js/adminlte.js') }}"></script>
 <script src="{{ url('dist/js/demo.js') }}"></script>
 <script src="{{ url('dist/js/jquery.dataTables.min.js') }}"></script>
+<script src="https://cdn.datatables.net/fixedcolumns/3.3.3/js/dataTables.fixedColumns.min.js"></script>
 <script src="{{ url('dist/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ url('plugins/select2/js/select2.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
