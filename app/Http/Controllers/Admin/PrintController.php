@@ -91,7 +91,7 @@ class PrintController extends Controller
             'receiverAddress1'  => $consignee->address,
             'receiverAddress2'  => $consignee->city_name,
             'receiverPostcode'  => $consignee->postal_code,
-            'receiverCountry'   => $consignee->country_name
+            'receiverCountry'   => 'Malaysia'
         ]]);
 
         $get = Http::withHeaders([

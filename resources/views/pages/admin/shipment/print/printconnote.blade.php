@@ -59,7 +59,7 @@
         <td style="border-top-style: hidden">
             <center>
             <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
-                $items->connote, 'C93')}}" height="58" width="300">
+                $items->connote, 'C128')}}" height="58" width="300">
                 {{-- <img src="data:image/png;base64, {{ DNS1D::getBarcodePNG($items->connote, 'C93',5,55,array(5,5,5), true) }}" alt="barcode" height="40" width="500"/> --}}
                 <br>
                 <div class="letter-space">

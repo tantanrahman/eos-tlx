@@ -69,7 +69,7 @@ class User extends Authenticatable
 
         $items   = self::leftjoin('officeprofile','users.office_id','=','officeprofile.id')
                         ->leftjoin('roles','users.role_id','=','roles.id')
-                        ->select('officeprofile.name AS op_name','officeprofile.address AS op_address','users.username AS username','officeprofile.photo AS photo','officeprofile.whatsapp AS phone','users.name AS name','roles.name AS role');
+                        ->select('users.id AS id','officeprofile.name AS op_name','officeprofile.address AS op_address','users.username AS username','officeprofile.photo AS photo','officeprofile.whatsapp AS phone','users.name AS name','roles.name AS role');
     
         return $items->get();
     }
