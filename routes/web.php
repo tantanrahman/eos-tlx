@@ -95,3 +95,4 @@ Route::get('autocompleteShipmentConsignee', [App\Http\Controllers\Admin\Shipment
 Route::get('getCustomerId', [App\Http\Controllers\Admin\CustomerController::class, 'getCustomerId'])->name('getCustomerId');
 Route::get('getConnote', [App\Http\Controllers\Admin\ShipmentController::class, 'getConnote'])->name('getConnote');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('getTrackChoir', [App\Http\Controllers\Admin\ApiEksContoller::class, 'getTrackChoir'])->name('getTrackChoir');
