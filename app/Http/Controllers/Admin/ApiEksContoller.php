@@ -18,7 +18,7 @@ class ApiEksContoller extends Controller
      */
     public function getCityAction(Request $request)
     {
-        $country = Country::where('id', $request->id)->first();
+        $country  = Country::where('id', $request->id)->first();
         $response = Http::get('https://api.zippopotam.us/' . $country->alpha2code . '/' . $request->postal_code . '');
         $response = json_decode($response->body());
         if (isset($response->places)) {
@@ -49,9 +49,9 @@ class ApiEksContoller extends Controller
             'Content-Type'  => 'application/json',
             'Accept'        => 'application/json',
             'Authorization' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IkNob2lyWFRMWEAyMDIxIg.HVyk8ztvDCSFXDmHWu23qfqA_QFPvnxyZd9V1XGhD44'
-        ])->post('https://office.choirexpress.co.id/v2/api/get_tracking', [[
-            'awb'           => 'CE0821458044'
-        ]]);
+        ])->post('https://office.choirexpress.co.id/v2/api/get_tracking', [
+            "awb"           => "CE0821458044"
+        ]);
 
         return $getTrack;
 
