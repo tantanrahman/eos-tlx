@@ -31,7 +31,7 @@
         <tr>
             <td><b>SENDER</b>
                 <br />
-                {{ $items->ship_company_name === null ? $items['ship_name'] ." / ".  $items['ac_username'] : $items->ship_company_name ." / ". $items['ship_name'] ." / ". $getUser[0]->username }}
+                {{ $items->ship_company_name === null ? $items['ship_name'] ." / ".  $items['ac_username'] : $items->ship_company_name ." / ". $items['ship_name'] ." / ". $items['ac_username'] }}
                 <br />
                 {{ $items['ship_address'] }} {{ $items['ship_postal_code'] }}
                 <br /> 

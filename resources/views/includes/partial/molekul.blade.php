@@ -207,7 +207,8 @@
     });
 
 	//Blink for Style
-	function JavaBlink() {
+	function JavaBlink() 
+	{
 		var blinks = document.getElementsByTagName('JavaBlink');
 		for (var i = blinks.length - 1; i >= 0; i--) {
 			var s = blinks[i];
