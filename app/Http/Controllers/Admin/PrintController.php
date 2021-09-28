@@ -161,7 +161,7 @@ class PrintController extends Controller
         });
 
         $response->headers->set('Content-Type', 'application/zip');
-        $response->headers->set('Content-Disposition', 'attachment; filename="' . $data->connote . '"');
+        $response->headers->set('Content-Disposition', 'attachment; filename="' . $data->connote . '.zip"');
 
         return $response;
     }

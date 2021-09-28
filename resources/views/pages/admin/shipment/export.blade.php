@@ -69,7 +69,7 @@
                 <td align="center">{{ $shipment->modal }}</td>
                 <td align="center">{{ $shipment->ongkir }}</td>
                 <td align="center">{{ $shipment->margin }}</td>
-                <td align="center">{{ $shipment->payment_status === "0" ? "UNPAID" : "PAID" }}</td>
+                <td align="center">{{ $shipment->payment_status == 0 || $shipment->payment_status === null ? "UNPAID" : "PAID" }}</td>
             </tr>
             
         @endforeach

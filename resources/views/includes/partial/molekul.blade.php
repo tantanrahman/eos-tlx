@@ -62,10 +62,11 @@
 			query = {
 				date_start: $('#shipment-periode-start').val(),
 				date_end: $('#shipment-periode-end').val(),
-				partner: $('#shipment-excel').val(),
+				partner: $('#partner_multiple').val(),
 			},
 			url_params = '';
 		url_params = '?' + $.param(query);
+		console.log(url_params);
 		window.location.href = export_url + url_params;
 	});
 
