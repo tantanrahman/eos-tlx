@@ -542,7 +542,7 @@
             <a href="{{ route('admin.printInvoice', $shipment->id) }}" target="_blank" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Invoice</a>
             
             @if ($shipment->partner_id == 8)
-                <a href="{{ route('admin.printgdexDev', $shipment->id) }}" target="_blank" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Print GDEX</a>
+                <a href="{{ route('admin.printgdexprod', $shipment->id) }}" target="_blank" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Print GDEX</a>
             @endif
 
         </div>

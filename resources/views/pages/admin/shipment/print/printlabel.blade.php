@@ -40,12 +40,21 @@
                 </td>
             <td height="100">
                 <center>
-                    <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
-                        $items->connote, 'C93', )}}" height="70" width="300">
+                    @if ($getShipment[0]->redoc_connote != '')
+                        <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
+                                                    $getShipment[0]->redoc_connote, 'C128')}}" height="60" width="300">
                         <br>
-                        <div class="letter-space2">
-                            {{ $items['connote'] }}
+                        <div class="letter-space3">
+                            <b>{{ $getShipment[0]->redoc_connote }}</b>
                         </div>
+                        @else
+                        <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
+                                                    $getShipment[0]->connote, 'C128')}}" height="60" width="300">
+                        <br>
+                        <div class="letter-space3">
+                            <b>{{ $getShipment[0]->connote }}</b>
+                        </div>
+                    @endif
                 </center>
             </td>
         </tr>

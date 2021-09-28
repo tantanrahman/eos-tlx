@@ -459,11 +459,11 @@ class ShipmentController extends Controller
 
         if($dataShipment)
         {
-            return redirect(route('admin.shipment.index'))->with('toast_success', 'Berhasil Mengubah Data');
+            return redirect(route('admin.shipment.edit', $dataShipment->id))->with('toast_success', 'Berhasil Mengubah Data');
         }
         else
         {
-            return redirect(route('admin.shipment.index'))->with('toast_error', 'Gagal! Edit Data!');
+            return redirect(route('admin.shipment.create'))->with('toast_error', 'Gagal! Edit Data!');
         }
     }
 

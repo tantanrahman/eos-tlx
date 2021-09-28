@@ -41,7 +41,7 @@
                 <td align="center">{{ $shipment->ship_address }}</td>
                 <td align="center">{{ $shipment->ship_city_name }}</td>
                 <td align="center">{{ $shipment->ship_postal_code }}</td>
-                <td align="center">Indonesia</td>
+                <td align="center">{{ $shipment->ship_cou_name }}</td>
                 <td align="center">{{ $shipment->ship_phone }}</td>
                 <td align="center">{{ $shipment->con_company_name }}</td>
                 <td align="center">{{ $shipment->con_name }}</td>

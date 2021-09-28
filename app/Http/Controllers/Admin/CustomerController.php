@@ -29,9 +29,9 @@ class CustomerController extends Controller
                     ->addColumn('action', function($customer){
 
                         $button =   '<div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="customer/'.$customer->id.'/edit" type="button" class="btn btn-info" data-id="'.$customer->id.'" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="far fa-edit"></i></a>
-                                        <button type="button" name="delete" id="'.$customer->id.'" class="delete btn btn-danger" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
-                                        <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="VIEW"><i class="fas fa-search"></i></button>
+                                        <a href="customer/'.$customer->id.'/edit" type="button" class="btn btn-info btn-sm" data-id="'.$customer->id.'" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="far fa-edit"></i></a>
+                                        <button type="button" name="delete" id="'.$customer->id.'" class="delete btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
+                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="VIEW"><i class="fas fa-search"></i></button>
                                     </div>';
 
                         return $button;
@@ -48,9 +48,9 @@ class CustomerController extends Controller
                     ->addColumn('action', function($customer){
 
                         $button =   '<div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="customer/'.$customer->id.'/edit" type="button" class="btn btn-info" data-id="'.$customer->id.'" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="far fa-edit"></i></a>
-                                        <button type="button" name="delete" id="'.$customer->id.'" class="delete btn btn-danger" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
-                                        <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="VIEW"><i class="fas fa-search"></i></button>
+                                        <a href="customer/'.$customer->id.'/edit" type="button" class="btn btn-info btn-sm" data-id="'.$customer->id.'" data-toggle="tooltip" data-placement="top" title="EDIT"><i class="far fa-edit"></i></a>
+                                        <button type="button" name="delete" id="'.$customer->id.'" class="delete btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
+                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="VIEW"><i class="fas fa-search"></i></button>
                                     </div>';
 
                         return $button;
