@@ -51,8 +51,16 @@
                 <td align="center">{{ $shipment->cou_name }}</td>
                 <td align="center">{{ $shipment->con_phone }}</td>
                 <td align="center">{{ $shipment->description }}</td>
-                <td align="center"></td>
-                <td align="center">{{ $shipment->actual_weight }}</td>
+                <td align="center">
+                  
+                </td>
+                <td align="center">
+                    @if ($shipment->sum_volume/5000 > $shipment->actual_weight)
+                        {{ ceil(number_format($shipment->sum_volume/5000, 2, '.', '')) }}
+                    @else
+                        {{ ceil(number_format($shipment->actual_weight, 2, '.', '')) }}
+                    @endif
+                </td>
                 <td align="center">{{ $shipment->values }}</td>
                 <td align="center">{{ $shipment->partner_name }}</td>
                 <td align="center">{{ $shipment->marketing }}</td>
