@@ -90,19 +90,13 @@
                 </div>
               </div>                
           </div>
-          <h3>Please Check for This</h3>
+          <h3>Please Check for This - Update 28 Sep 2021</h3>
           <ol>
-            <li>Cek login menggunakan akun masing-masing.</li>
-            <li>Cek nama pembuat label</li>
-            <li>Cek Postal /Zip Code Connote</li>
-            <li>Cek sehabis buat connote ada icon print di kanan atas</li>
-            <li>Tampilan kena volume/tidak di shipment</li>
+            <li>Cek data di Connote GDEX</li>
+            <li>Cek nomor connote untuk GDEX</li>
+            <li>Cek redoc_connote</li>
           </ol>
 
-          <h3>Catatan</h3>
-          <ol>
-            <li>Untuk API gdex dimatikan terlebih dahulu karena bug production</li>
-          </ol>
         </div>
       </div>
   </div>
