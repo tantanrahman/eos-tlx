@@ -90,11 +90,9 @@
                 </div>
               </div>                
           </div>
-          <h3>Please Check for This - <JavaBlink>Update 28 Sep 2021</JavaBlink> </h3>
+          <h3>Please Check for This - <JavaBlink>Update 29 Sep 2021</JavaBlink> </h3>
           <ol>
-            <li>Cek data di Connote GDEX</li>
-            <li>Cek nomor connote untuk GDEX</li>
-            <li>Cek redoc_connote</li>
+            <li>Cek Excel Shipment bagian Weight samakan dengan Chargeable Weight</li>
           </ol>
 
         </div>
