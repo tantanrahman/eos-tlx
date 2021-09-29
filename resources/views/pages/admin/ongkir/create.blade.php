@@ -86,7 +86,7 @@
                             <div class="form-group col-md-6">
                                 <label for="modal">Modal</label>
                                 <div class="input-group mb-2 mr-sm-2">
-                                    <input type="text" name="modal" class="form-control @error('modal') is-invalid @enderror" id="modal" value="{{ old('modal') }}" autocomplete="off">
+                                    <input type="text" name="modal" class="form-control uang @error('modal') is-invalid @enderror" id="modal" value="{{ old('modal') }}" autocomplete="off">
                                 </div>
                                 @error('modal')
                                       <span class="invalid-feedback" role="alert">

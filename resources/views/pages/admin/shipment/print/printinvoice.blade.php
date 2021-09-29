@@ -42,19 +42,20 @@
                 <td width=120>
                     <center>
                         @if ($getShipment[0]->redoc_connote != '')
-                            <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
-                                                        $getShipment[0]->redoc_connote, 'C128')}}" height="60" width="300">
-                            <br>
-                            <div class="letter-space3">
-                                <b>{{ $getShipment[0]->redoc_connote }}</b>
-                            </div>
-                            @else
-                            <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
+                        <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
+                                                        $getShipment[0]->redoc_connote, 'C128')}}" height="60"
+                            width="300">
+                        <br>
+                        <div class="letter-space3">
+                            <b>{{ $getShipment[0]->redoc_connote }}</b>
+                        </div>
+                        @else
+                        <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
                                                         $getShipment[0]->connote, 'C128')}}" height="60" width="300">
-                            <br>
-                            <div class="letter-space3">
-                                <b>{{ $getShipment[0]->connote }}</b>
-                            </div>
+                        <br>
+                        <div class="letter-space3">
+                            <b>{{ $getShipment[0]->connote }}</b>
+                        </div>
                         @endif
 
                     </center>
@@ -79,53 +80,61 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Postal / Zip Code :</td>
-                            <td style="border-bottom-style: solid">{{ $getShipment[0]->ship_postal_code }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Country :</td>
-                            <td style="border-bottom-style: solid">{{ $getShipment[0]->ship_cou_name }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Phone :</td>
-                            <td style="border-bottom-style: solid">{{ $getShipment[0]->ship_phone }}
-                            </td>
-                        </tr>
-                    </table>
+                            <<<<<<< HEAD <td>Postal Code :
                 </td>
-                <td>
-                    <table style="width: 100%">
-                        <tr>
-                            <td width="100">Name :</td>
-                            <td style="border-bottom-style: solid">{{ $getShipment[0]->con_company_name }} /
-                                {{ $getShipment[0]->con_name }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Address :</td>
-                            <td style="border-bottom-style: solid">{{ $getShipment[0]->con_address }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Postal / Zip Code :</td>
-                            <td style="border-bottom-style: solid">{{ $getShipment[0]->con_postal_code }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Country :</td>
-                            <td style="border-bottom-style: solid">{{ $getShipment[0]->con_cou_name }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Phone :</td>
-                            <td style="border-bottom-style: solid">{{ $getShipment[0]->con_phone }}
-                            </td>
-                        </tr>
-                    </table>
+                =======
+                <td>Postal / Zip Code :</td>
+                >>>>>>> b75b9746eb7e6992d25f16b507805d8b0d4c7002
+                <td style="border-bottom-style: solid">{{ $getShipment[0]->ship_postal_code }}
                 </td>
             </tr>
+            <tr>
+                <td>Country :</td>
+                <td style="border-bottom-style: solid">{{ $getShipment[0]->ship_cou_name }}
+                </td>
+            </tr>
+            <tr>
+                <td>Phone :</td>
+                <td style="border-bottom-style: solid">{{ $getShipment[0]->ship_phone }}
+                </td>
+            </tr>
+        </table>
+        </td>
+        <td>
+            <table style="width: 100%">
+                <tr>
+                    <td width="100">Name :</td>
+                    <td style="border-bottom-style: solid">{{ $getShipment[0]->con_company_name }} /
+                        {{ $getShipment[0]->con_name }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Address :</td>
+                    <td style="border-bottom-style: solid">{{ $getShipment[0]->con_address }}
+                    </td>
+                </tr>
+                <tr>
+                    <<<<<<< HEAD <td>Postal Code :
+        </td>
+        =======
+        <td>Postal / Zip Code :</td>
+        >>>>>>> b75b9746eb7e6992d25f16b507805d8b0d4c7002
+        <td style="border-bottom-style: solid">{{ $getShipment[0]->con_postal_code }}
+        </td>
+        </tr>
+        <tr>
+            <td>Country :</td>
+            <td style="border-bottom-style: solid">{{ $getShipment[0]->con_cou_name }}
+            </td>
+        </tr>
+        <tr>
+            <td>Phone :</td>
+            <td style="border-bottom-style: solid">{{ $getShipment[0]->con_phone }}
+            </td>
+        </tr>
+        </table>
+        </td>
+        </tr>
         </table>
         <br />
         <br />

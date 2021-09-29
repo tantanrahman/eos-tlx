@@ -51,14 +51,12 @@
                 <td align="center">{{ $shipment->cou_name }}</td>
                 <td align="center">{{ $shipment->con_phone }}</td>
                 <td align="center">{{ $shipment->description }}</td>
+                <td align="center">{{ $shipment->total_connote }}</td>
                 <td align="center">
-                  
-                </td>
-                <td align="center">
-                    @if ($shipment->sum_volume/5000 > $shipment->actual_weight)
-                        {{ ceil(number_format($shipment->sum_volume/5000, 2, '.', '')) }}
+                    @if ($shipment->total_volume/5000 > $shipment->weight)
+                        {{ ceil(number_format($shipment->total_volume/5000, 2, '.', '')) }}
                     @else
-                        {{ ceil(number_format($shipment->actual_weight, 2, '.', '')) }}
+                        {{ ceil(number_format($shipment->weight, 2, '.', '')) }}
                     @endif
                 </td>
                 <td align="center">{{ $shipment->values }}</td>
@@ -71,8 +69,8 @@
                 <td align="center">{{ $shipment->margin }}</td>
                 <td align="center">{{ $shipment->payment_status == 0 || $shipment->payment_status === null ? "UNPAID" : "PAID" }}</td>
             </tr>
-            
+
         @endforeach
-    
+
     </tbody>
 </table>

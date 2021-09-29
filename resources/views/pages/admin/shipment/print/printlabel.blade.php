@@ -1,108 +1,154 @@
 <html>
+
 <head>
     <title>Shipment | Label</title>
     <link rel="stylesheet" href="{{ asset('dist/css/print_style.css') }}">
 </head>
-<body>
-<header>
-    <table  cellpadding="1" cellspacing="0" style="width:100%">
-        <tr>
-            <td width="180" rowspan="3" style="padding-right: -90px !important"><img src="{{ url("storage/officeprofile/".$getUser[0]->photo) }}" style="width:90;"></td>
-            <th style="text-align: left">{{ $getUser[0]->op_name }}</th>
-        </tr>
-        <tr>
-            <td style="font-size: 8;">{{ $getUser[0]->op_address }}</td>
-        </tr>
-        <tr>
-            <td style="font-size: 8;">Phone: {{ $getUser[0]->phone }}</td>
-        </tr>
-    </table>
-</header>
 
-<div>
-    @foreach ($getShipment as $index => $items)
-  
-    <hr>
-    <table style="font-size: 10; width:100%;">
-        <tr>
-            <td width="250" style="font-size: 10">SHIPPING DATE: {{ date("d M Y H:i") }}</td>
-            <td style="font-size: 12" align="center">ACCOUNT : {{ $items->con_ac }}</td>
-        </tr>
-        <tr>
-            <td><b>SENDER</b>
-                <br />
-                {{ $items->ship_company_name === null ? $items['ship_name'] ." / ".  $items['ac_username'] : $items->ship_company_name ." / ". $items['ship_name'] ." / ". $items['ac_username'] }}
-                <br />
-                {{ $items['ship_address'] }} {{ $items['ship_postal_code'] }}
-                <br /> 
-                {{ $items['ship_city_name'] ." / ". $items['ship_cou_name'] }}
-                <br />PH: {{ $items['ship_phone'] }}
+<body>
+    <header>
+        <table cellpadding="1" cellspacing="0" style="width:100%">
+            <tr>
+                <td width="180" rowspan="3" style="padding-right: -90px !important"><img
+                        src="{{ url("storage/officeprofile/".$getUser[0]->photo) }}" style="width:90;"></td>
+                <th style="text-align: left">{{ $getUser[0]->op_name }}</th>
+            </tr>
+            <tr>
+                <td style="font-size: 8;">{{ $getUser[0]->op_address }}</td>
+            </tr>
+            <tr>
+                <td style="font-size: 8;">Phone: {{ $getUser[0]->phone }}</td>
+            </tr>
+        </table>
+    </header>
+
+    <div>
+        @foreach ($getShipment as $index => $items)
+
+        <hr>
+        <table style="font-size: 10; width:100%;">
+            <tr>
+                <td width="250" style="font-size: 10">SHIPPING DATE: {{ date("d M Y H:i") }}</td>
+                <td style="font-size: 12" align="center">ACCOUNT : {{ $items->con_ac }}</td>
+            </tr>
+            <tr>
+                <td><b>SENDER</b>
+                    <br />
+                    {{ $items->ship_company_name === null ? $items['ship_name'] ." / ".  $items['ac_username'] : $items->ship_company_name ." / ". $items['ship_name'] ." / ". $items['ac_username'] }}
+                    <br />
+                    {{ $items['ship_address'] }} {{ $items['ship_postal_code'] }}
+                    <br />
+                    {{ $items['ship_city_name'] ." / ". $items['ship_cou_name'] }}
+                    <br />PH: {{ $items['ship_phone'] }}
                 </td>
-            <td height="100">
-                <center>
-                    @if ($getShipment[0]->redoc_connote != '')
+                <td height="100">
+                    <center>
+                        @if ($getShipment[0]->redoc_connote != '')
                         <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
                                                     $getShipment[0]->redoc_connote, 'C128')}}" height="60" width="300">
                         <br>
                         <div class="letter-space3">
                             <b>{{ $getShipment[0]->redoc_connote }}</b>
                         </div>
-                        @else
-                        <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
+                        <<<<<<< HEAD @endif </center> </td> </tr> </table> <hr>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="font-size: 22"><b>DELIVER TO</b></td>
+                                    <td align="right" style="font-size: 22"><b>{{ $items['cou_code_dua'] }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="font-size: 22">{{ $items['con_name'] }}<br />
+                                        {{ $items['con_address'] }}
+                                        {{ $items['con_city_name'] }}
+                                        {{ $items['con_postal_code'] }}
+                                        {{ $items['con_cou_name'] }}
+                                        <br />PHONE: {{ $items['con_phone'] }}
+                                    </td>
+                                </tr>
+                            </table>
+                            <table border="1" style="width:100%; border-collapse:collapse;">
+                                <tr>
+                                    <td width="120" align="center"><b>DESCRIPTION</b></td>
+                                    <td width="150" align="center"><b>DELIVERY INSTRUCTIONS</b></td>
+                                    <td width="100" align="center"><b>NO. OF PIECES</b></td>
+                                    <td align="center"><b>CONSIGNMENT WEIGHT</b></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        {{ $items->description }}
+                                    </td>
+                                    <td align="center">{{ $items['delivery_intructions'] }}</td>
+                                    <td style="font-size: 13;" align="center"><b>@php echo $index + 1 @endphp OF @php
+                                            echo
+                                            count($getShipment) @endphp</b></td>
+                                    <td style="font-size: 13;" align="center">
+                                        <b>
+                                            @if ($getShipment->sum('sum_volume')/5000 >=
+                                            $getShipment->sum('actual_weight'))
+                                            {{ ceil(number_format($getShipment->sum('sum_volume')/5000, 2, '.', '')) }}
+                                            kg
+                                            @else
+                                            =======
+                                            @else
+                                            <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
                                                     $getShipment[0]->connote, 'C128')}}" height="60" width="300">
-                        <br>
-                        <div class="letter-space3">
-                            <b>{{ $getShipment[0]->connote }}</b>
-                        </div>
-                    @endif
-                </center>
-            </td>
-        </tr>
-    </table>
-    <hr>
-    <table style="width: 100%">
-        <tr>
-            <td style="font-size: 22"><b>DELIVER TO</b></td>
-            <td align="right" style="font-size: 22"><b>{{ $items['cou_code_dua'] }}</b></td>
-        </tr>
-        <tr>
-            <td colspan="2" style="font-size: 22">{{ $items['con_company_name'] }} / {{ $items['con_name'] }}<br />
-                {{ $items['con_address'] }}
-                {{ $items['con_city_name'] }}
-                {{ $items['con_postal_code'] }}
-                {{ $items['con_cou_name'] }}
-                <br />PHONE: {{ $items['con_phone'] }}
-            </td>
-        </tr>
-    </table>
-    <table border="1" style="width:100%; border-collapse:collapse;">
-        <tr>
-            <td width="120" align="center"><b>DESCRIPTION</b></td>
-            <td width="150" align="center"><b>DELIVERY INSTRUCTIONS</b></td>
-            <td width="100" align="center"><b>NO. OF PIECES</b></td>
-            <td align="center"><b>CONSIGNMENT WEIGHT</b></td>
-        </tr>
-        <tr>
-            <td align="center">
-               {{ $items->description }}
-            </td>
-            <td align="center">{{ $items['delivery_intructions'] }}</td>
-            <td style="font-size: 13;" align="center"><b>@php echo $index + 1 @endphp OF @php echo count($getShipment) @endphp</b></td>
-            <td style="font-size: 13;" align="center">
-                <b>
-                    @if ($getShipment->sum('sum_volume')/5000 >= $getShipment->sum('actual_weight'))
-                            {{ ceil(number_format($getShipment->sum('sum_volume')/5000, 2, '.', '')) }} kg
-                    @else
+                                            <br>
+                                            <div class="letter-space3">
+                                                <b>{{ $getShipment[0]->connote }}</b>
+                                            </div>
+                                            @endif
+                    </center>
+                </td>
+            </tr>
+        </table>
+        <hr>
+        <table style="width: 100%">
+            <tr>
+                <td style="font-size: 22"><b>DELIVER TO</b></td>
+                <td align="right" style="font-size: 22"><b>{{ $items['cou_code_dua'] }}</b></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="font-size: 22">{{ $items['con_company_name'] }} / {{ $items['con_name'] }}<br />
+                    {{ $items['con_address'] }}
+                    {{ $items['con_city_name'] }}
+                    {{ $items['con_postal_code'] }}
+                    {{ $items['con_cou_name'] }}
+                    <br />PHONE: {{ $items['con_phone'] }}
+                </td>
+            </tr>
+        </table>
+        <table border="1" style="width:100%; border-collapse:collapse;">
+            <tr>
+                <td width="120" align="center"><b>DESCRIPTION</b></td>
+                <td width="150" align="center"><b>DELIVERY INSTRUCTIONS</b></td>
+                <td width="100" align="center"><b>NO. OF PIECES</b></td>
+                <td align="center"><b>CONSIGNMENT WEIGHT</b></td>
+            </tr>
+            <tr>
+                <td align="center">
+                    {{ $items->description }}
+                </td>
+                <td align="center">{{ $items['delivery_intructions'] }}</td>
+                <td style="font-size: 13;" align="center"><b>@php echo $index + 1 @endphp OF @php echo
+                        count($getShipment) @endphp</b></td>
+                <td style="font-size: 13;" align="center">
+                    <b>
+                        @if ($getShipment->sum('sum_volume')/5000 >= $getShipment->sum('actual_weight'))
+                        {{ ceil(number_format($getShipment->sum('sum_volume')/5000, 2, '.', '')) }} kg
+                        @else
+                        >>>>>>> b75b9746eb7e6992d25f16b507805d8b0d4c7002
                         {{ ceil(number_format($getShipment->sum('actual_weight'), 2, '.', '')) }} kg
-                    @endif
-                    
-                </b>
-            </td>
-        </tr>
-        <p class="page-break" style="font-size: 11">I/WE AGREE THAT CARRIERS STANDARD TERMS AND CONDITIONS APPLY TO THIS SHIPMENT AND LIMIT THE
-            CARRIERS LIABILITY. THE WARSAW CONVENTION MAY ALSO APPLY.</p>
-    </table>
-    
-    @endforeach
+                        @endif
+
+                    </b>
+                </td>
+            </tr>
+            <p class="page-break" style="font-size: 11">I/WE AGREE THAT CARRIERS STANDARD TERMS AND CONDITIONS APPLY TO
+                THIS SHIPMENT AND LIMIT THE
+                CARRIERS LIABILITY. THE WARSAW CONVENTION MAY ALSO APPLY.</p>
+        </table>
+
+        @endforeach
 </body>
+
 </html>

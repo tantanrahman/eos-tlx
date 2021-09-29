@@ -75,7 +75,7 @@
                             <div class="form-group col-md-6">
                                 <label for="price">Harga*</label>
                                 <div class="input-group mb-2 mr-sm-2">
-                                    <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" id="price" value="{{ $ongkir->price }}" autocomplete="off">
+                                    <input type="text" name="price" class="form-control uang @error('price') is-invalid @enderror" id="price" value="{{ $ongkir->price }}" autocomplete="off">
                                 </div>
                                 @error('price')
                                       <span class="invalid-feedback" role="alert">
@@ -87,7 +87,7 @@
                             <div class="form-group col-md-6">
                                 <label for="modal">Modal</label>
                                 <div class="input-group mb-2 mr-sm-2">
-                                    <input type="text" name="modal" class="form-control @error('modal') is-invalid @enderror" id="modal" value="{{ $ongkir->modal }}" autocomplete="off">
+                                    <input type="text" name="modal" class="form-control uang @error('modal') is-invalid @enderror" id="modal" value="{{ $ongkir->modal }}" autocomplete="off">
                                 </div>
                                 @error('modal')
                                       <span class="invalid-feedback" role="alert">

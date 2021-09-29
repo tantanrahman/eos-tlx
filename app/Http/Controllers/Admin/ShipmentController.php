@@ -28,30 +28,26 @@ class ShipmentController extends Controller
     public function index(Request $request)
     {
         $partners   = Partner::get();
-        
-        if($request->ajax())
-        {   
-            $date_start = ( ! empty($request->get('date_start')) ? $request->get('date_start') : '');
-			$date_end   = ( ! empty($request->get('date_end')) ? $request->get('date_end') : '');
-            $partner    = ( ! empty($request->get('partner')) ? $request->get('partner') : '');
 
+        if ($request->ajax()) {
+            $date_start = (!empty($request->get('date_start')) ? $request->get('date_start') : '');
+            $date_end   = (!empty($request->get('date_end')) ? $request->get('date_end') : '');
+            $partner    = (!empty($request->get('partner')) ? $request->get('partner') : '');
             $idx = [];
-            $shipments  = Shipment::get_items($date_start,$date_end,$partner);
-            
+            $shipments  = Shipment::get_items($date_start, $date_end, $partner);
+
             // 
-           
+
             return DataTables::of($shipments)
-                    ->addColumn('action', function($shipment){
-                        if($shipment->partner_name == "GDEX")
-                        
-                        {
-                            $button =   '<div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="shipment/'.$shipment->idx.'/edit" data-toggle="tooltip"  data-id="'.$shipment->idx.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>
-                                        <button type="button" name="delete" id="'.$shipment->idx.'" class="delete btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
-                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-placement="top" data-target="#ModalPrint'.$shipment->idx.'" data-id="{{$shipment->idx}}" title="PRINT"><i class="fas fa-print"></i></button>
+                ->addColumn('action', function ($shipment) {
+                    if ($shipment->partner_name == "GDEX") {
+                        $button =   '<div class="btn-group" role="group" aria-label="Basic example">
+                                        <a href="shipment/' . $shipment->idx . '/edit" data-toggle="tooltip"  data-id="' . $shipment->idx . '" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>
+                                        <button type="button" name="delete" id="' . $shipment->idx . '" class="delete btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
+                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-placement="top" data-target="#ModalPrint' . $shipment->idx . '" data-id="{{$shipment->idx}}" title="PRINT"><i class="fas fa-print"></i></button>
                                     </div>
                                     
-                                    <div class="modal fade" id="ModalPrint'.$shipment->idx.'" tabindex="-1" role="dialog" aria-labelledby="ModalCourier" aria-hidden="true">
+                                    <div class="modal fade" id="ModalPrint' . $shipment->idx . '" tabindex="-1" role="dialog" aria-labelledby="ModalCourier" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -62,17 +58,17 @@ class ShipmentController extends Controller
                                             </div>
                                     
                                             <div class="modal-body">
-                                                <a href="printConnote/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
-                                                <a href="printLabel/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="far fa-envelope"></i> Label</a>
-                                                <a href="printInvoice/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Invoice</a>
-                                                <a href="printGdex/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Print GDEX</a>
+                                                <a href="printConnote/' . $shipment->idx . '" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
+                                                <a href="printLabel/' . $shipment->idx . '" target="_blank" type="button" class="btn btn-info"><i class="far fa-envelope"></i> Label</a>
+                                                <a href="printInvoice/' . $shipment->idx . '" target="_blank" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Invoice</a>
+                                                <a href="printGdex/' . $shipment->idx . '" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Print GDEX</a>
                                             </div>
                                             
                                         </div>
                                         </div>
                                     </div>
 
-                                    <div class="modal fade" id="ModalShow'.$shipment->idx.'" tabindex="-1" role="dialog" aria-labelledby="ModalShow" aria-hidden="true">
+                                    <div class="modal fade" id="ModalShow' . $shipment->idx . '" tabindex="-1" role="dialog" aria-labelledby="ModalShow" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -83,23 +79,21 @@ class ShipmentController extends Controller
                                             </div>
                                     
                                             <div class="modal-body">
-                                                <a href="shipment/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
+                                                <a href="shipment/' . $shipment->idx . '" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
                                             </div>
                                             
                                         </div>
                                         </div>
                                     </div>
                                     ';
-                        }
-                        else
-                        {
-                            $button ='<div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="shipment/'.$shipment->idx.'/edit" data-toggle="tooltip"  data-id="'.$shipment->idx.'" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>
-                                        <button type="button" name="delete" id="'.$shipment->idx.'" class="delete btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
-                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-placement="top" data-target="#ModalPrint'.$shipment->idx.'" data-id="{{$shipment->idx}}" title="PRINT"><i class="fas fa-print"></i></button>
+                    } else {
+                        $button = '<div class="btn-group" role="group" aria-label="Basic example">
+                                        <a href="shipment/' . $shipment->idx . '/edit" data-toggle="tooltip"  data-id="' . $shipment->idx . '" data-original-title="Edit" class="edit btn btn-info btn-sm edit-post"><i class="far fa-edit"></i></a>
+                                        <button type="button" name="delete" id="' . $shipment->idx . '" class="delete btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="HAPUS"><i class="far fa-trash-alt"></i></button>
+                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-placement="top" data-target="#ModalPrint' . $shipment->idx . '" data-id="{{$shipment->idx}}" title="PRINT"><i class="fas fa-print"></i></button>
                                     </div>
                                     
-                                    <div class="modal fade" id="ModalPrint'.$shipment->idx.'" tabindex="-1" role="dialog" aria-labelledby="ModalCourier" aria-hidden="true">
+                                    <div class="modal fade" id="ModalPrint' . $shipment->idx . '" tabindex="-1" role="dialog" aria-labelledby="ModalCourier" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -110,16 +104,16 @@ class ShipmentController extends Controller
                                             </div>
                                     
                                             <div class="modal-body">
-                                                <a href="printConnote/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
-                                                <a href="printLabel/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="far fa-envelope"></i> Label</a>
-                                                <a href="printInvoice/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Invoice</a>
+                                                <a href="printConnote/' . $shipment->idx . '" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
+                                                <a href="printLabel/' . $shipment->idx . '" target="_blank" type="button" class="btn btn-info"><i class="far fa-envelope"></i> Label</a>
+                                                <a href="printInvoice/' . $shipment->idx . '" target="_blank" type="button" class="btn btn-info"><i class="fas fa-money-bill-alt"></i> Invoice</a>
                                             </div>
                                             
                                         </div>
                                         </div>
                                     </div>
 
-                                    <div class="modal fade" id="ModalShow'.$shipment->idx.'" tabindex="-1" role="dialog" aria-labelledby="ModalShow" aria-hidden="true">
+                                    <div class="modal fade" id="ModalShow' . $shipment->idx . '" tabindex="-1" role="dialog" aria-labelledby="ModalShow" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -130,19 +124,19 @@ class ShipmentController extends Controller
                                             </div>
                                     
                                             <div class="modal-body">
-                                                <a href="shipment/'.$shipment->idx.'" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
+                                                <a href="shipment/' . $shipment->idx . '" target="_blank" type="button" class="btn btn-info"><i class="fas fa-barcode"></i> Connote</a>
                                             </div>
                                             
                                         </div>
                                         </div>
                                     </div>
                                     ';
-                        }
+                    }
 
-                        return $button;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
 
         return view('pages.admin.shipment.index', compact('partners'));
@@ -155,7 +149,7 @@ class ShipmentController extends Controller
      */
     public function create()
     {
-        $users          = User::where('role_id','=',2)->get();
+        $users          = User::where('role_id', '=', 2)->get();
         $packagetypes   = PackageType::all();
         $partners       = Partner::all();
         $nextId         = Customer::next_id();
@@ -163,7 +157,7 @@ class ShipmentController extends Controller
         $dateRan        = sha1(date("Y-m-d H:i:s"));
         $countries      = Country::all();
 
-        return view('pages.admin.shipment.create', compact('packagetypes','partners','users','nextId','apikey', 'dateRan','countries'));
+        return view('pages.admin.shipment.create', compact('packagetypes', 'partners', 'users', 'nextId', 'apikey', 'dateRan', 'countries'));
     }
 
     /**
@@ -173,12 +167,11 @@ class ShipmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-        
+    {
+
         $validateData = Customer::where('account_code', '=', $request->input('account_code'))->first();
-        
-        if($validateData === null)
-        {
+
+        if ($validateData === null) {
             //Input Customer for Shipment
             $acount_codes       = $request->account_code;
             $idx                = $request->id;
@@ -192,10 +185,9 @@ class ShipmentController extends Controller
             $phones             = $request->phone;
             $group              = $request->group;
             $apikey             = $request->apikey;
-            
-            foreach ($acount_codes as $key => $value) 
-            {
-    
+
+            foreach ($acount_codes as $key => $value) {
+
                 $dataCustomers[] = Customer::create([
                     'account_code'  => $value,
                     'id'            => $idx[$key],
@@ -211,7 +203,6 @@ class ShipmentController extends Controller
                     'apikey'        => md5($apikey[$key]),
                     'created_by'    => Auth::user()->id
                 ]);
-
             }
 
             //Input Shipment to Database
@@ -242,8 +233,7 @@ class ShipmentController extends Controller
             $sum_volumes        = $request->sum_volume;
             $sum_weights        = $request->sum_weight;
 
-            foreach ($actual_weights as $key => $value) 
-            {
+            foreach ($actual_weights as $key => $value) {
 
                 //Input Shipment Details (Volume)
                 $dataShipmentDetail[] = ShipmentDetail::create([
@@ -255,68 +245,6 @@ class ShipmentController extends Controller
                     'sum_volume'            => $sum_volumes[$key],
                     'sum_weight'            => $sum_weights[$key]
                 ]);
-
-                
-            }
-
-                $currentDate    = date('Y-m-d H:i:s');
-                $apiKey         = TrackingShipment::get_apikey();
-
-                //Input Data Tracking
-                $dataTracking = TrackingShipment::create([
-                    'shipment_id'       => $shipmentId,
-                    'track_time'        => $currentDate,
-                    'status_eng'        => Request()->status_eng,
-                    'status_ind'        => Request()->status_ind,
-                    'apikey'            => md5($apiKey)
-                ]);
-            
-        }
-        else
-        {
-
-            //Input Shipment to Database
-            $dataShipment = Shipment::create([
-                'packagetype_id'        => $request->packagetype_id,
-                'shipper_id'            => $request->id[0],
-                'consignee_id'          => $request->id[1],
-                'marketing_id'          => $request->marketing_id,
-                'partner_id'            => $request->partner_id,
-                'connote'               => $request->connote,
-                'values'                => $request->values,
-                'redoc_connote'         => $request->redoc_connote,
-                'redoc_params'          => $request->redoc_params,
-                'modal'                 => $request->modal,
-                'payment_method'        => $request->payment_method,
-                'payment_status'        => $request->payment_status,
-                'delivery_intructions'  => $request->delivery_intructions,
-                'remark'                => $request->remark,
-                'description'           => $request->description,
-                'created_by'            => Auth::user()->id
-            ]);
-
-            $shipmentId         = $dataShipment->id;
-            $actual_weights     = $request->actual_weight;
-            $lengths            = $request->length;
-            $widths             = $request->width;
-            $heights            = $request->height;
-            $sum_volumes        = $request->sum_volume;
-            $sum_weights        = $request->sum_weight;
-
-            foreach ($actual_weights as $key => $value) 
-            {
-
-                //Input Shipment Details (Volume)
-                $dataShipmentDetail[] = ShipmentDetail::create([
-                    'shipment_id'           => $shipmentId,
-                    'actual_weight'         => $value,
-                    'length'                => $lengths[$key],
-                    'width'                 => $widths[$key],
-                    'height'                => $heights[$key],
-                    'sum_volume'            => $sum_volumes[$key],
-                    'sum_weight'            => $sum_weights[$key]
-                ]);
-
             }
 
             $currentDate    = date('Y-m-d H:i:s');
@@ -330,16 +258,67 @@ class ShipmentController extends Controller
                 'status_ind'        => Request()->status_ind,
                 'apikey'            => md5($apiKey)
             ]);
+        } else {
 
+            //Input Shipment to Database
+            $dataShipment = Shipment::create([
+                'packagetype_id'        => $request->packagetype_id,
+                'shipper_id'            => $request->id[0],
+                'consignee_id'          => $request->id[1],
+                'marketing_id'          => $request->marketing_id,
+                'partner_id'            => $request->partner_id,
+                'connote'               => $request->connote,
+                'values'                => $request->values,
+                'redoc_connote'         => $request->redoc_connote,
+                'redoc_params'          => $request->redoc_params,
+                'modal'                 => $request->modal,
+                'payment_method'        => $request->payment_method,
+                'payment_status'        => $request->payment_status,
+                'delivery_intructions'  => $request->delivery_intructions,
+                'remark'                => $request->remark,
+                'description'           => $request->description,
+                'created_by'            => Auth::user()->id
+            ]);
+
+            $shipmentId         = $dataShipment->id;
+            $actual_weights     = $request->actual_weight;
+            $lengths            = $request->length;
+            $widths             = $request->width;
+            $heights            = $request->height;
+            $sum_volumes        = $request->sum_volume;
+            $sum_weights        = $request->sum_weight;
+
+            foreach ($actual_weights as $key => $value) {
+
+                //Input Shipment Details (Volume)
+                $dataShipmentDetail[] = ShipmentDetail::create([
+                    'shipment_id'           => $shipmentId,
+                    'actual_weight'         => $value,
+                    'length'                => $lengths[$key],
+                    'width'                 => $widths[$key],
+                    'height'                => $heights[$key],
+                    'sum_volume'            => $sum_volumes[$key],
+                    'sum_weight'            => $sum_weights[$key]
+                ]);
+            }
+
+            $currentDate    = date('Y-m-d H:i:s');
+            $apiKey         = TrackingShipment::get_apikey();
+
+            //Input Data Tracking
+            $dataTracking = TrackingShipment::create([
+                'shipment_id'       => $shipmentId,
+                'track_time'        => $currentDate,
+                'status_eng'        => Request()->status_eng,
+                'status_ind'        => Request()->status_ind,
+                'apikey'            => md5($apiKey)
+            ]);
         }
-        
 
-        if($dataShipment)
-        {
+
+        if ($dataShipment) {
             return redirect(route('admin.shipment.edit', $dataShipment->id))->with('toast_success', 'Berhasil menambah Data');
-        }
-        else
-        {
+        } else {
             return redirect(route('admin.shipment.create'))->with('toast_error', 'Gagal!');
         }
     }
@@ -363,15 +342,15 @@ class ShipmentController extends Controller
      */
     public function edit(Shipment $shipment)
     {
-        $users              = User::where('role_id','=',2)->get();
-        $packagetypes       = PackageType::where('active','=',1)->get();
-        $partners           = Partner::where('active','=',1)->get();
+        $users              = User::where('role_id', '=', 2)->get();
+        $packagetypes       = PackageType::where('active', '=', 1)->get();
+        $partners           = Partner::where('active', '=', 1)->get();
         $shipper            = Customer::where('id', $shipment->shipper_id)->first();
         $consignee          = Customer::where('id', $shipment->consignee_id)->first();
         $countries          = Country::all();
         $shipmentdetails    = ShipmentDetail::where('shipment_id', $shipment->id)->get();
 
-        return view('pages.admin.shipment.edit', compact('shipment', 'users', 'packagetypes', 'partners', 'shipper','consignee','countries','shipmentdetails'));
+        return view('pages.admin.shipment.edit', compact('shipment', 'users', 'packagetypes', 'partners', 'shipper', 'consignee', 'countries', 'shipmentdetails'));
     }
 
     /**
@@ -382,11 +361,11 @@ class ShipmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Shipment $shipment)
-    {   
+    {
 
         $shipper    = Customer::findOrFail($shipment->shipper_id);
         $consignee  = Customer::findOrFail($shipment->consignee_id);
-        
+
         $shipper->update([
             'account_code'  => $request->account_code[0],
             'name'          => $request->name[0],
@@ -412,7 +391,7 @@ class ShipmentController extends Controller
         ]);
 
         $dataShipment = Shipment::findOrFail($shipment->id);
-        
+
         //Input Shipment to Database
         $dataShipment->update([
             'packagetype_id'        => $request->packagetype_id,
@@ -441,9 +420,8 @@ class ShipmentController extends Controller
 
         $details = ShipmentDetail::get_details();
 
-        foreach ($actual_weights ?: [] as $key => $value) 
-        {
-            
+        foreach ($actual_weights ?: [] as $key => $value) {
+
             $details->updateOrCreate([
                 'id'                    => $value,
                 'shipment_id'           => $shipmentId,
@@ -454,15 +432,11 @@ class ShipmentController extends Controller
                 'sum_volume'            => $sum_volumes[$key],
                 'sum_weight'            => $sum_weights[$key]
             ]);
-
         }
 
-        if($dataShipment)
-        {
+        if ($dataShipment) {
             return redirect(route('admin.shipment.edit', $dataShipment->id))->with('toast_success', 'Berhasil Mengubah Data');
-        }
-        else
-        {
+        } else {
             return redirect(route('admin.shipment.create'))->with('toast_error', 'Gagal! Edit Data!');
         }
     }
@@ -475,11 +449,11 @@ class ShipmentController extends Controller
      */
     public function destroy($id)
     {
-        $shipment = Shipment::where('id',$id)->delete();
+        $shipment = Shipment::where('id', $id)->delete();
 
         return response()->json($shipment);
     }
-    
+
     /**
      * @author Tantan
      * @description Export Shipment XLSX
@@ -488,35 +462,34 @@ class ShipmentController extends Controller
 
     public function exportShipment()
     {
-        return Excel::download(new ShipmentExport(), 'Shipment '.date("Y-m-d").'.xlsx');
-
+        return Excel::download(new ShipmentExport(), date("His_Ymd") .'_shipment .xlsx');
     }
 
     /**
-     * 
+     * @author Tantan
      * Get Autocomplete From Shipper
      */
 
     public function autocompleteShipmentShipper(Request $request)
     {
-        $customers = Customer::select('id',  'account_code', 'name as label' ,'company_name' ,'address', 'country_id','country_name' ,'postal_code','city_id','city_name', 'phone')
+        $customers = Customer::select('id',  'account_code', 'name as label', 'company_name', 'address', 'country_id', 'country_name', 'postal_code', 'city_id', 'city_name', 'phone')
             ->where('name', 'like', "%{$request->term}%")
-            ->where('group','=','shipper')
+            ->where('group', '=', 'shipper')
             ->get();
 
         return response()->json($customers);
     }
 
     /**
-     * 
+     * @author Tantan
      * Get Autocomplete From Consignee
      */
 
     public function autocompleteShipmentConsignee(Request $request)
     {
-        $customers = Customer::select('id',  'account_code', 'name as label' ,'company_name' ,'address', 'country_id','country_name' ,'postal_code','city_id','city_name', 'phone')
+        $customers = Customer::select('id',  'account_code', 'name as label', 'company_name', 'address', 'country_id', 'country_name', 'postal_code', 'city_id', 'city_name', 'phone')
             ->where('name', 'like', "%{$request->term}%")
-            ->where('group','=','consignee')
+            ->where('group', '=', 'consignee')
             ->get();
 
         return response()->json($customers);
@@ -529,17 +502,16 @@ class ShipmentController extends Controller
      * @return void
      */
     public function getConnote(Request $request)
-	{
+    {
 
-		$connote = Shipment::get_connote($request);
+        $connote = Shipment::get_connote($request);
 
-		if (empty($connote))
-		{
-			return response()->json(['status' => false]);
-		}
+        if (empty($connote)) {
+            return response()->json(['status' => false]);
+        }
 
-		return response()->json(['status' => true, 'connote' => $connote]);
-	}
+        return response()->json(['status' => true, 'connote' => $connote]);
+    }
 
     /**
      * @param Request $request
@@ -551,7 +523,6 @@ class ShipmentController extends Controller
         $input = $request->all();
         Log::info($input);
 
-        return response()->json(['success'=>'Got Simple Ajax Request.']);
+        return response()->json(['success' => 'Got Simple Ajax Request.']);
     }
-
 }

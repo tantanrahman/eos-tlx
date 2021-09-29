@@ -1,5 +1,4 @@
 <script>
-
 	// Date Periode for Dropship
 	$('#dropship-periode-start').datepicker({
 		format: "yyyy-mm-dd",
@@ -66,7 +65,6 @@
 			},
 			url_params = '';
 		url_params = '?' + $.param(query);
-		console.log(url_params);
 		window.location.href = export_url + url_params;
 	});
 

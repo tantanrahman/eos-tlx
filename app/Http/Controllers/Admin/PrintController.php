@@ -25,11 +25,14 @@ class PrintController extends Controller
         $getShipment        = Shipment::get_items_name($shipment->id);
         $getUser            = User::get_items_name($shipment->id);
         $shipment->update(['printed' => 1]);
-        
-        $pdf = PDF::loadView('pages.admin.shipment.print.printconnote', compact('getShipment','getUser'))->setPaper('a4','landscape');
 
-        return $pdf->setOptions(['isHtml5ParserEnabled' => false, 'isRemoteEnabled' => true])->stream('Connote-'.$getShipment[0]['connote'].'.pdf');
+        $pdf = PDF::loadView('pages.admin.shipment.print.printconnote', compact('getShipment', 'getUser'))->setPaper('a4', 'landscape');
 
+        $shipment->update(['printed' => 1]);
+
+        $pdf = PDF::loadView('pages.admin.shipment.print.printconnote', compact('getShipment', 'getUser'))->setPaper('a4', 'landscape');
+
+        return $pdf->setOptions(['isHtml5ParserEnabled' => false, 'isRemoteEnabled' => true])->stream('Connote-' . $getShipment[0]['connote'] . '.pdf');
     }
 
     /**
@@ -42,11 +45,10 @@ class PrintController extends Controller
     {
         $getShipment        = Shipment::get_items_name($shipment->id);
         $getUser            = User::get_items_name($shipment->id);
-        
-        $pdf = PDF::loadView('pages.admin.shipment.print.printlabel', compact('getShipment','getUser'))->setPaper('a4','potrait');
 
-        return $pdf->stream('Label-'.$getShipment[0]['connote'].'.pdf');
+        $pdf = PDF::loadView('pages.admin.shipment.print.printlabel', compact('getShipment', 'getUser'))->setPaper('a4', 'potrait');
 
+        return $pdf->stream('Label-' . $getShipment[0]['connote'] . '.pdf');
     }
 
     /**
@@ -59,11 +61,10 @@ class PrintController extends Controller
     {
         $getShipment        = Shipment::get_items_name($shipment->id);
         $getUser            = User::get_items_name($shipment->id);
-        
-        $pdf = PDF::loadView('pages.admin.shipment.print.printinvoice', compact('getShipment','getUser'))->setPaper('a4','potrait');
 
-        return $pdf->stream('Invoice-'.$getShipment[0]['connote'].'.pdf');
+        $pdf = PDF::loadView('pages.admin.shipment.print.printinvoice', compact('getShipment', 'getUser'))->setPaper('a4', 'potrait');
 
+        return $pdf->stream('Invoice-' . $getShipment[0]['connote'] . '.pdf');
     }
 
     /**
@@ -90,9 +91,9 @@ class PrintController extends Controller
             'receiverName'      => $consignee->name,
             'receiverMobile'    => $consignee->phone,
             'receiverAddress1'  => $consignee->address,
-            'receiverAddress2'  => $consignee->city_name,
-            'receiverPostcode'  => $consignee->postal_code,
-            'receiverCountry'   => 'Malaysia'
+            'receiverAddress2'  => 'Malang',
+            'receiverPostcode'  => "65112",
+            'receiverCountry'   => 'Indonesia'
         ]]);
         Shipment::where('id', $id)->update(['redoc_connote' => $create->collect()['r'][0]]);
 
@@ -140,9 +141,9 @@ class PrintController extends Controller
             'receiverName'      => $consignee->name,
             'receiverMobile'    => $consignee->phone,
             'receiverAddress1'  => $consignee->address,
-            'receiverAddress2'  => $consignee->city_name,
-            'receiverPostcode'  => $consignee->postal_code,
-            'receiverCountry'   => 'Malaysia',
+            'receiverAddress2'  => 'Malang',
+            'receiverPostcode'  => "65112",
+            'receiverCountry'   => 'Indonesia'
         ]]);
         Shipment::where('id', $id)->update(['redoc_connote' => $create->collect()['r'][0]]);
 
@@ -161,9 +162,8 @@ class PrintController extends Controller
         });
 
         $response->headers->set('Content-Type', 'application/zip');
-        $response->headers->set('Content-Disposition', 'attachment; filename="' . $data->connote . '.zip"');
+        $response->headers->set('Content-Disposition', 'attachment; filename="' . $data->connote . '"');
 
         return $response;
     }
-    
 }

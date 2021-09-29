@@ -1,11 +1,10 @@
 <html>
-
 <head>
     <title>Shipment | Connote</title>
     <link rel="stylesheet" href="{{ asset('dist/css/print_style.css') }}">
 </head>
 
-<body style="background-image: url('img/tlx_logo.png')">
+<body>
     <header>
         <table cellpadding="1" cellspacing="0" style="width:100%">
             <tr>
@@ -66,7 +65,7 @@
                     <center>
                         @if ($items->redoc_connote != '')
                             <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
-                                            $items->redoc_connote, 'C128')}}" height="58" width="300">
+                                                $items->redoc_connote, 'C128')}}" height="58" width="300">
                             {{-- <img src="data:image/png;base64, {{ DNS1D::getBarcodePNG($items->connote, 'C93',5,55,array(5,5,5), true) }}"
                             alt="barcode" height="40" width="500"/> --}}
                             <br>
@@ -77,7 +76,7 @@
                             </div>
                         @else
                             <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
-                                            $items->connote, 'C128')}}" height="58" width="280">
+                                                $items->connote, 'C128')}}" height="58" width="280">
                             {{-- <img src="data:image/png;base64, {{ DNS1D::getBarcodePNG($items->connote, 'C93',5,55,array(5,5,5), true) }}"
                             alt="barcode" height="40" width="500"/> --}}
                             <br>
@@ -142,9 +141,9 @@
                         <li>
                             <b>{{ $getUser[0]->op_name }}</b> TIDAK BERTANGGUNG JAWAB ATAS SEGALA RESIKO YANG TERJADI
                             SELAMA PROSES PENGIRIMAN BARANG YANG MENYEBABKAN BARANG YANG DIKIRIM MENGALAMI KERUSAKAN
-                            SEHINGGA TIDAK BERFUNGSI ATAU BERUBAH FUNGSINYA, BARANG YANG DIKIRIM  MENGALAMI
+                            SEHINGGA TIDAK BERFUNGSI ATAU BERUBAH FUNGSINYA, BARANG YANG DIKIRIM MENGALAMI
                             KETERLAMBATAN SEHINGGA MENGHAMBAT/MEMPENGARUHI SITUASI KONDISI TERTENTU, BARANG YANG DIKIRIM
-                            DITAHAN/DISITA OLEH INSTANSI PEMERINTAH DINEGARA  ASAL  ATAU NEGARA TUJUAN.
+                            DITAHAN/DISITA OLEH INSTANSI PEMERINTAH DINEGARA ASAL ATAU NEGARA TUJUAN.
                         </li>
                         <li>
                             <b>{{ $getUser[0]->op_name }}</b> AKAN BERTANGGUNG JAWAB DENGAN MELAKUKAN PENGGANTIAN
@@ -184,9 +183,9 @@
                             <td>:</td>
                             <td>
                                 @php
-                                    echo $index + 1
+                                echo $index + 1
                                 @endphp of @php
-                                    echo count($getShipment)
+                                echo count($getShipment)
                                 @endphp
                             </td>
                         </tr>
