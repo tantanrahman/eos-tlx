@@ -46,9 +46,13 @@
                     <div class="btn-group mb-4" role="group" aria-label="Basic example">
                         <a href="{{ route('admin.shipment.create') }}" class="btn btn-sm bg-info"><i
                                 class="nav-icon fas fa-plus"></i> Create Connote</a>
-                        <a href="exportShipment" class="btn btn-sm bg-secondary shipment-export" id="shipment-export">
-                            <i class="fas fa-file-excel"></i> Excel
-                        </a>
+                        @if(Auth::user()->role_id == 11 || !Auth::user()->role_id == 9)
+                            
+                        @else
+                            <a href="exportShipment" class="btn btn-sm bg-secondary shipment-export" id="shipment-export">
+                                <i class="fas fa-file-excel"></i> Excel
+                            </a>
+                        @endif
                         {{-- <a href="#" class="btn bg-secondary dropship-export">
                             <i class="fas fa-file-pdf"></i> PDF
                         </a> --}}
