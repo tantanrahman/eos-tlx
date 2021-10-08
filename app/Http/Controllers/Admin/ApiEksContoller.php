@@ -44,14 +44,14 @@ class ApiEksContoller extends Controller
      * @created 25 Sep 2021
      * @return @getTrack
      */
-    public function getTrackChoir()
+    public function getTrackChoir($data)
     {
         $getTrack   = Http::withHeaders([
             'Content-Type'  => 'application/json',
             'Accept'        => 'application/json',
             'Authorization' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IkNob2lyWFRMWEAyMDIxIg.HVyk8ztvDCSFXDmHWu23qfqA_QFPvnxyZd9V1XGhD44'
         ])->post('https://office.choirexpress.co.id/v2/api/get_tracking', [
-            "awb"           => "CE0821458044"
+            "awb"           => $data
         ]);
 
         return $getTrack;

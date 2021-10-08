@@ -103,5 +103,20 @@
 			placeholder: "Select a Partner"
 		});
 	});
-    
+    $(document).ready(function() {
+		$('.connote-multiple-select').select2({
+			theme: "bootstrap4",
+			placeholder: "Select a Connote",
+            tokenSeparators: [',', ', ', ' '],
+            allowClear: false,
+            tags: true,
+		});
+	});
+    $(document).ready(function() {
+        $('#track_status').select2({
+        placeholder: "Select a Status",
+        allowClear: true,
+        theme: "bootstrap4",
+        });
+    });
 </script>

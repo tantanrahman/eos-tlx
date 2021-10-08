@@ -68,7 +68,7 @@ class TrackingStatusController extends Controller
         $data = TrackingStatus::create([
             'partner_id'    => Request()->partner_id,
             'status'        => Request()->status,
-            'created_by'    => Auth::user()->name
+            'created_by'    => Auth::user()->id
         ]);
 
         if ($data)
@@ -100,7 +100,9 @@ class TrackingStatusController extends Controller
      */
     public function edit(TrackingStatus $trackingStatus)
     {
-        //
+        $partners = Partner::all();
+
+        return view('pages.admin.tracking_status.edit', compact('trackingStatus','partners'));
     }
 
     /**
@@ -112,7 +114,20 @@ class TrackingStatusController extends Controller
      */
     public function update(Request $request, TrackingStatus $trackingStatus)
     {
-        //
+        $trackingStatus->update([
+            'partner_id'    => $request->partner_id,
+            'status'        => $request->status,
+            'active'        => $request->has('active')
+        ]);
+
+        if($trackingStatus)
+        {
+            return redirect(route('admin.tracking_status.index'))->with('toast_success', 'Berhasil Mengubah Data');
+        }
+        else 
+        {
+            return redirect(route('admin.tracking_status.index'))->with('toast_error', 'Gagal!');
+        }
     }
 
     /**

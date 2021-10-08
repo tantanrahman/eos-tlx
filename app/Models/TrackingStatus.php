@@ -21,12 +21,13 @@ class TrackingStatus extends Model
     public static function get_items_name()
 	{
 		$items_name = self::join('partner','tracking_status.partner_id','=','partner.id')
+                          ->join('users as ac', 'tracking_status.created_by', '=', 'ac.id')
 			->select(
 				'tracking_status.id as id',
                 'partner.name as partner_id',
 				'tracking_status.status as status',
                 'tracking_status.active as active',
-                'tracking_status.created_by as created_by',
+                'ac.name as ac_name',
 			);
 
 		return $items_name->get();

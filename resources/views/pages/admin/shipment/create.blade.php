@@ -94,7 +94,7 @@
                                         <label for="company_name">Company Name</label>
                                         <input type="text" name="company_name[0]"
                                             class="form-control @error('company_name') is-invalid @enderror"
-                                            value="{{ old('company_name') }}" autocomplete="off">
+                                            value="{{ old('company_name') }}" autocomplete="nope">
                                         @error('company_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -120,7 +120,7 @@
                                         <label for="postal_code">Postal Code</label>
                                         <input type="text" name="postal_code[0]"
                                             class="form-control @error('postal_code') is-invalid @enderror"
-                                            autocomplete="off">
+                                            autocomplete="nope">
                                         @error('postal_code')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -131,7 +131,7 @@
                                         <label for="address">Address*</label>
                                         <textarea name="address[0]" rows="3"
                                             class="form-control @error('address') is-invalid @enderror"
-                                            style="resize:none" autocomplete="off"></textarea>
+                                            style="resize:none" autocomplete="nope"></textarea>
                                         @error('address')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -153,7 +153,7 @@
                                     <div class="form-group col-md-12">
                                         <label for="phone">Phone</label>
                                         <input type="text" class="form-control @error('phone') is-invalid @enderror"
-                                            name="phone[0]" value="{{ old('phone') }}" autocomplete="off">
+                                            name="phone[0]" value="{{ old('phone') }}" autocomplete="nope">
                                         @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -206,7 +206,7 @@
                                         <label for="con_company_name">Company Name</label>
                                         <input type="text" name="company_name[1]"
                                             class="form-control @error('con_company_name') is-invalid @enderror"
-                                            value="{{ old('con_company_name') }}" autocomplete="off">
+                                            value="{{ old('con_company_name') }}" autocomplete="nope">
                                         @error('con_company_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -234,7 +234,7 @@
                                         <label for="con_postal_code">Postal Code</label>
                                         <input type="text" id="consignee_postalcode" name="postal_code[1]"
                                             class="form-control @error('con_postal_code') is-invalid @enderror"
-                                            autocomplete="off">
+                                            autocomplete="nope">
                                         @error('con_postal_code')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -245,7 +245,7 @@
                                         <label for="con_address">Address*</label>
                                         <textarea name="address[1]" rows="3"
                                             class="form-control @error('con_address') is-invalid @enderror"
-                                            style="resize:none" autocomplete="off"></textarea>
+                                            style="resize:none" autocomplete="nope"></textarea>
                                         @error('con_address')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -267,7 +267,7 @@
                                     <div class="form-group col-md-12">
                                         <label for="con_phone">Phone</label>
                                         <input type="text" class="form-control @error('con_phone') is-invalid @enderror"
-                                            name="phone[1]" value="{{ old('con_phone') }}" autocomplete="off">
+                                            name="phone[1]" value="{{ old('con_phone') }}" autocomplete="nope">
                                         @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

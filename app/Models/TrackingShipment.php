@@ -34,8 +34,11 @@ class TrackingShipment extends Model
     public static function get_connote()
     {
         $connote = self::join('shipment','tracking_shipment.shipment_id','=','shipment.id')
-                    ->select('shipment.connote AS connote');
+                    ->select(
+                        'tracking_shipment.shipment_id AS id',
+                        'shipment.connote AS connote'
+                    )->groupBy('connote');
 
-        return $connote->first();
+        return $connote->get();
     }
 }

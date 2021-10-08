@@ -220,4 +220,11 @@
 	else if (window.attachEvent) window.attachEvent("onload", JavaBlink);
 	else window.onload = JavaBlink;
 	
+	// Time Picker
+	$(document).ready(function () {
+		$('#datetimepicker3').datetimepicker({
+			format: 'HH:mm'
+		});
+	});
+
 </script>

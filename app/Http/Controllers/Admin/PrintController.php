@@ -145,6 +145,7 @@ class PrintController extends Controller
             'receiverPostcode'  => "65112",
             'receiverCountry'   => 'Indonesia'
         ]]);
+        
         Shipment::where('id', $id)->update(['redoc_connote' => $create->collect()['r'][0]]);
 
         $get = Http::withHeaders([
@@ -162,7 +163,7 @@ class PrintController extends Controller
         });
 
         $response->headers->set('Content-Type', 'application/zip');
-        $response->headers->set('Content-Disposition', 'attachment; filename="' . $data->connote . '"');
+        $response->headers->set('Content-Disposition', 'attachment; filename="' . $data->connote.'".zip"');
 
         return $response;
     }

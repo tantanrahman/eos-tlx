@@ -525,4 +525,5 @@ class ShipmentController extends Controller
 
         return response()->json(['success' => 'Got Simple Ajax Request.']);
     }
+    
 }

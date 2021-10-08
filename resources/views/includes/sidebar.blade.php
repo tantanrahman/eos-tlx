@@ -204,14 +204,14 @@
             </ul>
           </li>
 
-          {{-- <li class="nav-item {{ request()->is('admin/tracking_shipment*') ? 'menu-open' : '' }}">
+          <li class="nav-item {{ request()->is('admin/tracking_shipment*') ? 'menu-open' : '' }}">
             <a href="{{ route('admin.tracking_shipment.index') }}" class="nav-link {{ request()->is('admin/tracking_shipment*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-map-marked-alt"></i>
             <p style="font-size: 14px">
                 Tracking Shipment
             </p>
             </a>
-          </li> --}}
+          </li>
 
           <li class="nav-header"></li>
 

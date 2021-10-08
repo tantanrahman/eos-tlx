@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Imports\ImportTracking;
 use App\Models\TrackingShipment;
 use App\Http\Controllers\Controller;
+use App\Models\TrackingStatus;
 use Maatwebsite\Excel\Facades\Excel;
 
 class TrackingShipmentController extends Controller
@@ -17,7 +18,10 @@ class TrackingShipmentController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.tracking_shipment.index');
+        $connotes       = TrackingShipment::get_connote();
+        $track_status   = TrackingStatus::where('active','=',1)->get();
+
+        return view('pages.admin.tracking_shipment.index', compact('connotes', 'track_status'));
     }
 
     /**
@@ -38,7 +42,29 @@ class TrackingShipmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $request->validate([
+            "shipment_id" => "required",
+            "track_time" => "required",
+            "status_eng" => "required",
+        ]);
+
+        $shipment_ids   = $request->shipment_id;
+        $apiKey         = TrackingShipment::get_apikey();
+
+        foreach ($shipment_ids as $key => $value) {
+            $dataTracking = TrackingShipment::create([
+                'shipment_id'       => $value,
+                'track_time'        => $request->track_time,
+                'status_eng'        => $request->status_eng,
+            ]);
+        }
+
+        if ($dataTracking) {
+            return redirect(route('admin.tracking_shipment.index'))->with('toast_success', 'Berhasil menambah Data');
+        } else {
+            return redirect(route('admin.tracking_shipment.index'))->with('toast_error', 'Gagal!');
+        }
     }
 
     /**
@@ -95,7 +121,7 @@ class TrackingShipmentController extends Controller
     {
 
         Excel::import(new ImportTracking, request()->file('file'));
-        
+
         dd($request->file('file'));
 
         return redirect()->route('admin.tracking_shipment.index')->with(['success' => 'Data Berhasil Diupload!']);
