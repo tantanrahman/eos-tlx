@@ -40,9 +40,9 @@ class Dropship extends Model
 
     public static function get_items($date_start, $date_end, $get_courier)
 	{
-		$items = self::join('users','dropship.users_id','=','users.id')
-			->join('courier','dropship.courier_id','=','courier.id')
-			->join('city','dropship.city_id','=','city.id')
+		$items = self::leftjoin('users','dropship.users_id','=','users.id')
+			->leftjoin('courier','dropship.courier_id','=','courier.id')
+			->leftjoin('city','dropship.city_id','=','city.id')
 			->select(
 				'dropship.id as idx',
 				'dropship.created_at AS time',
@@ -79,9 +79,9 @@ class Dropship extends Model
 
 	public static function get_items_name($id)
 	{
-		$items_name = self::join('users','dropship.users_id','=','users.id')
-			->join('courier','dropship.courier_id','=','courier.id')
-			->join('city','dropship.city_id','=','city.id')
+		$items_name = self::leftjoin('users','dropship.users_id','=','users.id')
+			->leftjoin('courier','dropship.courier_id','=','courier.id')
+			->leftjoin('city','dropship.city_id','=','city.id')
 			->select(
 				'dropship.id as idx',
 				'dropship.created_at AS time',
