@@ -9,15 +9,15 @@
         <table cellpadding="1" cellspacing="0" style="width:100%">
             <tr>
                 <td width="100" rowspan="3"><img
-                        src="{{ url("storage/officeprofile/".$getUser[0]->photo ?? url('public/img/tlx_logo.png'))}}"
+                        src="{{ url("storage/officeprofile/".$getHeader[0]->photo ?? url('public/img/tlx_logo.png'))}}"
                         style="width:90;"></td>
-                <th style="text-align: left">{{ $getUser[0]->op_name }}</th>
+                <th style="text-align: left">{{ $getHeader[0]->op_name }}</th>
             </tr>
             <tr>
-                <td style="font-size: 8;">{{ $getUser[0]->op_address }}</td>
+                <td style="font-size: 8;">{{ $getHeader[0]->op_address }}</td>
             </tr>
             <tr>
-                <td style="font-size: 8;">Phone: {{ $getUser[0]->phone }}</td>
+                <td style="font-size: 8;">Phone: {{ $getHeader[0]->phone }}</td>
             </tr>
         </table>
     </header>

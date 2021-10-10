@@ -24,13 +24,15 @@ class PrintController extends Controller
     {
         $getShipment        = Shipment::get_items_name($shipment->id);
         $getUser            = User::get_items_name($shipment->id);
-        $shipment->update(['printed' => 1]);
-
-        $pdf = PDF::loadView('pages.admin.shipment.print.printconnote', compact('getShipment', 'getUser'))->setPaper('a4', 'landscape');
+        $getHeader          = User::get_header_name($shipment->id);
 
         $shipment->update(['printed' => 1]);
 
-        $pdf = PDF::loadView('pages.admin.shipment.print.printconnote', compact('getShipment', 'getUser'))->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('pages.admin.shipment.print.printconnote', compact('getShipment', 'getUser', 'getHeader'))->setPaper('a4', 'landscape');
+
+        $shipment->update(['printed' => 1]);
+
+        $pdf = PDF::loadView('pages.admin.shipment.print.printconnote', compact('getShipment', 'getUser', 'getHeader'))->setPaper('a4', 'landscape');
 
         return $pdf->setOptions(['isHtml5ParserEnabled' => false, 'isRemoteEnabled' => true])->stream('Connote-' . $getShipment[0]['connote'] . '.pdf');
     }
@@ -45,8 +47,9 @@ class PrintController extends Controller
     {
         $getShipment        = Shipment::get_items_name($shipment->id);
         $getUser            = User::get_items_name($shipment->id);
+        $getHeader          = User::get_header_name($shipment->id);
 
-        $pdf = PDF::loadView('pages.admin.shipment.print.printlabel', compact('getShipment', 'getUser'))->setPaper('a4', 'potrait');
+        $pdf = PDF::loadView('pages.admin.shipment.print.printlabel', compact('getShipment', 'getUser', 'getHeader'))->setPaper('a4', 'potrait');
 
         return $pdf->stream('Label-' . $getShipment[0]['connote'] . '.pdf');
     }
@@ -61,8 +64,9 @@ class PrintController extends Controller
     {
         $getShipment        = Shipment::get_items_name($shipment->id);
         $getUser            = User::get_items_name($shipment->id);
+        $getHeader          = User::get_header_name($shipment->id);
 
-        $pdf = PDF::loadView('pages.admin.shipment.print.printinvoice', compact('getShipment', 'getUser'))->setPaper('a4', 'potrait');
+        $pdf = PDF::loadView('pages.admin.shipment.print.printinvoice', compact('getShipment', 'getUser', 'getHeader'))->setPaper('a4', 'potrait');
 
         return $pdf->stream('Invoice-' . $getShipment[0]['connote'] . '.pdf');
     }
