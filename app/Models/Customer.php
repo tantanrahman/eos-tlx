@@ -81,8 +81,8 @@ class Customer extends Model
 			users.name AS user_name
 		");
 
-		$items = self::join('city','customer.city_id','=','city.id')
-						->join('users','customer.created_by','=','users.id')
+		$items = self::leftjoin('city','customer.city_id','=','city.id')
+						->leftjoin('users','customer.created_by','=','users.id')
 						->select($query)->where('group','=','shipper');
 
 		return $items->get();
@@ -107,8 +107,8 @@ class Customer extends Model
 			users.name AS user_name
 		");
 
-		$items = self::join('country','customer.country_id','=','country.id')
-						->join('users','customer.created_by','=','users.id')
+		$items = self::leftjoin('country','customer.country_id','=','country.id')
+						->leftjoin('users','customer.created_by','=','users.id')
 			    		->select($query)->where('customer.group','=','consignee');
 
 		return $items->get();
