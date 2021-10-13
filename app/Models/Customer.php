@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Customer extends Model
 {
@@ -68,6 +69,9 @@ class Customer extends Model
 	 */
 	public static function get_items_shipper()
 	{
+		$dateS = Carbon::now()->startOfMonth()->subMonth(5);
+        $dateE = Carbon::now()->startOfMonth();
+
 		$query = DB::raw("
 			customer.id,
 			customer.account_code,
@@ -83,7 +87,7 @@ class Customer extends Model
 
 		$items = self::leftjoin('city','customer.city_id','=','city.id')
 						->leftjoin('users','customer.created_by','=','users.id')
-						->select($query)->where('group','=','shipper');
+						->select($query)->whereBetween('customer.created_at',$dateE)->where('group','=','shipper');
 
 		return $items->get();
 	}
